@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staged4U - Home Staging Services</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Retro Overlay Styles - Professional 90s Business Design */
+        #retro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #C0C0C0; /* Light gray background */
+            background-image: 
+                linear-gradient(45deg, #DCDCDC 25%, transparent 25%),
+                linear-gradient(-45deg, #DCDCDC 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #DCDCDC 75%),
+                linear-gradient(-45deg, transparent 75%, #DCDCDC 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            font-family: "Arial", sans-serif;
+            color: #000080; /* Navy blue text */
+            text-align: left;
+            z-index: 9999;
+            display: block;
+            overflow-y: auto;
+            padding: 0;
+            box-sizing: border-box;
+            border: 3px outset #C0C0C0;
+        }
+
+        .business-header {
+            background-color: #000080; /* Navy blue header */
+            color: #FFFFFF;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px inset #C0C0C0;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .business-nav {
+            background-color: #808080; /* Dark gray navigation */
+            padding: 8px 0;
+            border-bottom: 2px inset #C0C0C0;
+        }
+
+        .business-nav table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .business-nav td {
+            text-align: center;
+            padding: 8px;
+            border-right: 1px solid #404040;
+            background-color: #C0C0C0;
+            border: 1px outset #C0C0C0;
+        }
+
+        .business-nav td:last-child {
+            border-right: none;
+        }
+
+        .business-nav a {
+            color: #000080;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .business-nav a:hover {
+            color: #800000;
+            text-decoration: underline;
+        }
+
+        .business-content {
+            padding: 20px;
+            background-color: #FFFFFF;
+            margin: 0;
+        }
+
+        .business-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #000080;
+            text-align: center;
+            border-bottom: 2px solid #808080;
+            padding-bottom: 10px;
+        }
+
+        .business-section {
+            margin: 25px 0;
+            padding: 15px;
+            border: 2px inset #C0C0C0;
+            background-color: #F0F0F0;
+        }
+
+        .business-section h3 {
+            color: #800000;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid #808080;
+            padding-bottom: 3px;
+        }
+
+        .business-text {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #000000;
+            margin: 10px 0;
+        }
+
+        .business-list {
+            margin: 10px 0 10px 20px;
+        }
+
+        .business-list li {
+            margin: 5px 0;
+            color: #000080;
+        }
+
+        .business-footer {
+            background-color: #808080;
+            color: #FFFFFF;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px inset #C0C0C0;
+            font-size: 12px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .contact-info {
+            background-color: #FFFFC0; /* Light yellow */
+            border: 2px inset #C0C0C0;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .contact-info h3 {
+            color: #800000;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+        }
+
+        .business-hr {
+            border: none;
+            height: 2px;
+            background-color: #808080;
+            margin: 20px 0;
+        }
+
+        .emphasis {
+            color: #800000;
+            font-weight: bold;
+        }
+
+        .business-button {
+            background-color: #C0C0C0;
+            border: 2px outset #C0C0C0;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000080;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        .business-button:hover {
+            background-color: #E0E0E0;
+        }
+
+        .business-button:active {
+            border: 2px inset #C0C0C0;
+        }
+
+        /* Banner styles */
+        .staging-banner {
+            position: fixed;
+            top: 50%;
+            left: -100%;
+            width: 200%;
+            background-color: #FFD700; /* Gold */
+            color: #8B0000; /* Dark Red */
+            padding: 15px;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(-45deg);
+            transform-origin: center;
+            z-index: 10000; /* Above the overlay */
+            display: none;
+            border: 5px dashed #000000; /* Black dashed border */
+            box-shadow: 8px 8px #000000;
+        }
+
+        /* Fall and fade animation */
+        .text-fall-animation {
+            --rotation: 15deg;
+            animation: fall 1s forwards;
+        }
+
+        .background-fade-out-animation {
+            animation: fade-out 1s forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(var(--rotation));
+                opacity: 0;
+            }
+        }
+
+        @keyframes fade-out {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes flash {
+            0% { background-color: #FF6600; }
+            50% { background-color: #FFFF00; }
+            100% { background-color: #FF6600; }
+        }
+
+        .marquee-text {
+            animation: marquee 15s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Your existing styles from style.css */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+        /* General Styles */
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            line-height: 1.8;
+            color: #e0e0e0; /* Light grey for body text */
+            background-color: #1a1a1a; /* Dark background */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #000000; /* Black header */
+            padding: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            color: #ffd700; /* Gold for company name */
+            font-size: 2.8em;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-left: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #e0e0e0; /* Light grey for nav links */
+            font-weight: 400;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffd700; /* Gold on hover */
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none; /* Hidden by default */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #ffd700;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Main Sections */
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            background-color: #222222; /* Darker section background */
+            padding: 70px 0;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700; /* Gold for section headings */
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #ffd700; /* Gold underline */
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/1600/900?random=1') no-repeat center center;
+            color: #fff;
+            padding: 120px 0;
+            text-align: center;
+            border-radius: 0;
+            box-shadow: none;
+            
+            position: relative; /* Needed for absolute positioning of trust indicators */
+        }
+
+        #hero h2 {
+            font-size: 4.5em;
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        #hero h2::after {
+            background-color: #fff;
+        }
+
+        #hero p {
+            font-size: 1.4em;
+            margin-bottom: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .hero-trust-indicators {
+            display: flex;
+            gap: 30px;
+            color: #ffd700;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            margin-top: 30px; /* Add some space from content above */
+            justify-content: center; /* Center items horizontally */
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+        }
+
+        .hero-trust-indicators span {
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-trust-indicators i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+
+        .cta-button {
+            background-color: #ffd700; /* Gold button */
+            color: #1a1a1a; /* Dark text on button */
+            padding: 18px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e6c200; /* Slightly darker gold on hover */
+            transform: translateY(-3px) scale(1.05); /* Pop effect */
+        }
+
+        /* About Section */
+        #about {
+            padding: 70px 0;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        #about p {
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* Services Section */
+        #services .service {
+            display: inline-block;
+            width: 28%;
+            margin: 0 2%;
+            vertical-align: top;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 1px solid #333333;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #2c2c2c;
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* Ensure text is readable on image backgrounds */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Add text shadow for readability */
+        }
+
+        .service-consultation {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/id/10/400/300');
+        }
+
+        .service-occupied {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/id/20/400/300');
+        }
+
+        .service-vacant {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/id/30/400/300');
+        }
+
+        #services .service:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        #services h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        #services p {
+            color: #b0b0b0;
+        }
+
+        /* Portfolio Section */
+        #portfolio .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        #portfolio .portfolio-item {
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #portfolio .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        #portfolio .portfolio-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        #portfolio .portfolio-item p {
+            padding: 20px;
+            margin: 0;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Process Section */
+        #process .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        #process .process-step {
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #process .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        #process .process-step i {
+            font-size: 3em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        #process .process-step h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        #process .process-step p {
+            color: #b0b0b0;
+        }
+
+        /* Testimonials Section */
+        #testimonials .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        #testimonials .testimonial-item {
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center; /* Center align content */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #testimonials .testimonial-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        #testimonials .testimonial-item img.testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #ffd700; /* Gold border for avatars */
+        }
+
+        #testimonials .testimonial-item p {
+            font-style: italic;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        #testimonials .testimonial-item h4 {
+            color: #ffd700;
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        /* Contact Section */
+        #contact form {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        #contact form input,
+        #contact form textarea {
+            width: calc(100% - 24px); /* Adjust for padding */
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            font-size: 1.1em;
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+
+        #contact form input::placeholder,
+        #contact form textarea::placeholder {
+            color: #a0a0a0;
+        }
+
+        #contact form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        #contact form button {
+            background-color: #ffd700; /* Gold button */
+            color: #1a1a1a; /* Dark text on button */
+            padding: 18px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #contact form button:hover {
+            background-color: #e6c200;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000; /* Black footer */
+            color: #e0e0e0;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.5);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .certifications-awards {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #a0a0a0;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 24px;
+            border: none;
+            outline: none;
+            background-color: #ffd700;
+            color: #1a1a1a;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #back-to-top:hover {
+            background-color: #e6c200;
+            transform: translateY(-3px);
+        }
+
+        /* Header Social Links */
+        .header-social-links {
+          margin-top: 0.0rem;
+          display: flex;
+          gap: 0.75rem;
+          font-size: 0.9rem; /* makes sure inherited size doesn't blow up the icons */
+        }
+
+        .header-social-links a {
+          font-size: 1rem; /* or try 0.9rem for smaller icons */
+          color: #444;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .header-social-links a:hover {
+          color: #000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: row; /* Keep logo and hamburger on one line */
+                justify-content: space-between;
+            }
+
+            .hamburger {
+                display: block; /* Show hamburger on mobile */
+            }
+
+            .nav-menu {
+                display: none; /* Hide regular nav by default */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%; /* Position below header */
+                left: 0;
+                background-color: #000000;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                display: flex; /* Show nav when active */
+            }
+
+            nav li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            #hero h2 {
+                font-size: 3em;
+            }
+
+            #hero p {
+                font-size: 1.1em;
+            }
+
+            section h2 {
+                font-size: 2em;
+            }
+
+            #services .service {
+                width: 90%;
+                margin: 20px auto;
+                display: block;
+            }
+
+            #portfolio .portfolio-grid,
+            #testimonials .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-social-links {
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #hero {
+                padding: 80px 20px; /* Adjust padding for smaller screens */
+            }
+
+            #hero h2 {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+
+            #hero p {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+
+            .hero-trust-indicators {
+                flex-direction: column;
+                gap: 15px;
+                font-size: 1em;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="retro-overlay">
+        <div class="business-header">
+            STAGED4U PROFESSIONAL HOME STAGING SERVICES
+        </div>
+        
+        <div class="business-nav">
+            <table>
+                <tr>
+                    <td><a href="#home">HOME</a></td>
+                    <td><a href="#about">ABOUT US</a></td>
+                    <td><a href="#services">SERVICES</a></td>
+                    <td><a href="#portfolio">PORTFOLIO</a></td>
+                    <td><a href="#testimonials">TESTIMONIALS</a></td>
+                    <td><a href="#contact">CONTACT</a></td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="business-content">
+            <div class="business-title">
+                Welcome to Staged4U Professional Services
+            </div>
+            
+            <div class="business-section">
+                <h3>Company Overview</h3>
+                <div class="business-text">
+                    <span class="emphasis">Staged4U</span> has been serving the real estate community since 1995, providing professional home staging services to help properties sell faster and for higher prices. Our experienced team understands market trends and buyer psychology.
+                </div>
+            </div>
+            
+            <div class="business-section">
+                <h3>Our Services</h3>
+                <div class="business-text">
+                    We offer comprehensive staging solutions for residential properties:
+                </div>
+                <ul class="business-list">
+                    <li>Initial Property Consultation and Assessment</li>
+                    <li>Vacant Property Staging with Rental Furniture</li>
+                    <li>Occupied Home Staging and Redesign</li>
+                    <li>Color Consultation and Paint Recommendations</li>
+                    <li>Furniture Arrangement and Styling</li>
+                    <li>Accessories and Artwork Placement</li>
+                </ul>
+            </div>
+            
+            <div class="business-section">
+                <h3>Why Choose Professional Staging?</h3>
+                <div class="business-text">
+                    Statistics show that professionally staged homes:
+                </div>
+                <ul class="business-list">
+                    <li>Sell 73% faster than non-staged properties</li>
+                    <li>Receive offers 6% higher than asking price</li>
+                    <li>Spend less time on the market</li>
+                    <li>Appeal to a broader range of potential buyers</li>
+                </ul>
+            </div>
+            
+            <hr class="business-hr">
+            
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="business-text">
+                    <strong>Staged4U Professional Services</strong><br>
+                    Phone: (555) 123-STAGE<br>
+                    Fax: (555) 123-STAG1<br>
+                    Email: info@staged4u.com<br>
+                    Address: 123 Design Boulevard, Suite 200<br>
+                    Professional Plaza, CA 90210
+                </div>
+                
+                <button class="business-button">Request Quote</button>
+                <button class="business-button">View Portfolio</button>
+                <button class="business-button">Schedule Consultation</button>
+            </div>
+            
+            <hr class="business-hr">
+            
+            <div class="business-text" style="text-align: center; font-size: 12px; color: #808080;">
+                <em>Licensed and Bonded • Member of Professional Staging Association</em><br>
+                <em>Serving the Greater Metropolitan Area Since 1995</em>
+            </div>
+        </div>
+        
+        <div class="business-footer">
+            Copyright © 1995-2025 Staged4U Professional Services. All Rights Reserved.<br>
+            Last Updated: June 26, 2025 | Webmaster: admin@staged4u.com
+        </div>
+
+        <div id="staging-banner" class="staging-banner">
+            🚧 UPGRADING TO MODERN DESIGN - PLEASE WAIT!!! 🚧
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>Staged4U
+        <div class="header-social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+
+            </h1>
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Transforming Spaces, Inspiring Buyers</h2>
+                <p>We specialize in creating beautiful, inviting spaces that sell faster and for a higher price.</p>
+                <a href="#contact" class="cta-button">Get a Free Consultation</a>
+                <div class="hero-trust-indicators">
+                    <span><i class="fas fa-smile"></i> <span class="count" data-target="500">0</span>+ Satisfied Clients</span>
+                    <span><i class="fas fa-dollar-sign"></i> <span class="count" data-target="1000000">0</span>+ Saved</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2>About Us</h2>
+                <p>Staged4U is a premier home staging company dedicated to transforming properties into irresistible homes. With years of experience and a passion for design, our team creates spaces that resonate with potential buyers, leading to quicker sales and higher returns on investment. We believe every home has a story, and we're here to help it tell its best one.</p>
+                <p>Our approach combines aesthetic appeal with strategic marketing, ensuring your property stands out in a competitive market. From initial consultation to final touches, we handle every detail with professionalism and creativity.</p>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="service-grid">
+                    <div class="service service-consultation">
+                        <h3>Consultation</h3>
+                        <p>We're assess your property and provide a detailed report with recommendations for maximizing its appeal.</p>
+                    </div>
+                    <div class="service service-occupied">
+                        <h3>Occupied Staging</h3>
+                        <p>We're work with your existing furniture and decor to create a fresh, updated look.</p>
+                    </div>
+                    <div class="service service-vacant">
+                        <h3>Vacant Staging</h3>
+                        <p>We're bring in our own furniture and accessories to fully furnish your empty property.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <h2>Portfolio</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/237/400/300" alt="Living room staged by Staged4U">
+                        <p>Modern Living Room</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/238/400/300" alt="Bedroom staged by Staged4U">
+                        <p>Cozy Bedroom</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/239/400/300" alt="Kitchen staged by Staged4U">
+                        <p>Gourmet Kitchen</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/240/400/300" alt="Dining room staged by Staged4U">
+                        <p>Elegant Dining Room</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/241/400/300" alt="Bathroom staged by Staged4U">
+                        <p>Luxurious Bathroom</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/242/400/300" alt="Outdoor space staged by Staged4U">
+                        <p>Inviting Outdoor Space</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process">
+            <div class="container">
+                <h2>Our Process</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>1. Consultation & Assessment</h3>
+                        <p>We begin with a thorough walk-through of your property, identifying its strengths and areas for improvement.</p>
+                    </div>
+                    <div class="process-step">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>2. Strategic Planning</h3>
+                        <p>Based on the assessment, we develop a customized staging plan tailored to your home's unique features and target market.</p>
+                    </div>
+                    <div class="process-step">
+                        <i class="fas fa-paint-roller"></i>
+                        <h3>3. Staging & Transformation</h3>
+                        <p>Our team meticulously stages your home, arranging furniture, decor, and accessories to create an inviting atmosphere.</p>
+                    </div>
+                    <div class="process-step">
+                        <i class="fas fa-home"></i>
+                        <h3>4. Showcase & Sell</h3>
+                        <p>Your property is now ready to impress potential buyers, leading to faster sales and maximum value.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <div class="container">
+                <h2>What Our Clients Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-item">
+                        <img src="https://picsum.photos/id/60/100/100" alt="Jane Doe" class="testimonial-avatar">
+                        <p>"Staged4U transformed our home! It sold in record time and for above asking price. Highly recommend their services!"</p>
+                        <h4>- Jane Doe, Home Seller</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <img src="https://picsum.photos/id/61/100/100" alt="John Smith" class="testimonial-avatar">
+                        <p>"Professional, efficient, and incredibly talented. Staged4U made our property shine. We couldn't be happier!"</p>
+                        <h4>- John Smith, Real Estate Agent</h4>
+                    </div>
+                    <div class="testimonial-item">
+                        <img src="https://picsum.photos/id/62/100/100" alt="Emily White" class="testimonial-avatar">
+                        <p>"The staging was impeccable. Every detail was perfect, and it truly made a difference in attracting buyers."</p>
+                        <h4>- Emily White, Property Developer</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <form id="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="certifications-awards">
+                <p>Proud Members of [Association Name] | Certified Staging Professionals</p>
+                <!-- Add logos here if available -->
+            </div>
+            <p>&copy; 2025 Staged4U. All Rights Reserved.</p>
+        </div>
+    </footer>
+        
+
+    <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const retroOverlay = document.getElementById("retro-overlay");
+            const stagingBanner = document.getElementById("staging-banner");
+
+            // Show the banner after 1 second
+            setTimeout(() => {
+                stagingBanner.style.display = "block";
+                stagingBanner.style.left = "50%";
+            }, 1000);
+
+            // Trigger the fall animation and reveal the modern site after 3 seconds
+            // TEMPORARILY DISABLED - uncomment to re-enable transition
+            /*
+            setTimeout(() => {
+                const retroTexts = retroOverlay.querySelectorAll(".retro-header, .retro-text");
+                retroTexts.forEach(text => {
+                    const duration = Math.random() * 1 + 0.5; // 0.5s to 1.5s
+                    const rotation = Math.random() * 40 - 20; // -20deg to 20deg
+                    const delay = Math.random() * 0.5; // 0s to 0.5s
+
+                    text.style.animation = `fall ${duration}s forwards ${delay}s`;
+                    text.style.setProperty('--rotation', `${rotation}deg`);
+                });
+                retroOverlay.classList.add("background-fade-out-animation");
+
+                // Remove the retro overlay after the animation
+                setTimeout(() => {
+                    retroOverlay.remove();
+                }, 2000); // Increased timeout to allow for longer animations
+            }, 3000);
+            */
+        });
+
+        // Your existing script from script.js
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for your message!');
+        });
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                const navMenu = document.querySelector('.nav-menu');
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Hero section zoom and pan effect
+        const hero = document.getElementById('hero');
+        let zoom = 110;
+        let panX = 50;
+        let panY = 50;
+        let zoomDirection = 1; // 1 for zooming in, -1 for zooming out
+        let panDirectionX = 1; // 1 for right, -1 for left
+        let panDirectionY = 1; // 1 for down, -1 for up
+
+        setInterval(() => {
+            // Zoom effect
+            zoom += 0.1 * zoomDirection;
+            if (zoom > 130 || zoom < 90) {
+                zoomDirection *= -1;
+            }
+
+            // Pan effect
+            panX += 0.04 * panDirectionX;
+            panY += 0.04 * panDirectionY;
+
+            if (panX > 70 || panX < 30) {
+                panDirectionX *= -1;
+            }
+            if (panY > 70 || panY < 30) {
+                panDirectionY *= -1;
+            }
+
+            hero.style.backgroundSize = `${zoom}%`;
+            hero.style.backgroundPosition = `${panX}% ${panY}%`;
+        }, 50);
+
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Back to Top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Number animation for trust indicators
+        const counters = document.querySelectorAll('.count');
+        const heroSection = document.getElementById('hero');
+        let hasAnimated = false;
+
+        const animateNumber = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const speed = 2000; // The higher the speed, the slower the animation
+            const increment = target / speed;
+
+            const updateCount = () => {
+                const count = +counter.innerText;
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        };
+
+        const checkVisibilityAndAnimate = () => {
+            const rect = heroSection.getBoundingClientRect();
+            // Check if the hero section is in the viewport
+            if (rect.top < window.innerHeight && rect.bottom >= 0 && !hasAnimated) {
+                counters.forEach(animateNumber);
+                hasAnimated = true; // Ensure animation runs only once
+            }
+        };
+
+        // Initial check on load
+        checkVisibilityAndAnimate();
+
+        // Check on scroll
+        window.addEventListener('scroll', checkVisibilityAndAnimate);
+    </script>
+</body>
+</html>

@@ -12,32 +12,38 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 /* Header */
 header {
-    background-color: #000000; /* Black header */
-    padding: 20px 0;
+    background-color: #000000;
+    padding: 10px 0; /* ↓ reduced from 20px to 10px */
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     text-align: center;
-position: sticky;
-top: 0;
-z-index: 1000;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.logo-img {
+  height: 100px; /* adjust as needed */
+  margin-right: 10px;
+}
 
 h1 {
     margin: 0;
     font-family: 'Playfair Display', serif;
     color: #ffd700; /* Gold for company name */
-    font-size: 2.8em;
+    font-size: 2.2em;
     letter-spacing: 2px;
+    line-height: 1.5;
 }
 
 nav ul {
@@ -84,8 +90,8 @@ nav a:hover {
 
 /* Main Sections */
 main {
-    padding: 40px 0;
-}
+  padding: 0; /* optional if your sections already have padding */
+  margin: 0;}
 
 section {
     background-color: #222222; /* Darker section background */
@@ -120,13 +126,13 @@ section h2::after {
 
 /* Hero Section */
 #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/1600/900?random=1') no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero.jpg') no-repeat center center;
     color: #fff;
     padding: 120px 0;
     text-align: center;
     border-radius: 0;
     box-shadow: none;
-    
+      margin-top: 0; /* prevent accidental spacing */
     position: relative; /* Needed for absolute positioning of trust indicators */
 }
 
@@ -203,33 +209,46 @@ section h2::after {
 }
 
 /* Services Section */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+#services {
+    padding: 70px 0;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
 #services .service {
-    display: inline-block;
-    width: 28%;
-    margin: 0 2%;
-    vertical-align: top;
-    padding: 40px;
-    box-sizing: border-box;
-    border: 1px solid #333333;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #2c2c2c;
-    background-size: cover;
-    background-position: center;
-    color: #fff; /* Ensure text is readable on image backgrounds */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Add text shadow for readability */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  min-height: 380px; /* ⬅️ Force consistent height */
+  box-sizing: border-box;
+  border: 1px solid #333;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #2c2c2c;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+.service {
+    position: relative; /* Needed for background images */
 }
 
 .service-consultation {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/id/10/400/300');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('images/consult.jpg');
 }
 
 .service-occupied {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/id/20/400/300');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('images/occupied.jpg');
 }
 
 .service-vacant {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/id/30/400/300');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('images/vacant.jpg');
 }
 
 #services .service:hover {
@@ -246,6 +265,11 @@ section h2::after {
 
 #services p {
     color: #b0b0b0;
+}
+
+#services .service:hover p {
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 /* Portfolio Section */
@@ -286,11 +310,25 @@ section h2::after {
 
 /* Process Section */
 #process .process-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  padding: 0 20px;
 }
+
+/* Responsive overrides go OUTSIDE the selector block */
+@media (max-width: 900px) {
+  #process .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  #process .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 #process .process-step {
     background-color: #2c2c2c;
@@ -460,24 +498,24 @@ footer p {
     transform: translateY(-3px);
 }
 
-/* Header Social Links */
-.header-social-links {
-  margin-top: 0.0rem;
+/* New rule for the logo and social links container */
+.logo-wrapper {
   display: flex;
-  gap: 0.75rem;
-  font-size: 0.9rem; /* makes sure inherited size doesn't blow up the icons */
+  align-items: flex-end;
+  gap: 2px;
 }
 
 .header-social-links a {
-  font-size: 1rem; /* or try 0.9rem for smaller icons */
-  color: #444;
-  text-decoration: none;
-  transition: color 0.2s ease;
+  color: #aaa483; /* bright yellow */
+  font-size: 1.0rem; /* larger icons */
+  margin-left: 2px;
+  transition: color 0.3s ease;
 }
 
 .header-social-links a:hover {
-  color: #000;
+    color: #ffd700; /* Gold on hover */
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -490,24 +528,42 @@ footer p {
         display: block; /* Show hamburger on mobile */
     }
 
-    .nav-menu {
-        display: none; /* Hide regular nav by default */
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 100%; /* Position below header */
-        left: 0;
-        background-color: #000000;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-        padding: 20px 0;
-    }
+  .nav-menu {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background-color: #000;
+  padding: 20px 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+nav ul {
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}}
+/* Ensure nav links are visible */
+.nav-menu a {
+  color: #ffd700; /* bright gold/yellow */
+  padding: 12px 20px;
+  text-align: center;
+  font-size: 1.2em;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-    .nav-menu.active {
-        display: flex; /* Show nav when active */
-    }
-
+.nav-menu.active {
+  display: flex; /* Show nav when active */
+}
+.nav-menu a:hover {
+  background-color: #111;
+  color: #fff;
+}
     nav li {
-        margin: 10px 0;
+        margin: 8px 0;
         text-align: center;
     }
 
@@ -536,10 +592,6 @@ footer p {
     #portfolio .portfolio-grid,
     #testimonials .testimonial-grid {
         grid-template-columns: 1fr;
-    }
-
-    .header-social-links {
-        margin-top: 10px;
     }
 }
 

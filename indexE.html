@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staged4U - Architectural Poetry</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200;0,300;0,400;1,300&family=Inter:wght@200;300;400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1815;
+            --secondary-dark: #2a251f;
+            --accent-warm: #d4af37;
+            --text-light: #f5f2ed;
+            --text-muted: #a69b8a;
+            --surface-glass: rgba(245, 242, 237, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(166, 155, 138, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><filter id="grain"><feTurbulence baseFrequency="0.8" numOctaves="3"/><feColorMatrix values="0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0 0.05 0 0 0 0.4 0"/></filter><rect width="100%" height="100%" filter="url(%23grain)"/></svg>');
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        .geometric-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .geometric-shape {
+            position: absolute;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            background: transparent;
+            animation: geometricFloat 20s ease-in-out infinite;
+        }
+
+        .geometric-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            transform: rotate(45deg);
+            animation-delay: 0s;
+        }
+
+        .geometric-shape:nth-child(2) {
+            width: 150px;
+            height: 400px;
+            top: 50%;
+            right: 10%;
+            animation-delay: -7s;
+        }
+
+        .geometric-shape:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 20%;
+            border-radius: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes geometricFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            25% { 
+                transform: translateY(-30px) rotate(90deg);
+                opacity: 0.2;
+            }
+            50% { 
+                transform: translateY(-60px) rotate(180deg);
+                opacity: 0.1;
+            }
+            75% { 
+                transform: translateY(-30px) rotate(270deg);
+                opacity: 0.15;
+            }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 25px 0;
+            background: rgba(26, 24, 21, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 28px;
+            font-weight: 200;
+            color: var(--accent-warm);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 1px;
+            background: var(--accent-warm);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 1px;
+            background: var(--accent-warm);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 60px;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-warm);
+            transition: width 0.4s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-warm);
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+            margin-top: 80px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridShift 30s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-text {
+            opacity: 0;
+            animation: slideInLeft 1.2s ease-out 0.5s forwards;
+        }
+
+        .hero-visual {
+            opacity: 0;
+            animation: slideInRight 1.2s ease-out 0.8s forwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-label {
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .hero-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 1px;
+            background: var(--accent-warm);
+        }
+
+        .hero-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 200;
+            color: var(--text-light);
+            line-height: 1.1;
+            margin-bottom: 40px;
+        }
+
+        .hero-title .highlight {
+            font-style: italic;
+            color: var(--accent-warm);
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 60px;
+            max-width: 480px;
+        }
+
+        .cta-architectural {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0;
+            background: transparent;
+            color: var(--accent-warm);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .cta-architectural::before {
+            content: '';
+            width: 60px;
+            height: 1px;
+            background: var(--accent-warm);
+            transition: all 0.4s ease;
+        }
+
+        .cta-architectural:hover::before {
+            width: 80px;
+        }
+
+        .cta-architectural:hover {
+            transform: translateX(10px);
+        }
+
+        .hero-visual-container {
+            position: relative;
+            height: 600px;
+            background: var(--surface-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            overflow: hidden;
+        }
+
+        .hero-visual-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.9);
+            transition: all 0.8s ease;
+        }
+
+        .hero-visual-container:hover .hero-visual-image {
+            filter: grayscale(0%) contrast(1.1) brightness(1);
+            transform: scale(1.05);
+        }
+
+        .hero-visual-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .hero-visual-container:hover .hero-visual-overlay {
+            opacity: 1;
+        }
+
+        .section {
+            padding: 160px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .section-header {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 120px;
+            margin-bottom: 120px;
+            align-items: end;
+        }
+
+        .section-meta {
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-meta::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 60px;
+            height: 1px;
+            background: var(--accent-warm);
+        }
+
+        .section-content h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 48px;
+            font-weight: 200;
+            color: var(--text-light);
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .section-content p {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .service-item {
+            position: relative;
+            padding: 60px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.6s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-warm);
+            transition: width 0.6s ease;
+        }
+
+        .service-item:hover::before {
+            width: 100%;
+        }
+
+        .service-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 64px;
+            font-weight: 200;
+            color: rgba(212, 175, 55, 0.2);
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+
+        .service-item h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .service-item p {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .portfolio-section {
+            background: rgba(212, 175, 55, 0.02);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            margin-top: 80px;
+        }
+
+        .portfolio-item {
+            aspect-ratio: 4/3;
+            position: relative;
+            overflow: hidden;
+            background: var(--surface-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.05);
+        }
+
+        .portfolio-item:nth-child(odd) {
+            aspect-ratio: 3/4;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1) brightness(0.8);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .portfolio-item:hover .portfolio-image {
+            filter: grayscale(0%) contrast(1.1) brightness(1);
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26, 24, 21, 0.9), rgba(42, 37, 31, 0.7));
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-info {
+            text-align: center;
+            transform: translateY(30px);
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-info h4 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .portfolio-info p {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--accent-warm);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .testimonial-section {
+            background: var(--primary-dark);
+        }
+
+        .testimonial-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-family: 'Crimson Pro', serif;
+            font-size: 32px;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 60px;
+        }
+
+        .testimonial-author {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--accent-warm);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .contact-section {
+            position: relative;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: center;
+        }
+
+        .contact-form {
+            background: var(--surface-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 80px;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 20px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--text-light);
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            outline: none;
+            transition: all 0.4s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-bottom-color: var(--accent-warm);
+        }
+
+        .contact-info h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 36px;
+            font-weight: 200;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.3;
+        }
+
+        .contact-details {
+            space-y: 30px;
+        }
+
+        .contact-detail {
+            margin-bottom: 30px;
+        }
+
+        .contact-detail h4 {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--accent-warm);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .contact-detail p {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--text-muted);
+        }
+
+        footer {
+            background: var(--primary-dark);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 24px;
+            font-weight: 200;
+            color: var(--accent-warm);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.4s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-warm);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 1200px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 80px;
+                text-align: center;
+            }
+            
+            .section-header {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            nav {
+                padding: 0 30px;
+            }
+            
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero-content {
+                padding: 0 30px;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 40px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    <div class="geometric-bg">
+        <div class="geometric-shape"></div>
+        <div class="geometric-shape"></div>
+        <div class="geometric-shape"></div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">Staged4U</div>
+            <ul class="nav-menu">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-grid"></div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-label">Architecture Meets Poetry</div>
+                    <h1 class="hero-title">Spaces That <span class="highlight">Breathe</span></h1>
+                    <p class="hero-description">
+                        Where form follows emotion and function serves beauty. We create environments that don't just house life—they elevate it.
+                    </p>
+                    <a href="#contact" class="cta-architectural">Begin Conversation</a>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-visual-container">
+                        <img src="https://picsum.photos/id/1018/800/600" alt="Architectural Poetry" class="hero-visual-image">
+                        <div class="hero-visual-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-meta">Our Philosophy</div>
+                    <div class="section-content">
+                        <h2>Crafting Emotional<br>Landscapes</h2>
+                        <p>
+                            Every space has an inherent poetry waiting to be discovered. We listen to the language of light, texture, and form to compose environments that resonate with the human spirit.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-number">01</div>
+                        <h3>Spatial Narratives</h3>
+                        <p>Understanding the story your space wants to tell, we craft environments that speak to both conscious and unconscious desires, creating emotional connections that transcend the transactional.</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-number">02</div>
+                        <h3>Light Choreography</h3>
+                        <p>Orchestrating natural and artificial light to create moments of drama, intimacy, and wonder. Light becomes our primary medium for shaping mood and defining character.</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-number">03</div>
+                        <h3>Material Poetry</h3>
+                        <p>Selecting textures, colors, and forms that create a sensory dialogue. Each material choice contributes to a larger conversation about comfort, aspiration, and belonging.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section portfolio-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-meta">Recent Work</div>
+                    <div class="section-content">
+                        <h2>Spaces That<br>Tell Stories</h2>
+                        <p>
+                            Each project is a unique collaboration between architecture, emotion, and human need. These spaces don't just showcase properties—they reveal possibilities.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/1005/600/800" alt="Urban Sanctuary" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h4>Urban Sanctuary</h4>
+                                <p>Penthouse Transformation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/1012/800/600" alt="Minimalist Haven" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h4>Minimalist Haven</h4>
+                                <p>Contemporary Residence</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/1015/800/600" alt="Artisan Workshop" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h4>Artisan Workshop</h4>
+                                <p>Creative Studio Space</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://picsum.photos/id/1019/600/800" alt="Garden Pavilion" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-info">
+                                <h4>Garden Pavilion</h4>
+                                <p>Landscape Integration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonial-section">
+            <div class="container">
+                <div class="testimonial-container">
+                    <p class="testimonial-text">
+                        "Staged4U didn't just stage our home—they revealed its soul. The transformation was so profound that we almost didn't want to sell."
+                    </p>
+                    <div class="testimonial-author">— Sarah Chen, Architect</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Let's Create Something<br>Extraordinary Together</h3>
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <h4>Studio</h4>
+                                <p>Available for consultations<br>Monday through Saturday</p>
+                            </div>
+                            <div class="contact-detail">
+                                <h4>Philosophy</h4>
+                                <p>Every space has a story<br>waiting to be told</p>
+                            </div>
+                            <div class="contact-detail">
+                                <h4>Approach</h4>
+                                <p>Collaborative, intuitive,<br>and deeply personal</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone number">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="4" placeholder="Tell us about your space and vision" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="cta-architectural">Send Message</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Staged4U</div>
+                <div class="footer-links">
+                    <a href="#">Services</a>
+                    <a href="#">Portfolio</a>
+                    <a href="#">Philosophy</a>
+                    <a href="#">Contact</a>
+                </div>
+                <p class="footer-text">&copy; 2025 Staged4U. Architectural Poetry in Every Space.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for geometric shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.geometric-shape');
+            
+            shapes.forEach((shape, index) => {
+                const rate = scrolled * (0.5 + index * 0.2);
+                shape.style.transform = `translateY(${rate}px) rotate(${rate * 0.1}deg)`;
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate elements on scroll
+        document.querySelectorAll('.service-item, .portfolio-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(60px)';
+            el.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            observer.observe(el);
+        });
+
+        // Grid animation on mouse move
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX / window.innerWidth;
+            mouseY = e.clientY / window.innerHeight;
+            
+            const heroGrid = document.querySelector('.hero-grid');
+            if (heroGrid) {
+                const translateX = (mouseX - 0.5) * 20;
+                const translateY = (mouseY - 0.5) * 20;
+                heroGrid.style.transform = `translate(${translateX}px, ${translateY}px)`;
+            }
+        });
+
+        // Service item hover effects
+        document.querySelectorAll('.service-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.background = 'rgba(212, 175, 55, 0.02)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.background = 'transparent';
+            });
+        });
+
+        // Form enhancement
+        const formInputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentNode.style.transform = 'translateX(10px)';
+            });
+            
+            input.addEventListener('blur', () => {
+                input.parentNode.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Smooth reveal animations for hero content
+        setTimeout(() => {
+            document.querySelector('.hero-text').style.opacity = '1';
+        }, 500);
+        
+        setTimeout(() => {
+            document.querySelector('.hero-visual').style.opacity = '1';
+        }, 800);
+    </script>
+</body>
+</html>

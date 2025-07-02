@@ -1,7 +1,3 @@
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    alert('Thank you for your message!');
-});
 
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -107,8 +103,47 @@ const checkVisibilityAndAnimate = () => {
     }
 };
 
+// Update years of experience dynamically
+document.addEventListener('DOMContentLoaded', function () {
+  // Years of Experience
+  const startYear = 2006;
+  const currentYear = new Date().getFullYear();
+  const yearsElement = document.getElementById('years-experience');
+  if (yearsElement) {
+    yearsElement.textContent = currentYear - startYear;
+  }
+
+  // Contact Form Handler
+  const form = document.getElementById("contact-form");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch("https://formsubmit.co/ajax/stager@staged4sale.com", {
+        method: "POST",
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("✅ Thank you! Your message has been sent.");
+          form.reset();
+        } else {
+          alert("❌ Oops! Something went wrong. Please try again.");
+        }
+      })
+      .catch(error => {
+        alert("❌ Network error. Please check your connection.");
+        console.error("Formsubmit error:", error);
+      });
+    });
+  }
+
+
 // Initial check on load
 checkVisibilityAndAnimate();
 
 // Check on scroll
 window.addEventListener('scroll', checkVisibilityAndAnimate);
+
+});
