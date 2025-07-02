@@ -25,10 +25,98 @@
     <title>Staged4Sale - Home Staging Services</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <style>
+      /* Pop effect for nav menu items on hover */
+      .nav-menu a {
+        transition: transform 0.18s cubic-bezier(.4,1.4,.6,1), color 0.18s;
+      }
+      .nav-menu a:hover, .nav-menu a:focus {
+        transform: scale(1.13);
+        color: #FFD600;
+        text-shadow: 0 2px 12px rgba(34,34,34,0.13);
+      }
+      /* Fade-in on scroll for sections */
+      .fade-section {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.9s cubic-bezier(.4,0,.2,1), transform 0.9s cubic-bezier(.4,0,.2,1);
+      }
+      .fade-section.visible {
+        opacity: 1;
+        transform: none;
+      }
+      /* Overlay for retro page */
+      #retro-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw; height: 100vh;
+        background: #fff;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: opacity 0.7s;
+      }
+      #retro-iframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        pointer-events: none;
+      }
+      #staging-banner {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-8deg);
+        background: repeating-linear-gradient(135deg, #FFD600 0 30px, #222 30px 60px);
+        color: #222;
+        padding: 2.5rem 7vw;
+        border-radius: 1.2rem;
+        font-size: 3.2rem;
+        font-family: 'Lato', 'Arial Black', Impact, sans-serif;
+        text-align: center;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        border: 6px solid #222;
+        border-style: dashed;
+        opacity: 0;
+        z-index: 100001;
+        pointer-events: none;
+        text-shadow: 2px 2px 0 #FFD600, 4px 4px 0 #222;
+        transition: opacity 0.7s;
+      }
+      .falling-text span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(-80px) scale(1.2);
+        animation: fall 0.8s forwards cubic-bezier(.23,1.02,.67,1.01);
+      }
+      @keyframes fall {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .shake {
+        animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+      }
+
+      /* No fade in for main site */
+      @keyframes shake {
+        10%, 90% { transform: translate3d(-2px, 0, 0); }
+        20%, 80% { transform: translate3d(4px, 0, 0); }
+        30%, 50%, 70% { transform: translate3d(-8px, 0, 0); }
+        40%, 60% { transform: translate3d(8px, 0, 0); }
+      }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
+
     <header>
         <div class="container">
 <div class="logo-area">
@@ -58,6 +146,7 @@
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#process">Process</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -67,7 +156,7 @@
 
     <main>
         <section id="hero">
-            <div class="container">
+            <div class="container hero-fade">
                 <h2>Transforming Spaces<br> Inspiring Buyers</h2>
                 <p>We specialize in creating beautiful, inviting spaces that sell faster and for a higher price.</p>
                 <a href="#contact" class="cta-button">Get a Free Consultation</a>
@@ -78,15 +167,23 @@
             </div>
         </section>
 
+
 <section id="about">
   <div class="container">
-    <h2>About Us</h2>
-    <p>
-      At <strong>Staged 4 Sale</strong>, we don’t just stage homes — we curate elevated living experiences that captivate buyers and command top offers. Led by <strong>Tawni Oppenheim</strong>, one of the nation’s few professionals to hold the prestigious <strong><em>Accredited Staging Professional Master™ (ASPM™)</em></strong> designation, our team brings over <span id="years-experience"></span> years of expertise in design, marketing, and emotional appeal. Personally trained by Barb Schwarz, the creator of home staging, Tawni blends artistic vision with real estate insight to position every property at its fullest potential.
-    </p>
-    <p>
-      From occupied homes to vacant listings, we approach each project with careful intention and an eye for detail. Our signature services—such as <strong>TruREdesign©</strong>, which refreshes spaces using existing furnishings, and <strong>Staged4Home©</strong>, which reimagines lived-in spaces for homeowners—reflect our commitment to both beauty and practicality. With a reputation for professionalism, creativity, and results, <strong>Staged 4 Sale</strong> helps sellers move forward with confidence and style.
-    </p>
+    <div class="about-flex">
+      <div class="about-text-col">
+        <h2>About Us</h2>
+        <p>
+          At <span class="shine-keyword">Staged 4 Sale</span>, we don’t just stage homes — we curate elevated living experiences that captivate buyers and command top offers. Led by <span class="shine-keyword">Tawni Oppenheim</span>, one of the nation’s few professionals to hold the prestigious <span class="shine-keyword">Accredited Staging Professional Master™ (ASPM™)</span> designation, our team brings over <span id="years-experience"></span> years of expertise in design, marketing, and emotional appeal. <span class="shine-keyword">A pioneer</span> of home staging, Tawni was personally trained by Barb Schwarz, the creator of the industry itself. She blends artistic vision with real estate insight to position every property at its fullest potential.
+        </p>
+        <p>
+          From occupied homes to vacant listings, we approach each project with careful intention and an eye for detail. Our signature services—such as <span class="shine-keyword">TruREdesign©</span>, which refreshes spaces using existing furnishings, and <span class="shine-keyword">Staged4Home©</span>, which reimagines lived-in spaces for homeowners—reflect our commitment to both beauty and practicality. With a reputation for professionalism, creativity, and results, <span class="shine-keyword">Staged 4 Sale</span> helps sellers move forward with confidence and style.
+        </p>
+      </div>
+      <div class="about-img-col">
+        <img src="images/tawni.jpg" alt="Tawni Oppenheim, Staged4Sale founder" class="about-tawni-img">
+      </div>
+    </div>
   </div>
 </section>
         <section id="services">
@@ -197,10 +294,107 @@
   </div>
 </section>
 
+<section id="faq">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-1">
+        <span class="faq-emoji">🛋️</span>
+        <span class="faq-title">Why Staging Matters</span>
+        <i class="fas fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-answer" id="faq-1">
+        <div class="faq-content-inner">
+          <p><strong>Home staging isn't just about furniture — it's about feelings.</strong></p>
+          
+          <p>Have you ever wondered why IKEA stages its showrooms like real homes, or why almost every builder fully decorates their model homes? It's not just for looks — it's because staging is proven to work.</p>
+          
+          <p>Most buyers struggle to visualize a home's potential. Staging bridges that gap. It helps them emotionally connect with the space, imagine their life there, and feel confident about making an offer.</p>
+          
+          <p><strong>Staging:</strong></p>
+          <ul>
+            <li>Creates an immediate emotional response</li>
+            <li>Helps buyers see purpose, flow, and scale</li>
+            <li>Removes distractions so they can picture themselves living there</li>
+          </ul>
+          
+          <p>It turns hesitation into action — and houses into homes buyers can't forget.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-2">
+        <span class="faq-emoji">💰</span>
+        <span class="faq-title">How Much Does Staging Cost?</span>
+        <i class="fas fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-answer" id="faq-2">
+        <div class="faq-content-inner">
+          <p>We offer a variety of flexible, customized services to fit your timeline, home, and budget:</p>
+          
+          <ul>
+            <li><strong>Walkthrough Consultations</strong> start at $150</li>
+            <li><strong>Detailed Home Staging Reports</strong> start at $350</li>
+            <li><strong>Full-home staging quotes</strong> are provided after your free site survey</li>
+          </ul>
+          
+          <p><strong>💡 Staging pays for itself</strong> by helping maximize your sale price and reducing time on the market — which means fewer holding costs, fewer price drops, and faster peace of mind.</p>
+          
+          <p>Whether you're looking for expert guidance or a full-service transformation, we'll walk you through every step and take care of everything.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-3">
+        <span class="faq-emoji">🏠</span>
+        <span class="faq-title">What's the Difference Between Occupied and Vacant Staging?</span>
+        <i class="fas fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-answer" id="faq-3">
+        <div class="faq-content-inner">
+          <p>During your consultation, we'll help determine what's best for your property — but most of the time, we recommend vacant staging. Why?</p>
+          
+          <p>Because while we love your personal style, home staging relies on a more neutral, broadly appealing look that allows buyers to project their own lives into the space. Vacant staging gives us the most creative and strategic control to do that effectively.</p>
+          
+          <p>That said, if you're living in the home or working with a limited timeline or budget, we also offer:</p>
+          
+          <ul>
+            <li><strong>Occupied staging</strong> using your existing pieces (with our TruREdesign™ approach)</li>
+            <li><strong>Re-Design+</strong>, which blends your furnishings with key accessories and furniture from our inventory</li>
+          </ul>
+          
+          <p>No matter the approach, we'll work with you to make sure your home looks its best.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq-4">
+        <span class="faq-emoji">🤝</span>
+        <span class="faq-title">Do You Work with Realtors?</span>
+        <i class="fas fa-chevron-down faq-icon"></i>
+      </button>
+      <div class="faq-answer" id="faq-4">
+        <div class="faq-content-inner">
+          <p><strong>Absolutely.</strong> We love collaborating with agents and are proud of the long-term relationships we've built in the industry.</p>
+          
+          <p>If you're a licensed Realtor®, you may also qualify for special pricing and bundled service options through our <strong>REAP Program (Realtor Exclusive Access & Pricing)</strong>. Ask us for details!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="contact">
   <div class="container">
     <h2>Contact Us</h2>
+    
+    <p class="contact-intro">Whether you're a homeowner preparing to sell, a realtor looking to elevate your listings, or just curious about how staging can transform a space — we'd love to hear from you.</p>
+    
+    <p class="contact-tagline">Let's make your first impression unforgettable.</p>
     
     <form action="https://formsubmit.co/stager@staged4sale.com" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
@@ -212,6 +406,20 @@
 
       <button type="submit">Send Message</button>
     </form>
+
+    <div class="contact-social">
+      <p>Follow us on:</p>
+      <div class="contact-social-links">
+        <a href="https://www.facebook.com/Staged4Sale/" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-facebook-f"></i>
+          <span>Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/staged4salellc/" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram"></i>
+          <span>Instagram</span>
+        </a>
+      </div>
+    </div>
 
   </div>
 </section>
@@ -231,6 +439,78 @@
 
     <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="script.js"></script>
+</body>
+<script>
+// --- Fade-in on scroll for sections ---
+window.addEventListener('DOMContentLoaded', function() {
+  // Add fade-section class to all main > section and .container > section
+  document.querySelectorAll('main > section, .container > section').forEach(el => {
+    el.classList.add('fade-section');
+  });
+  // Add fade-section to hero text container only (with .hero-fade)
+  var heroInner = document.querySelector('#hero .hero-fade');
+  if (heroInner) heroInner.classList.add('fade-section');
+  // Intersection Observer for fade-in and fade-out
+  const observer = new window.IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.18 });
+  document.querySelectorAll('.fade-section').forEach(el => {
+    observer.observe(el);
+  });
+  // Instantly show hero text if it's at the top on load
+  if (heroInner && window.scrollY < 32) {
+    setTimeout(() => heroInner.classList.add('visible'), 80);
+  }
+});
+
+// FAQ Accordion Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const isOpen = this.getAttribute('aria-expanded') === 'true';
+            
+            // Close all other FAQ items
+            faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== this) {
+                    otherQuestion.setAttribute('aria-expanded', 'false');
+                    otherQuestion.nextElementSibling.classList.remove('open');
+                }
+            });
+            
+            // Toggle current item
+            if (isOpen) {
+                this.setAttribute('aria-expanded', 'false');
+                answer.classList.remove('open');
+            } else {
+                this.setAttribute('aria-expanded', 'true');
+                answer.classList.add('open');
+            }
+        });
+    });
+    
+    // Smooth scroll for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
