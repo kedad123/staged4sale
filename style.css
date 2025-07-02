@@ -425,9 +425,20 @@ section h2::after {
 
 @media (max-width: 600px) {
     #portfolio .portfolio-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 20px;
         padding: 0 15px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    #portfolio .portfolio-item {
+        width: 100%;
+        max-width: none;
+    }
+    
+    #portfolio .portfolio-item img {
+        height: 250px;
     }
 }
 
