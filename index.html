@@ -505,16 +505,25 @@
     
     <p class="contact-tagline">Let's make your first impression unforgettable.</p>
     
-    <form action="https://formsubmit.co/sales@staged4sale.com" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
+<form id="contact-form">
+  <input type="text" name="name" placeholder="Listing legend" required>
+  <input type="email" name="email" placeholder="futureclient@staged4sale.com" required>
+  <textarea name="message" placeholder="Tell us about your space, your goals, or your wildest design dreams..." required></textarea>
 
-      <!-- Optional: Turn off CAPTCHA -->
-      <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_subject" value="New Contact from Website">
+  <input type="text" name="_gotcha" style="display:none">
 
-      <button type="submit">Send Message</button>
-    </form>
+  <button type="submit">Send Message</button>
+</form>
+
+
+<div id="form-popup" class="form-popup hidden">
+  <div class="form-popup-content">
+    <h2>🎉 Message Sent!</h2>
+    <p>Thank you for reaching out. We can’t wait to help you stage something amazing!</p>
+    <button id="popup-close">Close</button>
+  </div>
+</div>
 
     <div class="contact-social">
       <p>Follow us on:</p>
