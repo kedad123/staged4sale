@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Staged4Sale</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .crack-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .crack {
+            position: absolute;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+            transform-origin: center;
+        }
+
+        .crack-1 {
+            width: 3px;
+            height: 350px;
+            top: 10%;
+            left: 20%;
+            transform: rotate(25deg);
+        }
+
+        .crack-2 {
+            width: 2px;
+            height: 180px;
+            top: 30%;
+            left: 70%;
+            transform: rotate(-15deg);
+        }
+
+        .crack-3 {
+            width: 4px;
+            height: 250px;
+            top: 50%;
+            left: 15%;
+            transform: rotate(65deg);
+        }
+
+        .crack-4 {
+            width: 2px;
+            height: 130px;
+            top: 70%;
+            left: 80%;
+            transform: rotate(-45deg);
+        }
+
+        .crack-5 {
+            width: 3px;
+            height: 220px;
+            top: 20%;
+            left: 60%;
+            transform: rotate(10deg);
+        }
+
+        .crack-6 {
+            width: 2px;
+            height: 150px;
+            top: 80%;
+            left: 30%;
+            transform: rotate(-30deg);
+        }
+
+        .crack-7 {
+            width: 3px;
+            height: 300px;
+            top: 5%;
+            left: 85%;
+            transform: rotate(40deg);
+        }
+
+        .crack-8 {
+            width: 2px;
+            height: 110px;
+            top: 60%;
+            left: 50%;
+            transform: rotate(-60deg);
+        }
+
+        .crack-9 {
+            width: 2px;
+            height: 160px;
+            top: 40%;
+            left: 35%;
+            transform: rotate(75deg);
+        }
+
+        .crack-10 {
+            width: 1px;
+            height: 90px;
+            top: 15%;
+            left: 45%;
+            transform: rotate(-80deg);
+        }
+
+        .crack-11 {
+            width: 2px;
+            height: 200px;
+            top: 65%;
+            left: 55%;
+            transform: rotate(20deg);
+        }
+
+        .crack-12 {
+            width: 1px;
+            height: 120px;
+            top: 85%;
+            left: 65%;
+            transform: rotate(-50deg);
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .home-button, .contact-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .home-button:hover, .contact-button:hover {
+            background: #ffed4a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .contact-button {
+            background: transparent;
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+
+        .contact-button:hover {
+            background: #ffd700;
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.5rem;
+            }
+            
+            .error-description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-wrapper">
+                    <a href="/">
+                        <img src="images/logo2.png" alt="Staged4Sale Logo" class="logo-img">
+                    </a>
+                    <div class="header-social-links">
+                        <a href="https://www.facebook.com/Staged4Sale/" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/staged4salellc/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#services">Services</a></li>
+                    <li><a href="/#portfolio">Portfolio</a></li>
+                    <li><a href="/#process">Process</a></li>
+                    <li><a href="/#testimonials">Testimonials</a></li>
+                    <li><a href="/#faq">FAQ</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="crack-overlay">
+        <div class="crack crack-1"></div>
+        <div class="crack crack-2"></div>
+        <div class="crack crack-3"></div>
+        <div class="crack crack-4"></div>
+        <div class="crack crack-5"></div>
+        <div class="crack crack-6"></div>
+        <div class="crack crack-7"></div>
+        <div class="crack crack-8"></div>
+        <div class="crack crack-9"></div>
+        <div class="crack crack-10"></div>
+        <div class="crack crack-11"></div>
+        <div class="crack crack-12"></div>
+    </div>
+    
+    <div class="main-content">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <div class="error-message">Oops! Looks like this page never got staged!</div>
+            <div class="error-description">
+                The page you're looking for seems to have been deleted or moved to a different location.
+            </div>
+            <div class="button-container">
+                <a href="/" class="home-button">Back to Home</a>
+                <a href="/#contact" class="contact-button">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
