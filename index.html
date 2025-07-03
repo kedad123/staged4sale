@@ -501,29 +501,31 @@
   <div class="container">
     <h2>Contact Us</h2>
     
-    <p class="contact-intro">Whether you're a homeowner preparing to sell, a realtor looking to elevate your listings, or just curious about how staging can transform a space — we'd love to hear from you.</p>
+    <p class="contact-intro">
+      Whether you're a homeowner preparing to sell, a realtor looking to elevate your listings, or just curious about how staging can transform a space — we'd love to hear from you.
+    </p>
     
     <p class="contact-tagline">Let's make your first impression unforgettable.</p>
     
-<form id="contact-form">
-  <input type="text" name="name" placeholder="Listing legend" required>
-  <input type="email" name="email" placeholder="futureclient@staged4sale.com" required>
-  <textarea name="message" placeholder="Tell us about your space, your goals, or your wildest design dreams..." required></textarea>
+    <form action="https://formspree.io/f/mnnvrdew" method="POST" id="contact-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Listing A. Legend" required>
 
-  <input type="hidden" name="_subject" value="New Contact from Website">
-  <input type="text" name="_gotcha" style="display:none">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="FutureHappyClient@staged4sale.com" required>
 
-  <button type="submit">Send Message</button>
-</form>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Tell us about your space, your goals, or your wildest design dreams..." required></textarea>
 
+      <input type="hidden" name="_subject" value="New Contact from Website">
+      <input type="hidden" name="_next" value="thank-you.html">
+      <input type="text" name="_gotcha" style="display:none">
 
-<div id="form-popup" class="form-popup hidden">
-  <div class="form-popup-content">
-    <h2>🎉 Message Sent!</h2>
-    <p>Thank you for reaching out. We can’t wait to help you stage something amazing!</p>
-    <button id="popup-close">Close</button>
+      <button type="submit">Send Message</button>
+    </form>
   </div>
-</div>
+</section>
+
 
     <div class="contact-social">
       <p>Follow us on:</p>

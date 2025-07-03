@@ -605,7 +605,7 @@ section h2::after {
 #contact form textarea {
     width: calc(100% - 24px); /* Adjust for padding */
     padding: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     border: 1px solid #444444;
     border-radius: 8px;
     font-size: 1.1em;
@@ -1084,11 +1084,21 @@ footer p {
         max-width: 400px; /* Shorter width but still centered */
         padding: 30px 20px;
     }
-    
+    #contact form label {
+  display: block;
+  text-align: left;
+  color: #ffd700;
+  font-weight: 500;
+  font-size: 0.85em;
+  margin-bottom: 6px;
+  margin-top: 10px;
+  padding-left: 5px;
+}
     .contact-intro,
     .contact-tagline {
         padding: 0 20px;
     }
+    
     
     .contact-social-links {
         flex-direction: column;
@@ -1101,6 +1111,7 @@ footer p {
         justify-content: center;
     }
 }
+
 
 @media (max-width: 480px) {
     #hero {

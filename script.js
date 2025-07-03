@@ -113,41 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     yearsElement.textContent = currentYear - startYear;
   }
 
- // Contact Form Handler
-const form = document.getElementById("contact-form");
-const popup = document.getElementById("form-popup");
-const closeBtn = document.getElementById("popup-close");
-
-if (form) {
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-
-    fetch("https://formspree.io/f/mnnvrdew", {
-      method: "POST",
-      headers: { 'Accept': 'application/json' },
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        form.reset();
-        popup.classList.remove("hidden");
-      } else {
-        alert("❌ Oops! Something went wrong. Please try again.");
-      }
-    })
-    .catch(error => {
-      alert("❌ Network error. Please check your connection.");
-      console.error("Formspree error:", error);
-    });
-  });
-}
-
-if (closeBtn && popup) {
-  closeBtn.addEventListener("click", function () {
-    popup.classList.add("hidden");
-  });
-}
 
 
 // Initial check on load
