@@ -1,6 +1,6 @@
 # Rolando Bungalow
 slug: rolando-bungalow
-location: Rolando Village, San Diego, CA
+location: San Diego, CA
 featured: rolando-bungalow-01.webp
 tags: [bungalow, mid-century, turnkey, staged]
 

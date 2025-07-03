@@ -159,6 +159,9 @@ class PortfolioManager {
             return;
         }
 
+        // Clear any fallback content
+        container.innerHTML = '';
+
         if (this.projects.length === 0) {
             container.innerHTML = '<p class="portfolio-empty">No projects found.</p>';
             return;
