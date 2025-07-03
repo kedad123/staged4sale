@@ -317,31 +317,11 @@
 
         <section id="portfolio">
             <div class="container">
-                <h2>Portfolio</h2>
-                <div class="portfolio-grid">
-                    <div class="portfolio-item">
-                        <img src="images/living.jpg" alt="Living room staged by Staged4Sale">
-                        <p>Modern Living Room</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="images/bedroom.jpg" alt="Bedroom staged by Staged4Sale">
-                        <p>Cozy Bedroom</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="images/kitchen.jpg" alt="Kitchen staged by Staged4Sale">
-                        <p>Gourmet Kitchen</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="images/dining.jpg" alt="Dining room staged by Staged4Sale">
-                        <p>Elegant Dining Room</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="images/bathroom.jpg" alt="Bathroom staged by Staged4Sale">
-                        <p>Luxurious Bathroom</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="images/outdoor.jpg" alt="Outdoor space staged by Staged4Sale">
-                        <p>Inviting Outdoor Space</p>
+                <h2>Recent Projects</h2>
+                <div class="portfolio-grid" id="portfolio-container">
+                    <!-- Dynamic portfolio items will be loaded here -->
+                    <div class="portfolio-loading">
+                        <p>Loading portfolio projects...</p>
                     </div>
                 </div>
             </div>
@@ -518,7 +498,7 @@
       <textarea id="message" name="message" placeholder="Tell us about your space, your goals, or your wildest design dreams..." required></textarea>
 
       <input type="hidden" name="_subject" value="New Contact from Website">
-      <input type="hidden" name="_next" value="thank-you.html">
+      <input type="hidden" name="_next" value="https://kedad123.github.io/staged4sale/thank-you.html">
       <input type="text" name="_gotcha" style="display:none">
 
       <button type="submit">Send Message</button>
@@ -560,6 +540,7 @@
     <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
 
 </body>
+<script src="portfolio.js"></script>
 <script>
 // --- Fade-in on scroll for sections ---
 window.addEventListener('DOMContentLoaded', function() {
