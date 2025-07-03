@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staged4U - Door Hanger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .door-hanger {
+            width: 4.25in;
+            height: 11in;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            color: #e0e0e0;
+        }
+
+        .door-hanger::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .door-hanger-hole {
+            position: absolute;
+            top: 1.75in; /* 1.75" safe zone from top */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1.25in; /* 1.25" hole diameter */
+            height: 1.25in;
+            background: #f0f0f0;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            padding: 3in 20px 30px 20px; /* 3in Start after safe zone + hole */
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffd700;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 12px;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        .main-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 2in;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #ffd700;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
+        }
+
+        .subheadline {
+            font-size: 12px;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .about-us {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #ffd700;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .about-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .about-text {
+            font-size: 11px;
+            color: #e0e0e0;
+            line-height: 1.4;
+        }
+
+        .services-list {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: center;
+            padding: 6px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 6px;
+            border-left: 2px solid #ffd700;
+        }
+
+        .service-item i {
+            color: #ffd700;
+            font-size: 10px;
+            margin-right: 6px;
+            width: 14px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .service-item span {
+            color: #e0e0e0;
+            font-size: 8px;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .qr-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .qr-code {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .qr-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .qr-title {
+            font-size: 11px;
+            color: #ffd700;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .qr-subtitle {
+            font-size: 9px;
+            color: #b0b0b0;
+            line-height: 1.3;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #ffd700 0%, #e6c200 100%);
+            color: #1a1a1a;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .cta-content {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 5px 40px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cta-subtitle {
+            font-size: 10px;
+            margin: 0 0 10px 40px;
+            opacity: 0.;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            gap: 10px;
+        }
+
+        .cta-qr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cta-qr .qr-code {
+            width: 75px;
+            height: 75px;
+            background: white;
+            border-radius: 6px;
+            padding: 3px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .cta-qr .qr-text {
+            font-size: 7px;
+            text-align: center;
+            line-height: 1.1;
+            opacity: 0.8;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-size: 11px;
+            font-weight: 600;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            min-width: 0; /* Allow text to wrap/shrink */
+        }
+
+        .contact-item i {
+            margin: 0;
+            width: auto;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .contact-item span {
+            font-size: 8px;
+            text-align: center;
+            word-break: break-all; /* Allow email to break if needed */
+            line-height: 1.1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .trust-indicators {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 10px;
+            color: #ffd700;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .trust-item i {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .copyright {
+            font-size: 9px;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .door-hanger {
+                width: 4.25in;
+                height: 11in;
+                box-shadow: none;
+                margin: 0;
+                page-break-inside: avoid;
+            }
+            
+            @page {
+                size: 4.25in 11in;
+                margin: 0;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .door-hanger {
+                width: 90vw;
+                height: auto;
+                min-height: 90vh;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .headline {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="door-hanger">
+        <div class="door-hanger-hole"></div>
+        
+        <div class="header">
+            <div class="logo">STAGED4SALE</div>
+            <div class="tagline">Professional Home Staging since 2006</div>
+        </div>
+
+        <div class="main-content">
+            <img src="images/hero.jpg" alt="Staged living room by Staged4U" class="portfolio-image">
+            
+            <div class="headline">Transform Your Space, Maximize Your Sale</div>
+            <div class="subheadline">Professional staging that helps homes sell faster and for higher prices</div>
+            
+            <div class="about-us">
+                <div class="about-title">About Staged4Sale</div>
+                <div class="about-text">We're certified staging professionals with over 500 successful projects. Our expert team transforms homes using proven design principles that appeal to today's buyers, helping properties sell faster and for higher prices.</div>
+            </div>
+            
+            <div class="cta-section">
+                <div class="cta-content">
+                    <div class="cta-title">FREE CONSULTATION</div>
+                    <div class="cta-subtitle">Get Your Home Market-Ready Today!</div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>sales@staged4sale.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span>www.staged4sale.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cta-qr">
+                    <img src="images/staged4sale-qrcode.svg" alt="QR Code for Contact" class="qr-code">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <i class="fas fa-award"></i>
+                    <span>Certified Professional</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-star"></i>
+                    <span>5-Star Rated</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Trusted by 500+ Clients</span>
+                </div>
+            </div>
+            
+            <div class="copyright">© 2025 Staged4Sale - Licensed & Insured</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -78,6 +78,13 @@ nav a:hover {
     text-shadow: none !important; /* Remove any text shadow */
 }
 
+/* Active menu item styling */
+nav a.active {
+    color: #ffd700 !important; /* Yellow text for active menu item */
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    font-weight: 600;
+}
+
 /* Hamburger Menu */
 .hamburger {
     display: none; /* Hidden by default */
@@ -109,6 +116,7 @@ section {
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     text-align: center;
+    scroll-padding-top: 120px; /* Account for sticky header height */
 }
 
 section h2 {
@@ -910,6 +918,10 @@ section h2::after {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px; /* Ensure consistent height for all cards */
 }
 
 #process .process-step:hover {
@@ -932,6 +944,10 @@ section h2::after {
 
 #process .process-step p {
     color: #b0b0b0;
+    flex-grow: 1; /* Allow description to take available space */
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 /* Testimonials Section */
@@ -1130,8 +1146,10 @@ section h2::after {
 
 @media (max-width: 480px) {
     .contact-social-links {
-        flex-direction: column;
+        flex-direction: row; /* Keep side by side even on mobile */
         gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping if needed */
+        justify-content: center;
     }
 }
 
@@ -1506,14 +1524,17 @@ footer p {
     
     
     .contact-social-links {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row; /* Keep side by side on tablet too */
+        gap: 20px;
         align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
     }
     
     .contact-social-links a {
-        width: 200px;
+        width: auto; /* Allow natural width */
         justify-content: center;
+        min-width: 150px; /* Minimum width for consistency */
     }
 }
 

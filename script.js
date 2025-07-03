@@ -121,4 +121,85 @@ checkVisibilityAndAnimate();
 // Check on scroll
 window.addEventListener('scroll', checkVisibilityAndAnimate);
 
+// Active menu highlighting based on scroll position
+setupMenuHighlighting();
+
 });
+
+function setupMenuHighlighting() {
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    const sections = document.querySelectorAll('section[id]');
+    
+    console.log('Setting up menu highlighting...');
+    console.log('Nav links found:', navLinks.length);
+    console.log('Sections found:', sections.length);
+    
+    // Better intersection observer settings
+    const observerOptions = {
+        rootMargin: '-10% 0px -80% 0px', // Less restrictive margins
+        threshold: 0.1 // Small threshold for better detection
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const targetId = entry.target.id;
+            const navLink = document.querySelector(`nav a[href="#${targetId}"]`);
+            
+            console.log(`Section ${targetId} intersecting:`, entry.isIntersecting);
+            
+            if (entry.isIntersecting) {
+                // Remove active class from all nav links
+                navLinks.forEach(link => link.classList.remove('active'));
+                // Add active class to current nav link
+                if (navLink) {
+                    navLink.classList.add('active');
+                    console.log(`Added active class to ${targetId} nav link`);
+                }
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections
+    sections.forEach(section => {
+        observer.observe(section);
+        console.log(`Observing section: ${section.id}`);
+    });
+    
+    // Fallback: Manual scroll detection
+    let ticking = false;
+    
+    function updateActiveNavOnScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollPos = window.scrollY + 150; // Account for header height
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        currentSection = section.id;
+                    }
+                });
+                
+                if (currentSection) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`nav a[href="#${currentSection}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+                
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    // Add scroll listener as fallback
+    window.addEventListener('scroll', updateActiveNavOnScroll);
+    
+    // Initialize active state
+    updateActiveNavOnScroll();
+}
