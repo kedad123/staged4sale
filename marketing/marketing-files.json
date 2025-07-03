@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "filename": "Staged4Sale - One Pager.pdf",
+      "displayName": "Staged4Sale One Pager",
+      "fileType": "PDF",
+      "description": "Complete overview of Staged4Sale services and benefits in a single page format",
+      "category": "Overview",
+      "size": "PDF Document"
+    },
+    {
+      "filename": "Staged4Sale-OnePager.html",
+      "displayName": "Staged4Sale One Pager (Web Version)",
+      "fileType": "HTML",
+      "description": "Interactive web version of the Staged4Sale one-pager with full styling and animations",
+      "category": "Web Resources",
+      "size": "HTML Document"
+    },
+    {
+      "filename": "Staged4Sale-hanger.html",
+      "displayName": "Staged4Sale Door Hanger",
+      "fileType": "HTML",
+      "description": "Printable door hanger design for marketing and promotional activities",
+      "category": "Print Materials",
+      "size": "HTML Document"
+    }
+  ]
+}

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Essential SEO Meta Tags -->
+    <meta name="description" content="Download marketing materials for Staged4Sale - Professional Home Staging in Southern California. Access our one-pagers, door hangers, and promotional resources.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Tawni Oppenheim">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="home staging, marketing materials, staged homes, ASPM, real estate, San Diego staging, promotional materials">
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Staged4Sale Marketing Materials - Download Resources" />
+    <meta property="og:description" content="Access marketing materials and promotional resources for Staged4Sale professional home staging services." />
+    <meta property="og:image" content="https://staged4sale.com/images/hero.jpg" />
+    <meta property="og:url" content="https://staged4sale.com/marketing/" />
+    <meta property="og:type" content="website" />
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Materials - Staged4Sale</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Marketing page specific styles */
+        .marketing-hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 2px solid #ffd700;
+        }
+        
+        .marketing-hero h1 {
+            font-size: 3em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .marketing-hero p {
+            font-size: 1.3em;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .marketing-section {
+            padding: 60px 0;
+            background-color: #1a1a1a;
+        }
+        
+        .marketing-section h2 {
+            text-align: center;
+            color: #ffd700;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .marketing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .marketing-card {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .marketing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+        }
+        
+        .marketing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .marketing-card:hover::before {
+            animation: shine 0.6s ease-in-out;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+        
+        .file-icon {
+            font-size: 3em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+        
+        .marketing-card h3 {
+            color: #ffd700;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .marketing-card p {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .file-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        
+        .file-type {
+            background: #ffd700;
+            color: #1a1a1a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        
+        .file-category {
+            color: #ffd700;
+            font-weight: 600;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            background: linear-gradient(135deg, #ffed4a 0%, #ffd700 100%);
+        }
+        
+        .download-btn i {
+            font-size: 1.2em;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 60px 0;
+            color: #e0e0e0;
+            font-size: 1.2em;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #ffd700;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-state {
+            text-align: center;
+            padding: 60px 0;
+            color: #ff6b6b;
+            font-size: 1.2em;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-5px);
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .marketing-hero h1 {
+                font-size: 2.2em;
+            }
+            
+            .marketing-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .marketing-card {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-area">
+                <div class="logo-wrapper">
+                    <a href="../index.html">
+                        <img src="../images/logo2.png" alt="Staged4Sale Logo" class="logo-img">
+                    </a>
+                    <div class="header-social-links">
+                        <a href="https://www.facebook.com/Staged4Sale/" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/staged4salellc/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../index.html#services">Services</a></li>
+                    <li><a href="../index.html#portfolio">Portfolio</a></li>
+                    <li><a href="../index.html#process">Process</a></li>
+                    <li><a href="../index.html#testimonials">Testimonials</a></li>
+                    <li><a href="../index.html#faq">FAQ</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="marketing-hero">
+            <div class="container">
+                <a href="../index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </a>
+                <h1>Marketing Materials</h1>
+                <p>Download our professional marketing resources, one-pagers, and promotional materials to help showcase Staged4Sale services.</p>
+            </div>
+        </section>
+
+        <section class="marketing-section">
+            <div class="container">
+                <h2>Available Downloads</h2>
+                <div id="marketing-content">
+                    <div class="loading-state">
+                        <div class="loading-spinner"></div>
+                        <p>Loading marketing materials...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="certifications-awards">
+                <p>Accredited, Licensed & Insured | Serving Southern California</p>
+                <p>Certified Accredited Staging Professional Master" (ASPM")</p>
+            </div>
+            <p>&copy; 2025 Staged4Sale. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fetch marketing files and populate the page
+        async function loadMarketingFiles() {
+            try {
+                const response = await fetch('marketing-files.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load marketing files');
+                }
+                const data = await response.json();
+                displayMarketingFiles(data.files);
+            } catch (error) {
+                console.error('Error loading marketing files:', error);
+                displayError();
+            }
+        }
+
+        function displayMarketingFiles(files) {
+            const contentDiv = document.getElementById('marketing-content');
+            
+            if (files.length === 0) {
+                contentDiv.innerHTML = '<p class="error-state">No marketing materials available at this time.</p>';
+                return;
+            }
+
+            const grid = document.createElement('div');
+            grid.className = 'marketing-grid';
+
+            files.forEach(file => {
+                const card = createMarketingCard(file);
+                grid.appendChild(card);
+            });
+
+            contentDiv.innerHTML = '';
+            contentDiv.appendChild(grid);
+        }
+
+        function createMarketingCard(file) {
+            const card = document.createElement('div');
+            card.className = 'marketing-card';
+
+            const fileIcon = getFileIcon(file.fileType);
+            
+            card.innerHTML = `
+                <div class="file-icon">
+                    <i class="${fileIcon}"></i>
+                </div>
+                <h3>${file.displayName}</h3>
+                <p>${file.description}</p>
+                <div class="file-meta">
+                    <span class="file-category">${file.category}</span>
+                    <span class="file-type">${file.fileType}</span>
+                </div>
+                <a href="${encodeURIComponent(file.filename)}" class="download-btn" download>
+                    <i class="fas fa-download"></i>
+                    Download
+                </a>
+            `;
+
+            return card;
+        }
+
+        function getFileIcon(fileType) {
+            switch (fileType.toLowerCase()) {
+                case 'pdf':
+                    return 'fas fa-file-pdf';
+                case 'html':
+                    return 'fas fa-code';
+                case 'doc':
+                case 'docx':
+                    return 'fas fa-file-word';
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                case 'gif':
+                    return 'fas fa-file-image';
+                default:
+                    return 'fas fa-file';
+            }
+        }
+
+        function displayError() {
+            const contentDiv = document.getElementById('marketing-content');
+            contentDiv.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2em; margin-bottom: 15px;"></i>
+                    <p>Unable to load marketing materials. Please try again later.</p>
+                </div>
+            `;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMarketingFiles();
+        });
+    </script>
+</body>
+</html>
