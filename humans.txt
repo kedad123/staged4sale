@@ -1,0 +1,33 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+Owner & Principal Stager: Tawni Oppenheim
+Credentials: ASPM™ (Accredited Staging Professional Master)
+Contact: staged4sale.com
+Location: Southern California
+
+Web Development: Claude Code
+Technology: AI-Assisted Development
+Location: Anthropic
+
+# THANKS
+
+Staging Education: Real Estate Staging Association (RESA)
+Photography: Professional real estate photographers
+Clients: Homeowners and real estate professionals throughout Southern California
+
+# TECHNOLOGY COLOPHON
+
+Standards: HTML5, CSS3, JavaScript ES6+
+Components: Font Awesome, Google Fonts
+Methodology: Progressive Enhancement, Mobile-First
+Software: Visual Studio Code, Git
+Hosting: GitHub Pages
+Analytics: Performance-focused, privacy-conscious
+
+Last update: 2025/01/01
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code

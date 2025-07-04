@@ -602,6 +602,58 @@ section h2::after {
     opacity: 1;
 }
 
+/* Portfolio Call-to-Action */
+.portfolio-cta {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px 0;
+}
+
+.btn-portfolio {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    border: 2px solid transparent;
+}
+
+.btn-portfolio:hover {
+    background: linear-gradient(135deg, #ffed4e, #ffd700);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    border-color: #ffd700;
+}
+
+.btn-portfolio:focus {
+    outline: none;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 0 0 3px rgba(255, 215, 0, 0.2);
+}
+
+.btn-portfolio i {
+    margin-right: 8px;
+    font-size: 1em;
+}
+
+/* Mobile responsive for portfolio CTA */
+@media (max-width: 768px) {
+    .portfolio-cta {
+        margin-top: 40px;
+        padding: 20px 0;
+    }
+    
+    .btn-portfolio {
+        padding: 14px 28px;
+        font-size: 1em;
+    }
+}
+
 /* Lightbox Styles */
 .lightbox-overlay {
     position: fixed;

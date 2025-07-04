@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Essential SEO Meta Tags -->
+<meta name="description" content="Explore our portfolio of professionally staged homes across Southern California. See before and after transformations by ASPM™ certified staging experts.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Tawni Oppenheim">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Keywords -->
+<meta name="keywords" content="staged homes portfolio, home staging before after, ASPM staging, San Diego staging, Southern California homes, real estate staging">
+
+<!-- Open Graph meta tags -->
+<meta property="og:title" content="Portfolio - Staged4Sale Professional Home Staging" />
+<meta property="og:description" content="Explore our portfolio of stunning home staging transformations across Southern California." />
+<meta property="og:image" content="https://staged4sale.com/images/hero.jpg" />
+<meta property="og:image:alt" content="Staged4Sale portfolio showcase" />
+<meta property="og:url" content="https://staged4sale.com/projects/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Staged4Sale" />
+<meta property="og:locale" content="en_US" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Staged4Sale Home Staging Services</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      /* Portfolio-specific styles */
+      .breadcrumb {
+        background-color: #2c2c2c;
+        padding: 15px 0;
+        margin-bottom: 0;
+      }
+      .breadcrumb .container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9em;
+        color: #b0b0b0;
+      }
+      .breadcrumb a {
+        color: #ffd700;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .breadcrumb a:hover {
+        color: #fff;
+      }
+      .breadcrumb-separator {
+        color: #666;
+      }
+      
+      /* Hero adjustments */
+      #portfolio-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/hero.jpg') no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+      }
+      
+      #portfolio-hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5em;
+        color: #ffd700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        margin-bottom: 20px;
+      }
+      
+      #portfolio-hero p {
+        font-size: 1.3em;
+        color: #e0e0e0;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      /* Portfolio grid adjustments */
+      #portfolio {
+        padding-top: 70px;
+      }
+      
+      /* Project descriptions styling */
+      .projects-content {
+        max-width: 1000px;
+        margin: 60px auto 0 auto;
+        padding: 0 20px;
+      }
+      
+      .project-descriptions h3 {
+        font-family: 'Playfair Display', serif;
+        color: #ffd700;
+        font-size: 2.2em;
+        text-align: center;
+        margin-bottom: 40px;
+        position: relative;
+      }
+      
+      .project-descriptions h3::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -15px;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #ffd700;
+        border-radius: 2px;
+      }
+      
+      .project-preview {
+        margin-bottom: 30px;
+        padding: 25px;
+        background-color: #2c2c2c;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      }
+      
+      .project-preview h4 {
+        font-family: 'Playfair Display', serif;
+        color: #ffd700;
+        font-size: 1.4em;
+        margin: 0 0 15px 0;
+      }
+      
+      .project-preview h4 a {
+        color: #ffd700;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      .project-preview h4 a:hover {
+        color: #fff;
+      }
+      
+      .project-preview p {
+        color: #b0b0b0;
+        line-height: 1.6;
+        margin: 0;
+        font-size: 1em;
+      }
+      
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        #portfolio-hero {
+          background-attachment: scroll;
+          min-height: 50vh;
+          padding: 40px 0;
+        }
+        
+        #portfolio-hero h1 {
+          font-size: 2.5em;
+        }
+        
+        #portfolio-hero p {
+          font-size: 1.1em;
+          padding: 0 20px;
+        }
+        
+        .projects-content {
+          margin-top: 40px;
+        }
+        
+        .project-descriptions h3 {
+          font-size: 1.8em;
+        }
+        
+        .project-preview {
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+        
+        .project-preview h4 {
+          font-size: 1.2em;
+        }
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+<div class="logo-area">
+  <div class="logo-wrapper">
+<a href="../#hero">
+  <img src="../images/logo2.png" alt="Staged4Sale Logo" class="logo-img">
+</a>
+
+    <div class="header-social-links">
+      <a href="https://www.facebook.com/Staged4Sale/" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/staged4salellc/" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+</div>
+
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="../#about">About</a></li>
+                    <li><a href="../#services">Services</a></li>
+                    <li><a href="../#portfolio">Portfolio</a></li>
+                    <li><a href="../#process">Process</a></li>
+                    <li><a href="../#testimonials">Testimonials</a></li>
+                    <li><a href="../#faq">FAQ</a></li>
+                    <li><a href="../#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="../">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <span>Portfolio</span>
+        </div>
+    </section>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="portfolio-hero">
+            <div class="container">
+                <h1>Our Portfolio</h1>
+                <p>Discover our stunning home staging transformations across Southern California. Each project showcases our commitment to excellence and our ability to transform spaces into irresistible homes that sell faster and for top dollar.</p>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <div class="container">
+                <h2>Recent Projects</h2>
+                <div class="portfolio-grid" id="portfolio-container">
+                    <!-- Static project grid for optimal SEO -->
+                    
+                    <!-- Monte Fuego Ranch -->
+                    <div class="portfolio-item has-before-after" data-slug="monte-fuego-ranch">
+                        <a href="monte-fuego-ranch/" aria-label="View Monte Fuego Ranch project">
+                            <img src="../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg" 
+                                 alt="Monte Fuego Ranch staging transformation - living room with arched windows" 
+                                 class="portfolio-image" 
+                                 width="400" 
+                                 height="400"
+                                 loading="lazy">
+                            <div class="portfolio-image-count">
+                                <i class="fas fa-camera"></i>
+                                <span>7</span>
+                            </div>
+                            <div class="portfolio-overlay animate-in">
+                                <h3 class="portfolio-title">Monte Fuego Ranch</h3>
+                                <p class="portfolio-location">Rancho Santa Fe, CA</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">ranch</span>
+                                    <span class="portfolio-tag">transitional</span>
+                                    <span class="portfolio-tag">neutral palette</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Cresta View Estate -->
+                    <div class="portfolio-item" data-slug="cresta-view-estate">
+                        <a href="cresta-view-estate/" aria-label="View Cresta View Estate project">
+                            <img src="../images/projects/cresta-view-estate/cresta-view-estate-01.jpg" 
+                                 alt="Cresta View Estate gourmet kitchen with bar seating" 
+                                 class="portfolio-image"
+                                 width="400" 
+                                 height="400"
+                                 loading="lazy">
+                            <div class="portfolio-image-count">
+                                <i class="fas fa-camera"></i>
+                                <span>5</span>
+                            </div>
+                            <div class="portfolio-overlay animate-in">
+                                <h3 class="portfolio-title">Cresta View Estate</h3>
+                                <p class="portfolio-location">San Clemente, CA</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">vacant</span>
+                                    <span class="portfolio-tag">coastal</span>
+                                    <span class="portfolio-tag">luxury</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Canyon View Condo -->
+                    <div class="portfolio-item" data-slug="canyon-view-condo">
+                        <a href="canyon-view-condo/" aria-label="View Canyon View Condo project">
+                            <img src="../images/projects/canyon-view-condo/canyon-view-condo-01.webp" 
+                                 alt="Canyon View Condo living room with stone fireplace and modern furnishings" 
+                                 class="portfolio-image"
+                                 width="400" 
+                                 height="400"
+                                 loading="lazy">
+                            <div class="portfolio-image-count">
+                                <i class="fas fa-camera"></i>
+                                <span>6</span>
+                            </div>
+                            <div class="portfolio-overlay animate-in">
+                                <h3 class="portfolio-title">Canyon View Condo</h3>
+                                <p class="portfolio-location">La Jolla, CA</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">condo</span>
+                                    <span class="portfolio-tag">canyon-view</span>
+                                    <span class="portfolio-tag">coastal</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Anchor Point Hideaway -->
+                    <div class="portfolio-item" data-slug="anchor-point-hideaway">
+                        <a href="anchor-point-hideaway/" aria-label="View Anchor Point Hideaway project">
+                            <img src="../images/projects/anchor-point-hideaway/anchor-point-hideaway-08.jpg" 
+                                 alt="Anchor Point Hideaway outdoor lounge staged for relaxation by the pool" 
+                                 class="portfolio-image"
+                                 width="400" 
+                                 height="400"
+                                 loading="lazy">
+                            <div class="portfolio-image-count">
+                                <i class="fas fa-camera"></i>
+                                <span>8</span>
+                            </div>
+                            <div class="portfolio-overlay animate-in">
+                                <h3 class="portfolio-title">Anchor Point Hideaway</h3>
+                                <p class="portfolio-location">Carlsbad, CA</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">coastal</span>
+                                    <span class="portfolio-tag">family</span>
+                                    <span class="portfolio-tag">pool</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Rolando Bungalow -->
+                    <div class="portfolio-item" data-slug="rolando-bungalow">
+                        <a href="rolando-bungalow/" aria-label="View Rolando Bungalow project">
+                            <img src="../images/projects/rolando-bungalow/rolando-bungalow-01.webp" 
+                                 alt="Rolando Bungalow living room with natural light and classic staging elements" 
+                                 class="portfolio-image"
+                                 width="400" 
+                                 height="400"
+                                 loading="lazy">
+                            <div class="portfolio-image-count">
+                                <i class="fas fa-camera"></i>
+                                <span>5</span>
+                            </div>
+                            <div class="portfolio-overlay animate-in">
+                                <h3 class="portfolio-title">Rolando Bungalow</h3>
+                                <p class="portfolio-location">San Diego, CA</p>
+                                <div class="portfolio-tags">
+                                    <span class="portfolio-tag">bungalow</span>
+                                    <span class="portfolio-tag">mid-century</span>
+                                    <span class="portfolio-tag">turnkey</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Descriptions for SEO -->
+                <div class="projects-content">
+                    <div class="project-descriptions">
+                        <h3>Featured Staging Projects</h3>
+                        
+                        <div class="project-preview">
+                            <h4><a href="monte-fuego-ranch/">Monte Fuego Ranch - Rancho Santa Fe</a></h4>
+                            <p>A stunning transitional staging project featuring neutral palette design that enhances the home's scale, natural light, and architectural flow. This ranch-style home showcases before and after transformations with large-scale pieces and cohesive atmosphere.</p>
+                        </div>
+
+                        <div class="project-preview">
+                            <h4><a href="cresta-view-estate/">Cresta View Estate - San Clemente</a></h4>
+                            <p>This 5-bedroom luxury coastal home was fully staged to highlight light-filled living spaces, open kitchen, and premium finishes. Located in Cantomar, just minutes from the beach, designed for coastal elegance and everyday comfort.</p>
+                        </div>
+
+                        <div class="project-preview">
+                            <h4><a href="canyon-view-condo/">Canyon View Condo - La Jolla</a></h4>
+                            <p>Thoughtfully staged La Jolla condo showcasing architectural charm with soft coastal tones and modern furnishings. Features canyon-facing windows, vaulted bedroom, and spa-inspired bathroom creating a relaxed yet elevated atmosphere.</p>
+                        </div>
+
+                        <div class="project-preview">
+                            <h4><a href="anchor-point-hideaway/">Anchor Point Hideaway - Carlsbad</a></h4>
+                            <p>REdesign+ staging project incorporating seller's furniture into a cohesive presentation. Features coastal charm, poolside outdoor staging, and indoor-outdoor lifestyle enhancement with neutral furnishings and layered textures.</p>
+                        </div>
+
+                        <div class="project-preview">
+                            <h4><a href="rolando-bungalow/">Rolando Bungalow - San Diego</a></h4>
+                            <p>Mid-century bungalow staged to balance original charm with fresh, turnkey appeal. Features refinished hardwood floors, dark stone backsplash kitchen, and soft neutral bedroom staging emphasizing comfortable living.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="certifications-awards">
+                <p>Accredited, Licensed & Insured | Serving Southern California</p>
+                <p>Certified Accredited Staging Professional Master™ (ASPM™)</p>
+            </div>
+            <p>&copy; 2025 Staged4Sale. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
+
+</body>
+<script src="../script.js"></script>
+<script>
+// Progressive enhancement for portfolio animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup portfolio animations for static content
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    // Add intersection observer for animations
+    if ('IntersectionObserver' in window) {
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const overlay = entry.target.querySelector('.portfolio-overlay');
+                if (entry.isIntersecting) {
+                    if (overlay) {
+                        overlay.classList.add('animate-in');
+                        overlay.classList.remove('animate-out');
+                    }
+                } else {
+                    if (overlay) {
+                        overlay.classList.remove('animate-in');
+                        overlay.classList.add('animate-out');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.25,
+            rootMargin: '0px 0px -10% 0px'
+        });
+
+        portfolioItems.forEach(item => {
+            animationObserver.observe(item);
+        });
+    } else {
+        // Fallback for older browsers
+        portfolioItems.forEach(item => {
+            const overlay = item.querySelector('.portfolio-overlay');
+            if (overlay) {
+                overlay.classList.add('animate-in');
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>

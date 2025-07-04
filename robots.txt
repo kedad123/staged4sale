@@ -1,0 +1,32 @@
+# Robots.txt for Staged4Sale.com
+# Professional Home Staging Services in Southern California
+
+User-agent: *
+Allow: /
+
+# Block development and internal directories
+Disallow: /shots/
+Disallow: /projects/_template/
+Disallow: /.git/
+Disallow: /.vscode/
+
+# Allow important assets and pages
+Allow: /images/
+Allow: /projects/
+Allow: /marketing/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.pdf
+
+# Block common spam/attack paths
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /admin/
+Disallow: /administrator/
+
+# Sitemap location
+Sitemap: https://staged4sale.com/sitemap.xml
+
+# Crawl delay (optional - remove if causing issues)
+# Crawl-delay: 1

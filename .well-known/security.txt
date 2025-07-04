@@ -1,0 +1,21 @@
+# Security.txt for Staged4Sale.com
+# RFC 9116 compliant security contact information
+
+Contact: mailto:info@staged4sale.com
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://staged4sale.com/.well-known/security.txt
+
+# Policy
+Policy: https://staged4sale.com/
+
+# Acknowledgments
+# We appreciate responsible disclosure of security vulnerabilities
+
+# Scope
+# This security.txt applies to:
+# - staged4sale.com
+# - All subdomains of staged4sale.com
+
+# Please report security issues responsibly
+# Do not perform testing that could harm our users or services
