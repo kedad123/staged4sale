@@ -87,6 +87,7 @@ class PortfolioManager {
             featured: '',
             tags: [],
             gallery: [],
+            beforeAfterPairs: [],
             notes: ''
         };
 
@@ -129,6 +130,12 @@ class PortfolioManager {
             path: `${this.basePath}${slug}/${item.filename}`
         }));
 
+        // Detect before/after pairs
+        project.beforeAfterPairs = this.detectBeforeAfterPairs(project.gallery, slug);
+        
+        // Filter gallery for thumbnails - exclude 'before' images
+        project.thumbnailGallery = project.gallery.filter(item => !item.filename.includes('-before'));
+
         return project;
     }
 
@@ -168,11 +175,15 @@ class PortfolioManager {
         }
 
         container.innerHTML = this.projects.map(project => `
-            <div class="portfolio-item" data-slug="${project.slug}" role="button" tabindex="0" aria-label="View ${project.title} project">
+            <div class="portfolio-item${project.beforeAfterPairs.length > 0 ? ' has-before-after' : ''}" data-slug="${project.slug}" role="button" tabindex="0" aria-label="View ${project.title} project">
                 <img src="${project.featuredPath}" alt="${project.title}" loading="lazy" class="portfolio-image" 
                      onload="this.style.opacity=1" 
                      onerror="this.src='images/logo.png';this.style.opacity=0.5" 
                      style="opacity:0;transition:opacity 0.3s ease">
+                <div class="portfolio-image-count">
+                    <i class="fas fa-camera"></i>
+                    <span>${project.thumbnailGallery.length}</span>
+                </div>
                 <div class="portfolio-overlay">
                     <h3 class="portfolio-title">${this.escapeHtml(project.title)}</h3>
                     <p class="portfolio-location">${this.escapeHtml(project.location)}</p>
@@ -339,6 +350,15 @@ class PortfolioManager {
     renderLightbox() {
         if (!this.currentProject) return;
 
+        const currentItem = this.currentProject.gallery[this.currentImageIndex];
+        const beforeAfterPair = this.getBeforeAfterPair(currentItem);
+        
+        const imageContentHTML = beforeAfterPair ? 
+            this.renderBeforeAfterComparison(beforeAfterPair) : 
+            `<img src="${currentItem.path}" 
+                 alt="${currentItem.caption}" 
+                 class="lightbox-image">`;
+
         const lightboxHTML = `
             <div class="lightbox-overlay" id="lightbox-overlay">
                 <div class="lightbox-content">
@@ -346,9 +366,7 @@ class PortfolioManager {
                     
                     <div class="lightbox-main">
                         <div class="lightbox-image-container">
-                            <img src="${this.currentProject.gallery[this.currentImageIndex].path}" 
-                                 alt="${this.currentProject.gallery[this.currentImageIndex].caption}" 
-                                 class="lightbox-image">
+                            ${imageContentHTML}
                             
                             <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
                                 <i class="fas fa-chevron-left"></i>
@@ -361,18 +379,21 @@ class PortfolioManager {
                         <div class="lightbox-info">
                             <h3>${this.escapeHtml(this.currentProject.title)}</h3>
                             <p class="lightbox-location">${this.escapeHtml(this.currentProject.location)}</p>
-                            <p class="lightbox-caption">${this.escapeHtml(this.currentProject.gallery[this.currentImageIndex].caption)}</p>
+                            <div class="lightbox-caption">${this.renderCaptionContent(currentItem, beforeAfterPair)}</div>
                             <p class="lightbox-notes">${this.escapeHtml(this.currentProject.notes)}</p>
                         </div>
                     </div>
                     
                     <div class="lightbox-thumbnails">
-                        ${this.currentProject.gallery.map((item, index) => `
-                            <div class="lightbox-thumbnail ${index === this.currentImageIndex ? 'active' : ''}" 
-                                 data-index="${index}">
-                                <img src="${item.path}" alt="${item.caption}" loading="lazy">
-                            </div>
-                        `).join('')}
+                        ${this.currentProject.thumbnailGallery.map((item, thumbnailIndex) => {
+                            const galleryIndex = this.currentProject.gallery.findIndex(g => g.filename === item.filename);
+                            return `
+                                <div class="lightbox-thumbnail ${galleryIndex === this.currentImageIndex ? 'active' : ''}" 
+                                     data-index="${galleryIndex}">
+                                    <img src="${item.path}" alt="${item.caption}" loading="lazy">
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 </div>
             </div>
@@ -380,6 +401,11 @@ class PortfolioManager {
 
         document.body.insertAdjacentHTML('beforeend', lightboxHTML);
         this.setupLightboxEvents();
+        
+        // Setup before/after slider if present
+        if (beforeAfterPair) {
+            this.setupBeforeAfterSlider();
+        }
     }
 
     setupLightboxEvents() {
@@ -401,8 +427,11 @@ class PortfolioManager {
         nextBtn.addEventListener('click', () => this.showNextImage());
 
         // Thumbnails
-        thumbnails.forEach((thumb, index) => {
-            thumb.addEventListener('click', () => this.showImage(index));
+        thumbnails.forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                const galleryIndex = parseInt(thumb.dataset.index);
+                this.showImage(galleryIndex);
+            });
         });
 
         // Keyboard navigation
@@ -476,15 +505,40 @@ class PortfolioManager {
     }
 
     showPrevImage() {
-        if (this.currentImageIndex > 0) {
-            this.showImage(this.currentImageIndex - 1);
+        const currentThumbnailIndex = this.getCurrentThumbnailIndex();
+        if (currentThumbnailIndex > 0) {
+            const prevThumbnail = this.currentProject.thumbnailGallery[currentThumbnailIndex - 1];
+            const prevGalleryIndex = this.currentProject.gallery.findIndex(g => g.filename === prevThumbnail.filename);
+            this.showImage(prevGalleryIndex);
         }
     }
 
     showNextImage() {
-        if (this.currentImageIndex < this.currentProject.gallery.length - 1) {
-            this.showImage(this.currentImageIndex + 1);
+        const currentThumbnailIndex = this.getCurrentThumbnailIndex();
+        if (currentThumbnailIndex < this.currentProject.thumbnailGallery.length - 1) {
+            const nextThumbnail = this.currentProject.thumbnailGallery[currentThumbnailIndex + 1];
+            const nextGalleryIndex = this.currentProject.gallery.findIndex(g => g.filename === nextThumbnail.filename);
+            this.showImage(nextGalleryIndex);
         }
+    }
+
+    getCurrentThumbnailIndex() {
+        const currentItem = this.currentProject.gallery[this.currentImageIndex];
+        
+        // If current image is a 'before' image, find its corresponding 'after' image in thumbnails
+        if (currentItem.filename.includes('-before')) {
+            const beforeAfterPair = this.getBeforeAfterPair(currentItem);
+            if (beforeAfterPair) {
+                return this.currentProject.thumbnailGallery.findIndex(item => 
+                    item.filename === beforeAfterPair.after.filename
+                );
+            }
+        }
+        
+        // Otherwise, find the current item directly in thumbnails
+        return this.currentProject.thumbnailGallery.findIndex(item => 
+            item.filename === currentItem.filename
+        );
     }
 
     showImage(index) {
@@ -492,22 +546,52 @@ class PortfolioManager {
 
         this.currentImageIndex = index;
         const overlay = document.getElementById('lightbox-overlay');
-        const image = overlay.querySelector('.lightbox-image');
+        const imageContainer = overlay.querySelector('.lightbox-image-container');
         const caption = overlay.querySelector('.lightbox-caption');
         const thumbnails = overlay.querySelectorAll('.lightbox-thumbnail');
 
         const currentItem = this.currentProject.gallery[index];
-        image.src = currentItem.path;
-        image.alt = currentItem.caption;
-        caption.innerHTML = this.escapeHtml(currentItem.caption);
+        const beforeAfterPair = this.getBeforeAfterPair(currentItem);
+        
+        // Update image content
+        const imageContentHTML = beforeAfterPair ? 
+            this.renderBeforeAfterComparison(beforeAfterPair) : 
+            `<img src="${currentItem.path}" 
+                 alt="${currentItem.caption}" 
+                 class="lightbox-image">`;
+        
+        // Find and preserve navigation buttons
+        const prevBtn = imageContainer.querySelector('.lightbox-prev');
+        const nextBtn = imageContainer.querySelector('.lightbox-next');
+        
+        // Update container content
+        imageContainer.innerHTML = imageContentHTML;
+        
+        // Re-add navigation buttons
+        if (prevBtn) imageContainer.appendChild(prevBtn);
+        if (nextBtn) imageContainer.appendChild(nextBtn);
+        
+        // Update caption
+        caption.innerHTML = this.renderCaptionContent(currentItem, beforeAfterPair);
 
         // Update thumbnail active state
-        thumbnails.forEach((thumb, i) => {
-            thumb.classList.toggle('active', i === index);
+        thumbnails.forEach((thumb) => {
+            const thumbIndex = parseInt(thumb.dataset.index);
+            thumb.classList.toggle('active', thumbIndex === index);
         });
 
-        // Scroll thumbnail into view
-        thumbnails[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Scroll thumbnail into view if it exists
+        const activeThumbnail = Array.from(thumbnails).find(thumb => 
+            parseInt(thumb.dataset.index) === index
+        );
+        if (activeThumbnail) {
+            activeThumbnail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Setup before/after slider if present
+        if (beforeAfterPair) {
+            this.setupBeforeAfterSlider();
+        }
     }
 
     closeLightbox() {
@@ -534,6 +618,166 @@ class PortfolioManager {
         if (container) {
             container.innerHTML = `<div class="portfolio-error">${message}</div>`;
         }
+    }
+
+    detectBeforeAfterPairs(gallery, slug) {
+        const pairs = [];
+        const beforeImages = gallery.filter(item => item.filename.includes('-before'));
+        
+        beforeImages.forEach(beforeItem => {
+            // Extract the base number from filename (e.g., '01' from 'project-01-before.webp')
+            const beforeMatch = beforeItem.filename.match(/-([0-9]+)-before\./i);
+            if (beforeMatch) {
+                const imageNumber = beforeMatch[1];
+                
+                // Find corresponding after image (without -before suffix)
+                const afterItem = gallery.find(item => {
+                    const afterMatch = item.filename.match(new RegExp(`-${imageNumber}\\.[^.]+$`));
+                    return afterMatch && !item.filename.includes('-before');
+                });
+                
+                if (afterItem) {
+                    pairs.push({
+                        before: beforeItem,
+                        after: afterItem,
+                        imageNumber: imageNumber
+                    });
+                }
+            }
+        });
+        
+        return pairs;
+    }
+
+    getBeforeAfterPair(currentItem) {
+        if (!this.currentProject.beforeAfterPairs) return null;
+        
+        return this.currentProject.beforeAfterPairs.find(pair => 
+            pair.before.filename === currentItem.filename || 
+            pair.after.filename === currentItem.filename
+        );
+    }
+
+    renderBeforeAfterComparison(pair) {
+        return `
+            <div class="before-after-container" id="before-after-container">
+                <img src="${pair.before.path}" alt="${pair.before.caption}" class="before-image">
+                <img src="${pair.after.path}" alt="${pair.after.caption}" class="after-image">
+                <div class="before-after-slider" id="before-after-slider">
+                    <div class="before-after-handle"></div>
+                </div>
+                <div class="before-after-labels">
+                    <div class="before-label">Before</div>
+                    <div class="after-label">After</div>
+                </div>
+            </div>
+        `;
+    }
+
+    setupBeforeAfterSlider() {
+        const container = document.getElementById('before-after-container');
+        const slider = document.getElementById('before-after-slider');
+        const afterImage = container.querySelector('.after-image');
+        
+        if (!container || !slider || !afterImage) return;
+
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 50; // Start at 50%
+
+        const updateSlider = (percentage) => {
+            // Clamp percentage between 0 and 100
+            percentage = Math.max(0, Math.min(100, percentage));
+            
+            // Update slider position
+            slider.style.left = percentage + '%';
+            
+            // Update clip path for after image
+            afterImage.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+            
+            currentX = percentage;
+        };
+
+        const getPercentageFromEvent = (event) => {
+            const rect = container.getBoundingClientRect();
+            const clientX = event.clientX || (event.touches && event.touches[0].clientX);
+            return ((clientX - rect.left) / rect.width) * 100;
+        };
+
+        // Mouse events
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = getPercentageFromEvent(e);
+            updateSlider(startX);
+            container.style.cursor = 'ew-resize';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const percentage = getPercentageFromEvent(e);
+            updateSlider(percentage);
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.style.cursor = 'ew-resize';
+        });
+
+        // Touch events
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = getPercentageFromEvent(e);
+            updateSlider(startX);
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const percentage = getPercentageFromEvent(e);
+            updateSlider(percentage);
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Keyboard accessibility
+        container.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                updateSlider(currentX - 5);
+                e.preventDefault();
+            } else if (e.key === 'ArrowRight') {
+                updateSlider(currentX + 5);
+                e.preventDefault();
+            }
+        });
+
+        // Make container focusable for keyboard navigation
+        container.setAttribute('tabindex', '0');
+        container.setAttribute('aria-label', 'Before and after comparison slider');
+        
+        // Initialize slider position
+        updateSlider(50);
+    }
+
+    renderCaptionContent(currentItem, beforeAfterPair) {
+        if (!beforeAfterPair) {
+            return this.escapeHtml(currentItem.caption);
+        }
+        
+        // For before/after pairs, show both captions
+        return `
+            <div class="before-after-captions">
+                <div class="caption-before">
+                    <strong>Before:</strong> ${this.escapeHtml(beforeAfterPair.before.caption.replace('Before: ', ''))}
+                </div>
+                <div class="caption-after">
+                    <strong>After:</strong> ${this.escapeHtml(beforeAfterPair.after.caption.replace('After: ', ''))}
+                </div>
+            </div>
+        `;
     }
 
     escapeHtml(text) {
