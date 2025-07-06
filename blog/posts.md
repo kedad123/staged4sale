@@ -29,8 +29,8 @@ This file manages all blog post metadata for the Staged4Sale blog. Each post ent
   image: "/images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg"
   alt_text: "Monte Fuego Ranch living room transformation showing before and after staging"
   tags: ["Before After", "Case Study", "Ranch Staging", "Transitional Design", "Architectural Staging"]
-  summary: "See how strategic staging transformed a stark Rancho Santa Fe ranch into a warm, inviting home that sold in 18 days. Complete before/after photos and expert insights into every staging decision."
-  meta_description: "See how strategic staging transformed a stark Rancho Santa Fe ranch into a warm, inviting home that sold in 18 days. Before/after photos and expert insights."
+  summary: "See how strategic staging transformed a stark Rancho Santa Fe ranch into a warm, inviting home. Complete before/after photos and expert insights into every staging decision."
+  meta_description: "See how strategic staging transformed a stark Rancho Santa Fe ranch into a warm, inviting home. Before/after photos and expert insights."
   read_time: 8
   featured: true
   published: true
