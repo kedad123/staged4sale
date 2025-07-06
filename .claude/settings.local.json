@@ -5,7 +5,11 @@
       "Bash(rg:*)",
       "Bash(node:*)",
       "Bash(ls:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(grep:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

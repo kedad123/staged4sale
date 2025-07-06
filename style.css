@@ -1216,10 +1216,25 @@ section h2::after {
 
 /* Testimonials Section */
 #testimonials .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 30px;
     padding: 0 20px;
+}
+
+/* Responsive testimonials */
+@media (max-width: 1024px) {
+    #testimonials .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 600px) {
+    #testimonials .testimonial-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+        padding: 0 10px;
+    }
 }
 
 #testimonials .testimonial-item {
@@ -1560,6 +1575,37 @@ footer p {
     color: #a0a0a0;
 }
 
+.awards-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.award-image {
+    height: 80px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.award-image:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .awards-images {
+        gap: 15px;
+    }
+    
+    .award-image {
+        height: 60px;
+    }
+}
+
 /* Back to Top Button */
 #back-to-top {
     display: none; /* Hidden by default */
@@ -1758,12 +1804,13 @@ footer p {
         display: block;
     }
 
-    #portfolio .portfolio-grid,
-    #testimonials .testimonial-grid {
+    #portfolio .portfolio-grid {
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 0 10px;
     }
+    
+    /* Testimonials handled by their own media queries above */
     
     /* Better mobile contact form */
     #contact form {
