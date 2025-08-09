@@ -33,8 +33,8 @@ header .container {
     align-items: center;
 }
 .logo-img {
-  height: 100px; /* adjust as needed */
-  margin-right: 10px;
+    height: 50px; /* reduced to half */
+    margin-right: 10px;
 }
 
 h1 {
@@ -104,6 +104,19 @@ nav a.active {
     transition: all 0.3s ease-in-out;
 }
 
+/* Hamburger animation when active */
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
 /* Main Sections */
 main {
   padding: 0; /* optional if your sections already have padding */
@@ -116,7 +129,7 @@ section {
     border-radius: 10px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     text-align: center;
-    scroll-padding-top: 120px; /* Account for sticky header height */
+    scroll-padding-top: 80px; /* Adjusted for proper header clearance */
 }
 
 section h2 {
@@ -1606,29 +1619,6 @@ footer p {
     }
 }
 
-/* Back to Top Button */
-#back-to-top {
-    display: none; /* Hidden by default */
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 99;
-    font-size: 24px;
-    border: none;
-    outline: none;
-    background-color: #ffd700;
-    color: #1a1a1a;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#back-to-top:hover {
-    background-color: #e6c200;
-    transform: translateY(-3px);
-}
 
 /* New rule for the logo and social links container */
 .logo-wrapper {
@@ -1659,12 +1649,15 @@ footer p {
 
 @media (max-width: 768px) {
     header .container {
-        flex-direction: column;
-        align-items: stretch;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
     }
 
     .hamburger {
-        display: none; /* Hide hamburger - no longer needed */
+        display: block; /* Show hamburger on mobile */
+        position: relative;
     }
     
     #hero {
@@ -1673,63 +1666,56 @@ footer p {
     }
 
     .logo-img {
-        height: 85px; /* Slightly smaller on tablets */
+        height: 45px; /* Much smaller on tablets */
     }
     
     .nav-menu {
-        display: block;
+        display: none; /* Hidden by default on mobile */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         width: 100%;
         background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
-        padding: 0;
-        margin-top: 10px;
-        border-radius: 8px;
+        padding: 10px 0;
+        border-radius: 0 0 8px 8px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        overflow: hidden;
-        position: relative;
+        z-index: 999;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-menu.active {
+        display: block; /* Show when active */
     }
     
     nav ul {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         width: 100%;
         padding: 0;
         margin: 0;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
-    }
-    
-    /* Hide scrollbar for webkit browsers */
-    nav ul::-webkit-scrollbar {
-        display: none;
+        list-style: none;
     }
     
     nav li {
-        flex: 0 0 auto;
         margin: 0;
-        white-space: nowrap;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    }
+    
+    nav li:last-child {
+        border-bottom: none;
     }
     
     .nav-menu a {
         color: #e0e0e0;
-        padding: 15px 12px;
-        text-align: center;
-        font-size: 0.95em;
+        padding: 15px 20px;
+        text-align: left;
+        font-size: 1em;
         text-decoration: none;
         transition: all 0.3s ease;
-        border-radius: 0;
-        border: none;
-        background: none;
         display: block;
-        min-width: 70px;
-        border-right: 1px solid rgba(255, 215, 0, 0.2);
-    }
-    
-    .nav-menu a:last-child {
-        border-right: none;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .nav-menu a:hover {
@@ -1737,39 +1723,6 @@ footer p {
         color: #000000;
         transform: none;
         box-shadow: none;
-    }
-    
-    /* Fade effect on edges to indicate scrollability */
-    .nav-menu::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 20px;
-        height: 100%;
-        background: linear-gradient(to left, #000000, transparent);
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    /* Scroll indicator */
-    .nav-menu::after {
-        content: "👆 Swipe to scroll 👆";
-        position: absolute;
-        bottom: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.75em;
-        color: #ffd700;
-        white-space: nowrap;
-        pointer-events: none;
-        opacity: 0.8;
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-        0%, 100% { opacity: 0.8; }
-        50% { opacity: 0.4; }
     }
 }
     h1 {
@@ -1888,25 +1841,10 @@ footer p {
     
     /* Logo adjustment */
     .logo-img {
-        height: 70px;
+        height: 32px; /* Much smaller for mobile phones */
     }
     
-    /* Mobile navigation adjustments */
-    .nav-menu a {
-        padding: 12px 10px;
-        font-size: 0.85em;
-        min-width: 65px;
-    }
-    
-    .nav-menu::after {
-        content: "👆 Scroll 👆";
-        bottom: -20px;
-        font-size: 0.7em;
-    }
-    
-    .nav-menu::before {
-        width: 15px;
-    }
+    /* Mobile navigation adjustments - use same dropdown style as 768px */
     
     /* CTA button optimization */
     .cta-button {

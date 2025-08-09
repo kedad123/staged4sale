@@ -412,14 +412,54 @@
         </div>
     </footer>
 
-    <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
 
 </body>
-<script src="../script.js"></script>
 <script>
-// Progressive enhancement for portfolio animations
+// Portfolio-specific JavaScript that overrides main site navigation
 document.addEventListener('DOMContentLoaded', function() {
-    // Setup portfolio animations for static content
+    // Override navigation for external links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            
+            // If it's an external link to main site sections, navigate normally
+            if (href.startsWith('../#')) {
+                // Let the browser handle the navigation normally
+                return true;
+            }
+            
+            // For internal links, use smooth scrolling (though none exist in this page)
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            // Close mobile menu if open
+            const navMenu = document.querySelector('.nav-menu');
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    });
+
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    }
+
+
+    // Progressive enhancement for portfolio animations
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     
     // Add intersection observer for animations

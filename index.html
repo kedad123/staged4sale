@@ -1,16 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Essential SEO Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- Essential SEO Meta Tags -->
 <meta name="description" content="Staged4Sale is Southern California’s premier home staging company. ASPM™ certified, we transform spaces to inspire buyers and sell faster.">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Tawni Oppenheim">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Canonical -->
+<link rel="canonical" href="https://staged4sale.com/" />
+
+  <!-- Twitter  -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Staged4Sale - Home Staging in North San Diego County" />
+  <meta name="twitter:description" content="Transform your home with ASPM™ certified staging that inspires buyers and maximizes value." />
+  <meta name="twitter:image" content="https://staged4sale.com/images/hero.jpg" />
+
+<!-- Site Name & Organization (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://staged4sale.com/",
+    "name": "Staged4Sale",
+    "alternateName": ["STAGED 4 SALE", "Staged 4 Sale"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Staged4Sale",
+    "url": "https://staged4sale.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://staged4sale.com/images/logo2.png"
+    },
+    "sameAs": [
+      "https://www.facebook.com/staged4sale",
+      "https://www.instagram.com/staged4sale",
+    ]
+  }
+  </script>
 <!-- Keywords (Not used by Google, but harmless) -->
 <meta name="keywords" content="home staging, staged homes, ASPM, real estate, San Diego staging, interior design, house selling tips, Southern California homes">
 <!-- Open Graph meta tags -->
-<meta property="og:title" content="Staged4Sale - Professional Home Staging in Southern California" />
+<meta property="og:title" content="Staged4Sale - Home Staging in North San Diego County" />
 <meta property="og:description" content="Transform your home with ASPM™ certified staging that inspires buyers and maximizes value." />
 <meta property="og:image" content="https://staged4sale.com/images/hero.jpg" />
 <meta property="og:image:alt" content="Beautifully staged living room by Staged4Sale" />
@@ -20,9 +57,7 @@
 <meta property="og:locale" content="en_US" />
 
 <!-- End of Open Graph meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staged4Sale - Home Staging Services</title>
+    <title>Staged4Sale - Home Staging in North San Diego County</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <style>
@@ -253,7 +288,7 @@
                     <li><a href="#process">Process</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="blog/">Blog</a></li>
+<!--                    <li><a href="blog/">Blog</a></li>-->
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -636,6 +671,7 @@
         <img src="images/awards/certified-accredited-staging-professional-master.png" alt="Certified Accredited Staging Professional Master" class="award-image">
         <img src="images/awards/iahsp-best-of-home-staging-2020-staging-excellence.jpeg" alt="IAHSP Best of Home Staging 2020 - Staging Excellence" class="award-image">
         <img src="images/awards/iahsp-best-of-home-staging-2021-staging-excellence.jpeg" alt="IAHSP Best of Home Staging 2021 - Staging Excellence" class="award-image">
+        <img src="images/awards/iahsp-best-of-home-staging-2021-client-care-excellence.jpeg" alt="IAHSP Best of Home Staging 2021 - Client Care Excellence" class="award-image">
       </div>
     </div>
     <p>&copy; 2025 Staged4Sale. All Rights Reserved.</p>
@@ -643,7 +679,6 @@
 </footer>
         
 
-    <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
 
 </body>
 <script src="portfolio.js"></script>
@@ -735,19 +770,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Smooth scroll for navigation links
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+  // Smooth scroll for navigation links with header offset
+  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 5; // -5 for extra spacing
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
         });
+      }
+
+      // Close mobile menu if open
+      const navMenu = document.querySelector('.nav-menu');
+      if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        // Also toggle hamburger animation
+        const hamburger = document.querySelector('.hamburger');
+        if (hamburger) {
+          hamburger.classList.remove('active');
+        }
+      }
     });
+  });
+
+  // Hamburger menu functionality
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-menu');
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+  }
+
 });
 </script>
 </body>
