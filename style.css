@@ -78,12 +78,6 @@ nav a:hover {
     text-shadow: none !important; /* Remove any text shadow */
 }
 
-/* Active menu item styling */
-nav a.active {
-    color: #ffd700 !important; /* Yellow text for active menu item */
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    font-weight: 600;
-}
 
 /* Hamburger Menu */
 .hamburger {
