@@ -420,40 +420,61 @@ section h2::after {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Portfolio Section */
+/* Portfolio Section - Horizontal Scrolling */
 #portfolio .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) !important;
+    display: flex;
+    flex-direction: row;
     gap: 25px;
     padding: 0 20px;
-    max-width: 1000px;
-    margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #ffd700 #333;
 }
 
-/* Responsive portfolio grid */
-@media (max-width: 900px) {
-    #portfolio .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
+/* Custom scrollbar styling */
+#portfolio .portfolio-grid::-webkit-scrollbar {
+    height: 8px;
 }
 
-@media (max-width: 600px) {
+#portfolio .portfolio-grid::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+#portfolio .portfolio-grid::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 4px;
+}
+
+#portfolio .portfolio-grid::-webkit-scrollbar-thumb:hover {
+    background: #ffed4e;
+}
+
+/* Responsive portfolio - horizontal scrolling on all devices */
+@media (max-width: 768px) {
     #portfolio .portfolio-grid {
-        grid-template-columns: 1fr !important;
         gap: 20px;
         padding: 0 15px;
-        max-width: 400px;
-        margin: 0 auto;
     }
     
     #portfolio .portfolio-item {
-        width: 100%;
-        max-width: none;
+        flex: 0 0 250px; /* Smaller width on mobile */
+        min-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    #portfolio .portfolio-grid {
+        gap: 15px;
+        padding: 0 10px;
     }
     
-    #portfolio .portfolio-item .portfolio-image {
-        height: 250px;
+    #portfolio .portfolio-item {
+        flex: 0 0 220px; /* Even smaller on small mobile */
+        min-width: 220px;
     }
 }
 
@@ -469,6 +490,8 @@ section h2::after {
     flex-direction: column;
     position: relative;
     cursor: pointer;
+    flex: 0 0 300px; /* Fixed width for horizontal scroll */
+    min-width: 300px; /* Ensure minimum width */
 }
 
 #portfolio .portfolio-item:hover {
@@ -1751,11 +1774,6 @@ footer p {
         display: block;
     }
 
-    #portfolio .portfolio-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 10px;
-    }
     
     /* Testimonials handled by their own media queries above */
     
