@@ -11,7 +11,8 @@
       "Bash(sed:*)",
       "Bash(mv:*)",
       "Bash(curl:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "WebFetch(domain:unsplash.com)"
     ],
     "deny": []
   }

@@ -148,9 +148,9 @@ section h2::after {
     border-radius: 2px;
 }
 
-/* Hero Section */
+/* Hero Section - Before/After Fade Effect */
 #hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero.jpg') no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('images/hero-after.png') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
     background-position: center center; /* Explicit desktop positioning */
@@ -164,6 +164,35 @@ section h2::after {
     min-height: 100vh;
     display: flex;
     align-items: center;
+}
+
+/* Before image overlay that fades out */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url('images/hero-before.png') no-repeat center center;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    animation: heroFadeOut 6s ease-in-out forwards;
+    z-index: 1;
+}
+
+/* Ensure content appears above the overlay */
+#hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Fade out animation - shows before for 3s, fades over 3s */
+@keyframes heroFadeOut {
+    0% { opacity: 1; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 #hero h2 {
@@ -359,8 +388,11 @@ section h2::after {
 /* Services Section */
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(4, minmax(300px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 #services {
     padding: 70px 0;
@@ -397,6 +429,36 @@ section h2::after {
 
 .service-vacant {
     background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('images/vacant.jpg');
+}
+
+.service-staged4home {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1674230227190-05b589f2f730?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+    border: 2px solid #ffd700;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-staged4home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 50%, rgba(255, 215, 0, 0.1) 100%);
+    pointer-events: none;
+}
+
+.service-staged4home h3 {
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-size: 1.9em;
+}
+
+.service-staged4home:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
+    border-color: #fff;
 }
 
 #services .service:hover {
@@ -1244,6 +1306,11 @@ section h2::after {
     text-align: center;
 }
 
+/* Hide process section for now */
+#process {
+    display: none;
+}
+
 /* Testimonials Section */
 #testimonials .testimonial-grid {
     display: grid !important;
@@ -1368,6 +1435,55 @@ section h2::after {
 #contact form button:hover {
     background-color: #e6c200;
     transform: translateY(-3px);
+}
+
+/* Contact Layout - Side by Side */
+.contact-layout {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+.contact-text {
+    flex: 1;
+    max-width: 500px;
+}
+
+.contact-form-wrapper {
+    flex: 1;
+    max-width: 600px;
+}
+
+.contact-text .contact-intro {
+    font-size: 1.2em;
+    line-height: 1.7;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.contact-text .contact-tagline {
+    font-size: 1.1em;
+    color: #ffd700;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+/* Mobile responsive for contact layout */
+@media (max-width: 768px) {
+    .contact-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .contact-text {
+        max-width: none;
+        text-align: center;
+    }
+    
+    .contact-form-wrapper {
+        max-width: none;
+    }
 }
 .form-popup {
   position: fixed;
@@ -1554,7 +1670,7 @@ section h2::after {
 
 .faq-content-inner ul {
     margin: 15px 0;
-    padding-left: 20px;
+    padding-left: 40px;
 }
 
 .faq-content-inner li {
@@ -1768,10 +1884,44 @@ footer p {
         margin-bottom: 20px;
     }
 
+    /* Services horizontal scrolling on mobile */
+    .service-grid {
+        /* RESET all desktop properties to prevent inheritance */
+        display: flex;
+        grid-template-columns: none; /* Reset grid */
+        justify-content: flex-start; /* Override center */
+        margin: 0; /* Override auto centering */
+        max-width: none; /* Remove container limits */
+        
+        /* Mobile-specific flexbox properties */
+        flex-direction: row;
+        align-items: stretch;
+        gap: 20px;
+        padding: 0 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+        box-sizing: border-box;
+    }
+    
+    .service-grid::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+    
     #services .service {
-        width: 90%;
-        margin: 20px auto;
-        display: block;
+        flex: 0 0 280px; /* Fixed width, no shrink, no grow */
+        min-width: 280px;
+        height: auto;
+        margin: 0;
+        display: flex;
+    }
+    
+    /* Ensure Staged4Home keeps its distinctive styling on mobile */
+    .service-staged4home {
+        border: 2px solid #ffd700;
     }
 
     
