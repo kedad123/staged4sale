@@ -12,7 +12,8 @@
       "Bash(mv:*)",
       "Bash(curl:*)",
       "Bash(pkill:*)",
-      "WebFetch(domain:unsplash.com)"
+      "WebFetch(domain:unsplash.com)",
+      "WebFetch(domain:www.nar.realtor)"
     ],
     "deny": []
   }
