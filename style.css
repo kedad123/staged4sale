@@ -482,6 +482,32 @@ section h2::after {
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
+/* Service card links */
+#services a.service {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#services a.service h3 {
+  color: #ffd700;
+}
+
+#services a.service p {
+  color: #b0b0b0;
+}
+
+#services a.service:hover h3 {
+  color: #ffd700;
+}
+
+#services a.service:hover p {
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
 /* Portfolio Section - Horizontal Scrolling */
 #portfolio .portfolio-grid {
     display: flex;
