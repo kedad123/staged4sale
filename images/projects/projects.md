@@ -5,3 +5,4 @@
 - canyon-view-condo
 - anchor-point-hideaway
 - rolando-bungalow
+- san-pasqual-retreat

@@ -52,6 +52,36 @@ Staged4Sale is Southern California's premier home staging company, led by ASPMâ„
 - Southern California market focus
 - Data-driven credibility
 
+## Service Page Standards
+
+### Pricing Policy
+- **No specific pricing**: Remove all dollar amounts, price ranges, and specific costs
+- **Focus on value**: Emphasize benefits, process, and professional expertise
+- **Avoid cost language**: Remove "additional fees", "investment ranges", specific timelines with costs
+
+### Review Integration
+- **Trustpilot widget**: Use standardized review widget across all service pages
+- **Widget code**: `<script defer async src='https://cdn.trustindex.io/loader.js?c8b206c51f08759284665cf4a70'></script>`
+- **Replace manual testimonials**: Convert testimonial sections to "Client Reviews" with widget
+
+### FAQ Functionality
+- **CSS pattern**: Use `max-height: 0` with `.faq-answer.open` class for animations
+- **JavaScript**: Implement accordion behavior (close others when opening one)
+- **Error handling**: Include console logging and DOM structure validation
+- **Delayed initialization**: Use `setTimeout(initializeFAQ, 100)` for DOM readiness
+
+### Service Navigation
+- **Service cards**: Main page service cards link to respective service pages
+- **Breadcrumbs**: Consistent navigation structure
+- **Related services**: Cross-link between service pages
+
+## Recent Updates (Session Notes)
+- All service pages updated with consistent review widgets
+- FAQ functionality standardized across all service pages
+- Pricing information removed from all service pages
+- Service cards on main page now link to detailed service pages
+- Blog link added to social media section
+
 ## Future Sections
 (Reserved for additional project guidelines as needed)
 - Portfolio page standards
