@@ -46,6 +46,24 @@ Staged4Sale is Southern California's premier home staging company, led by ASPMâ„
 - Clean URL structure
 - Mobile-first responsive design
 
+### Analytics Tracking
+- **Google Analytics 4 (GA4)**: Required on ALL pages
+- **Tracking ID**: `G-MHC7Q77PBG`
+- **Implementation**: Add GA4 script in `<head>` section before closing `</head>` tag
+- **Standard code snippet**:
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MHC7Q77PBG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MHC7Q77PBG');
+</script>
+```
+- **IMPORTANT**: When creating new pages (blog posts, city pages, project pages, service pages), always include GA4 tracking code
+- **Placement**: Insert after stylesheets and before inline `<style>` blocks
+
 ### Brand Consistency
 - Professional expertise positioning
 - ASPMâ„¢ certification prominence
@@ -81,6 +99,9 @@ Staged4Sale is Southern California's premier home staging company, led by ASPMâ„
 - Pricing information removed from all service pages
 - Service cards on main page now link to detailed service pages
 - Blog link added to social media section
+- Phone number (760) 583-2500 added to homepage contact section and Organization schema
+- Comprehensive SEO enhancements: homepage meta tags updated, 16 city pages added to sitemap, Cities hub page created, FAQ schema added, breadcrumb schema implemented
+- Google Analytics 4 (GA4) tracking added to all pages (FAQ, blog index, blog posts, project pages, thank-you, 404)
 
 ## Future Sections
 (Reserved for additional project guidelines as needed)
