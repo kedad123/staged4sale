@@ -120,7 +120,7 @@
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
-      "reviewCount": "50",
+      "reviewCount": "5",
       "bestRating": "5",
       "worstRating": "1"
     },
@@ -237,6 +237,120 @@
       }
     ]
   }
+  </script>
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "Staged 4 Sale"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Alma S."
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Tawni and her team always offer good value and excellent customer service. The stagers are polite, respectful and go the extra mile to move things around to enhance my client's homes. I can always count on them to showcase a vacant or drab space. Prices are reasonable and they offer promotions so real estate professionals have a few options. I'll continue to use their services when needed.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Yelp"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "Staged 4 Sale"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Stacey Walker"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "I have been working with Tawni my whole real estate career & she is always a pleasure to work with. I recently had her stage a 3 story beach condo & I felt it helped tremendously with the sale & to get top dollar. This condo will be the highest priced condo in the complex! WOO HOO!!!! Thanks Tawni!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Facebook"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "Staged 4 Sale"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Anne Virjee"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Thank you Tawni and Staged4Sale for my latest listing photos and Matterport tour. My clients LOVE them and were so impressed with the service and fast turn around time! It can be hard to capture a small condo and we could not be more pleased!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Facebook"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "Staged 4 Sale"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Credo Bizimana"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Staged 4 sale is a valuable partner in staging for your listings! They are professional and deliver high quality service. Would definitely recommend!!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Facebook"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": "Staged 4 Sale"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Cletta McCaughan Johnson"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "I used Stage 4 Sale when we had our house on the market. I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Facebook"
+      }
+    }
+  ]
   </script>
 <!-- Keywords (Not used by Google, but harmless) -->
 <meta name="keywords" content="San Diego home staging, home staging San Diego, North County staging, professional home staging, staged homes, ASPM certified staging, real estate staging, San Diego County, interior design, house selling tips, Southern California homes">
@@ -443,6 +557,72 @@
       /* Prevent hero h2 elements from getting section underlines */
       #hero h2.hero-line::after {
         display: none;
+      }
+
+      /* Testimonials Grid */
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .testimonial-card {
+        background-color: #2c2c2c;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.2);
+      }
+
+      .testimonial-stars {
+        color: #ffd700;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+      }
+
+      .testimonial-stars i {
+        margin-right: 3px;
+      }
+
+      .testimonial-text {
+        color: #e0e0e0;
+        font-size: 1em;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        flex-grow: 1;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        color: #ffd700;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.95em;
+      }
+
+      .testimonial-source {
+        color: #b0b0b0;
+        font-size: 0.85em;
+        margin-top: auto;
+      }
+
+      .testimonial-source a:hover {
+        text-decoration: underline !important;
+      }
+
+      @media (max-width: 768px) {
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
       }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -668,13 +848,59 @@
 <section id="testimonials">
   <div class="container">
     <h2>What Our Clients Say</h2>
-    
-    <!-- Trustpilot Review Widget -->
-    <div style="margin-bottom: 60px; text-align: center;">
-      <script defer async src='https://cdn.trustindex.io/loader.js?c8b206c51f08759284665cf4a70'></script>
+
+    <div class="testimonials-grid">
+      <!-- Testimonial 1 - Alma S. (Yelp) -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Tawni and her team always offer good value and excellent customer service. The stagers are polite, respectful and go the extra mile to move things around to enhance my client's homes. I can always count on them to showcase a vacant or drab space. Prices are reasonable and they offer promotions so real estate professionals have a few options. I'll continue to use their services when needed."</p>
+        <p class="testimonial-author">— Alma S., Real Estate Professional</p>
+        <p class="testimonial-source"><a href="https://www.yelp.com/biz/staged-4-sale-san-marcos" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-yelp"></i> View on Yelp</a></p>
+      </div>
+
+      <!-- Testimonial 2 - Stacey Walker (Facebook) -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"I have been working with Tawni my whole real estate career & she is always a pleasure to work with. I recently had her stage a 3 story beach condo & I felt it helped tremendously with the sale & to get top dollar. This condo will be the highest priced condo in the complex! WOO HOO!!!! Thanks Tawni!"</p>
+        <p class="testimonial-author">— Stacey Walker, Realtor®</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+      </div>
+
+      <!-- Testimonial 3 - Anne Virjee (Facebook) -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Thank you Tawni and Staged4Sale for my latest listing photos and Matterport tour. My clients LOVE them and were so impressed with the service and fast turn around time! It can be hard to capture a small condo and we could not be more pleased!"</p>
+        <p class="testimonial-author">— Anne Virjee, Realtor®</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+      </div>
+
+      <!-- Testimonial 4 - Credo Bizimana (Facebook) -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Staged 4 sale is a valuable partner in staging for your listings! They are professional and deliver high quality service. Would definitely recommend!!"</p>
+        <p class="testimonial-author">— Credo Bizimana, Real Estate Professional</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+      </div>
+
+      <!-- Testimonial 5 - Cletta McCaughan Johnson (Facebook) -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"I used Stage 4 Sale when we had our house on the market. I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!"</p>
+        <p class="testimonial-author">— Cletta McCaughan Johnson, Homeowner</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+      </div>
     </div>
-    
-    
+
   </div>
 </section>
 
