@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staged4Sale - Professional Home Staging Flyer</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Print-optimized styles */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 9pt;
+                line-height: 1.2;
+            }
+            
+            .container {
+                max-width: none;
+                margin: 0;
+                padding: 0.25in;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        /* General styles */
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.3;
+            font-size: 9pt;
+        }
+        
+        .container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.25in;
+            background-color: #ffffff;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 12px;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 1px;
+        }
+        
+        .logo {
+            height: 100px;
+            margin-bottom: 5px;
+        }
+        
+        .company-name {
+            display: none;
+        }
+        
+        .tagline {
+            font-size: 13pt;
+            color: #333333;
+            margin: 3px 0;
+            font-weight: 700;
+        }
+        
+        .years-highlight {
+            font-size: 20pt;
+            color: #ffd700;
+            font-weight: bold;
+            margin: 4px 0;
+            background-color: #333;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .website {
+            font-size: 10pt;
+            color: #666666;
+            margin: 2px 0;
+        }
+        
+        .credentials-header {
+            font-size: 8pt;
+            color: #ffd700;
+            font-weight: bold;
+            margin: 2px 0;
+        }
+        
+        /* Main content grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        /* Section headers */
+        .section-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 12pt;
+            color: #333333;
+            margin: 0 0 8px 0;
+            padding-bottom: 3px;
+            border-bottom: 2px solid #ffd700;
+        }
+        
+        /* About section */
+        .about-section {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .about-section p {
+            margin: 0 0 8px 0;
+            font-size: 8pt;
+            line-height: 1.3;
+        }
+        
+        /* Statistics highlight box */
+        .stats-highlight {
+            background: linear-gradient(135deg, #edd965 0%, #ffed4a 100%);
+            color: #333333;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid #000000;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stats-highlight h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0 0 10px 0;
+            font-size: 12pt;
+            color: #000;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 8px 0;
+        }
+        
+        .stat-item {
+            background-color: rgba(255,255,255,0.8);
+            padding: 6px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #000;
+            display: block;
+        }
+        
+        .stat-text {
+            font-size: 7pt;
+            color: #333;
+        }
+        
+        /* Before/After Portfolio Section */
+        .portfolio-showcase {
+            background-color: #f5f5f5;
+            padding: 12px;
+            border-radius: 6px;
+            border: 2px solid #ffd700;
+        }
+        
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .before-after-item {
+            text-align: center;
+        }
+        
+        .before-after-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            margin-bottom: 2px;
+        }
+        
+        .before-after-item p {
+            margin: 0;
+            font-size: 6pt;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .project-name {
+            font-size: 7pt;
+            color: #333;
+            margin: 2px 0 0 0;
+            font-style: italic;
+        }
+        
+        /* Services section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+        }
+        
+        .service-box {
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        .service-box h4 {
+            font-family: 'Playfair Display', serif;
+            color: #caac02;
+            margin: 0 0 6px 0;
+            font-size: 9pt;
+        }
+        
+        .service-box p {
+            margin: 0;
+            font-size: 7pt;
+            color: #555555;
+        }
+        
+        /* Trustpilot Rating */
+        .rating-section {
+            background-color: #00b67a;
+            color: white;
+            padding: 1px;
+            border-radius: 1px;
+            text-align: center;
+            margin-bottom: 1px;
+        }
+        
+        .rating-section h3 {
+            margin: 0 0 6px 0;
+            font-size: 10pt;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .stars {
+            font-size: 16pt;
+            color: #FFD700;
+            background-color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 4px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .rating-text {
+            font-size: 7pt;
+            margin: 4px 0 0 0;
+        }
+        
+        /* Testimonials */
+        .testimonials-compact {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+        }
+        
+        .testimonial {
+            background-color: #f9f9f9;
+            border-left: 3px solid #ffd700;
+            padding: 6px;
+            font-size: 7pt;
+        }
+        
+        .testimonial p {
+            margin: 0 0 4px 0;
+            font-style: italic;
+            color: #555555;
+        }
+        
+        .testimonial .author {
+            font-weight: bold;
+            color: #333333;
+            font-size: 6pt;
+        }
+        
+        /* Process steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .step-number {
+            background-color: #ffd700;
+            color: #333333;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 8pt;
+            flex-shrink: 0;
+        }
+        
+        .step-content h5 {
+            margin: 0 0 2px 0;
+            font-size: 8pt;
+            font-weight: bold;
+        }
+        
+        .step-content p {
+            margin: 0;
+            font-size: 6pt;
+            color: #666666;
+        }
+        
+        /* Contact section */
+        .contact-section {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 6px;
+            border: 3px solid #ffd700;
+            grid-column: 1 / -1;
+        }
+        
+        .contact-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: #ffd700;
+            margin: 0 0 8px 0;
+            font-size: 12pt;
+        }
+        
+        .contact-section p {
+            margin: 2px 0;
+            font-size: 8pt;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .contact-left {
+            text-align: left;
+        }
+        
+        .contact-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cta-button {
+            background-color: #ffd700;
+            color: #333333;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 15px;
+            font-size: 8pt;
+            font-weight: bold;
+            margin-top: 6px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .credentials {
+            font-size: 6pt;
+            margin-top: 6px;
+            color: #ffd700;
+        }
+        
+        /* Awards section */
+        .awards-section {
+            background-color: #f0f8ff;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #ffd700;
+        }
+        
+        .awards-section h4 {
+            font-family: 'Playfair Display', serif;
+            margin: 0 0 6px 0;
+            font-size: 9pt;
+            color: #333;
+        }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            font-size: 6pt;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="../images/logo2.png" alt="Staged4Sale Logo" class="logo">
+            <h1 class="company-name">Staged4Sale</h1>
+            <p class="tagline">Transforming Spaces. Inspiring Buyers.</p>
+            <p class="years-highlight">⭐ 19 Years in Business ⭐</p>
+        </div>
+        
+        
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- About Us Section -->
+                <div class="about-section">
+                    <h2 class="section-header">About Staged4Sale</h2>
+                    <p><strong>Southern California's premier home staging company</strong>, led by <strong>Tawni Oppenheim</strong>, one of the nation's few professionals with the <strong>Accredited Staging Professional Master™ (ASPM™)</strong> designation.</p>
+                    <p><strong>With over 20 years of experience</strong>, we've helped hundreds of homeowners and realtors achieve maximum value with confidence and style. Our team specializes in creating emotionally compelling spaces that help buyers envision their future home.</p>
+                    <p>From luxury estates to cozy condos, we understand that every property has unique potential. We work closely with our clients to bring out the best in each space, ensuring faster sales and higher offers.</p>
+                </div>
+                
+                <!-- Statistics Highlight -->
+                <div class="stats-highlight">
+                    <h3>Proven Results with Real Data</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">586% ROI</span>
+                            <div class="stat-text">Average return on staging investment</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3X Faster</span>
+                            <div class="stat-text">Staged homes sell 3 times faster</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25% More</span>
+                            <div class="stat-text">Higher sale prices than non-staged</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">85%+</span>
+                            <div class="stat-text">Sell at or above asking price</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 6pt; margin: 6px 0 0 0; color: #333;">Sources: RESA, NAR, Bankrate, Realtor Magazine</p>
+                </div>
+                
+                <!-- Services Section -->
+                <div>
+                    <h2 class="section-header">Our Services</h2>
+                    <div class="services-grid">
+                        <div class="service-box">
+                            <h4>Consultation</h4>
+                            <p>Expert assessment & staging recommendations</p>
+                        </div>
+                        <div class="service-box">
+                            <h4>Vacant Staging</h4>
+                            <p>Complete furniture & accessories for empty homes</p>
+                        </div>
+                        <div class="service-box">
+                            <h4>Occupied Staging</h4>
+                            <p>REdesign+ using your existing pieces</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Process Section -->
+                <div>
+                    <h2 class="section-header">Our Process</h2>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>Consultation</h5>
+                                <p>We handle the complete assessment and provide detailed recommendations</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>Planning</h5>
+                                <p>We create a complete staging plan tailored to your market and timeline</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>Staging</h5>
+                                <p>We handle all furniture delivery, installation, and professional styling</p>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h5>Results</h5>
+                                <p>We ensure your property is market-ready for maximum impact and value</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Before/After Portfolio -->
+                <div class="portfolio-showcase">
+                    <h2 class="section-header">Real Before & After Transformations</h2>
+                    <p style="font-size: 6pt; margin: 4px 0 8px 0; text-align: center; color: #666;">View our full gallery at staged4sale.com/projects/</p>
+                    <div class="before-after-grid">
+                        <div class="before-after-item">
+                            <img src="../images/projects/monte-fuego-ranch/monte-fuego-ranch-01-before.webp" alt="Monte Fuego Ranch Before">
+                            <p>BEFORE</p>
+                            <div class="project-name">Spacious  but Uninviting</div>
+                        </div>
+                        <div class="before-after-item">
+                            <img src="../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg" alt="Monte Fuego Ranch After">
+                            <p>AFTER</p>
+                            <div class="project-name">Transformed into a Warm, Sophisticated Retreat</div>
+                        </div>
+                        <div class="before-after-item">
+                            <img src="../images/projects/monte-fuego-ranch/monte-fuego-ranch-02-before.webp" alt="Kitchen Before">
+                            <p>BEFORE</p>
+                            <div class="project-name">Cold, Empty Kitchen</div>
+                        </div>
+                        <div class="before-after-item">
+                            <img src="../images/projects/monte-fuego-ranch/monte-fuego-ranch-02.jpg" alt="Kitchen After">
+                            <p>AFTER</p>
+                            <div class="project-name">Inviting Culinary Space with Style and Comfort</div>
+                        </div>
+                        <div class="before-after-item">
+                            <img src="../images/projects/san-pasqual-retreat/san-pasqual-retreat-04-before.jpg" alt="San Pasqual Retreat Before">
+                            <p>BEFORE</p>
+                            <div class="project-name">Plain, Vacant Dining Area</div>
+                        </div>
+                        <div class="before-after-item">
+                            <img src="../images/projects/san-pasqual-retreat/san-pasqual-retreat-04.jpg" alt="San Pasqual Retreat After">
+                            <p>AFTER</p>
+                            <div class="project-name">Elegant Dining Experience Designed for Gathering</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Awards & Recognition -->
+                <div class="awards-section">
+                    <h4>Awards & Recognition</h4>
+                    <div class="awards-grid">
+                        <div>🏆 IAHSP Best of Home Staging 2020 - Staging Excellence</div>
+                        <div>🏆 IAHSP Best of Home Staging 2021 - Staging Excellence</div>
+                        <div>🏆 IAHSP Best of Home Staging 2021 - Client Care Excellence</div>
+                        <div>📜 Certified ASPM™ Professional Master</div>
+                    </div>
+                </div>
+                
+                <!-- Testimonials Section -->
+                <div>
+                    <h2 class="section-header">Real Client Reviews</h2>
+                    <div class="testimonials-compact">
+                        <div class="testimonial">
+                            <p>"I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!"</p>
+                            <div class="author">- Cletta McCaughan Johnson</div>
+                        </div>
+                        <div class="testimonial">
+                            <p>"Staged a 3 story beach condo & it will be the highest priced condo in the complex! WOO HOO!!"</p>
+                            <div class="author">- Stacey Walker, Realtor</div>
+                        </div>
+                        <div class="testimonial">
+                            <p>"Very professional and a joy to work with. I get tremendous compliments on every staging they do."</p>
+                            <div class="author">- Kim Babcock, Realtor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="contact-grid">
+                <div class="contact-left">
+                    <h3>Get Your Free Consultation Today</h3>
+                    <p><strong>Ready to maximize your home's value?</strong></p>
+                    <p>📧 <strong>sales@staged4sale.com</strong></p>
+                    <p>🌐 <strong>www.staged4sale.com</strong></p>
+                    <p>🌐 /Staged4Sale (Facebook)</p>
+                    <a href="#" class="cta-button">Schedule Free Consultation</a>
+                    <div class="credentials">
+                        <strong>Licensed & Insured • Serving Southern California</strong><br>
+                        From Oceanside to La Jolla • Escondido to San Clemente
+                    </div>
+                </div>
+                <div class="contact-middle" style="text-align: center; padding: 0 10px;">
+                    <img src="staged4sale-trustindex.png" alt="Staged4Sale Trustpilot Reviews" style="max-width: 100%; height: auto; max-height: 115px;">
+                </div>
+                <div class="contact-right">
+                    <img src="staged4sale-qr-code.png" alt="QR Code to Website" style="width: 120px; height: 120px; background-color: white; padding: 8px; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
