@@ -1835,6 +1835,27 @@ footer p {
     color: #ffd700; /* Gold on hover */
 }
 
+.header-phone {
+  color: #ffd700;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.header-phone:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.header-phone i {
+  font-size: 1rem;
+}
+
 
 /* Responsive Design */
 /* Mobile Parallax Optimization */
@@ -1844,12 +1865,33 @@ footer p {
     }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header-phone {
+        font-size: 1rem;
+        margin-left: 15px;
+    }
+}
+
 @media (max-width: 768px) {
     header .container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 15px;
+    }
+
+    .header-phone {
+        font-size: 0.9rem;
+        margin-left: 10px;
+        gap: 5px;
+    }
+
+    .header-phone .phone-number {
+        display: none; /* Hide full number on very small screens */
+    }
+
+    .header-phone i {
+        font-size: 1.2rem; /* Larger icon when text is hidden */
     }
 
     .hamburger {
