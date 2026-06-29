@@ -251,10 +251,12 @@
     <style>
       /* INDEX2 OVERRIDES - Simplified, Compact Design */
 
-      /* Simplified Hero - No animations, smaller height */
+      /* Simplified Hero - No animations, smaller height with side spacing */
       #hero {
-        min-height: 50vh !important;
-        padding: 80px 20px !important;
+        min-height: 35vh !important;
+        padding: 60px 20px !important;
+        margin: 20px !important;
+        border-radius: 12px !important;
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('images/hero-after.jpg') no-repeat center center !important;
         background-size: cover !important;
         background-attachment: scroll !important;
@@ -291,11 +293,20 @@
 
       /* Compact sections */
       section {
-        padding: 40px 0 !important;
+        padding: 30px 0 !important;
       }
 
       .container {
-        padding: 0 20px;
+        padding: 0 15px;
+      }
+
+      section h2 {
+        margin-bottom: 20px !important;
+        font-size: 2em !important;
+      }
+
+      section p {
+        margin-bottom: 15px !important;
       }
 
       /* New CTAs section */
@@ -735,21 +746,6 @@
             </div>
         </section>
 
-<section id="about">
-  <div class="container">
-    <div class="about-flex">
-      <div class="about-text-col">
-        <h2>About Us</h2>
-        <p>
-          At Staged 4 Sale, we don't just stage homes — we create elevated living experiences that inspire offers. Led by <span class="shine-keyword">Tawni Oppenheim</span>, an <span class="shine-keyword">Accredited Staging Professional Master™ (ASPM™)</span> personally trained by industry founder Barb Schwarz, we bring <span class="shine-keyword">decades</span> of design, marketing, and real estate insight to every project. From <a href="services/vacant-staging/">vacant listings</a> to <a href="services/occupied-staging/">lived-in spaces</a>, our team blends artistic vision with strategic staging to refresh homes with purpose and style. Trusted for our creativity, professionalism, and results, we help sellers <span class="shine-keyword">move forward with confidence</span>.
-        </p>
-      </div>
-      <div class="about-img-col">
-        <img src="images/tawni.jpg" alt="Tawni Oppenheim, Staged4Sale founder" class="about-tawni-img">
-      </div>
-    </div>
-  </div>
-</section>
         <section id="services">
             <div class="container">
                 <h2>Our Services</h2>
@@ -857,34 +853,6 @@
             </div>
         </section>
 
-        <section id="process">
-            <div class="container">
-                <h2>Our Process</h2>
-                <div class="process-grid">
-                    <div class="process-step">
-                        <i class="fas fa-clipboard-list"></i>
-                        <h3>1. Consultation & Assessment</h3>
-                        <p>We begin with a thorough walk-through of your property, identifying its strengths and areas for improvement.</p>
-                    </div>
-                    <div class="process-step">
-                        <i class="fas fa-lightbulb"></i>
-                        <h3>2. Strategic Planning</h3>
-                        <p>Based on the assessment, we develop a customized staging plan tailored to your home's unique features and target market.</p>
-                    </div>
-                    <div class="process-step">
-                        <i class="fas fa-couch"></i>
-                        <h3>3. Staging & Transformation</h3>
-                        <p>Our team meticulously stages your home, arranging furniture, decor, and accessories to create an inviting atmosphere.</p>
-                    </div>
-                    <div class="process-step">
-                        <i class="fas fa-home"></i>
-                        <h3>4. Showcase & Sell</h3>
-                        <p>Your property is now ready to impress potential buyers, leading to faster sales and maximum value.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
 <section id="testimonials">
   <div class="container">
     <h2>What Our Clients Say</h2>
@@ -902,8 +870,8 @@
 
       <!-- Testimonial 2 - Stacey Walker (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-recommend">
-          <i class="fas fa-check-circle"></i> Recommended on Facebook
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
         <p class="testimonial-text">"I have been working with Tawni my whole real estate career & she is always a pleasure to work with. I recently had her stage a 3 story beach condo & I felt it helped tremendously with the sale & to get top dollar. This condo will be the highest priced condo in the complex! WOO HOO!!!! Thanks Tawni!"</p>
         <p class="testimonial-author">— Stacey Walker, Realtor®</p>
@@ -912,8 +880,8 @@
 
       <!-- Testimonial 3 - Anne Virjee (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-recommend">
-          <i class="fas fa-check-circle"></i> Recommended on Facebook
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
         <p class="testimonial-text">"Thank you Tawni and Staged4Sale for my latest listing photos and Matterport tour. My clients LOVE them and were so impressed with the service and fast turn around time! It can be hard to capture a small condo and we could not be more pleased!"</p>
         <p class="testimonial-author">— Anne Virjee, Realtor®</p>
@@ -922,8 +890,8 @@
 
       <!-- Testimonial 4 - Credo Bizimana (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-recommend">
-          <i class="fas fa-check-circle"></i> Recommended on Facebook
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
         <p class="testimonial-text">"Staged 4 sale is a valuable partner in staging for your listings! They are professional and deliver high quality service. Would definitely recommend!!"</p>
         <p class="testimonial-author">— Credo Bizimana, Real Estate Professional</p>
@@ -932,8 +900,8 @@
 
       <!-- Testimonial 5 - Cletta McCaughan Johnson (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-recommend">
-          <i class="fas fa-check-circle"></i> Recommended on Facebook
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </div>
         <p class="testimonial-text">"I used Stage 4 Sale when we had our house on the market. I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!"</p>
         <p class="testimonial-author">— Cletta McCaughan Johnson, Homeowner</p>
@@ -1122,6 +1090,39 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Social Media & Cities Section -->
+<section style="background: #1a1a1a; padding: 30px 0;">
+  <div class="container" style="text-align: center;">
+    <h3 style="color: #ffd700; font-size: 1.4em; margin-bottom: 15px;">Connect With Us</h3>
+    <div style="display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; flex-wrap: wrap;">
+      <a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1.1em; text-decoration: none;"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/staged4salellc/" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1.1em; text-decoration: none;"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.google.com/maps/place/Staged4Sale/@33.0103261,-118.1653469,412842m/" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1.1em; text-decoration: none;"><i class="fab fa-google"></i> Google</a>
+    </div>
+    <p style="color: #b0b0b0; font-size: 0.95em; margin-bottom: 10px;">Serving:</p>
+    <p style="color: #b0b0b0; font-size: 0.9em;">
+      <a href="cities/oceanside/" style="color: #e0e0e0; text-decoration: none; margin: 0 6px;">Oceanside</a> •
+      <a href="cities/carlsbad/" style="color: #e0e0e0; text-decoration: none; margin: 0 6px;">Carlsbad</a> •
+      <a href="cities/la-jolla/" style="color: #e0e0e0; text-decoration: none; margin: 0 6px;">La Jolla</a> •
+      <a href="cities/del-mar/" style="color: #e0e0e0; text-decoration: none; margin: 0 6px;">Del Mar</a> •
+      <a href="cities/" style="color: #ffd700; text-decoration: none; margin-left: 10px;">All Cities →</a>
+    </p>
+  </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" style="background: #252525; padding: 30px 0;">
+  <div class="container" style="max-width: 800px; text-align: center;">
+    <h2 style="color: #ffd700; margin-bottom: 20px;">About Us</h2>
+    <p style="color: #e0e0e0; line-height: 1.7; margin-bottom: 15px;">
+      At Staged 4 Sale, we create elevated living experiences that inspire offers. Led by <strong style="color: #ffd700;">Tawni Oppenheim</strong>, an <strong>ASPM™ certified professional</strong> personally trained by industry founder Barb Schwarz, we bring decades of design, marketing, and real estate insight to every project.
+    </p>
+    <p style="color: #e0e0e0; line-height: 1.7;">
+      From <a href="services/vacant-staging/" style="color: #ffd700;">vacant listings</a> to <a href="services/occupied-staging/" style="color: #ffd700;">lived-in spaces</a>, we help sellers move forward with confidence.
+    </p>
   </div>
 </section>
 
