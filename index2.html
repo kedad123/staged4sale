@@ -246,7 +246,14 @@
 
 <!-- End of Open Graph meta tags -->
     <title>Oceanside & North County San Diego Home Staging | Staged4Sale</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
+
     <link rel="stylesheet" href="style.css">
     <style>
       /* INDEX2 OVERRIDES - Simplified, Compact Design */
@@ -377,6 +384,42 @@
       /* Compact Contact */
       #contact {
         padding: 40px 0 !important;
+      }
+
+      /* Horizontal Scrolling Testimonials */
+      .testimonials-grid {
+        display: flex !important;
+        overflow-x: auto !important;
+        gap: 20px !important;
+        padding: 10px 0 !important;
+        scroll-behavior: smooth !important;
+      }
+
+      .testimonial-card {
+        min-width: 350px !important;
+        max-width: 350px !important;
+        flex-shrink: 0 !important;
+      }
+
+      .testimonial-card .testimonial-stars {
+        display: inline !important;
+        margin-right: 10px !important;
+        font-size: 0.9em !important;
+      }
+
+      .testimonial-text {
+        display: -webkit-box !important;
+        -webkit-line-clamp: 4 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin-bottom: 10px !important;
+      }
+
+      .testimonial-card .testimonial-stars + .testimonial-text {
+        display: inline !important;
+        -webkit-line-clamp: unset !important;
+        -webkit-box-orient: unset !important;
       }
 
     </style>
@@ -860,52 +903,52 @@
     <div class="testimonials-grid">
       <!-- Testimonial 1 - Alma S. (Yelp) -->
       <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"Tawni and her team always offer good value and excellent customer service. The stagers are polite, respectful and go the extra mile to move things around to enhance my client's homes. I can always count on them to showcase a vacant or drab space. Prices are reasonable and they offer promotions so real estate professionals have a few options. I'll continue to use their services when needed."</p>
-        <p class="testimonial-author">— Alma S., Real Estate Professional</p>
-        <p class="testimonial-source"><a href="https://www.yelp.com/biz/staged-4-sale-oceanside" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-yelp"></i> 5-star review on Yelp</a></p>
+        <p style="margin-bottom: 10px;">
+          <span class="testimonial-stars" style="color: #ffd700;">★★★★★</span>
+          <span class="testimonial-text" style="color: #e0e0e0;">"Tawni and her team always offer good value and excellent customer service..."</span>
+        </p>
+        <p class="testimonial-author" style="font-size: 0.9em; color: #b0b0b0; margin-bottom: 5px;">— Alma S., Real Estate Professional</p>
+        <p class="testimonial-source"><a href="https://www.yelp.com/biz/staged-4-sale-oceanside" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.85em;"><i class="fab fa-yelp"></i> Yelp</a></p>
       </div>
 
       <!-- Testimonial 2 - Stacey Walker (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"I have been working with Tawni my whole real estate career & she is always a pleasure to work with. I recently had her stage a 3 story beach condo & I felt it helped tremendously with the sale & to get top dollar. This condo will be the highest priced condo in the complex! WOO HOO!!!! Thanks Tawni!"</p>
-        <p class="testimonial-author">— Stacey Walker, Realtor®</p>
-        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+        <p style="margin-bottom: 10px;">
+          <span class="testimonial-stars" style="color: #ffd700;">★★★★★</span>
+          <span class="testimonial-text" style="color: #e0e0e0;">"I recently had her stage a 3 story beach condo & I felt it helped tremendously..."</span>
+        </p>
+        <p class="testimonial-author" style="font-size: 0.9em; color: #b0b0b0; margin-bottom: 5px;">— Stacey Walker, Realtor®</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.85em;"><i class="fab fa-facebook"></i> Facebook</a></p>
       </div>
 
       <!-- Testimonial 3 - Anne Virjee (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"Thank you Tawni and Staged4Sale for my latest listing photos and Matterport tour. My clients LOVE them and were so impressed with the service and fast turn around time! It can be hard to capture a small condo and we could not be more pleased!"</p>
-        <p class="testimonial-author">— Anne Virjee, Realtor®</p>
-        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+        <p style="margin-bottom: 10px;">
+          <span class="testimonial-stars" style="color: #ffd700;">★★★★★</span>
+          <span class="testimonial-text" style="color: #e0e0e0;">"Thank you Tawni for my latest listing photos and Matterport tour. My clients LOVE them..."</span>
+        </p>
+        <p class="testimonial-author" style="font-size: 0.9em; color: #b0b0b0; margin-bottom: 5px;">— Anne Virjee, Realtor®</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.85em;"><i class="fab fa-facebook"></i> Facebook</a></p>
       </div>
 
       <!-- Testimonial 4 - Credo Bizimana (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"Staged 4 sale is a valuable partner in staging for your listings! They are professional and deliver high quality service. Would definitely recommend!!"</p>
-        <p class="testimonial-author">— Credo Bizimana, Real Estate Professional</p>
-        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+        <p style="margin-bottom: 10px;">
+          <span class="testimonial-stars" style="color: #ffd700;">★★★★★</span>
+          <span class="testimonial-text" style="color: #e0e0e0;">"Staged 4 sale is a valuable partner in staging for your listings! Professional and high quality..."</span>
+        </p>
+        <p class="testimonial-author" style="font-size: 0.9em; color: #b0b0b0; margin-bottom: 5px;">— Credo Bizimana, Real Estate Professional</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.85em;"><i class="fab fa-facebook"></i> Facebook</a></p>
       </div>
 
       <!-- Testimonial 5 - Cletta McCaughan Johnson (Facebook) -->
       <div class="testimonial-card">
-        <div class="testimonial-stars">
-          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-        </div>
-        <p class="testimonial-text">"I used Stage 4 Sale when we had our house on the market. I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!"</p>
-        <p class="testimonial-author">— Cletta McCaughan Johnson, Homeowner</p>
-        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.9em;"><i class="fab fa-facebook"></i> View on Facebook</a></p>
+        <p style="margin-bottom: 10px;">
+          <span class="testimonial-stars" style="color: #ffd700;">★★★★★</span>
+          <span class="testimonial-text" style="color: #e0e0e0;">"I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!"</span>
+        </p>
+        <p class="testimonial-author" style="font-size: 0.9em; color: #b0b0b0; margin-bottom: 5px;">— Cletta McCaughan Johnson, Homeowner</p>
+        <p class="testimonial-source"><a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.85em;"><i class="fab fa-facebook"></i> Facebook</a></p>
       </div>
     </div>
 
@@ -930,17 +973,13 @@
           <a href="tel:+17605832500" style="color: #ffd700; text-decoration: none;">(760) 583-2500</a>
         </p>
 
-        <p class="service-area">From the sun-soaked shores of <a href="cities/oceanside/">Oceanside</a> to the upscale streets of <a href="cities/la-jolla/">La Jolla</a> and the rolling hills of <a href="cities/escondido/">Escondido</a> — we serve all of <a href="cities/san-diego/">North County San Diego</a> (and beyond).</p>
-
 <!-- Google Business Profile Section -->
-<div class="google-business-section" style="margin-top: 40px;">
-  <h3 style="color: #ffd700; font-size: 1.5em; margin-bottom: 20px; font-family: 'Playfair Display', serif; text-align: center;">Find Us on Google</h3>
-
-  <div class="service-area-map" style="margin-bottom: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+<div class="google-business-section" style="margin-top: 30px;">
+  <div class="service-area-map" style="margin-bottom: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3326234.8!2d-118.1653469!3d33.0103261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dc71381bba545d%3A0xa70264d2cb938fa9!2sStaged4Sale!5e0!3m2!1sen!2sus!4v1640000000000!5m2!1sen!2sus"
       width="100%"
-      height="350"
+      height="300"
       style="border:0;"
       allowfullscreen
       loading="lazy"
@@ -949,9 +988,11 @@
     ></iframe>
   </div>
 
+  <p class="service-area" style="font-size: 0.95em; color: #b0b0b0; text-align: center; margin-bottom: 10px;">From the sun-soaked shores of <a href="cities/oceanside/" style="color: #ffd700;">Oceanside</a> to the upscale streets of <a href="cities/la-jolla/" style="color: #ffd700;">La Jolla</a> and the rolling hills of <a href="cities/escondido/" style="color: #ffd700;">Escondido</a> — we serve all of <a href="cities/san-diego/" style="color: #ffd700;">North County San Diego</a> (and beyond).</p>
+
   <div style="text-align: center;">
-    <a href="https://www.google.com/maps/place/Staged4Sale/@33.0103261,-118.1653469,412842m/data=!3m2!1e3!4b1!4m6!3m5!1s0x80dc71381bba545d:0xa70264d2cb938fa9!8m2!3d33.0172666!4d-116.8460104!16s%2Fg%2F11cm18dvn6" target="_blank" rel="noopener" class="cta-button" style="display: inline-block; background-color: #ffd700; color: #1a1a1a; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
-      <i class="fab fa-google" style="margin-right: 8px;"></i>View on Google Maps
+    <a href="https://www.google.com/maps/place/Staged4Sale/@33.0103261,-118.1653469,412842m/data=!3m2!1e3!4b1!4m6!3m5!1s0x80dc71381bba545d:0xa70264d2cb938fa9!8m2!3d33.0172666!4d-116.8460104!16s%2Fg%2F11cm18dvn6" target="_blank" rel="noopener" style="color: #ffd700; text-decoration: none; font-size: 0.95em;">
+      <i class="fab fa-google" style="margin-right: 5px;"></i>View on Google
     </a>
   </div>
 </div>
@@ -1094,15 +1135,13 @@
 </section>
 
 <!-- Social Media & Cities Section -->
-<section style="background: #1a1a1a; padding: 30px 0;">
+<section style="background: #1a1a1a; padding: 25px 0;">
   <div class="container" style="text-align: center;">
-    <h3 style="color: #ffd700; font-size: 1.4em; margin-bottom: 15px;">Connect With Us</h3>
-    <div style="display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; flex-wrap: wrap;">
-      <a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1.1em; text-decoration: none;"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="https://www.instagram.com/staged4salellc/" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1.1em; text-decoration: none;"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://www.google.com/maps/place/Staged4Sale/@33.0103261,-118.1653469,412842m/" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1.1em; text-decoration: none;"><i class="fab fa-google"></i> Google</a>
+    <div style="display: flex; justify-content: center; gap: 25px; margin-bottom: 15px; flex-wrap: wrap;">
+      <a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1em; text-decoration: none;"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/staged4salellc/" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1em; text-decoration: none;"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.google.com/maps/place/Staged4Sale/@33.0103261,-118.1653469,412842m/" target="_blank" rel="noopener" style="color: #e0e0e0; font-size: 1em; text-decoration: none;"><i class="fab fa-google"></i> Google</a>
     </div>
-    <p style="color: #b0b0b0; font-size: 0.95em; margin-bottom: 10px;">Serving:</p>
     <p style="color: #b0b0b0; font-size: 0.9em;">
       <a href="cities/oceanside/" style="color: #e0e0e0; text-decoration: none; margin: 0 6px;">Oceanside</a> •
       <a href="cities/carlsbad/" style="color: #e0e0e0; text-decoration: none; margin: 0 6px;">Carlsbad</a> •
@@ -1117,6 +1156,7 @@
 <section id="about" style="background: #252525; padding: 30px 0;">
   <div class="container" style="max-width: 800px; text-align: center;">
     <h2 style="color: #ffd700; margin-bottom: 20px;">About Us</h2>
+    <img src="images/tawni.jpg" alt="Tawni Oppenheim, Staged4Sale founder" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);">
     <p style="color: #e0e0e0; line-height: 1.7; margin-bottom: 15px;">
       At Staged 4 Sale, we create elevated living experiences that inspire offers. Led by <strong style="color: #ffd700;">Tawni Oppenheim</strong>, an <strong>ASPM™ certified professional</strong> personally trained by industry founder Barb Schwarz, we bring decades of design, marketing, and real estate insight to every project.
     </p>
