@@ -1344,6 +1344,7 @@ section h2::after {
 }
 
 /* Hide process section for now */
+/* When unhiding #process, restore the Process menu link removed from site navs. Re-add <li><a href="#process">Process</a></li> (adjust the href per page; see the HTML comments). */
 #process {
     display: none;
 }
