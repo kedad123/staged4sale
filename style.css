@@ -226,12 +226,12 @@ section h2::after {
 }
 
 #hero p {
-    font-size: 1.4em;
+    font-size: 1.35em;
     margin-bottom: 50px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    font-weight: 300;
+    font-weight: 600;
     text-shadow:
         0 1px 1px rgba(0, 0, 0, 0.95),
         0 2px 2px rgba(0, 0, 0, 0.9),
@@ -324,14 +324,23 @@ section h2::after {
 }
 
 /* Inline body-copy links. Gold matches .shine-keyword.
-   :link and :visited share a color so a visited link never turns purple. */
-a.content-link:link,
-a.content-link:visited {
+   Do not put :visited on this rule. WebKit drops an entire rule whose
+   selector includes :visited when the block also sets properties outside
+   the :visited privacy allowlist (text-decoration-line, thickness, offset).
+   The links then paint as default blue / visited purple, and the inspector
+   shows no matching author rule. */
+a.content-link {
     color: #ffd700;
     text-decoration-line: underline;
     text-decoration-color: rgba(255, 215, 0, 0.55);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.18em;
+}
+
+/* Color properties only. Locks visited to the same gold; no purple. */
+a.content-link:visited {
+    color: #ffd700;
+    text-decoration-color: rgba(255, 215, 0, 0.55);
 }
 
 a.content-link:hover,
@@ -2022,7 +2031,7 @@ footer p {
     }
 
     #hero p {
-        font-size: 1.1em;
+        font-size: 1.35em;
         padding: 0 20px;
         margin-bottom: 40px;
     }
