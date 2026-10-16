@@ -1,0 +1,8 @@
+# Editor, agent, and OS files. This repo is public on GitHub Pages.
+.claude/
+.vscode/
+.cursor/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
