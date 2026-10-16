@@ -4,7 +4,7 @@
 
 A read-only review of the public GitHub Pages site was followed by a cleanup in October 2026:
 
-- Font Awesome on the public pages moved off the unsigned `6.0.0-beta3` CDN build to stable 6.7.2 on cdnjs, with Subresource Integrity and `crossorigin="anonymous"`. Files under `marketing/` were left unchanged, so those pages still reference the beta stylesheet.
+- Every page that loads Font Awesome, including `marketing/index.html` and `marketing/Staged4Sale-hanger.html`, uses stable 6.7.2 from cdnjs, with Subresource Integrity and `crossorigin="anonymous"`.
 - The placeholder Font Awesome kit script was removed.
 - `target="_blank"` links that were missing `rel="noopener noreferrer"` were updated.
 - `index2.html` (an unlinked duplicate homepage) was removed.
