@@ -1,5 +1,9 @@
 # Decisions
 
+## 2026-10-16 — Monthly project blog post
+
+Publish one blog post a month built from one of Tawni's staging projects (photos plus a short write-up) so the site's content stays fresh. The work is tracked in [docs/todo.md](todo.md).
+
 ## 2026-10-16 — Separate request-a-quote form
 
 Add a request-a-quote form that is separate from the homepage Formspree contact form and feeds the leads inbox in the admin area. The work is tracked in [docs/todo.md](todo.md).
