@@ -24,8 +24,10 @@ Allow: /*.pdf
 Disallow: /wp-admin/
 Disallow: /wp-content/
 Disallow: /wp-includes/
-Disallow: /admin/
 Disallow: /administrator/
+
+# Sample admin site (admin/). Mock data only; pages also send noindex.
+Disallow: /admin/
 
 # Sitemap location
 Sitemap: https://staged4sale.com/sitemap.xml

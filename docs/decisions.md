@@ -33,3 +33,11 @@ Enforce HTTPS is turned on in the GitHub Pages settings for this site.
 Branding — name, colors, logo, and contact details — lives in `portal/brand.js`. Shared screens and behavior live in `portal/portal.js` and `portal/portal.css`, so the portal can be split into its own product later without rewriting those screens.
 
 Real sign-in is still to be built. The plan is Firebase or Supabase, with keys kept server-side (see "API keys stay off this repo" above). The static pages would call that backend only.
+
+## 2026-10-17 — Sample admin site
+
+`admin/` is a sample admin site with made-up clients, addresses, and amounts. Sign-in is not real: any email and password, or View demo, opens the dashboard. Each admin page sends `noindex, nofollow`. `robots.txt` disallows `/admin/`. Public pages do not link to it, and it is not in `sitemap.xml`. The sample does not include virtual staging.
+
+Branding lives in `admin/brand.js`. Screens and behavior live in `admin/admin.js` and `admin/admin.css`.
+
+Real authentication and real client data need a server-side backend (for example Firebase or Supabase) before this goes live. Keys stay server-side. See "API keys stay off this repo" above.
