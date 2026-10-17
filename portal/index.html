@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample client portal with demo data only. Not a real account.">
+  <title>Client portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body data-page="login">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="../">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word">Client portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main id="main" class="login-main" tabindex="-1">
+    <div class="card form-card">
+      <h1>Sign in</h1>
+      <p class="tagline" data-fill="tagline"></p>
+      <!-- Inputs have no name attributes, so a no-JS submit cannot put a password in the URL. -->
+      <form id="login-form" action="dashboard.html" method="get" autocomplete="off" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="text" inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" autocomplete="off">
+        </div>
+        <div class="stack">
+          <button class="btn" type="submit">Sign in</button>
+          <a class="btn btn-ghost" href="dashboard.html">View demo</a>
+        </div>
+        <p class="form-links"><a href="forgot.html">Forgot password?</a></p>
+        <p class="hint">Any email and password will open the demo. Nothing is checked or saved.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <span data-fill="businessName"></span>
+      · <a data-fill="phone" data-href-kind="phone"></a>
+      · <a data-fill="email" data-href-kind="email"></a>
+    </p>
+    <p data-fill="tagline"></p>
+    <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+  </footer>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>

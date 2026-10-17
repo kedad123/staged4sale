@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample password reset. This demo does not send email.">
+  <title>Client portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body data-page="forgot">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="../">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word">Client portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main id="main" class="login-main" tabindex="-1">
+    <div class="card form-card">
+      <h1>Forgot password?</h1>
+      <p class="tagline">This sample does not send email. Use View demo on the sign-in page to open the dashboard.</p>
+      <form id="forgot-form" action="forgot.html" method="get" autocomplete="off" novalidate>
+        <div class="field">
+          <label for="forgot-email">Email</label>
+          <input id="forgot-email" type="text" inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false">
+        </div>
+        <div class="stack">
+          <button class="btn" type="submit">Send reset link</button>
+        </div>
+        <p id="forgot-result" class="form-note" hidden></p>
+        <p class="form-links"><a href="index.html">Back to sign in</a></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <span data-fill="businessName"></span>
+      · <a data-fill="phone" data-href-kind="phone"></a>
+      · <a data-fill="email" data-href-kind="email"></a>
+    </p>
+    <p data-fill="tagline"></p>
+    <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+  </footer>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>

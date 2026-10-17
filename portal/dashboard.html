@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample client dashboard with demo data only. Not a real account.">
+  <title>Client portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body data-page="dashboard">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="dashboard.html">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word">Client portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+          <a class="btn btn-small btn-ghost" href="index.html">Sign out</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <h1 id="welcome" class="welcome"></h1>
+    <p id="client-line" class="client-line"></p>
+    <nav class="section-nav" aria-label="On this page">
+      <a href="#status">Status</a>
+      <a href="#dates">Key dates</a>
+      <a href="#invoice">Invoice</a>
+      <a href="#gallery">Before &amp; after</a>
+      <a href="#documents">Documents</a>
+    </nav>
+    <article id="property" class="card property"></article>
+    <section id="status" class="card"></section>
+    <div class="split">
+      <section id="dates" class="card"></section>
+      <section id="invoice" class="card"></section>
+    </div>
+    <section id="gallery" class="card"></section>
+    <section id="documents" class="card"></section>
+    <noscript>
+      <p class="card">This sample needs JavaScript to show the demo dashboard.</p>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <span data-fill="businessName"></span>
+      · <a data-fill="phone" data-href-kind="phone"></a>
+      · <a data-fill="email" data-href-kind="email"></a>
+    </p>
+    <p data-fill="tagline"></p>
+    <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+  </footer>
+
+  <dialog id="lightbox" aria-label="Enlarged photo">
+    <div class="lightbox-bar">
+      <form method="dialog">
+        <button type="submit" class="btn btn-small">Close</button>
+      </form>
+    </div>
+    <img alt="">
+    <p class="lightbox-caption"></p>
+  </dialog>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>
