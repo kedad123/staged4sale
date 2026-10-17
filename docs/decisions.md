@@ -25,3 +25,11 @@ When a client portal is added, it will live in its own folder in this repo. Bran
 ## HTTPS
 
 Enforce HTTPS is turned on in the GitHub Pages settings for this site.
+
+## 2026-10-17 — Sample admin site
+
+`admin/` is a sample admin site with made-up clients, addresses, and amounts. Sign-in is not real: any email and password, or View demo, opens the dashboard. Each admin page sends `noindex, nofollow`. `robots.txt` disallows `/admin/`. Public pages do not link to it, and it is not in `sitemap.xml`. The sample does not include virtual staging.
+
+Branding lives in `admin/brand.js`. Screens and behavior live in `admin/admin.js` and `admin/admin.css`.
+
+Real authentication and real client data need a server-side backend (for example Firebase or Supabase) before this goes live. Keys stay server-side. See "API keys stay off this repo" above.
