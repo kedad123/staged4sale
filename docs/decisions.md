@@ -25,3 +25,11 @@ When a client portal is added, it will live in its own folder in this repo. Bran
 ## HTTPS
 
 Enforce HTTPS is turned on in the GitHub Pages settings for this site.
+
+## 2026-10-17 — Client portal sample
+
+`portal/` is a clickable front-end sample. It shows fake demo data only: any sign-in opens the dashboard, and nothing is authenticated. There is no backend and no API key. Each portal page sends `noindex, nofollow`. `robots.txt` disallows `/portal/`. The folder is not in `sitemap.xml`, and the public navigation does not link to it.
+
+Branding — name, colors, logo, and contact details — lives in `portal/brand.js`. Shared screens and behavior live in `portal/portal.js` and `portal/portal.css`, so the portal can be split into its own product later without rewriting those screens.
+
+Real sign-in is still to be built. The plan is Firebase or Supabase, with keys kept server-side (see "API keys stay off this repo" above). The static pages would call that backend only.
