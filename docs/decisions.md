@@ -69,3 +69,13 @@ Branding — name, colors, logo, contact details, the VIP label, and the "Staged
 The virtual staging page does not call an image API. It shows a labeled sample pair and states that California AB 723 requires disclosing digitally altered listing photos and providing the original.
 
 Real sign-in is still to be built. See "API keys stay off this repo" above.
+
+## 2026-10-25 — Admin studio shell
+
+`admin/` is still a front-end sample for the owner's view. Sign-in is not real. There is no backend and no API key. The home screen is "This week": new leads from the last seven days, upcoming installs and destages, and invoices marked unpaid in the sample. Added sample sections are furniture inventory, VIP members (gone quiet after 60 days with no activity), a quote pipeline (needs a nudge after about seven days with no answer), and a marketing queue of before/after pairs marked Ready, Drafted, or Posted. The marketing page does not post anywhere.
+
+Desktop navigation is a left sidebar with Pipeline, Office, and Studio groups. Narrow screens use a bottom tab bar: This week, Projects, Calendar, Clients, and More. Virtual Stager stays in the Studio group. It does not call an image API. Virtual staging shows a labeled sample pair and the California AB 723 note. Markup mode shows a stored sample board, not a board drawn from the uploaded photo. Rescue leads and open houses read `admin/weekly-leads.js`, so a weekly refresh can replace that file without changing the screens. Addresses, agents, and phones in that file are fictional. Redfin and map controls are placeholders.
+
+Branding stays in `admin/brand.js`. Screens and behavior stay in `admin/admin.js` and `admin/admin.css`. Demo jobs, inventory, members, quotes, and marketing stay in `admin/sample-data.js`. The 2026-10-17 admin entry still describes the earlier sample; this entry supersedes the note that the sample does not include virtual staging.
+
+Each admin page sends `noindex, nofollow`. `robots.txt` disallows `/admin/`. The folder is not in `sitemap.xml`, and the public navigation does not link to it. Real authentication still needs a server-side backend. See "API keys stay off this repo" above.

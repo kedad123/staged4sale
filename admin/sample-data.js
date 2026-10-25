@@ -26,7 +26,7 @@
   }
 
   window.AdminSample = {
-    banner: "Sample / demo data — made-up clients, addresses, and amounts",
+    banner: "Sample / demo data",
     clients: [
       {
         id: "maya-chen",
@@ -148,6 +148,7 @@
         status: "staged",
         amount: 4800,
         invoicedOn: monthDay(12),
+        paid: false,
         note: "Installed. Listing photos are already in the sample file."
       },
       {
@@ -160,6 +161,7 @@
         status: "listed",
         amount: 6100,
         invoicedOn: monthDay(6),
+        paid: false,
         note: "On the market in this sample. Pickup waits until it sells."
       },
       {
@@ -172,6 +174,7 @@
         status: "sold",
         amount: 5400,
         invoicedOn: monthDay(16),
+        paid: true,
         note: "Sale is recorded in the sample. Pickup is on the calendar."
       },
       {
@@ -184,6 +187,7 @@
         status: "done",
         amount: 2900,
         invoicedOn: monthDay(2),
+        paid: true,
         note: "Pickup is finished in this sample. Furniture is back in the warehouse."
       }
     ],
@@ -293,6 +297,206 @@
         message: "Asked for a quote, then went another direction. Kept so the Dead status is visible in the sample.",
         status: "dead"
       }
-    ]
+    ],
+    inventory: [
+      {
+        id: "sofa-ridge",
+        name: "Low-profile sofa set",
+        category: "Seating",
+        photo: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg",
+        photoAlt: "Neutral sofa from the Monte Fuego Ranch portfolio, used as a sample thumbnail",
+        placement: "job",
+        home: "1842 Sample Ridge Road, Encinitas",
+        until: fromToday(18)
+      },
+      {
+        id: "chairs-harbor",
+        name: "Accent chair pair",
+        category: "Seating",
+        photo: "../images/projects/anchor-point-hideaway/anchor-point-hideaway-02.jpg",
+        photoAlt: "Seating from the Anchor Point Hideaway portfolio, used as a sample thumbnail",
+        placement: "job",
+        home: "310 Sample Harbor Drive, Vista",
+        until: fromToday(2)
+      },
+      {
+        id: "coffee-round",
+        name: "Round coffee table",
+        category: "Tables",
+        photo: "../images/projects/cresta-view-estate/cresta-view-estate-02.jpg",
+        photoAlt: "Living room from the Cresta View Estate portfolio, used as a sample thumbnail",
+        placement: "warehouse"
+      },
+      {
+        id: "queen-bed",
+        name: "Queen bed package",
+        category: "Bedroom",
+        photo: "../images/projects/cresta-view-estate/cresta-view-estate-05.jpg",
+        photoAlt: "Primary bedroom from the Cresta View Estate portfolio, used as a sample thumbnail",
+        placement: "warehouse"
+      },
+      {
+        id: "art-coast",
+        name: "Coastal art set",
+        category: "Art",
+        photo: "../images/projects/canyon-view-condo/canyon-view-condo-04.webp",
+        photoAlt: "Styled seating from the Canyon View Condo portfolio, used as a sample thumbnail",
+        placement: "job",
+        home: "55 Sample Mesa Way, Oceanside",
+        until: fromToday(24)
+      },
+      {
+        id: "patio-lounge",
+        name: "Patio lounge set",
+        category: "Outdoor",
+        photo: "../images/projects/anchor-point-hideaway/anchor-point-hideaway-08.jpg",
+        photoAlt: "Outdoor lounge from the Anchor Point Hideaway portfolio, used as a sample thumbnail",
+        placement: "warehouse"
+      }
+    ],
+    members: [
+      {
+        id: "maya-chen",
+        name: "Maya Chen",
+        brokerage: "Example Realty",
+        email: "maya.chen@example.com",
+        phone: "(760) 555-0148",
+        joined: fromToday(-210),
+        jobsSent: 4,
+        lastActivity: fromToday(-4)
+      },
+      {
+        id: "priya-nandakumar",
+        name: "Priya Nandakumar",
+        brokerage: "Example Coastal Realty",
+        email: "priya.nandakumar@example.com",
+        phone: "(760) 555-0190",
+        joined: fromToday(-140),
+        jobsSent: 2,
+        lastActivity: fromToday(-11)
+      },
+      {
+        id: "chris-dalton",
+        name: "Chris Dalton",
+        brokerage: "Example Mesa Group",
+        email: "chris.dalton@example.com",
+        phone: "(760) 555-0133",
+        joined: fromToday(-45),
+        jobsSent: 1,
+        lastActivity: fromToday(-9)
+      },
+      {
+        id: "riley-okonkwo",
+        name: "Riley Okonkwo",
+        brokerage: "Placeholder North Realty",
+        email: "riley.okonkwo@example.com",
+        phone: "(760) 555-0164",
+        joined: fromToday(-320),
+        jobsSent: 3,
+        lastActivity: fromToday(-74)
+      },
+      {
+        id: "samira-west",
+        name: "Samira West",
+        brokerage: "Demo Harbor Realty",
+        email: "samira.west@example.com",
+        phone: "(442) 555-0118",
+        joined: fromToday(-190),
+        jobsSent: 0,
+        lastActivity: fromToday(-96)
+      }
+    ],
+    quotes: [
+      {
+        id: "q-chris",
+        clientId: "chris-dalton",
+        address: "1288 Sample Juniper Road, Escondido",
+        service: "Vacant staging",
+        amount: 5200,
+        sentOn: fromToday(-10),
+        status: "sent"
+      },
+      {
+        id: "q-elena",
+        clientId: "elena-brooks",
+        address: "742 Sample Olive Street, San Marcos",
+        service: "Consultation",
+        amount: 350,
+        sentOn: fromToday(-2),
+        status: "sent"
+      },
+      {
+        id: "q-jordan",
+        clientId: "jordan-hale",
+        address: "907 Sample Citrus Court, Carlsbad",
+        service: "Occupied staging",
+        amount: 3600,
+        sentOn: fromToday(-18),
+        status: "accepted"
+      },
+      {
+        id: "q-priya",
+        clientId: "priya-nandakumar",
+        address: "18 Sample Lupine Court, Oceanside",
+        service: "Vacant staging",
+        amount: 4500,
+        sentOn: fromToday(-16),
+        status: "accepted"
+      },
+      {
+        id: "q-harper",
+        clientId: "",
+        name: "Harper Quinn",
+        address: "600 Sample Canyon Drive, Escondido",
+        service: "Vacant staging",
+        amount: 4900,
+        sentOn: fromToday(-28),
+        status: "declined"
+      }
+    ],
+    marketing: [
+      {
+        id: "m-ridge",
+        title: "Arched living room",
+        place: "1842 Sample Ridge Road",
+        status: "ready",
+        before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01-before.webp",
+        beforeAlt: "Before photo from the Monte Fuego Ranch portfolio, used as a sample",
+        after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg",
+        afterAlt: "After photo from the Monte Fuego Ranch portfolio, used as a sample",
+        caption: "Sample caption: empty living room to a seated lounge. Not posted."
+      },
+      {
+        id: "m-crest",
+        title: "Family room",
+        place: "2200 Fictional Crest Drive",
+        status: "drafted",
+        before: "../images/projects/cresta-view-estate/cresta-view-estate-03-before.jpg",
+        beforeAlt: "Before photo from the Cresta View Estate portfolio, used as a sample",
+        after: "../images/projects/cresta-view-estate/cresta-view-estate-03.jpg",
+        afterAlt: "After photo from the Cresta View Estate portfolio, used as a sample",
+        caption: "Sample draft: family room styled for the listing. Not posted."
+      },
+      {
+        id: "m-pasqual",
+        title: "Dining room",
+        place: "77 Example Grove Place",
+        status: "posted",
+        before: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-04-before.jpg",
+        beforeAlt: "Before photo from the San Pasqual Retreat portfolio, used as a sample",
+        after: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-04.jpg",
+        afterAlt: "After photo from the San Pasqual Retreat portfolio, used as a sample",
+        caption: "Marked posted in this sample only. Nothing was sent to Facebook or Google."
+      }
+    ],
+    virtual: {
+      disclosure: "California AB 723 requires disclosing digitally altered listing photos and providing the original. The after image is labeled Virtually staged, and the original sits beside it. This is not legal advice. The after photo is a portfolio photograph used only to show the label, not a generated edit.",
+      before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01-before.webp",
+      beforeAlt: "Original portfolio photo of an unfurnished living room, shown as the unaltered image in this sample",
+      after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg",
+      afterAlt: "Portfolio photo of the same living room after physical staging, labeled Virtually staged only to show the disclosure",
+      markupSrc: "images/staging-markup-sample.png",
+      markupAlt: "Sample staging suggestions board for a living and dining room, with numbered teal outlines, a walkway arrow, and a legend"
+    }
   };
 })();

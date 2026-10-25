@@ -32,7 +32,7 @@
     contact: {
       phoneDisplay: "(760) 583-2500",
       phoneTel: "+17605832500",
-      email: "info@staged4sale.com"
+      email: "sales@staged4sale.com"
     },
     leadsNote: "In real use, Tawni manages leads by chatting with the Staged4Sale assistant in the #grokbot Slack channel (or directly), and the CRM records live in Notion. This screen is just a quick view, not a sales pipeline."
   };

@@ -12,13 +12,23 @@
   var memoryLeads = null;
   var flash = "";
   var calState = null;
+  var virtualMode = "staging";
+  var uploadPreviewUrl = "";
+  var inventoryFilter = { placement: "all", category: "all" };
 
   var NAV = [
-    { id: "dashboard", href: "dashboard.html", label: "Dashboard", icon: "fa-gauge-high" },
-    { id: "clients", href: "clients.html", label: "Clients", icon: "fa-users" },
-    { id: "calendar", href: "calendar.html", label: "Calendar", icon: "fa-calendar-days" },
-    { id: "projects", href: "projects.html", label: "Projects", icon: "fa-table-columns" },
-    { id: "leads", href: "leads.html", label: "Leads", icon: "fa-inbox" }
+    { id: "week", href: "dashboard.html", label: "This week", short: "Week", tab: true },
+    { id: "projects", href: "projects.html", label: "Projects", short: "Projects", tab: true },
+    { id: "calendar", href: "calendar.html", label: "Calendar", short: "Calendar", tab: true },
+    { id: "clients", href: "clients.html", label: "Clients", short: "Clients", tab: true },
+    { id: "leads", href: "leads.html", label: "Leads", short: "Leads", group: "Pipeline" },
+    { id: "rescue", href: "rescue.html", label: "Rescue leads", short: "Rescue" },
+    { id: "opens", href: "open-houses.html", label: "Open houses", short: "Opens" },
+    { id: "quotes", href: "quotes.html", label: "Quotes", short: "Quotes", group: "Office" },
+    { id: "inventory", href: "inventory.html", label: "Inventory", short: "Inventory" },
+    { id: "members", href: "members.html", label: "VIP members", short: "VIP" },
+    { id: "marketing", href: "marketing.html", label: "Marketing", short: "Marketing", group: "Studio" },
+    { id: "virtual", href: "virtual.html", label: "Virtual Stager", short: "Stager" }
   ];
 
   var JOB_STATUSES = [
@@ -37,8 +47,6 @@
     { id: "booked", label: "Booked" },
     { id: "dead", label: "Dead" }
   ];
-
-  var ACTIVE_STATUS = { scheduled: true, staged: true, listed: true, sold: true };
 
   var APPT_TYPES = {
     stage: { label: "Staging", short: "Staging", icon: "fa-couch" },
@@ -341,6 +349,42 @@
     }
   }
 
+  function currentNav() {
+    var named = document.body.getAttribute("data-nav");
+    if (named) return named;
+    if (page === "dashboard") return "week";
+    if (page === "client") return "clients";
+    return page;
+  }
+
+  function daysSince(iso) {
+    var date = parseIso(iso);
+    if (!date) return null;
+    return Math.round((todayDate().getTime() - date.getTime()) / 86400000);
+  }
+
+  function weekly() {
+    return window.AdminWeekly || null;
+  }
+
+  function syncTopOffset() {
+    var bar = document.querySelector(".topbar");
+    if (!bar) return;
+    document.documentElement.style.setProperty("--app-top", bar.offsetHeight + "px");
+  }
+
+  function quoteStatusLabel(status) {
+    if (status === "accepted") return "Accepted";
+    if (status === "declined") return "Declined";
+    return "Sent";
+  }
+
+  function marketingStatusLabel(status) {
+    if (status === "drafted") return "Drafted";
+    if (status === "posted") return "Posted";
+    return "Ready";
+  }
+
   function contact() {
     return brand.contact || {};
   }
@@ -400,37 +444,6 @@
 
     var headerInner = el("div", { class: "header-inner", children: [logoLink, tools] });
     var header = el("header", { class: "site-header", children: [headerInner] });
-
-    if (page !== "login") {
-      var toggle = el("button", {
-        class: "nav-toggle",
-        type: "button",
-        "aria-expanded": "false",
-        "aria-controls": "admin-nav",
-        "aria-label": "Open menu"
-      });
-      toggle.append(el("span", { class: "bar" }), el("span", { class: "bar" }), el("span", { class: "bar" }));
-      toggle.addEventListener("click", function () {
-        var open = document.body.classList.toggle("nav-open");
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
-        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      });
-      tools.append(toggle);
-
-      var current = page === "client" ? "clients" : page;
-      var nav = el("nav", { class: "admin-nav", id: "admin-nav", "aria-label": brand.productName || "Admin" });
-      NAV.forEach(function (item) {
-        var link = el("a", { href: item.href });
-        if (item.id === current) link.setAttribute("aria-current", "page");
-        link.append(icon(item.icon), el("span", { text: item.label }));
-        link.addEventListener("click", function () {
-          document.body.classList.remove("nav-open");
-        });
-        nav.append(link);
-      });
-      header.append(nav);
-    }
-
     topbar.replaceChildren(banner, header);
 
     var phone = contact().phoneDisplay
@@ -457,6 +470,117 @@
         children: [el("a", { href: brand.publicSiteHref || "../", text: brand.businessName || "Home" })]
       })
     );
+  }
+
+  function navLink(item, current, extraClass) {
+    return el("a", {
+      class: extraClass || "nav-link",
+      href: item.href,
+      text: extraClass === "tab-link" ? item.short : item.label,
+      "aria-label": extraClass === "tab-link" ? item.label : null,
+      "aria-current": current === item.id ? "page" : null
+    });
+  }
+
+  function appendGrouped(container, items, current) {
+    var lastGroup = "";
+    items.forEach(function (item) {
+      if (item.group && item.group !== lastGroup) {
+        if (container.childNodes.length) container.append(el("hr", { class: "nav-divider" }));
+        container.append(el("p", { class: "nav-label", text: item.group }));
+        lastGroup = item.group;
+      }
+      container.append(navLink(item, current));
+    });
+  }
+
+  function initNav() {
+    var sidebar = document.getElementById("sidebar");
+    var tabbar = document.getElementById("tabbar");
+    if (!sidebar && !tabbar) return;
+
+    var current = currentNav();
+    var tabs = [];
+    var more = [];
+    NAV.forEach(function (item) {
+      if (item.tab) tabs.push(item);
+      else more.push(item);
+    });
+
+    if (sidebar) {
+      var links = el("div", { class: "sidebar-links" });
+      appendGrouped(links, NAV, current);
+      sidebar.replaceChildren(
+        links,
+        el("div", {
+          class: "sidebar-foot",
+          children: [
+            el("p", { class: "sidebar-name", text: brand.greetingName || "Sample owner" }),
+            el("p", { class: "sidebar-role", text: "Sample owner" })
+          ]
+        })
+      );
+    }
+
+    var sheet = document.getElementById("more-sheet");
+    var backdrop = document.getElementById("more-backdrop");
+    var moreButton = null;
+
+    function setMore(open) {
+      if (!sheet || !moreButton) return;
+      var wasOpen = !sheet.hidden;
+      sheet.hidden = !open;
+      if (backdrop) backdrop.hidden = !open;
+      moreButton.setAttribute("aria-expanded", open ? "true" : "false");
+      if (!open && wasOpen) moreButton.focus();
+    }
+
+    if (tabbar) {
+      tabbar.replaceChildren();
+      tabs.forEach(function (item) {
+        tabbar.append(navLink(item, current, "tab-link"));
+      });
+      var moreCurrent = null;
+      more.forEach(function (item) {
+        if (item.id === current) moreCurrent = item;
+      });
+      moreButton = el("button", {
+        class: moreCurrent ? "tab-more is-current" : "tab-more",
+        type: "button",
+        text: "More",
+        "aria-expanded": "false",
+        "aria-controls": "more-sheet",
+        "aria-label": moreCurrent ? "More, " + moreCurrent.label + " selected" : "More"
+      });
+      tabbar.append(moreButton);
+      if (sheet) {
+        sheet.replaceChildren();
+        appendGrouped(sheet, more, current);
+        moreButton.addEventListener("click", function () {
+          setMore(sheet.hidden);
+        });
+      }
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener("click", function () {
+        setMore(false);
+      });
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setMore(false);
+    });
+
+    window.addEventListener("resize", function () {
+      syncTopOffset();
+      if (window.matchMedia("(min-width: 900px)").matches) setMore(false);
+    });
+
+    syncTopOffset();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncTopOffset);
+    }
   }
 
   function mount(nodes, opts) {
@@ -486,40 +610,48 @@
     return block;
   }
 
-  function renderDashboard() {
-    pageTitle("Dashboard");
-    var helloName = brand.greetingName || "";
-    var title = helloName ? "Hello, " + helloName : "Dashboard";
-    var today = todayDate();
-    var todayIso = toIso(today);
-    var horizon = toIso(addDays(today, 14));
-    var appts = sortAppts(allAppts());
-    var active = 0;
-    var revenue = 0;
-    jobs().forEach(function (job) {
-      if (ACTIVE_STATUS[jobStatus(job)]) active += 1;
-      var invoiced = parseIso(job.invoicedOn);
-      if (invoiced && invoiced.getFullYear() === today.getFullYear() && invoiced.getMonth() === today.getMonth()) {
-        revenue += Number(job.amount) || 0;
-      }
+  function weekStartIso() {
+    return toIso(addDays(todayDate(), -6));
+  }
+
+  function newLeadsThisWeek() {
+    var start = weekStartIso();
+    var end = toIso(todayDate());
+    return leads().filter(function (lead) {
+      return lead.date && lead.date >= start && lead.date <= end;
+    }).sort(function (a, b) {
+      if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+      return a.name.localeCompare(b.name);
     });
-    var upcomingStages = appts.filter(function (appt) {
-      return appt.type === "stage" && appt.iso >= todayIso && appt.iso <= horizon;
-    }).length;
-    var coming = appts.filter(function (appt) { return appt.iso >= todayIso; }).slice(0, 5);
+  }
 
-    var stats = el("div", { class: "stats" });
-    stats.append(
-      statCard("fa-house-chimney", String(active), "Active jobs", "Scheduled through sold", "projects.html"),
-      statCard("fa-couch", String(upcomingStages), "Upcoming stages", "Installs in the next 14 days", "calendar.html"),
-      statCard("fa-dollar-sign", money(revenue), "Revenue this month", "Invoices dated " + formatMonthYear(today), "")
-    );
+  function upcomingAppts(type) {
+    var todayIso = toIso(todayDate());
+    return sortAppts(allAppts()).filter(function (appt) {
+      return appt.type === type && appt.iso >= todayIso;
+    });
+  }
 
+  function unpaidJobs() {
+    return jobs().filter(function (job) {
+      return job.invoicedOn && job.paid === false;
+    });
+  }
+
+  function sectionHead(title, href, hrefLabel) {
+    var row = el("div", { class: "section-row" });
+    row.append(el("h2", { class: "section-title", text: title }));
+    if (href) row.append(el("a", { class: "text-link", href: href, text: hrefLabel }));
+    return row;
+  }
+
+  function agendaList(items, emptyText) {
     var list = el("div", { class: "agenda" });
-    if (!coming.length) {
-      list.append(el("p", { class: "muted", text: "Nothing coming up in the sample calendar." }));
+    if (!items.length) {
+      list.append(el("p", { class: "muted", text: emptyText }));
+      return list;
     }
-    coming.forEach(function (appt) {
+    items.forEach(function (appt) {
       var row = el("a", { class: "agenda-item", href: calendarHref(appt.iso) });
       var when = el("span", { class: "when" });
       when.append(el("span", { class: "dow", text: formatDow(appt.date) }), el("span", { text: formatMedium(appt.date) }));
@@ -534,14 +666,72 @@
       row.append(when, body, chevron);
       list.append(row);
     });
+    return list;
+  }
 
-    var upcoming = el("section", { class: "card", children: [
-      el("h2", { class: "section-title", text: "Coming up" }),
-      el("p", { class: "fine", text: "Next stagings and pickups in the sample calendar." }),
-      list
-    ]});
+  function renderDashboard() {
+    pageTitle("This week");
+    var helloName = brand.greetingName || "";
+    var title = helloName ? "Hello, " + helloName : "This week";
+    var fresh = newLeadsThisWeek();
+    var installs = upcomingAppts("stage");
+    var destages = upcomingAppts("destage");
+    var unpaid = unpaidJobs();
 
-    mount([head(title, "A quick look at the sample book of work."), stats, upcoming]);
+    var stats = el("div", { class: "stats" });
+    stats.append(
+      statCard("fa-inbox", String(fresh.length), "New leads this week", "Inquiries from the last 7 days", "leads.html"),
+      statCard("fa-couch", String(installs.length), "Upcoming installs", "Staging days still ahead", installs.length ? calendarHref(installs[0].iso) : "calendar.html"),
+      statCard("fa-truck", String(destages.length), "Upcoming destages", "Pickups still ahead", destages.length ? calendarHref(destages[0].iso) : "calendar.html"),
+      statCard("fa-file-invoice-dollar", String(unpaid.length), "Unpaid invoices", "Sample invoices marked unpaid", "#unpaid")
+    );
+
+    var leadList = el("div", { class: "stack-list" });
+    if (!fresh.length) leadList.append(el("p", { class: "muted", text: "No new sample leads in the last 7 days." }));
+    fresh.forEach(function (lead) {
+      var row = el("a", { class: "link-row", href: "leads.html" });
+      row.append(
+        el("span", { class: "row-title", text: lead.name }),
+        el("span", { class: "muted", text: [lead.property, lead.date && parseIso(lead.date) ? formatMonthDayYear(parseIso(lead.date)) : ""].filter(Boolean).join(" · ") })
+      );
+      leadList.append(row);
+    });
+
+    var billList = el("div", { class: "stack-list" });
+    if (!unpaid.length) billList.append(el("p", { class: "muted", text: "No unpaid sample invoices." }));
+    unpaid.forEach(function (job) {
+      var client = clientById(job.clientId);
+      var row = el("a", { class: "link-row", href: client ? clientHref(client.id) : "clients.html" });
+      var when = job.invoicedOn && parseIso(job.invoicedOn) ? formatMonthDayYear(parseIso(job.invoicedOn)) : "";
+      row.append(
+        el("span", { class: "row-title", text: job.address }),
+        el("span", { class: "muted", text: [client ? client.name : "", money(job.amount), when].filter(Boolean).join(" · ") })
+      );
+      billList.append(row);
+    });
+
+    mount([
+      head(title, "This week in the sample book. Leads, installs, destages, and unpaid invoices."),
+      stats,
+      el("div", { class: "week-grid", children: [
+        el("section", { class: "card", children: [
+          sectionHead("New leads", "leads.html", "Open leads"),
+          leadList
+        ]}),
+        el("section", { class: "card", children: [
+          sectionHead("Upcoming installs", installs.length ? calendarHref(installs[0].iso) : "calendar.html", "Open calendar"),
+          agendaList(installs, "No upcoming installs in the sample calendar.")
+        ]}),
+        el("section", { class: "card", children: [
+          sectionHead("Upcoming destages", destages.length ? calendarHref(destages[0].iso) : "calendar.html", "Open calendar"),
+          agendaList(destages, "No upcoming destages in the sample calendar.")
+        ]}),
+        el("section", { class: "card", id: "unpaid", children: [
+          sectionHead("Unpaid invoices", unpaid.length && clientById(unpaid[0].clientId) ? clientHref(unpaid[0].clientId) : "clients.html", "Open a client"),
+          billList
+        ]})
+      ]})
+    ]);
   }
 
   function statCard(iconName, value, label, note, href) {
@@ -959,6 +1149,383 @@
     ], opts);
   }
 
+  function refreshedLine() {
+    var data = weekly();
+    if (!data) return "Sample list. A weekly file can replace this data.";
+    return "Last refreshed: " + (data.refreshedLabel || "sample date") + " · " + (data.cadence || "updates weekly");
+  }
+
+  function renderRescue() {
+    pageTitle("Rescue leads");
+    var data = weekly();
+    var groups = [
+      { id: "vacant", title: "Fully vacant" },
+      { id: "virtual", title: "Virtually staged" },
+      { id: "stale", title: "Stale or lived-in" }
+    ];
+    var nodes = [
+      head("Rescue staging leads", "Sample listings that look vacant, virtually staged, or stale. Not a live search."),
+      el("p", { class: "fine", text: refreshedLine() })
+    ];
+    if (!data || !data.rescue) {
+      nodes.push(el("p", { class: "card", text: "The weekly sample file did not load." }));
+      mount(nodes);
+      return;
+    }
+    groups.forEach(function (group) {
+      var items = data.rescue.filter(function (item) { return item.category === group.id; });
+      var list = el("div", { class: "rescue-list" });
+      if (!items.length) list.append(el("p", { class: "muted", text: "None in this sample." }));
+      items.forEach(function (item) {
+        var card = el("article", { class: "card rescue-card" });
+        if (item.photo) {
+          card.append(el("img", { class: "thumb", src: item.photo, alt: item.photoAlt || "" }));
+        }
+        var body = el("div");
+        body.append(el("h3", { text: item.address }));
+        body.append(el("p", { class: "fine", text: item.city || "" }));
+        var facts = [
+          item.price ? money(item.price) : "",
+          item.beds != null ? item.beds + " bd" : "",
+          item.baths != null ? item.baths + " ba" : "",
+          item.sqft ? Number(item.sqft).toLocaleString("en-US") + " sq ft" : "",
+          item.daysOnMarket != null ? item.daysOnMarket + " days on market" : ""
+        ].filter(Boolean).join(" · ");
+        body.append(el("p", { text: facts }));
+        if (item.note) body.append(el("p", { text: item.note }));
+        body.append(el("p", { class: "fine", text: [item.agent, item.brokerage, item.phone].filter(Boolean).join(" · ") }));
+        var redfin = el("a", { class: "btn btn-small btn-ghost", href: "#", text: "Redfin listing (sample placeholder)" });
+        redfin.addEventListener("click", function (event) { event.preventDefault(); });
+        body.append(redfin);
+        card.append(body);
+        list.append(card);
+      });
+      nodes.push(el("h2", { class: "section-title", text: group.title }), list);
+    });
+    mount(nodes);
+  }
+
+  function renderOpenHouses() {
+    pageTitle("Open houses");
+    var data = weekly();
+    var nodes = [
+      head("Open house leads", "Sample open houses this weekend. Addresses and agents are fictional."),
+      el("p", { class: "fine", text: refreshedLine() })
+    ];
+    if (!data || !data.openHouses) {
+      nodes.push(el("p", { class: "card", text: "The weekly sample file did not load." }));
+      mount(nodes);
+      return;
+    }
+    var list = el("div", { class: "rescue-list" });
+    data.openHouses.forEach(function (item) {
+      var card = el("article", { class: "card" });
+      card.append(el("h2", { text: item.address }));
+      card.append(el("p", { class: "fine", text: item.city || "" }));
+      card.append(el("p", { text: [item.when, item.time].filter(Boolean).join(" · ") }));
+      card.append(el("p", { class: "fine", text: [item.agent, item.brokerage, item.phone].filter(Boolean).join(" · ") }));
+      card.append(el("div", {
+        class: "map-placeholder",
+        role: "img",
+        "aria-label": "Map placeholder",
+        text: "Map placeholder. No map is loaded in this sample."
+      }));
+      list.append(card);
+    });
+    nodes.push(list);
+    mount(nodes);
+  }
+
+  function renderVirtual() {
+    pageTitle("Virtual Stager");
+    var pack = (sample && sample.virtual) || {};
+    var modeBtn = el("button", {
+      class: "btn",
+      type: "button",
+      text: virtualMode === "markup" ? "Virtual staging" : "Markup mode"
+    });
+    modeBtn.addEventListener("click", function () {
+      virtualMode = virtualMode === "markup" ? "staging" : "markup";
+      renderVirtual();
+    });
+
+    var file = el("input", { class: "file-input", id: "room-photo", type: "file", accept: "image/*" });
+    file.addEventListener("change", function () {
+      var chosen = file.files && file.files[0];
+      if (!chosen) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        uploadPreviewUrl = String(reader.result || "");
+        renderVirtual();
+      };
+      reader.readAsDataURL(chosen);
+    });
+    var fileLabel = el("label", { class: "btn btn-ghost", for: "room-photo", text: "Choose a room photo" });
+    var upload = el("div", { class: "upload-mock", children: [
+      file,
+      fileLabel,
+      el("p", { class: "fine", text: "The photo stays in this browser. Nothing is uploaded." })
+    ]});
+    if (uploadPreviewUrl) {
+      upload.append(el("img", {
+        id: "upload-preview",
+        src: uploadPreviewUrl,
+        alt: "Room photo chosen on this device"
+      }));
+    }
+
+    var nodes = [
+      head("Virtual Stager", "A local sample. It does not call an image service."),
+      el("div", { class: "toolbar", children: [modeBtn, el("p", { class: "fine", text: virtualMode === "markup" ? "Markup mode shows a stored sample board." : "Virtual staging shows a labeled sample pair." })] })
+    ];
+
+    if (virtualMode === "markup") {
+      var board = el("section", { class: "card" });
+      board.append(el("h2", { class: "section-title", text: "Staging suggestions" }));
+      board.append(el("img", {
+        class: "markup-shot",
+        src: pack.markupSrc || "",
+        alt: pack.markupAlt || "Sample staging suggestions board"
+      }));
+      board.append(el("p", {
+        class: "fine",
+        text: "Sample board stored with this demo. It is not generated from the photo above."
+      }));
+      board.append(el("p", { class: "fine", text: "Concept layout only. Verify dimensions and clearances on site." }));
+      nodes.push(upload, board);
+    } else {
+      var pair = el("div", { class: "pair" });
+      var before = el("figure", { class: "shot" });
+      var beforeFrame = el("span", { class: "shot-frame" });
+      beforeFrame.append(
+        el("img", { src: pack.before || "", alt: pack.beforeAlt || "Original room photo" }),
+        el("span", { class: "virtual-badge is-original", text: "Original" })
+      );
+      before.append(beforeFrame, el("figcaption", { text: "Original" }));
+      var after = el("figure", { class: "shot" });
+      var afterFrame = el("span", { class: "shot-frame" });
+      afterFrame.append(
+        el("img", { src: pack.after || "", alt: pack.afterAlt || "Sample staged photo" }),
+        el("span", { class: "virtual-badge", text: "Virtually staged" })
+      );
+      after.append(afterFrame, el("figcaption", { text: "Virtually staged" }));
+      pair.append(before, after);
+      var staging = el("section", { class: "card", children: [
+        el("h2", { class: "section-title", text: "Sample result" }),
+        el("p", { class: "fine", text: "The after photo is a portfolio image used to show the label. It is not an edit of the upload." }),
+        pair,
+        el("p", { text: pack.disclosure || "" })
+      ]});
+      nodes.push(upload, staging);
+    }
+
+    nodes.push(el("p", { class: "fine", text: "Markups can also be requested by email." }));
+    mount(nodes);
+  }
+
+  function inventoryItems() {
+    return (sample && sample.inventory) || [];
+  }
+
+  function inventoryWhere(item) {
+    if (item.placement === "warehouse") return "In warehouse";
+    var until = item.until && parseIso(item.until) ? formatMonthDayYear(parseIso(item.until)) : "";
+    var home = item.home || "a sample home";
+    return until ? "At " + home + " until " + until : "At " + home;
+  }
+
+  function renderInventory() {
+    pageTitle("Inventory");
+    var items = inventoryItems();
+    var categories = ["all"];
+    items.forEach(function (item) {
+      if (item.category && categories.indexOf(item.category) === -1) categories.push(item.category);
+    });
+    if (categories.indexOf(inventoryFilter.category) === -1) inventoryFilter.category = "all";
+
+    function choose(kind, value) {
+      inventoryFilter[kind] = value;
+      renderInventory();
+    }
+
+    var placement = el("label", { class: "filter-field" });
+    placement.append(el("span", { text: "Status" }));
+    var placementSelect = el("select");
+    [
+      { id: "all", label: "All" },
+      { id: "warehouse", label: "In warehouse" },
+      { id: "job", label: "On a job" }
+    ].forEach(function (option) {
+      var node = el("option", { value: option.id, text: option.label });
+      if (option.id === inventoryFilter.placement) node.selected = true;
+      placementSelect.append(node);
+    });
+    placementSelect.addEventListener("change", function () { choose("placement", placementSelect.value); });
+    placement.append(placementSelect);
+
+    var category = el("label", { class: "filter-field" });
+    category.append(el("span", { text: "Category" }));
+    var categorySelect = el("select");
+    categories.forEach(function (name) {
+      var node = el("option", { value: name, text: name === "all" ? "All" : name });
+      if (name === inventoryFilter.category) node.selected = true;
+      categorySelect.append(node);
+    });
+    categorySelect.addEventListener("change", function () { choose("category", categorySelect.value); });
+    category.append(categorySelect);
+
+    var shown = items.filter(function (item) {
+      if (inventoryFilter.placement !== "all" && item.placement !== inventoryFilter.placement) return false;
+      if (inventoryFilter.category !== "all" && item.category !== inventoryFilter.category) return false;
+      return true;
+    });
+
+    var grid = el("div", { class: "inventory-grid" });
+    if (!shown.length) grid.append(el("p", { class: "muted", text: "Nothing in the sample matches that filter." }));
+    shown.forEach(function (item) {
+      var card = el("article", { class: "card inventory-card" });
+      if (item.photo) card.append(el("img", { class: "thumb", src: item.photo, alt: item.photoAlt || item.name || "" }));
+      var body = el("div");
+      body.append(el("p", { class: "fine", text: item.category || "" }));
+      body.append(el("h2", { text: item.name }));
+      body.append(el("p", { text: inventoryWhere(item) }));
+      card.append(body);
+      grid.append(card);
+    });
+
+    var free = items.filter(function (item) { return item.placement === "warehouse"; }).length;
+    mount([
+      head("Furniture inventory", "Sample pieces and sets. Photos are portfolio stand-ins, not a catalog shoot."),
+      el("div", { class: "toolbar", children: [
+        el("div", { class: "filters", children: [placement, category] }),
+        el("p", { class: "fine", text: free + " in the warehouse · " + (items.length - free) + " out on a job" })
+      ]}),
+      grid
+    ]);
+  }
+
+  function goneQuiet(member) {
+    var days = daysSince(member.lastActivity);
+    return days != null && days >= 60;
+  }
+
+  function renderMembers() {
+    pageTitle("VIP members");
+    var members = ((sample && sample.members) || []).slice().sort(function (a, b) {
+      var quiet = Number(goneQuiet(b)) - Number(goneQuiet(a));
+      if (quiet) return quiet;
+      return String(a.lastActivity || "").localeCompare(String(b.lastActivity || ""));
+    });
+    var quietCount = members.filter(goneQuiet).length;
+    var list = el("div", { class: "stack-list" });
+    members.forEach(function (member) {
+      var card = el("article", { class: "card member-card" });
+      var top = el("div", { class: "member-top" });
+      top.append(el("h2", { text: member.name }));
+      if (goneQuiet(member)) top.append(el("span", { class: "flag", text: "Gone quiet" }));
+      card.append(top);
+      card.append(el("p", { class: "fine", text: member.brokerage || "" }));
+      var joined = member.joined && parseIso(member.joined) ? formatMonthDayYear(parseIso(member.joined)) : "";
+      var last = member.lastActivity && parseIso(member.lastActivity) ? formatMonthDayYear(parseIso(member.lastActivity)) : "";
+      card.append(el("p", { text: "Joined " + joined }));
+      card.append(el("p", { text: (member.jobsSent || 0) + (member.jobsSent === 1 ? " job sent" : " jobs sent") }));
+      card.append(el("p", { text: "Last activity " + last }));
+      list.append(card);
+    });
+    mount([
+      head("VIP members", "Sample agents in the VIP program. Gone quiet means no activity in 60 or more days."),
+      el("p", { class: "fine", text: quietCount + " gone quiet in this sample." }),
+      list
+    ]);
+  }
+
+  function quotePerson(quote) {
+    var client = quote.clientId ? clientById(quote.clientId) : null;
+    return (client && client.name) || quote.name || "Sample contact";
+  }
+
+  function needsNudge(quote) {
+    if (quote.status !== "sent") return false;
+    var days = daysSince(quote.sentOn);
+    return days != null && days >= 7;
+  }
+
+  function renderQuotes() {
+    pageTitle("Quotes");
+    var quotes = ((sample && sample.quotes) || []).slice().sort(function (a, b) {
+      function rank(quote) {
+        if (needsNudge(quote)) return 0;
+        if (quote.status === "sent") return 1;
+        if (quote.status === "accepted") return 2;
+        return 3;
+      }
+      var diff = rank(a) - rank(b);
+      if (diff) return diff;
+      return String(b.sentOn || "").localeCompare(String(a.sentOn || ""));
+    });
+    var counts = { sent: 0, accepted: 0, declined: 0 };
+    quotes.forEach(function (quote) {
+      if (counts[quote.status] != null) counts[quote.status] += 1;
+    });
+    var list = el("div", { class: "stack-list" });
+    quotes.forEach(function (quote) {
+      var card = el("article", { class: "card" });
+      var top = el("div", { class: "member-top" });
+      top.append(el("h2", { text: quotePerson(quote) }));
+      top.append(el("span", { class: "badge", text: quoteStatusLabel(quote.status) }));
+      if (needsNudge(quote)) top.append(el("span", { class: "flag", text: "Needs a nudge" }));
+      card.append(top);
+      card.append(el("p", { text: quote.address || "" }));
+      var sent = quote.sentOn && parseIso(quote.sentOn) ? formatMonthDayYear(parseIso(quote.sentOn)) : "";
+      card.append(el("p", { class: "price", text: money(quote.amount) }));
+      card.append(el("p", { class: "fine", text: [quote.service, sent ? "Sent " + sent : ""].filter(Boolean).join(" · ") }));
+      list.append(card);
+    });
+    mount([
+      head("Quote pipeline", "Sample quotes. Needs a nudge means sent, with no answer for about 7 days."),
+      el("p", { class: "counts", children: [
+        el("span", { text: counts.sent + " sent" }),
+        el("span", { text: counts.accepted + " accepted" }),
+        el("span", { text: counts.declined + " declined" })
+      ]}),
+      list
+    ]);
+  }
+
+  function renderMarketing() {
+    pageTitle("Marketing");
+    var items = (sample && sample.marketing) || [];
+    var list = el("div", { class: "stack-list" });
+    items.forEach(function (item) {
+      var card = el("article", { class: "card" });
+      var top = el("div", { class: "member-top" });
+      top.append(el("h2", { text: item.title }));
+      top.append(el("span", { class: "badge", text: marketingStatusLabel(item.status) }));
+      card.append(top);
+      if (item.place) card.append(el("p", { class: "fine", text: item.place }));
+      var pair = el("div", { class: "pair" });
+      var before = el("figure", { class: "shot" });
+      before.append(
+        el("img", { src: item.before || "", alt: item.beforeAlt || "Before" }),
+        el("figcaption", { text: "Before" })
+      );
+      var after = el("figure", { class: "shot" });
+      after.append(
+        el("img", { src: item.after || "", alt: item.afterAlt || "After" }),
+        el("figcaption", { text: "After" })
+      );
+      pair.append(before, after);
+      card.append(pair);
+      if (item.caption) card.append(el("p", { text: item.caption }));
+      list.append(card);
+    });
+    mount([
+      head("Marketing queue", "Finished sample projects with before and after pairs, ready for a Facebook or Google Business post. This page does not post anything."),
+      el("p", { class: "fine", text: "Status is Ready, Drafted, or Posted. Photos are reused from the public portfolio." }),
+      list
+    ]);
+  }
+
   function initLogin() {
     var form = document.getElementById("login-form");
     if (form) {
@@ -981,16 +1548,7 @@
   function init() {
     paintStatic();
     paintChrome();
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 720 && document.body.classList.contains("nav-open")) {
-        document.body.classList.remove("nav-open");
-        var toggle = document.querySelector(".nav-toggle");
-        if (toggle) {
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.setAttribute("aria-label", "Open menu");
-        }
-      }
-    });
+    initNav();
     if (!sample && page !== "login") {
       missingData();
       return;
@@ -1004,6 +1562,13 @@
     else if (page === "calendar") renderCalendar();
     else if (page === "projects") renderProjects();
     else if (page === "leads") renderLeads();
+    else if (page === "rescue") renderRescue();
+    else if (page === "opens") renderOpenHouses();
+    else if (page === "virtual") renderVirtual();
+    else if (page === "inventory") renderInventory();
+    else if (page === "members") renderMembers();
+    else if (page === "quotes") renderQuotes();
+    else if (page === "marketing") renderMarketing();
   }
 
   init();
