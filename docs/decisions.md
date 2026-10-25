@@ -41,3 +41,9 @@ Real sign-in is still to be built. The plan is Firebase or Supabase, with keys k
 Branding lives in `admin/brand.js`. Screens and behavior live in `admin/admin.js` and `admin/admin.css`.
 
 Real authentication and real client data need a server-side backend (for example Firebase or Supabase) before this goes live. Keys stay server-side. See "API keys stay off this repo" above.
+
+## 2026-10-25 — Hero trust indicators
+
+The homepage hero trust indicators were added in October 2026. The unverified client and savings counters ("500+ Satisfied Clients" and "$1,000,000+ Saved") were removed. The wording — "20+ Years", "ASPM Certified", and "Award-Winning Stager" — was approved by Joey.
+
+City landing pages under `cities/*/index.html` do not have a hero trust area, so they were left unchanged.

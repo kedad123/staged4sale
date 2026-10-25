@@ -589,7 +589,7 @@
     <main>
         <section id="hero">
             <div class="container hero-fade">
-                <h1 class="hero-h1">Home Staging in Oceanside & North County San Diego</h1>
+                <h1 class="hero-h1">Home Staging in Oceanside&nbsp;&amp; North County San Diego</h1>
                 <div class="hero-text-container">
                     <h2 class="hero-line" id="line1">Transforming Spaces.</h2>
                     <h2 class="hero-line" id="line2">Inspiring Buyers.</h2>
@@ -597,9 +597,19 @@
                     <a href="#contact" class="cta-button hero-line-fade" id="line4">Get a Free Consultation</a>
                 </div>
                 <div class="hero-trust-indicators">
-<!--                    <span><i class="fas fa-smile"></i> <span class="count" data-target="500">0</span>+ Satisfied Clients</span>
-                    <span><i class="fas fa-dollar-sign"></i> <span class="count" data-target="1,000,000">0</span>+ Saved</span>
-                -->                </div>
+                    <span class="hero-trust-item">
+                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                        <span>20+ Years</span>
+                    </span>
+                    <span class="hero-trust-item" title="Accredited Staging Professional Master">
+                        <i class="fas fa-certificate" aria-hidden="true"></i>
+                        <span>ASPM Certified</span>
+                    </span>
+                    <a class="hero-trust-item" href="#certifications" title="IAHSP Best of Home Staging 2020 and 2021">
+                        <i class="fas fa-trophy" aria-hidden="true"></i>
+                        <span>Award-Winning Stager</span>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -987,7 +997,7 @@
 
 <footer>
   <div class="container">
-    <div class="certifications-awards">
+    <div class="certifications-awards" id="certifications">
       <p>Accredited, Licensed & Insured | Serving Southern California</p>
       <p>Certified Accredited Staging Professional Master™ (ASPM™)</p>
       <div class="awards-images">
@@ -1053,7 +1063,13 @@ window.addEventListener('DOMContentLoaded', function() {
   let currentLine = 0;
   
   function animateNextLine() {
-    if (currentLine >= heroLines.length) return;
+    if (currentLine >= heroLines.length) {
+      const trust = document.querySelector('#hero .hero-trust-indicators');
+      if (trust) {
+        trust.classList.add('is-visible');
+      }
+      return;
+    }
     
     const lineElement = document.getElementById(heroLines[currentLine]);
     if (!lineElement) return;
@@ -1083,6 +1099,22 @@ window.addEventListener('DOMContentLoaded', function() {
   
   // Start the animation after a brief delay
   setTimeout(animateNextLine, 1000);
+
+  const awardsLink = document.querySelector('#hero .hero-trust-indicators a[href="#certifications"]');
+  if (awardsLink) {
+    awardsLink.addEventListener('click', function (e) {
+      const target = document.getElementById('certifications');
+      if (!target) return;
+      e.preventDefault();
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 0;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
+      window.scrollTo({
+        top: top,
+        behavior: 'smooth'
+      });
+    });
+  }
 });
 
 // FAQ Accordion Functionality

@@ -164,6 +164,8 @@ section h2::after {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    /* Keep padding inside the viewport height so the trust row stays with the CTA. */
+    box-sizing: border-box;
 }
 
 /* Before image overlay that fades out */
@@ -200,7 +202,8 @@ section h2::after {
     font-family: 'Lato', sans-serif;
     font-weight: 600;
     color: #ffd700;
-    text-align: left;
+    text-align: center;
+    text-wrap: balance;
     margin-bottom: 40px;
     text-shadow:
         0 1px 1px rgba(0, 0, 0, 0.95),
@@ -241,24 +244,70 @@ section h2::after {
 
 .hero-trust-indicators {
     display: flex;
-    gap: 30px;
-    color: #ffd700;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    margin-top: 30px; /* Add some space from content above */
-    justify-content: center; /* Center items horizontally */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px 0;
+    margin-top: 32px;
+    color: #e0e0e0;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.95),
+        0 2px 2px rgba(0, 0, 0, 0.9),
+        0 0 8px rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    transition: opacity 1s ease-out;
 }
 
-.hero-trust-indicators span {
-    display: flex;
+.hero-trust-indicators.is-visible {
+    opacity: 1;
+}
+
+.hero-trust-indicators .hero-trust-item {
+    display: inline-flex;
     align-items: center;
+    gap: 10px;
+    padding: 0 22px;
+    color: #e0e0e0;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Color only. A :visited rule that also sets layout or decoration
+   is dropped by WebKit, and the link then paints as default blue. */
+.hero-trust-indicators a.hero-trust-item:visited {
+    color: #e0e0e0;
+}
+
+.hero-trust-indicators a.hero-trust-item:hover,
+.hero-trust-indicators a.hero-trust-item:focus-visible {
+    color: #ffed4e;
+}
+
+.hero-trust-indicators a.hero-trust-item:hover i,
+.hero-trust-indicators a.hero-trust-item:focus-visible i {
+    color: #ffed4e;
+}
+
+.hero-trust-indicators a.hero-trust-item:focus-visible {
+    outline: 1px solid rgba(255, 215, 0, 0.7);
+    outline-offset: 6px;
+    border-radius: 2px;
 }
 
 .hero-trust-indicators i {
-    margin-right: 10px;
-    font-size: 1.5em;
+    color: #ffd700;
+    font-size: 1.15em;
+    line-height: 1;
+}
+
+@media (min-width: 769px) {
+    .hero-trust-indicators .hero-trust-item + .hero-trust-item {
+        border-left: 1px solid rgba(255, 215, 0, 0.4);
+    }
 }
 
 .cta-button {
@@ -1834,6 +1883,7 @@ footer p {
     margin-top: 20px;
     font-size: 0.9em;
     color: #a0a0a0;
+    scroll-margin-top: 96px;
 }
 
 .awards-images {
@@ -1953,6 +2003,16 @@ footer p {
     #hero {
         min-height: 60vh; /* Much smaller hero on tablets */
         padding: 60px 0;
+    }
+
+    .hero-trust-indicators {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .hero-trust-indicators .hero-trust-item {
+        padding: 0;
     }
 
     .logo-img {
@@ -2124,60 +2184,38 @@ footer p {
         justify-content: center;
         min-width: 150px; /* Minimum width for consistency */
     }
-}
-
 
 @media (max-width: 480px) {
     #hero {
-        padding: 40px 15px;
-        min-height: 50vh; /* Even smaller on mobile phones */
+        padding: 36px 16px 28px;
+        min-height: 100vh;
     }
 
     .hero-h1 {
-        font-size: 1.2em;
-        margin-bottom: 25px;
+        font-size: 1.15em;
+        margin-bottom: 16px;
     }
 
     #hero h2 {
-        font-size: 2.2em;
-        margin-bottom: 15px;
-        line-height: 1.1;
+        font-size: 1.8em;
+        margin-bottom: 8px;
+        line-height: 1.15;
     }
 
     #hero p {
         font-size: 1em;
-        margin-bottom: 30px;
-        padding: 0 10px;
+        margin-bottom: 18px;
+        padding: 0 8px;
     }
 
     .hero-trust-indicators {
         flex-direction: column;
-        gap: 15px;
-        font-size: 1em;
-        margin-top: 20px;
+        gap: 10px;
+        font-size: 0.98rem;
+        margin-top: 18px;
     }
-    
-    /* Smaller sections on mobile */
-    section {
-        padding: 40px 0;
-        margin-bottom: 15px;
-    }
-    
-    section h2 {
-        font-size: 1.8em;
-        margin-bottom: 25px;
-    }
-    
-    /* Logo adjustment */
-    .logo-img {
-        height: 32px; /* Much smaller for mobile phones */
-    }
-    
-    /* Mobile navigation adjustments - use same dropdown style as 768px */
-    
-    /* CTA button optimization */
-    .cta-button {
-        padding: 15px 25px;
-        font-size: 1.1em;
+
+    .hero-trust-indicators .hero-trust-item {
+        padding: 0;
     }
 }
