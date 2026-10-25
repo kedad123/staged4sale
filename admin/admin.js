@@ -1319,14 +1319,7 @@
       nodes.push(upload, staging);
     }
 
-    var mailLine = el("p", { class: "fine" });
-    mailLine.append(document.createTextNode("Markups can also be requested by email"));
-    if (contact().email) {
-      mailLine.append(document.createTextNode(" at "));
-      mailLine.append(el("a", { href: "mailto:" + contact().email, text: contact().email }));
-    }
-    mailLine.append(document.createTextNode("."));
-    nodes.push(mailLine);
+    nodes.push(el("p", { class: "fine", text: "Markups can also be requested by email." }));
     mount(nodes);
   }
 
