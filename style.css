@@ -1936,6 +1936,27 @@ footer p {
     color: #ffd700; /* Gold on hover */
 }
 
+.header-phone-block {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  margin-left: 20px;
+}
+
+.header-since {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 1px);
+  transform: translateX(-50%);
+  color: #ffd700;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .header-phone {
   color: #ffd700;
   text-decoration: none;
@@ -1946,6 +1967,10 @@ footer p {
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
+}
+
+.header-phone-block .header-phone {
+  margin-left: 0;
 }
 
 .header-phone:hover {
@@ -1971,6 +1996,19 @@ footer p {
         font-size: 1rem;
         margin-left: 15px;
     }
+
+    .header-phone-block {
+        margin-left: 15px;
+    }
+}
+
+/* Below 1000px the nav wraps and the phone number stacks, so this line
+   would sit on or above the header edge. The number itself is already
+   hidden at 768px. Keep the line for the single-row header only. */
+@media (max-width: 999px) {
+    .header-since {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1985,6 +2023,10 @@ footer p {
         font-size: 0.9rem;
         margin-left: 10px;
         gap: 5px;
+    }
+
+    .header-phone-block {
+        margin-left: 10px;
     }
 
     .header-phone .phone-number {
