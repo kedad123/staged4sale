@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample VIP listings for a real estate agent. Demo data only. Not a real account.">
+  <title>VIP portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body class="app" data-page="listings">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="listings.html">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word" data-fill="portalLabel">VIP portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+          <a class="btn btn-small btn-ghost" href="index.html">Sign out</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="app-body">
+    <nav id="sidebar" class="sidebar" aria-label="Portal"></nav>
+    <div class="app-content">
+      <main id="main" class="wrap" tabindex="-1">
+        <h1 class="page-title">My Listings</h1>
+        <p id="agent-line" class="client-line"></p>
+        <div id="perks" class="perk-row"></div>
+        <p class="page-lead block">Open a listing for status, dates, the invoice, photos, and documents. Addresses are fictional. Photos are reused from the public portfolio.</p>
+        <div id="listing-grid" class="listing-grid"></div>
+        <noscript>
+          <p class="card">This sample needs JavaScript to show the demo.</p>
+        </noscript>
+      </main>
+      <footer class="site-footer">
+        <p>
+          <span data-fill="businessName"></span>
+          · <a data-fill="phone" data-href-kind="phone"></a>
+          · <a data-fill="email" data-href-kind="email"></a>
+        </p>
+        <p data-fill="tagline"></p>
+        <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+      </footer>
+    </div>
+  </div>
+
+  <button id="more-backdrop" class="sheet-backdrop" type="button" hidden aria-label="Close menu"></button>
+  <div id="more-sheet" class="more-sheet" hidden role="navigation" aria-label="More portal sections"></div>
+  <nav id="tabbar" class="tabbar" aria-label="Portal"></nav>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample virtual staging for VIP members. No image is generated or uploaded.">
+  <title>VIP portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body class="app" data-page="virtual">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="listings.html">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word" data-fill="portalLabel">VIP portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+          <a class="btn btn-small btn-ghost" href="index.html">Sign out</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="app-body">
+    <nav id="sidebar" class="sidebar" aria-label="Portal"></nav>
+    <div class="app-content">
+      <main id="main" class="wrap" tabindex="-1">
+        <h1 class="page-title">Virtual Staging</h1>
+        <p class="page-lead">Included for VIP members. This page does not create or upload a photo.</p>
+        <aside class="vip-note">
+          <p class="eyebrow">Free for VIP members</p>
+          <p id="virtual-free"></p>
+        </aside>
+        <section class="card block">
+          <h2>Try a room</h2>
+          <div class="upload-mock">
+            <label class="btn" for="room-photo">Choose a photo</label>
+            <input id="room-photo" class="file-input" type="file" accept="image/*">
+            <p id="upload-note" class="status-note">Nothing is uploaded. A chosen photo stays in this browser as a preview.</p>
+            <img id="upload-preview" alt="" hidden>
+          </div>
+        </section>
+        <section id="virtual-pair" class="card block"></section>
+        <p id="virtual-disclosure" class="disclosure"></p>
+        <noscript>
+          <p class="card">This sample needs JavaScript to show the demo.</p>
+        </noscript>
+      </main>
+      <footer class="site-footer">
+        <p>
+          <span data-fill="businessName"></span>
+          · <a data-fill="phone" data-href-kind="phone"></a>
+          · <a data-fill="email" data-href-kind="email"></a>
+        </p>
+        <p data-fill="tagline"></p>
+        <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+      </footer>
+    </div>
+  </div>
+
+  <button id="more-backdrop" class="sheet-backdrop" type="button" hidden aria-label="Close menu"></button>
+  <div id="more-sheet" class="more-sheet" hidden role="navigation" aria-label="More portal sections"></div>
+  <nav id="tabbar" class="tabbar" aria-label="Portal"></nav>
+
+  <dialog id="lightbox" aria-label="Enlarged photo">
+    <div class="lightbox-bar">
+      <form method="dialog">
+        <button type="submit" class="btn btn-small">Close</button>
+      </form>
+    </div>
+    <img alt="">
+    <p class="lightbox-caption"></p>
+  </dialog>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>

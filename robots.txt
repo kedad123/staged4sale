@@ -7,7 +7,7 @@ Allow: /
 # Block development and internal directories
 Disallow: /shots/
 Disallow: /projects/_template/
-# Sample client portal: demo only, noindex, not linked from the public site
+# Sample VIP agent portal: demo only, noindex, not linked from the public site
 Disallow: /portal/
 Disallow: /.git/
 Disallow: /.vscode/
@@ -26,7 +26,7 @@ Disallow: /wp-content/
 Disallow: /wp-includes/
 Disallow: /administrator/
 
-# Sample admin site (admin/). Mock data only; pages also send noindex.
+# Sample admin studio (admin/). Mock data only; pages also send noindex.
 Disallow: /admin/
 
 # Sitemap location

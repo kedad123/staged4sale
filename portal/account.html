@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample agent account, brokerage branding, and notification settings.">
+  <title>VIP portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body class="app" data-page="account">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="listings.html">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word" data-fill="portalLabel">VIP portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+          <a class="btn btn-small btn-ghost" href="index.html">Sign out</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="app-body">
+    <nav id="sidebar" class="sidebar" aria-label="Portal"></nav>
+    <div class="app-content">
+      <main id="main" class="wrap" tabindex="-1">
+        <h1 class="page-title">Account</h1>
+        <p class="page-lead">Sample agent profile. Saving stays in this browser and updates the mark on Seller Packets. The stager's name and phone stay on the packet.</p>
+        <form id="account-form" class="card block" action="account.html" method="post" autocomplete="off" novalidate>
+          <h2>Profile</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label for="agent-name">Name</label>
+              <input id="agent-name" type="text" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="agent-email">Email</label>
+              <input id="agent-email" type="text" inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false">
+            </div>
+            <div class="field">
+              <label for="agent-phone">Mobile</label>
+              <input id="agent-phone" type="text" inputmode="tel" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="agent-license">License</label>
+              <input id="agent-license" type="text" autocomplete="off">
+            </div>
+          </div>
+
+          <h2 class="section-gap">Brokerage branding</h2>
+          <p class="status-note">Logo placeholder and colors used on seller packets. This is not the stager's brand.</p>
+          <div class="form-grid block">
+            <div class="field">
+              <label for="brokerage-name">Brokerage name</label>
+              <input id="brokerage-name" type="text" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="brokerage-initials">Initials</label>
+              <input id="brokerage-initials" type="text" maxlength="3" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="brokerage-primary">Primary color</label>
+              <div class="color-pair">
+                <input id="brokerage-primary" type="color">
+              </div>
+            </div>
+            <div class="field">
+              <label for="brokerage-accent">Accent color</label>
+              <div class="color-pair">
+                <input id="brokerage-accent" type="color">
+              </div>
+            </div>
+          </div>
+          <div id="brand-preview" class="brand-preview block"></div>
+
+          <h2 class="section-gap">Notifications</h2>
+          <div class="check-list">
+            <label class="check"><input id="notify-projects" type="checkbox"> <span>Project status updates</span></label>
+            <label class="check"><input id="notify-invoices" type="checkbox"> <span>Invoice reminders</span></label>
+            <label class="check"><input id="notify-newsletter" type="checkbox"> <span>Staging ROI newsletter</span></label>
+            <label class="check"><input id="notify-booking" type="checkbox"> <span>Booking confirmations</span></label>
+          </div>
+          <div class="pay-row">
+            <button class="btn" type="submit">Save sample profile</button>
+          </div>
+          <p id="account-result" class="form-note" hidden></p>
+        </form>
+        <noscript>
+          <p class="card">This sample needs JavaScript to show the demo.</p>
+        </noscript>
+      </main>
+      <footer class="site-footer">
+        <p>
+          <span data-fill="businessName"></span>
+          · <a data-fill="phone" data-href-kind="phone"></a>
+          · <a data-fill="email" data-href-kind="email"></a>
+        </p>
+        <p data-fill="tagline"></p>
+        <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+      </footer>
+    </div>
+  </div>
+
+  <button id="more-backdrop" class="sheet-backdrop" type="button" hidden aria-label="Close menu"></button>
+  <div id="more-sheet" class="more-sheet" hidden role="navigation" aria-label="More portal sections"></div>
+  <nav id="tabbar" class="tabbar" aria-label="Portal"></nav>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>
