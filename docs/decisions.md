@@ -47,3 +47,13 @@ Real authentication and real client data need a server-side backend (for example
 The homepage hero trust indicators were added in October 2026. The unverified client and savings counters ("500+ Satisfied Clients" and "$1,000,000+ Saved") were removed. The wording — "20+ Years", "ASPM Certified", and "Award-Winning Stager" — was approved by Joey.
 
 City landing pages under `cities/*/index.html` do not have a hero trust area, so they were left unchanged.
+
+## 2026-10-25 — Years in business
+
+October 2026: years-in-business messaging added to the header, About, Contact, and footer. The wording was approved by Joey.
+
+The homepage header shows "Staging since 2006" in small gold Lato type directly above the phone number. The line is taken out of the document flow so the header stays the same height. It is hidden below 1000px: the nav wraps and the phone number stacks, and the line would crowd the bar. At 768px and narrower the phone number is already hidden as well. Other public pages duplicate the logo and nav, but they do not include the phone number in the header, so the line was not added there.
+
+The About opening now starts "For over 20 years, Staged 4 Sale has done more than stage homes." The Contact intro adds "For over 20 years, we've helped homeowners and their agents get top dollar." The footer line now reads "Accredited, Licensed & Insured | Serving Southern California for Over 20 Years" on every public page that already carried it, including the project starter in `projects/_template/`. `admin/`, `portal/`, and `marketing/` were left unchanged.
+
+The homepage LocalBusiness structured data (`HomeAndConstructionBusiness`) includes `"foundingDate": "2006"`.
