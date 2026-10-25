@@ -1,0 +1,143 @@
+/* Weekly lead sample. A later refresh can overwrite this file
+   without changing admin.js. Nothing here is a real listing,
+   agent, phone number, or open house. */
+window.AdminWeekly = {
+  refreshedLabel: "October 24, 2026",
+  cadence: "updates weekly",
+  rescue: [
+    {
+      id: "r-vacant-dune",
+      category: "vacant",
+      address: "12 Demo Vacant Lane",
+      city: "Oceanside, CA 92054",
+      price: 879000,
+      beds: 3,
+      baths: 2,
+      sqft: 1480,
+      daysOnMarket: 36,
+      note: "Listing photos show bare floors, no window coverings, and an empty primary bedroom.",
+      photo: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-03-before.webp",
+      photoAlt: "Empty room from the portfolio, used as a stand-in. Not this sample listing.",
+      agent: "Casey Nguyen",
+      brokerage: "Sample Coast Realty",
+      phone: "(760) 555-0142"
+    },
+    {
+      id: "r-vacant-empty",
+      category: "vacant",
+      address: "880 Placeholder Empty Court",
+      city: "Vista, CA 92084",
+      price: 1125000,
+      beds: 4,
+      baths: 3,
+      sqft: 2210,
+      daysOnMarket: 22,
+      note: "Photos show a large empty great room and a kitchen with no styling on the island.",
+      photo: "../images/projects/cresta-view-estate/cresta-view-estate-03-before.jpg",
+      photoAlt: "Unstyled room from the portfolio, used as a stand-in. Not this sample listing.",
+      agent: "Morgan Ellis",
+      brokerage: "Demo Harbor Realty",
+      phone: "(760) 555-0171"
+    },
+    {
+      id: "r-virtual-pixel",
+      category: "virtual",
+      address: "44 Fictional Pixel Way",
+      city: "Carlsbad, CA 92009",
+      price: 965000,
+      beds: 3,
+      baths: 2.5,
+      sqft: 1675,
+      daysOnMarket: 18,
+      note: "The living room photo looks digitally furnished. The kitchen photo is still empty.",
+      photo: "../images/projects/canyon-view-condo/canyon-view-condo-01.webp",
+      photoAlt: "Styled room from the portfolio, used as a stand-in. Not this sample listing.",
+      agent: "Avery Shah",
+      brokerage: "Placeholder Mesa Group",
+      phone: "(442) 555-0166"
+    },
+    {
+      id: "r-virtual-render",
+      category: "virtual",
+      address: "19 Example Render Road",
+      city: "Encinitas, CA 92024",
+      price: 1540000,
+      beds: 4,
+      baths: 3,
+      sqft: 1980,
+      daysOnMarket: 27,
+      note: "Furniture in the hero photo does not match the floor shadows. The other rooms are vacant.",
+      photo: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-05.jpg",
+      photoAlt: "Living room from the portfolio, used as a stand-in. Not this sample listing.",
+      agent: "Quinn Barker",
+      brokerage: "Example Bluff Realty",
+      phone: "(760) 555-0183"
+    },
+    {
+      id: "r-stale-lived",
+      category: "stale",
+      address: "701 Sample Lived-in Street",
+      city: "San Marcos, CA 92078",
+      price: 799000,
+      beds: 3,
+      baths: 2,
+      sqft: 1320,
+      daysOnMarket: 61,
+      note: "Photos show personal photos on the fridge, a crowded sofa, and dark lamps.",
+      photo: "../images/projects/rolando-bungalow/rolando-bungalow-01.webp",
+      photoAlt: "Interior from the portfolio, used as a stand-in. Not this sample listing.",
+      agent: "Riley Cho",
+      brokerage: "Sample Inland Realty",
+      phone: "(760) 555-0129"
+    },
+    {
+      id: "r-stale-canyon",
+      category: "stale",
+      address: "305 Demo Stale Avenue",
+      city: "Escondido, CA 92025",
+      price: 725000,
+      beds: 2,
+      baths: 2,
+      sqft: 1188,
+      daysOnMarket: 74,
+      note: "The listing has been up for weeks. Rooms look occupied, with laundry and a pet bed in frame.",
+      photo: "../images/projects/rolando-bungalow/rolando-bungalow-03.webp",
+      photoAlt: "Room from the portfolio, used as a stand-in. Not this sample listing.",
+      agent: "Parker Diaz",
+      brokerage: "Fictional Valley Group",
+      phone: "(760) 555-0194"
+    }
+  ],
+  openHouses: [
+    {
+      id: "oh-tide",
+      when: "Saturday, October 24, 2026",
+      time: "1:00–4:00 PM",
+      address: "640 Sample Tide Street",
+      city: "Oceanside, CA 92054",
+      agent: "Casey Nguyen",
+      brokerage: "Sample Coast Realty",
+      phone: "(760) 555-0142"
+    },
+    {
+      id: "oh-mesa",
+      when: "Saturday, October 24, 2026",
+      time: "11:00 AM–2:00 PM",
+      address: "15 Demo Mesa Place",
+      city: "Encinitas, CA 92024",
+      agent: "Avery Shah",
+      brokerage: "Placeholder Mesa Group",
+      phone: "(442) 555-0166"
+    },
+    {
+      id: "oh-grove",
+      when: "Sunday, October 25, 2026",
+      time: "1:00–4:00 PM",
+      address: "88 Placeholder Grove Lane",
+      city: "San Marcos, CA 92078",
+      agent: "Riley Cho",
+      brokerage: "Sample Inland Realty",
+      phone: "(760) 555-0129"
+    }
+  ]
+};
