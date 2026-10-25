@@ -36,7 +36,9 @@
       phoneTel: "+17605832500",
       email: "sales@staged4sale.com"
     },
-    messageSubject: "Question about my staging project"
+    messageSubject: "Question about a VIP staging project",
+    portalLabel: "VIP portal",
+    stagedBy: "Staged by Staged 4 Sale"
   };
 
   window.PortalBrand = brand;

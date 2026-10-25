@@ -57,3 +57,15 @@ The homepage header shows "Staging since 2006" in small gold Lato type directly 
 The About opening now starts "For over 20 years, Staged 4 Sale has done more than stage homes." The Contact intro adds "For over 20 years, we've helped homeowners and their agents get top dollar." The footer line now reads "Accredited, Licensed & Insured | Serving Southern California for Over 20 Years" on every public page that already carried it, including the project starter in `projects/_template/`. `admin/`, `portal/`, and `marketing/` were left unchanged.
 
 The homepage LocalBusiness structured data (`HomeAndConstructionBusiness`) includes `"foundingDate": "2006"`.
+
+## 2026-10-25 — Agent VIP portal sample
+
+`portal/` is now a clickable sample of a real estate agent VIP portal, still front-end only. Any sign-in opens My Listings. Nothing is authenticated. There is no backend and no API key. Addresses, invoices, the agent profile, and every market figure are fake and labeled as sample data. Each portal page sends `noindex, nofollow`. `robots.txt` disallows `/portal/`. The folder is not in `sitemap.xml`, and the public navigation does not link to it.
+
+Desktop navigation is a left sidebar. Narrow screens use a bottom tab bar: My Listings, Book Staging, Seller Packets, Market Info, and More for the rest. Virtual Staging stays below the main menu items. Opening a listing reuses the existing project screen (status, dates, invoice, gallery, documents).
+
+Branding — name, colors, logo, contact details, the VIP label, and the "Staged by" line — lives in `portal/brand.js`. Screens and behavior live in `portal/portal.js` and `portal/portal.css`. Demo content lives in `portal/sample-data.js`.
+
+The virtual staging page does not call an image API. It shows a labeled sample pair and states that California AB 723 requires disclosing digitally altered listing photos and providing the original.
+
+Real sign-in is still to be built. See "API keys stay off this repo" above.

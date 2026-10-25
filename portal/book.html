@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Sample VIP priority booking form. It does not send a request.">
+  <title>VIP portal</title>
+  <script src="brand.js"></script>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body class="app" data-page="book">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="topbar">
+    <p class="sample-banner" role="note">Sample / demo data</p>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="lockup">
+          <a class="logo-link" href="listings.html">
+            <img class="logo" alt="" width="112" height="52">
+          </a>
+          <span class="portal-word" data-fill="portalLabel">VIP portal</span>
+        </div>
+        <div class="header-tools">
+          <a class="header-phone" data-fill="phone" data-href-kind="phone"></a>
+          <a class="btn btn-small btn-ghost" href="index.html">Sign out</a>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="app-body">
+    <nav id="sidebar" class="sidebar" aria-label="Portal"></nav>
+    <div class="app-content">
+      <main id="main" class="wrap" tabindex="-1">
+        <h1 class="page-title">Book Staging</h1>
+        <p class="page-lead">Ask for a priority install. This sample keeps the request on the page.</p>
+        <aside class="vip-note">
+          <p class="eyebrow">VIP priority</p>
+          <p>Member requests are booked ahead of the general calendar. This form does not send a request.</p>
+        </aside>
+        <form id="book-form" class="card block" action="book.html" method="post" autocomplete="off" novalidate>
+          <div class="form-grid">
+            <div class="field span-2">
+              <label for="book-property">Property</label>
+              <select id="book-property"></select>
+            </div>
+            <div id="other-property" class="field span-2" hidden>
+              <label for="other-address">Address</label>
+              <input id="other-address" type="text" autocomplete="off" placeholder="A fictional address is fine">
+            </div>
+            <fieldset class="field span-2">
+              <legend>Vacant or occupied</legend>
+              <div class="choice-row">
+                <label class="choice">
+                  <input type="radio" name="occupancy" value="vacant" checked>
+                  <span>Vacant</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="occupancy" value="occupied">
+                  <span>Occupied</span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset class="field span-2">
+              <legend>Rooms</legend>
+              <div class="choice-row">
+                <label class="choice"><input type="checkbox" checked> <span>Living</span></label>
+                <label class="choice"><input type="checkbox"> <span>Dining</span></label>
+                <label class="choice"><input type="checkbox"> <span>Kitchen</span></label>
+                <label class="choice"><input type="checkbox" checked> <span>Primary bedroom</span></label>
+                <label class="choice"><input type="checkbox"> <span>Outdoor</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="list-date">Target list date</label>
+              <input id="list-date" type="date" value="2026-11-20">
+            </div>
+            <div class="field span-2">
+              <label for="book-notes">Notes</label>
+              <textarea id="book-notes" placeholder="Gate code, pets, or anything the crew should know. Sample only."></textarea>
+            </div>
+          </div>
+          <div class="pay-row">
+            <button class="btn" type="submit">Request priority booking</button>
+          </div>
+          <p id="book-result" class="form-note" hidden></p>
+        </form>
+        <noscript>
+          <p class="card">This sample needs JavaScript to show the demo.</p>
+        </noscript>
+      </main>
+      <footer class="site-footer">
+        <p>
+          <span data-fill="businessName"></span>
+          · <a data-fill="phone" data-href-kind="phone"></a>
+          · <a data-fill="email" data-href-kind="email"></a>
+        </p>
+        <p data-fill="tagline"></p>
+        <p><a class="public-link" data-href-kind="public" href="../">Home</a></p>
+      </footer>
+    </div>
+  </div>
+
+  <button id="more-backdrop" class="sheet-backdrop" type="button" hidden aria-label="Close menu"></button>
+  <div id="more-sheet" class="more-sheet" hidden role="navigation" aria-label="More portal sections"></div>
+  <nav id="tabbar" class="tabbar" aria-label="Portal"></nav>
+
+  <script src="sample-data.js"></script>
+  <script src="portal.js"></script>
+</body>
+</html>
