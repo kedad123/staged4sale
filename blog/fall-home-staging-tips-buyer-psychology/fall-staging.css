@@ -1,0 +1,117 @@
+/* Article-only styles. Shared site styling stays in /style.css. */
+.fall-post { background: #1a1a1a; }
+.fall-page { --fall-accent: #dfbd87; --fall-muted: #b9b2a9; --fall-ink: #f1ece4; color: var(--fall-ink); }
+.fall-page *, .fall-page *::before, .fall-page *::after { box-sizing: border-box; }
+.fall-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.fall-page a { color: var(--fall-accent); text-underline-offset: 4px; }
+.fall-page a:hover { color: #fff1d8; }
+.fall-page a:focus-visible, .fall-post .fall-skip:focus-visible { outline: 2px solid #ffd700; outline-offset: 5px; border-radius: 2px; }
+.fall-skip { position: fixed; top: -90px; left: 20px; z-index: 1100; padding: 12px 20px; background: #ffd700; color: #161616; }
+.fall-skip:focus { top: 12px; }
+.fall-breadcrumb { display: flex; flex-wrap: wrap; gap: 12px; padding: 28px 0; color: var(--fall-muted); font-size: .8rem; }
+.fall-breadcrumb a { color: var(--fall-muted); text-decoration: none; }
+.fall-breadcrumb > span[aria-hidden] { color: #776f64; }
+.fall-hero { display: grid; grid-template-columns: 1fr 1.03fr; align-items: center; gap: 48px; padding: 20px 0 64px; border-bottom: 1px solid #413c35; }
+.fall-eyebrow { color: var(--fall-accent); text-transform: uppercase; font-size: .7rem; letter-spacing: .19em; font-weight: 700; line-height: 1.6; margin: 0 0 20px; }
+.fall-hero h1 { color: var(--fall-ink); font-size: clamp(2.3rem, 4.1vw, 3.7rem); line-height: 1.13; letter-spacing: -.035em; margin: 0 0 24px; text-wrap: balance; font-weight: 400; }
+.fall-hero h1 em { color: var(--fall-accent); font-weight: 400; }
+.fall-deck { color: #d2ccc3; line-height: 1.8; font-size: 1.08rem; max-width: 450px; margin: 0 0 24px; }
+.fall-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; color: var(--fall-muted); font-size: .73rem; margin-bottom: 28px; }
+.fall-meta span + span::before { content: '·'; margin-right: 14px; }
+.fall-text-link { font-size: .85rem; text-decoration: none; border-bottom: 1px solid #8c7553; padding-bottom: 6px; display: inline-block; }
+.fall-text-link span { margin-left: 16px; }
+.fall-hero-photo { margin: 0; min-width: 0; }
+.fall-hero-photo img { display: block; width: 100%; height: 470px; object-fit: cover; object-position: 50% 62%; border-radius: 90px 2px 2px 2px; }
+.fall-hero-photo figcaption { padding-top: 15px; color: #d5c5ad; font-size: .8rem; line-height: 1.6; }
+.fall-hero-photo figcaption span { display: block; color: #a8a199; font-size: .68rem; letter-spacing: .025em; margin-top: 4px; }
+.fall-layout { display: grid; grid-template-columns: 220px minmax(0, 740px); gap: 80px; padding: 64px 0 0; justify-content: center; align-items: start; }
+.fall-toc { position: sticky; top: 130px; border-top: 1px solid #655640; padding-top: 22px; }
+.fall-toc .fall-eyebrow { font-size: .64rem; margin-bottom: 14px; }
+.fall-toc ol { list-style: none; margin: 0; padding: 0; }
+.fall-toc li { margin: 0 0 13px; line-height: 1.6; font-size: .85rem; }
+.fall-toc a { color: #d2ccc3; text-decoration: none; }
+.fall-toc .fall-toc-note { font-size: .8rem; color: #a49b8e; line-height: 1.7; border-top: 1px solid #413c35; padding-top: 22px; margin-top: 26px; max-width: 170px; }
+.fall-prose { min-width: 0; font-size: 1.04rem; line-height: 1.85; }
+.fall-prose:focus { outline: none; }
+.fall-prose p { margin: 0 0 22px; }
+.fall-prose strong { color: #fff8ec; font-weight: 700; }
+.fall-prose .fall-lead { font-size: 1.38rem; line-height: 1.6; font-family: 'Playfair Display', Georgia, serif; color: #fff5e5; }
+.fall-page section { padding: 0; margin: 50px 0; background: none; border-radius: 0; box-shadow: none; text-align: left; scroll-margin-top: 135px; }
+.fall-page h2, .fall-page h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--fall-ink); font-weight: 400; letter-spacing: -.02em; text-wrap: balance; }
+.fall-page h2 { display: block; font-size: 2rem; line-height: 1.25; margin: 0 0 24px; }
+.fall-page h2::after { content: none; }
+.fall-page h3 { font-size: 1.48rem; line-height: 1.35; margin: 0 0 16px; }
+.fall-page section > .fall-eyebrow { margin-bottom: 12px; }
+.fall-stat { display: flex; align-items: center; gap: 30px; border-top: 1px solid #655640; border-bottom: 1px solid #655640; padding: 27px 0; margin: 32px 0; }
+.fall-stat > strong { font-family: 'Playfair Display', Georgia, serif; font-weight: 400; color: var(--fall-accent); font-size: 5rem; line-height: 1; letter-spacing: -.05em; flex-shrink: 0; }
+.fall-stat strong span { font-size: 2.3rem; }
+.fall-stat p { font-size: .95rem; line-height: 1.65; margin: 0; }
+.fall-stat a { display: inline-block; margin-top: 9px; font-size: .73rem; }
+.fall-tip { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 20px; padding: 34px 0 10px; border-top: 1px solid #413c35; margin-top: 30px; scroll-margin-top: 135px; }
+.fall-number { color: var(--fall-accent); font-size: 1.05rem; font-family: 'Playfair Display', Georgia, serif; padding-top: 2px; }
+.fall-prose .fall-cite { font-size: .8rem; white-space: normal; }
+.fall-editor-note { margin: 36px 0 46px; background: #28251f; padding: 32px 36px; border-left: 2px solid var(--fall-accent); }
+.fall-editor-note .fall-eyebrow { margin-bottom: 12px; }
+.fall-editor-note p:last-child { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 1.45rem; line-height: 1.6; color: #f4e7d4; }
+.fall-page .fall-checklist { border: 1px solid #655640; padding: 32px 36px; background: #201e1a; }
+.fall-checklist h2 { font-size: 1.7rem; }
+.fall-checklist ul { list-style: none; margin: 0; padding: 0; }
+.fall-checklist li { position: relative; padding: 10px 0 10px 28px; border-bottom: 1px solid #413c35; font-size: .95rem; }
+.fall-checklist li:last-child { border: 0; padding-bottom: 0; }
+.fall-checklist li::before { content: '✓'; color: var(--fall-accent); position: absolute; left: 0; }
+.fall-cta { background: #e1c69f; color: #26231e; padding: 42px; margin: 54px 0; }
+.fall-cta .fall-eyebrow { color: #5f452b; }
+.fall-cta h2 { color: #26231e; font-size: 2rem; }
+.fall-cta p { font-size: 1rem; }
+.fall-page a.fall-button { display: inline-flex; gap: 20px; justify-content: center; align-items: center; padding: 13px 22px; background: #24211c; border: 1px solid #24211c; color: #fff3de; text-decoration: none; font-size: .9rem; line-height: 1.5; font-weight: 700; }
+.fall-page a.fall-button:hover { background: #44372b; }
+.fall-page a.fall-secondary { display: block; width: fit-content; font-size: .8rem; color: #4c3824; margin-top: 16px; }
+.fall-sources { padding-top: 34px; border-top: 1px solid #413c35; scroll-margin-top: 135px; color: var(--fall-muted); }
+.fall-sources h2 { font-size: 1.25rem; }
+.fall-sources p, .fall-sources li { font-size: .8rem; line-height: 1.75; }
+.fall-sources ol { padding-left: 20px; margin: 0; }
+.fall-sources li { margin-bottom: 12px; padding-left: 5px; overflow-wrap: anywhere; }
+.fall-related { margin: 46px 0 64px; padding-top: 30px; border-top: 1px solid #413c35; }
+.fall-related > a { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 1.35rem; line-height: 1.5; text-decoration: none; }
+.fall-related > a.fall-back { margin-top: 24px; font-family: 'Lato', sans-serif; font-size: .85rem; color: var(--fall-muted); }
+@media (max-width: 1000px) {
+  .fall-hero { gap: 30px; }
+  .fall-hero-photo img { height: 420px; }
+  .fall-layout { grid-template-columns: 170px minmax(0, 1fr); gap: 40px; }
+}
+@media (max-width: 768px) {
+  .fall-wrap { padding: 0 22px; }
+  .fall-breadcrumb { padding: 22px 0; gap: 9px; font-size: .72rem; }
+  .fall-hero { grid-template-columns: 1fr; padding: 14px 0 32px; gap: 30px; }
+  .fall-hero h1 { font-size: clamp(2.35rem, 8.7vw, 3.6rem); }
+  .fall-hero-copy { max-width: 580px; }
+  .fall-deck { font-size: 1rem; max-width: none; }
+  .fall-meta { gap: 7px 10px; font-size: .7rem; margin-bottom: 24px; }
+  .fall-meta span + span::before { margin-right: 10px; }
+  .fall-hero-photo img { height: auto; aspect-ratio: 4 / 3; border-top-left-radius: 60px; }
+  .fall-layout { display: block; padding-top: 26px; }
+  .fall-toc { position: static; padding: 0 0 22px; border-top: 0; border-bottom: 1px solid #413c35; margin-bottom: 32px; }
+  .fall-toc ol { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+  .fall-toc li { margin: 0; font-size: .8rem; }
+  .fall-toc .fall-toc-note { display: none; }
+  .fall-prose { font-size: 1rem; line-height: 1.85; }
+  .fall-prose .fall-lead { font-size: 1.25rem; }
+  .fall-page section { margin: 40px 0; scroll-margin-top: 125px; }
+  .fall-page h2 { font-size: 1.75rem; }
+  .fall-page h3 { font-size: 1.35rem; }
+  .fall-stat { gap: 20px; align-items: flex-start; padding: 24px 0; }
+  .fall-stat > strong { font-size: 3.7rem; }
+  .fall-stat strong span { font-size: 1.65rem; }
+  .fall-stat p { font-size: .84rem; }
+  .fall-tip { grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding-top: 26px; margin-top: 24px; }
+  .fall-editor-note, .fall-page .fall-checklist { padding: 25px 22px; }
+  .fall-editor-note p:last-child { font-size: 1.25rem; }
+  .fall-desktop-break { display: none; }
+  .fall-cta { padding: 30px 24px; }
+  .fall-cta h2 { font-size: 1.75rem; }
+  .fall-page a.fall-button { width: 100%; padding: 14px 16px; font-size: .85rem; }
+  .fall-sources, .fall-tip { scroll-margin-top: 125px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fall-post *, .fall-post *::before, .fall-post *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}

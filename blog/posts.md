@@ -4,6 +4,22 @@ This file manages all blog post metadata for the Staged4Sale blog. Each post ent
 
 ## Posts
 
+- title: "Fall Home Staging Tips & Buyer Psychology"
+  subtitle: "Help buyers feel at home this fall, one thoughtful detail at a time."
+  slug: "fall-home-staging-tips-buyer-psychology"
+  date: "2026-10-25"
+  author: "Staged4Sale"
+  category: "Home Staging Tips"
+  image: "/images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg"
+  alt_text: "Staged4Sale living room at Monte Fuego Ranch with soft textures and warm evening light"
+  tags: ["Fall Staging", "Buyer Psychology", "Home Staging", "Southern California"]
+  summary: "Six practical fall staging tips, a showing checklist, and research on buyer visualization, with a Southern California perspective."
+  meta_description: "Make your home feel inviting this fall with practical staging tips, thoughtful seasonal touches, and research on how buyers imagine living in their own home."
+  read_time: 7
+  featured: true
+  published: true
+  related_posts: ["monte-fuego-ranch-transformation"]
+
 - title: "New NAR Report Confirms: Home Staging Works — and Here's the Proof"
   subtitle: "Fresh data shows staging delivers higher offers, faster sales, and happier buyers"
   slug: "nar-report-confirms-home-staging-works"

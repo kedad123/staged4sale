@@ -79,3 +79,13 @@ Desktop navigation is a left sidebar with Pipeline, Office, and Studio groups. N
 Branding stays in `admin/brand.js`. Screens and behavior stay in `admin/admin.js` and `admin/admin.css`. Demo jobs, inventory, members, quotes, and marketing stay in `admin/sample-data.js`. The 2026-10-17 admin entry still describes the earlier sample; this entry supersedes the note that the sample does not include virtual staging.
 
 Each admin page sends `noindex, nofollow`. `robots.txt` disallows `/admin/`. The folder is not in `sitemap.xml`, and the public navigation does not link to it. Real authentication still needs a server-side backend. See "API keys stay off this repo" above.
+
+## 2026-10-25 — Fall staging article
+
+Added `/blog/fall-home-staging-tips-buyer-psychology/`, a researched seasonal article with Southern California staging tips, buyer-visualization context, a showing checklist, and linked sources. The hero reuses the existing Monte Fuego Ranch photo; it does not depict a newly commissioned fall installation. The byline is Staged4Sale.
+
+Article-specific styling lives beside the page in `fall-staging.css`; shared `style.css` and `script.js` were not changed. The static blog listing in `blog/index.html`, metadata in `blog/posts.md`, and `sitemap.xml` all include this article. The listing is hand-authored HTML, not generated from `posts.md` at runtime.
+
+For future website updates, start from the current GitHub branch head and preserve the article, its stylesheet, metadata entry, blog card, and sitemap URL unless intentionally changing them. When rebuilding the blog listing, include every published entry in `blog/posts.md`. This note documents the convention; it cannot prevent an external bot from overwriting files.
+
+The article distinguishes agent survey observations from experimental findings and does not promise that seasonal decor raises offers or shortens selling time.

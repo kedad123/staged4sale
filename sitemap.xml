@@ -244,7 +244,7 @@
   <!-- Blog Section -->
   <url>
     <loc>https://staged4sale.com/blog/</loc>
-    <lastmod>2025-07-06</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -293,4 +293,11 @@
     <priority>0.4</priority>
   </url>
 
+  <!-- Fall staging article -->
+  <url>
+    <loc>https://staged4sale.com/blog/fall-home-staging-tips-buyer-psychology/</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
