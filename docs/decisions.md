@@ -89,3 +89,7 @@ Article-specific styling lives beside the page in `fall-staging.css`; shared `st
 For future website updates, start from the current GitHub branch head and preserve the article, its stylesheet, metadata entry, blog card, and sitemap URL unless intentionally changing them. When rebuilding the blog listing, include every published entry in `blog/posts.md`. This note documents the convention; it cannot prevent an external bot from overwriting files.
 
 The article distinguishes agent survey observations from experimental findings and does not promise that seasonal decor raises offers or shortens selling time.
+
+## 2026-10-28 — Monte Fuego living room after photo
+
+On Oct 28, 2026 the Monte Fuego living room after photo was replaced with Joey's color-corrected version.
