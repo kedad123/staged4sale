@@ -170,17 +170,6 @@ window.PortalSample = {
           }
         },
         {
-          room: "Kitchen",
-          before: {
-            src: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-02-before.webp",
-            alt: "Before: undressed kitchen with high-contrast cabinetry"
-          },
-          after: {
-            src: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-02.jpg",
-            alt: "After: kitchen styled lightly so the cabinetry and size stay visible"
-          }
-        },
-        {
           room: "Family room",
           before: {
             src: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-03-before.webp",

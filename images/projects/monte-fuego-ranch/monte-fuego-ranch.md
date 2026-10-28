@@ -7,8 +7,6 @@ tags: [ranch, transitional, neutral palette]
 ## Gallery  
 - monte-fuego-ranch-01-before.webp | Before: Unfurnished Living Room with Dated Valance and Bold Wall Color Distracting from Architectural Arches and Scenic Views  
 - monte-fuego-ranch-01.jpg | After: Furniture Placement Frames the Arches and View, While Layered Neutrals and Texture Add Warmth Without Competing with the Architecture  
-- monte-fuego-ranch-02-before.webp | Before: Kitchen Undressed, Emphasizing Contrast But Lacking Warmth or Cohesion  
-- monte-fuego-ranch-02.jpg | After: Kitchen Styled Minimally to Showcase Size, Function, and High-Contrast Cabinetry  
 - monte-fuego-ranch-03-before.webp | Before: Bright But Bare Room With No Focal Anchors or Defined Use  
 - monte-fuego-ranch-03.jpg | After: Family Room Grounded with Rounded Furniture Layout, Layered Neutrals, and Textural Balance  
 - monte-fuego-ranch-04-before.webp | Before: Stark Living Space with Unbalanced Visual Weight and Harsh Contrast  
