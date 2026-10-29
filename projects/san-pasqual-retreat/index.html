@@ -169,6 +169,7 @@
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         gap: 40px;
         margin-top: 50px;
+        align-items: start;
       }
       
       .gallery-item {
@@ -186,9 +187,42 @@
       
       .gallery-item img {
         width: 100%;
-        height: 300px;
-        object-fit: cover;
+        height: auto;
         display: block;
+      }
+
+      /* Dining before is 3:2; the enhanced after is square. Cover both in one 3:2 frame. */
+      .dining-compare {
+        margin-top: 56px;
+      }
+
+      .dining-compare h2 {
+        font-family: 'Playfair Display', serif;
+        color: #ffd700;
+        text-align: center;
+        font-size: 2em;
+        margin: 0 0 24px;
+      }
+
+      .dining-compare .before-after-container {
+        width: min(100%, 960px);
+        margin: 0 auto;
+        aspect-ratio: 3 / 2;
+        height: auto;
+        background: #111;
+      }
+
+      .dining-compare .before-image,
+      .dining-compare .after-image {
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .dining-compare .gallery-caption {
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
       }
       
       .gallery-caption {
@@ -310,8 +344,8 @@
                     <div class="gallery-item">
                         <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-01.jpg" 
                              alt="San Pasqual Retreat Primary Bath - bright spa-like bath with deep soaking tub and double vanities" 
-                             width="800" 
-                             height="600"
+                             width="1536" 
+                             height="1024"
                              loading="lazy">
                         <div class="gallery-caption">Primary Bath: Bright and spacious spa-like bath with deep soaking tub, double vanities, and pristine tile finishes with minimalist accessories</div>
                     </div>
@@ -319,8 +353,8 @@
                     <div class="gallery-item">
                         <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-02.jpg" 
                              alt="San Pasqual Retreat Family Room - casual retreat space with rich-toned sectional and warm lighting" 
-                             width="800" 
-                             height="600"
+                             width="1024" 
+                             height="1024"
                              loading="lazy">
                         <div class="gallery-caption">Family Room: Casual retreat space anchored by rich-toned sectional with plush pillows, patterned rug, and warm lighting for relaxed evenings</div>
                     </div>
@@ -328,8 +362,8 @@
                     <div class="gallery-item">
                         <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-03.jpg" 
                              alt="San Pasqual Retreat Cozy Conversation Area - intimate sofa arrangement with curated accessories" 
-                             width="800" 
-                             height="600"
+                             width="1024" 
+                             height="1024"
                              loading="lazy">
                         <div class="gallery-caption">Cozy Conversation Area: Intimate sofa arrangement with soft accent pillows, woven throw, and warm-toned area rug centered around curated round coffee table</div>
                     </div>
@@ -337,8 +371,8 @@
                     <div class="gallery-item">
                         <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-04.jpg" 
                              alt="San Pasqual Retreat Dining Room - tailored setup with upholstered chairs and tropical artwork" 
-                             width="800" 
-                             height="600"
+                             width="1024" 
+                             height="1024"
                              loading="lazy">
                         <div class="gallery-caption">Dining Room: Tailored setup with upholstered chairs and sleek black table, featuring textured vase centerpiece framed by tropical landscape artwork</div>
                     </div>
@@ -346,12 +380,54 @@
                     <div class="gallery-item">
                         <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-05.jpg" 
                              alt="San Pasqual Retreat Great Room - soaring ceilings and expansive windows with sophisticated seating" 
-                             width="800" 
-                             height="600"
+                             width="2048" 
+                             height="1536"
                              loading="lazy">
                         <div class="gallery-caption">Great Room: Soaring ceilings and expansive windows with neutral-toned seating, layered textures, and subtle metallic accents for sophisticated relaxed atmosphere</div>
                     </div>
 
+                    <div class="gallery-item">
+                        <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-06.jpg" 
+                             alt="San Pasqual Retreat Kitchen - bright white cabinetry, central island with bar stools, and a dining nook" 
+                             width="1536" 
+                             height="1024"
+                             loading="lazy">
+                        <div class="gallery-caption">Kitchen: Bright white cabinetry, central island with bar stools, and a dining nook</div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-07.jpg" 
+                             alt="San Pasqual Retreat Primary Bedroom - neutral bedding, metallic wall accents, and matching nightstands with lamps" 
+                             width="1536" 
+                             height="1024"
+                             loading="lazy">
+                        <div class="gallery-caption">Primary Bedroom: Neutral bedding, metallic wall accents, and matching nightstands with lamps</div>
+                    </div>
+
+                </div>
+
+                <div class="dining-compare">
+                    <h2>Dining Room Before and After</h2>
+                    <div class="before-after-container" data-pair="dining-room">
+                        <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-04-before.jpg"
+                             alt="San Pasqual Retreat dining room before staging, an empty room with wood floors"
+                             class="before-image"
+                             width="1536"
+                             height="1024">
+                        <img src="../../images/projects/san-pasqual-retreat/san-pasqual-retreat-04.jpg"
+                             alt="San Pasqual Retreat Dining Room - tailored setup with upholstered chairs and tropical artwork"
+                             class="after-image"
+                             width="1024"
+                             height="1024">
+                        <div class="before-after-slider">
+                            <div class="before-after-handle"></div>
+                        </div>
+                        <div class="before-after-labels">
+                            <div class="before-label">Before</div>
+                            <div class="after-label">After</div>
+                        </div>
+                    </div>
+                    <div class="gallery-caption">Dining Room: Tailored setup with upholstered chairs and sleek black table, featuring textured vase centerpiece framed by tropical landscape artwork</div>
                 </div>
             </div>
         </section>
@@ -369,7 +445,76 @@
 
     <button id="back-to-top" title="Back to Top"><i class="fas fa-arrow-up"></i></button>
 
-</body>
 <script src="../../script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.dining-compare .before-after-container').forEach(function(container) {
+        var slider = container.querySelector('.before-after-slider');
+        var afterImage = container.querySelector('.after-image');
+        if (!slider || !afterImage) return;
+
+        var isDragging = false;
+        var currentX = 50;
+
+        function updateSlider(percentage) {
+            percentage = Math.max(0, Math.min(100, percentage));
+            slider.style.left = percentage + '%';
+            afterImage.style.clipPath = 'polygon(' + percentage + '% 0%, 100% 0%, 100% 100%, ' + percentage + '% 100%)';
+            currentX = percentage;
+        }
+
+        function percentageFromEvent(event) {
+            var rect = container.getBoundingClientRect();
+            var clientX = event.clientX || (event.touches && event.touches[0].clientX);
+            return ((clientX - rect.left) / rect.width) * 100;
+        }
+
+        container.addEventListener('mousedown', function(event) {
+            isDragging = true;
+            updateSlider(percentageFromEvent(event));
+            event.preventDefault();
+        });
+
+        document.addEventListener('mousemove', function(event) {
+            if (!isDragging) return;
+            updateSlider(percentageFromEvent(event));
+        });
+
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        container.addEventListener('touchstart', function(event) {
+            isDragging = true;
+            updateSlider(percentageFromEvent(event));
+            event.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', function(event) {
+            if (!isDragging) return;
+            updateSlider(percentageFromEvent(event));
+            event.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+
+        container.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                updateSlider(currentX - 5);
+                event.preventDefault();
+            } else if (event.key === 'ArrowRight') {
+                updateSlider(currentX + 5);
+                event.preventDefault();
+            }
+        });
+
+        container.setAttribute('tabindex', '0');
+        container.setAttribute('aria-label', 'Before and after comparison slider. Use arrow keys or drag to compare.');
+        updateSlider(50);
+    });
+});
+</script>
 </body>
 </html>
