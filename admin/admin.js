@@ -25,6 +25,8 @@
     { id: "rescue", href: "rescue.html", label: "Rescue leads", short: "Rescue" },
     { id: "opens", href: "open-houses.html", label: "Open houses", short: "Opens" },
     { id: "quotes", href: "quotes.html", label: "Quotes", short: "Quotes", group: "Office" },
+    { id: "builder", href: "quote-builder.html", label: "Quote builder", short: "Builder" },
+    { id: "prices", href: "price-list.html", label: "Price list", short: "Prices" },
     { id: "inventory", href: "inventory.html", label: "Inventory", short: "Inventory" },
     { id: "members", href: "members.html", label: "VIP members", short: "VIP" },
     { id: "marketing", href: "marketing.html", label: "Marketing", short: "Marketing", group: "Studio" },

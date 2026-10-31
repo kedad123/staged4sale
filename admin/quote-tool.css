@@ -1,0 +1,390 @@
+/* Quote builder and price-list editor. Admin chrome stays in admin.css. */
+
+[hidden] {
+  display: none !important;
+}
+
+.qt textarea {
+  width: 100%;
+  min-height: 88px;
+  padding: 8px 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 10px;
+  background: var(--a-header);
+  color: var(--a-text);
+  font: inherit;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.qt textarea:focus {
+  outline: 2px solid var(--a-accent);
+  outline-offset: 1px;
+}
+
+.qt fieldset {
+  min-width: 0;
+  margin: 0 0 14px;
+  padding: 0;
+  border: 0;
+}
+
+.qt legend {
+  margin-bottom: 6px;
+  padding: 0;
+  font-weight: 700;
+}
+
+.qt input[type="checkbox"],
+.qt input[type="radio"],
+.qt input[type="date"] {
+  accent-color: var(--a-accent);
+}
+
+.qt input[type="checkbox"],
+.qt input[type="radio"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.qt-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 8px;
+}
+
+.qt-links a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.qt-notice {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--a-line);
+  border-left: 4px solid var(--a-accent);
+  border-radius: 12px;
+  background: var(--a-surface);
+}
+
+.qt-notice p {
+  margin: 0;
+}
+
+.qt-notice p + p {
+  margin-top: 6px;
+}
+
+.qt-running {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-header);
+}
+
+.qt-running strong {
+  font-family: var(--a-font-display);
+  color: var(--a-accent);
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.qt-warn {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--a-surface);
+  border: 1px solid var(--a-accent);
+  color: var(--a-accent);
+  font-weight: 700;
+}
+
+.qt-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (min-width: 1200px) {
+  .qt-layout {
+    grid-template-columns: minmax(340px, 1fr) minmax(420px, 0.92fr);
+  }
+}
+
+.qt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.qt-form .card h2 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+}
+
+.qt-choice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: start;
+  margin: 0 0 8px;
+  padding: 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-header);
+  cursor: pointer;
+}
+
+.qt-choice:has(input:checked) {
+  border-color: var(--a-accent);
+  box-shadow: inset 0 0 0 1px var(--a-accent);
+}
+
+.qt-choice input {
+  margin-top: 3px;
+}
+
+.qt-choice-name {
+  font-weight: 700;
+}
+
+.qt-choice-desc {
+  display: block;
+  margin-top: 2px;
+}
+
+.qt-choice-price {
+  font-weight: 700;
+  color: var(--a-accent);
+  white-space: nowrap;
+}
+
+.qt-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border: 1px solid var(--a-accent);
+  border-radius: 999px;
+  color: var(--a-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
+.qt-qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--a-line);
+}
+
+.qt-qty:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.qt-qty-copy {
+  min-width: 0;
+}
+
+.qt-qty-copy p {
+  margin: 0;
+}
+
+.qt-stepper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.qt-stepper input {
+  width: 72px;
+  min-height: 44px;
+  text-align: center;
+}
+
+.qt-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 0 0 12px;
+  cursor: pointer;
+}
+
+.qt-check:last-child {
+  margin-bottom: 0;
+}
+
+.qt-check input {
+  margin-top: 4px;
+  flex: 0 0 auto;
+}
+
+.qt-inline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 10px;
+}
+
+.qt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.qt-status {
+  min-height: 1.4em;
+  margin: 8px 0 0;
+  font-weight: 700;
+}
+
+.qt-custom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px auto;
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.qt-custom .field {
+  margin-bottom: 0;
+}
+
+.qt-preview-note {
+  margin: 10px 0 0;
+}
+
+.qt-saved {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qt-saved-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--a-line);
+}
+
+.qt-saved-row p {
+  margin: 0;
+}
+
+.qt-saved-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.qt-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 12px;
+}
+
+.qt-span {
+  grid-column: 1 / -1;
+}
+
+.qt-edit {
+  margin-bottom: 12px;
+}
+
+.qt-edit-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.qt-check-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  margin: 4px 0 8px;
+}
+
+.qt-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.qt-section-title {
+  margin: 18px 0 6px;
+}
+
+@media (max-width: 720px) {
+  .qt-fields,
+  .qt-inline,
+  .qt-custom {
+    grid-template-columns: 1fr;
+  }
+
+  .qt-qty {
+    flex-wrap: wrap;
+  }
+
+  .qt-running {
+    position: sticky;
+    top: calc(var(--app-top, 88px) + 8px);
+    z-index: 4;
+  }
+
+  .qt-running strong {
+    font-size: 1.4rem;
+  }
+}
+
+@media print {
+  .no-print,
+  .topbar,
+  .sidebar,
+  .tabbar,
+  .site-footer,
+  .more-sheet,
+  .sheet-backdrop {
+    display: none !important;
+  }
+
+  body.app {
+    display: block;
+    padding: 0 !important;
+    background: #fff;
+  }
+
+  .app-body,
+  .app-content,
+  .wrap,
+  #main,
+  .qt-layout,
+  .qt-preview {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
