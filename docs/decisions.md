@@ -93,3 +93,21 @@ The article distinguishes agent survey observations from experimental findings a
 ## 2026-10-28 — Monte Fuego living room after photo
 
 On Oct 28, 2026 the Monte Fuego living room after photo was replaced with Joey's color-corrected version.
+
+## 2026-10-31 — 20-year press release, unlinked and noindexed
+
+`/blog/20-years/` holds the Nov. 1, 2026 anniversary press release. The quotes are still pending Tawni's approval, so the page was added unlinked and noindexed. It will be linked and indexed at launch, after that approval.
+
+What is true until launch:
+
+- The page is not in the nav, the homepage, `blog/index.html`, `sitemap.xml`, or a feed. This site has no RSS or Atom feed.
+- `blog/posts.md` lists the post with `published: false` and no featured image. The blog index is hand-authored HTML, not generated from `posts.md`. When rebuilding the listing, include only entries with `published: true`. Leave this post out.
+- The page sends `<meta name="robots" content="noindex, nofollow">`. It is not disallowed in `robots.txt`, so a direct link still opens for review and a crawler that fetches the URL can see the noindex tag.
+- The page has no photo. Do not add a Monte Fuego kitchen photo later.
+
+At launch, after Tawni approves the quotes:
+
+1. Remove the noindex tag (use `index, follow`).
+2. Set `published: true` in `blog/posts.md`.
+3. Add a card on `blog/index.html`.
+4. Add `https://staged4sale.com/blog/20-years/` to `sitemap.xml`.
