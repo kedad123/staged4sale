@@ -4,6 +4,27 @@ This file manages all blog post metadata for the Staged4Sale blog. Each post ent
 
 ## Posts
 
+<!--
+  /blog/20-years/ is a draft. published is false on purpose.
+  Do not add it to blog/index.html, sitemap.xml, the nav, the homepage, or a feed.
+  At launch, after Tawni approves the quotes, set published to true and follow docs/decisions.md.
+-->
+- title: "Staged4Sale Celebrates 20 Years: How a North County Stager Weathered the Housing Crash, a Pandemic and the Rise of AI"
+  subtitle: "Oceanside staging pioneer combines traditional staging with new technology instead of fighting it"
+  slug: "20-years"
+  date: "2026-11-01"
+  author: "Staged4Sale"
+  category: "Press Release"
+  image: ""
+  alt_text: ""
+  tags: ["Anniversary", "Press Release", "Oceanside", "Home Staging"]
+  summary: "Staged4Sale marks 20 years in Oceanside, from the housing crash and the pandemic to pairing traditional staging with new technology."
+  meta_description: "Oceanside staging pioneer combines traditional staging with new technology instead of fighting it."
+  read_time: 4
+  featured: false
+  published: false
+  related_posts: []
+
 - title: "Fall Home Staging Tips & Buyer Psychology"
   subtitle: "Help buyers feel at home this fall, one thoughtful detail at a time."
   slug: "fall-home-staging-tips-buyer-psychology"
@@ -95,6 +116,7 @@ This file manages all blog post metadata for the Staged4Sale blog. Each post ent
 - Categories help organize content (Home Staging Tips, Market Insights, Case Studies, etc.)
 - Featured posts appear prominently on blog index
 - Unpublished posts are hidden from public view
+- The blog index is hand-authored HTML. It is not generated from this file at runtime. When rebuilding `blog/index.html`, include only entries with `published: true`
 
 ## Adding New Posts
 
@@ -104,3 +126,5 @@ This file manages all blog post metadata for the Staged4Sale blog. Each post ent
 4. Add featured image to `/images/blog/`
 5. Update sitemap.xml if needed
 6. Test all links and metadata before publishing
+
+Leave `published: false` entries off `blog/index.html`, `sitemap.xml`, the nav, the homepage, and any feed. `/blog/20-years/` is one of those drafts until launch. See `docs/decisions.md`.
