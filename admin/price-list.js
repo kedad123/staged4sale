@@ -97,7 +97,9 @@
       return;
     }
     if (fieldName === "extensionRooms") {
-      item.extensionRooms = !!raw;
+      if (String(raw).trim() === "") return;
+      var weight = Number(raw);
+      item.extensionRooms = !isFinite(weight) || weight < 0 ? 0 : Math.round(weight * 10) / 10;
       return;
     }
     if (fieldName === "pricing") {
@@ -310,6 +312,7 @@
           field("How it is priced", pricing, true),
           priceWrap,
           percentWrap,
+          field("Counts as this many rooms for extensions (each)", input({ "data-field": "extensionRooms", type: "number", min: "0", step: "0.1", value: String(item.extensionRooms || 0) })),
           field("Description", description, true)
         ]}),
         packageChecks(item),
@@ -354,6 +357,7 @@
         el("div", { class: "qt-fields", children: [
           field("Name", name),
           field("Price (USD)", price),
+          field("Counts as this many rooms for extensions", input({ "data-field": "extensionRooms", type: "number", min: "0", step: "0.1", value: String(item.extensionRooms || 0) })),
           field("Description", description, true)
         ]}),
         el("label", { class: "qt-check-line", children: [placeholder, el("span", { text: "Placeholder — this number is not confirmed" })] })
@@ -601,7 +605,7 @@
       addonHost,
       addButton("addons", "Add an add-on"),
       el("h2", { class: "qt-section-title", text: "Extension rates" }),
-      el("p", { class: "fine", text: "Vacant packages use included rooms plus added rooms. Occupied styling has no extension of its own. These rates apply only to Furniture Rental Add-on rooms, and only after the included 60 days. If there are no rental rooms, the quote does not mention an extension." }),
+      el("p", { class: "fine", text: "Vacant packages use included rooms plus added rooms. A patio set counts as half a room. Occupied styling has no extension of its own. Added rooms on an occupied job use the same rate after the included 60 days. If there are no added rooms, the quote does not mention an extension." }),
       extensionCard(),
       el("h2", { class: "qt-section-title", text: "Room sizing note" }),
       roomNoteCard(),

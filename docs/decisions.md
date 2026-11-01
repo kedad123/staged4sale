@@ -108,18 +108,19 @@ Each new admin page sends `noindex, nofollow`. `robots.txt` still disallows `/ad
 
 ## 2026-11-01 — Joey's draft quote sheet
 
-The sample quote builder is three optional sections, each with its own subtotal. The total is the sum. Consultation is $250 for one hour and a general written plan. On the same quote as staging, or if Previously paid is checked, a $250 Consultation credit is applied against staging unless Tawni waives it. A consultation-only quote does not mention rental, extensions, weeks, or months.
+The sample quote builder totals consultation, staging, and listing media separately. Consultation only is a choice in the package list, not its own form section. Under that choice, the consultation fee is Charge, Waive fee, or Credit toward staging. Credit is only offered with a staging package and adds a -$250 credit line. A consultation-only quote does not mention rental, extensions, weeks, or months. Basic Media Package is a checkbox on that same list. Waive media fee is shown only when media is selected.
 
 Staging packages from the draft sheet, all still sample prices:
 
 - Partial Staging, $2,000, 2 rooms, 30 days
 - Full-Service Staging, $3,000, 3 rooms plus kitchen and bath accents, 60 days, consultation included in the service, media not included
 - Occupied Styling & Accessories, $1,500, owner's furniture, accessories for 60 days, delivery and pickup included, moving furniture not included
-- Additional vacant room, $500
-- Furniture Rental Add-on, occupied only, $500 per room
+- Additional room, $500, for vacant or occupied quotes. It counts toward extension rooms.
 
-Extensions are $200 per room per month, billed in prepaid one-week blocks at $50 per room per week. Vacant room count is the package rooms plus added rooms. Occupied styling itself has no extension. The same weekly rate applies only to furniture-rental rooms, after the included 60 days. If there are no rental rooms, the quote does not mention an extension. Extensions exclude media, consultation, and travel.
+Extensions are $200 per room per month, billed in prepaid one-week blocks at $50 per room per week. Vacant room count is the package rooms plus added rooms. A patio set is $250 and counts as half a room. Occupied styling itself has no extension. Added rooms on an occupied job use the same rate after the included 60 days. If there are no added rooms, the quote does not mention an extension. Extensions exclude media, consultation, and travel.
+
+The miles field shows the calculated value and can be edited. Each selected line has a price that can be changed for that quote without changing the price list. The access line is named Access fee, described as stairs, elevators, long carries or limited parking, at a $350 placeholder.
 
 Listing media is $500 up to 2,500 sq ft, plus $0.10 per sq ft above that, and it can be booked alone. Waive shows the $500 and a matching credit. The size surcharge remains. Travel is $5 per mile after 20 miles from Oceanside, once per visit, from the bundled Census ZIP table, with a manual mile override.
 
-The room note on staging quotes and the price list is: "A room includes up to 5 pieces of furniture. Great rooms and other large rooms may count as two or more rooms." Extra furniture and accent pieces stay. Stairs, patio, and rush stay as placeholders. The old Occupied home surcharge is gone. The price-list storage key is `s4s-admin-quote-catalog-v3`. See `docs/quote-calculator.md`.
+The room note on staging quotes and the price list is: "A room includes up to 5 pieces of furniture. Great rooms and other large rooms may count as two or more rooms." Extra furniture and accent pieces stay. Stairs, patio, and rush stay as placeholders. The old Occupied home surcharge is gone. The price-list storage key is `s4s-admin-quote-catalog-v4`. See `docs/quote-calculator.md`.

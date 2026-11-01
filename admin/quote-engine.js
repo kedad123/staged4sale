@@ -146,9 +146,8 @@
       packageId: packageId,
       qty: qty,
       addons: addons,
-      consultationOn: false,
-      previouslyPaid: false,
-      waiveCredit: false,
+      consultFee: "waive",
+      overrides: {},
       extensionWeeks: 0,
       mediaOn: false,
       mediaWaive: false,
@@ -293,7 +292,7 @@
     var overridden = false;
     if (overrideMiles != null && String(overrideMiles).trim() !== "") {
       var typed = Math.round(Number(overrideMiles));
-      if (isFinite(typed) && typed >= 0 && typed <= 5000) {
+      if (isFinite(typed) && typed >= 0 && typed <= 5000 && typed !== calculated) {
         used = typed;
         overridden = true;
       }
@@ -352,19 +351,42 @@
     };
   }
 
-  function extensionRoomCount(pkg, catalog, qtyMap) {
+  function roomWeight(value) {
+    if (value === true) return 1;
+    var n = Number(value);
+    if (!isFinite(n) || n <= 0) return 0;
+    return n;
+  }
+
+  function linePrice(draft, key, fallback) {
+    var map = (draft && draft.overrides) || {};
+    if (map[key] != null && String(map[key]).trim() !== "") {
+      var n = Number(String(map[key]).replace(/[$,\s]/g, ""));
+      if (isFinite(n)) return n;
+    }
+    return fallback;
+  }
+
+  function extensionRoomCount(pkg, catalog, qtyMap, addonMap) {
+    addonMap = addonMap || {};
     var added = 0;
     (catalog.quantityItems || []).forEach(function (item) {
-      if (!item.extensionRooms || !appliesTo(item, pkg.id)) return;
-      added += clampInt(qtyMap[item.id], 0, 99, 0);
+      var weight = roomWeight(item.extensionRooms);
+      if (!weight || !appliesTo(item, pkg.id)) return;
+      added += clampInt(qtyMap[item.id], 0, 99, 0) * weight;
     });
-    if (pkg.kind === "occupied") return added;
+    (catalog.addons || []).forEach(function (item) {
+      var weight = roomWeight(item.extensionRooms);
+      if (!weight || !addonMap[item.id]) return;
+      added += weight;
+    });
+    if (pkg.kind === "occupied" || pkg.kind === "consult") return added;
     return clampInt(pkg.includedRooms, 0, 99, 0) + added;
   }
 
-  function stagedRooms(pkg, catalog, qtyMap) {
+  function stagedRooms(pkg, catalog, qtyMap, addonMap) {
     if (!pkg) return 0;
-    return extensionRoomCount(pkg, catalog, qtyMap);
+    return extensionRoomCount(pkg, catalog, qtyMap, addonMap);
   }
 
   function findPackage(catalog, id) {
@@ -395,6 +417,10 @@
       return empty;
     }
     var pkg = draft.packageId ? findPackage(catalog, draft.packageId) : null;
+    var stagingPkg = pkg && pkg.kind !== "consult" ? pkg : null;
+    var consultOnly = !!(pkg && pkg.kind === "consult");
+    var feeMode = draft.consultFee === "charge" || draft.consultFee === "credit" ? draft.consultFee : "waive";
+    if (feeMode === "credit" && !stagingPkg) feeMode = consultOnly ? "charge" : "waive";
     var consult = consultationSettings(catalog);
     var media = mediaSettings(catalog);
     var ext = extensionSettings(catalog);
@@ -404,31 +430,39 @@
     var placeholderUsed = false;
     var extensionVisible = false;
 
-    if (draft.consultationOn) {
-      var hours = consult.hours === 1 ? "1 hour" : consult.hours + " hours";
+    var consultPrice = linePrice(draft, "consult", consult.price);
+    if (feeMode === "charge" || (feeMode === "waive" && consultOnly)) {
       var cLines = [{
         name: consult.name || "Consultation",
-        detail: consult.description || (hours + ". A general written plan."),
+        detail: consult.description || "One hour with a general written plan.",
         qty: 1,
-        amount: dollarsToCents(consult.price)
+        amount: dollarsToCents(consultPrice)
       }];
+      if (feeMode === "waive" && consultOnly) {
+        cLines.push({
+          name: "Consultation fee waived",
+          detail: "The consultation fee is not charged.",
+          qty: 1,
+          amount: -dollarsToCents(consultPrice)
+        });
+      }
       pushSection(sections, "consultation", "Consultation", cLines, []);
       if (consult.placeholder) placeholderUsed = true;
     }
 
-    if (pkg) {
-      if (pkg.placeholder) placeholderUsed = true;
+    if (stagingPkg) {
+      if (stagingPkg.placeholder) placeholderUsed = true;
       var sLines = [{
-        name: pkg.name || "Staging",
-        detail: packageLineDetail(pkg),
+        name: stagingPkg.name || "Staging",
+        detail: packageLineDetail(stagingPkg),
         qty: 1,
-        amount: dollarsToCents(pkg.price)
+        amount: dollarsToCents(linePrice(draft, "pkg:" + stagingPkg.id, stagingPkg.price))
       }];
       (catalog.quantityItems || []).forEach(function (item) {
-        if (!appliesTo(item, pkg.id)) return;
+        if (!appliesTo(item, stagingPkg.id)) return;
         var qty = clampInt(qtyMap[item.id], 0, 99, 0);
         if (!qty) return;
-        var unitCents = dollarsToCents(item.price);
+        var unitCents = dollarsToCents(linePrice(draft, item.id, item.price));
         var amount = unitCents * qty;
         if (!amount) return;
         var unitName = item.unit || "item";
@@ -444,12 +478,12 @@
           name: item.name || "Add-on",
           detail: item.description || "",
           qty: 1,
-          amount: dollarsToCents(item.price)
+          amount: dollarsToCents(linePrice(draft, item.id, item.price))
         });
         if (item.placeholder) placeholderUsed = true;
       });
-      var rooms = extensionRoomCount(pkg, catalog, qtyMap);
-      var showExtension = pkg.kind === "occupied" ? rooms > 0 : true;
+      var rooms = extensionRoomCount(stagingPkg, catalog, qtyMap, addonMap);
+      var showExtension = stagingPkg.kind === "occupied" ? rooms > 0 : true;
       extensionVisible = showExtension;
       var notes = [];
       if (showExtension) {
@@ -464,22 +498,23 @@
             amount: weeks * rooms * weekly
           });
         }
-        var rateLine = pkg.kind === "occupied"
-          ? "After the included " + (pkg.includedDays || 0) + " days, extensions apply only to rented rooms: " +
-            money(monthly) + " per rented room per month, billed in prepaid 1-week blocks at " + money(weekly) + " per room."
-          : "After the included " + (pkg.includedDays || 0) + " days: " + money(monthly) +
+        var roomLabel = (rooms % 1) ? String(Math.round(rooms * 10) / 10) : String(rooms);
+        var rateLine = stagingPkg.kind === "occupied"
+          ? "After the included " + (stagingPkg.includedDays || 0) + " days, extensions apply only to added rooms: " +
+            money(monthly) + " per room per month, billed in prepaid 1-week blocks at " + money(weekly) + " per room (" + roomLabel + " on this quote)."
+          : "After the included " + (stagingPkg.includedDays || 0) + " days: " + money(monthly) +
             " per room per month, billed in prepaid 1-week blocks at " + money(weekly) +
-            " per room (" + rooms + " " + plural("room", rooms) + " on this quote).";
+            " per room (" + roomLabel + " on this quote).";
         notes.push(rateLine);
         if (ext.placeholder) placeholderUsed = true;
       }
       if (catalog.roomNote) notes.push(catalog.roomNote);
-      if (!draft.waiveCredit && (draft.consultationOn || draft.previouslyPaid)) {
-        var credit = dollarsToCents(consult.credit);
+      if (feeMode === "credit") {
+        var credit = dollarsToCents(linePrice(draft, "credit", consult.credit));
         if (credit > 0) {
           sLines.push({
             name: "Consultation credit",
-            detail: draft.consultationOn ? "Booked on this quote with staging." : "Previously paid.",
+            detail: "Credit toward staging.",
             qty: 1,
             amount: -credit
           });
@@ -489,7 +524,7 @@
     }
 
     if (draft.mediaOn) {
-      var base = dollarsToCents(media.price);
+      var base = dollarsToCents(linePrice(draft, "media", media.price));
       var mLines = [{
         name: media.name || "Basic Media Package",
         detail: "Homes up to " + Number(media.sqftThreshold).toLocaleString("en-US") + " sq ft.",
@@ -523,7 +558,7 @@
       if (media.placeholder) placeholderUsed = true;
     }
 
-    var visit = !!(draft.consultationOn || pkg || draft.mediaOn);
+    var visit = !!(consultOnly || stagingPkg || draft.mediaOn || feeMode === "charge");
     var trip = mileage(catalog, draft.zip, draft.miles);
     if (visit && trip.surcharge > 0) {
       var mileWord = trip.used === 1 ? "mile" : "miles";
@@ -577,21 +612,21 @@
     }
 
     var included = [];
-    if (draft.consultationOn) {
-      included.push((consult.hours === 1 ? "One hour" : consult.hours + " hours") + " with a general written plan.");
+    if (feeMode === "charge" || consultOnly) {
+      included.push(consult.description || "One hour with a general written plan.");
     }
-    if (pkg) {
-      if (pkg.description) included.push(pkg.description);
-      if (pkg.includedRooms > 0) {
-        included.push(pkg.includedRooms + " " + plural("room", pkg.includedRooms) + " included.");
+    if (stagingPkg) {
+      if (stagingPkg.description) included.push(stagingPkg.description);
+      if (stagingPkg.includedRooms > 0) {
+        included.push(stagingPkg.includedRooms + " " + plural("room", stagingPkg.includedRooms) + " included.");
       }
-      if (pkg.includedDays > 0) included.push(pkg.includedDays + " days included.");
-      if (pkg.includesConsultation) included.push("Consultation is part of this staging service.");
+      if (stagingPkg.includedDays > 0) included.push(stagingPkg.includedDays + " days included.");
+      if (stagingPkg.includesConsultation) included.push("Consultation is part of this staging service.");
     }
-    if (draft.mediaOn) included.push("Listing media is priced in its own section.");
+    if (draft.mediaOn && stagingPkg) included.push("Listing media is priced in its own section.");
 
-    var terms = !pkg
-      ? (draft.mediaOn && !draft.consultationOn ? (catalog.mediaTerms || []) : (catalog.consultationTerms || []))
+    var terms = !stagingPkg
+      ? (draft.mediaOn && feeMode !== "charge" && !consultOnly ? (catalog.mediaTerms || []) : (catalog.consultationTerms || []))
       : (catalog.terms || []).filter(function (term) {
         if (extensionVisible) return true;
         return !/week|month|rental|extension/i.test(term);
@@ -615,7 +650,7 @@
       discountCapped: discountCapped,
       model: {
         number: number,
-        documentTitle: pkg ? "Staging Quote" : "Quote",
+        documentTitle: stagingPkg ? "Staging Quote" : "Quote",
         issued: issued,
         until: addDaysIso(issued, validDays),
         client: String(draft.clientName || "").trim().slice(0, 80),

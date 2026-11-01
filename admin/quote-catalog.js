@@ -12,7 +12,7 @@
    placeholder: true means the number was not in the draft fixed
    list. The client-facing quote does not print that word. */
 (function () {
-  var KEY = "s4s-admin-quote-catalog-v3";
+  var KEY = "s4s-admin-quote-catalog-v4";
 
   var DEFAULTS = {
     version: 3,
@@ -50,6 +50,17 @@
       "A special style, color, or size request may cost extra. This quote is valid through the date above."
     ],
     packages: [
+      {
+        id: "consultation",
+        name: "Consultation only",
+        description: "One hour with a general written plan.",
+        price: 250,
+        kind: "consult",
+        includedRooms: 0,
+        includedDays: 0,
+        includesConsultation: false,
+        placeholder: false
+      },
       {
         id: "partial",
         name: "Partial Staging",
@@ -104,25 +115,13 @@
       {
         id: "extra-room",
         name: "Additional room",
-        description: "Another room on a vacant staging.",
+        description: "Another room. On an occupied home this is the furniture for that room.",
         unit: "room",
         pricing: "flat",
         price: 500,
         percent: 0,
-        appliesTo: ["partial", "full-service"],
-        extensionRooms: true,
-        placeholder: false
-      },
-      {
-        id: "furniture-rental",
-        name: "Furniture Rental Add-on",
-        description: "Furniture for one room when the home is occupied.",
-        unit: "room",
-        pricing: "flat",
-        price: 500,
-        percent: 0,
-        appliesTo: ["occupied"],
-        extensionRooms: true,
+        appliesTo: ["partial", "full-service", "occupied"],
+        extensionRooms: 1,
         placeholder: false
       },
       {
@@ -148,18 +147,20 @@
     ],
     addons: [
       {
-        id: "stairs",
-        name: "Stairs / long carry",
-        description: "Stairs, a long carry, or other difficult access.",
+        id: "access",
+        name: "Access fee",
+        description: "Stairs, elevators, long carries or limited parking.",
         price: 350,
+        extensionRooms: 0,
         placeholder: true
       },
       {
         id: "patio",
         name: "Patio set",
-        description: "Outdoor seating set.",
-        price: 400,
-        placeholder: true
+        description: "Outdoor seating set. Counts as half a room for extensions.",
+        price: 250,
+        extensionRooms: 0.5,
+        placeholder: false
       },
       {
         id: "rush",
@@ -209,7 +210,7 @@
       name: String(item.name || "Package").trim().slice(0, 80) || "Package",
       description: String(item.description || "").trim().slice(0, 400),
       price: clampNum(item.price, 0, 10000000, 0),
-      kind: item.kind === "occupied" ? "occupied" : "vacant",
+      kind: item.kind === "occupied" ? "occupied" : (item.kind === "consult" ? "consult" : "vacant"),
       includedRooms: clampInt(item.includedRooms, 0, 99, 0),
       includedDays: clampInt(item.includedDays, 0, 365, 0),
       includesConsultation: !!item.includesConsultation,
@@ -230,7 +231,7 @@
       price: clampNum(item.price, 0, 10000000, 0),
       percent: clampNum(item.percent, 0, 100, 0),
       appliesTo: appliesToList(item.appliesTo),
-      extensionRooms: !!item.extensionRooms,
+      extensionRooms: roomWeight(item.extensionRooms),
       placeholder: !!item.placeholder
     };
   }
@@ -316,8 +317,16 @@
       name: String(item.name || "Add-on").trim().slice(0, 80) || "Add-on",
       description: String(item.description || "").trim().slice(0, 400),
       price: clampNum(item.price, 0, 10000000, 0),
+      extensionRooms: roomWeight(item.extensionRooms),
       placeholder: !!item.placeholder
     };
+  }
+
+  function roomWeight(value) {
+    if (value === true) return 1;
+    var n = Number(value);
+    if (!isFinite(n) || n <= 0) return 0;
+    return Math.round(n * 10) / 10;
   }
 
   function sanitizeList(list, map) {

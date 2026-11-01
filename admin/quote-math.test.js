@@ -53,8 +53,8 @@ function forbidden(model) {
 }
 
 const consultOnly = QuoteEngine.compute(draft({
-  consultationOn: true,
-  packageId: "",
+  packageId: "consultation",
+  consultFee: "charge",
   mediaOn: false
 }), catalog, contact);
 assert.strictEqual(consultOnly.model.total, 25000);
@@ -84,33 +84,33 @@ assert.ok(partial.model.lines.some(function (line) {
 assert.ok(textOf(partial).indexOf("Media package waived") !== -1);
 
 const full = QuoteEngine.compute(draft({
-  consultationOn: true,
   packageId: "full-service",
+  consultFee: "credit",
   mediaOn: true,
   mediaWaive: false
 }), catalog, contact);
-assert.strictEqual(full.model.sections.filter((s) => s.id === "consultation")[0].subtotal, 25000);
+assert.ok(!full.model.sections.some((section) => section.id === "consultation"));
 assert.strictEqual(full.model.sections.filter((s) => s.id === "staging")[0].subtotal, 300000 - 25000);
 assert.strictEqual(full.model.sections.filter((s) => s.id === "media")[0].subtotal, 50000);
-assert.strictEqual(full.model.total, 350000);
+assert.strictEqual(full.model.total, 325000);
 assert.ok(full.model.lines.some((line) => line.name === "Consultation credit" && line.amount === -25000));
 
-const waivedCredit = QuoteEngine.compute(draft({
-  consultationOn: true,
+const charged = QuoteEngine.compute(draft({
   packageId: "full-service",
-  waiveCredit: true
+  consultFee: "charge"
 }), catalog, contact);
-assert.ok(!waivedCredit.model.lines.some((line) => line.name === "Consultation credit"));
-assert.strictEqual(waivedCredit.model.total, 25000 + 300000);
+assert.strictEqual(charged.model.sections.filter((s) => s.id === "consultation")[0].subtotal, 25000);
+assert.ok(!charged.model.lines.some((line) => line.name === "Consultation credit"));
+assert.strictEqual(charged.model.total, 25000 + 300000);
 
 const occupied = QuoteEngine.compute(draft({
   packageId: "occupied",
-  qty: { "furniture-rental": 1 }
+  qty: { "extra-room": 1 }
 }), catalog, contact);
 assert.strictEqual(occupied.model.total, 200000);
 assert.ok(!occupied.model.lines.some((line) => line.name === "Extension"));
-assert.ok(textOf(occupied).indexOf("rented room") !== -1);
-assert.ok(!occupied.model.lines.some((line) => line.name === "Additional room"));
+assert.ok(textOf(occupied).indexOf("added rooms") !== -1);
+assert.ok(occupied.model.lines.some((line) => line.name === "Additional room" && line.amount === 50000));
 
 const occupiedPlain = QuoteEngine.compute(draft({ packageId: "occupied" }), catalog, contact);
 assert.strictEqual(occupiedPlain.model.total, 150000);
@@ -118,10 +118,26 @@ assert.strictEqual(/\bextensions?\b|\bweeks?\b|\bmonths?\b/i.test(textOf(occupie
 
 const occupiedWeeks = QuoteEngine.compute(draft({
   packageId: "occupied",
-  qty: { "furniture-rental": 2 },
+  qty: { "extra-room": 2 },
   extensionWeeks: 1
 }), catalog, contact);
 assert.strictEqual(occupiedWeeks.model.lines.filter((line) => line.name === "Extension")[0].amount, 10000);
+
+const patio = QuoteEngine.compute(draft({
+  packageId: "partial",
+  consultFee: "waive",
+  addons: { patio: true },
+  extensionWeeks: 1
+}), catalog, contact);
+assert.strictEqual(patio.model.lines.filter((line) => line.name === "Patio set")[0].amount, 25000);
+assert.strictEqual(patio.model.lines.filter((line) => line.name === "Extension")[0].amount, 12500);
+
+const overridden = QuoteEngine.compute(draft({
+  packageId: "partial",
+  consultFee: "waive",
+  overrides: { "pkg:partial": 1800 }
+}), catalog, contact);
+assert.strictEqual(overridden.model.lines.filter((line) => line.name === "Partial Staging")[0].amount, 180000);
 
 const trip = QuoteEngine.mileage(catalog, "92024", "");
 assert.strictEqual(trip.calculated, 13);

@@ -223,6 +223,25 @@
   text-align: center;
 }
 
+.qt-stepper input[data-price-for],
+.qt-addon input[data-price-for] {
+  width: 110px;
+  text-align: right;
+}
+
+.qt-addon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.qt-addon .qt-check {
+  margin: 0;
+  flex: 1;
+}
+
 .qt-check {
   display: flex;
   gap: 10px;

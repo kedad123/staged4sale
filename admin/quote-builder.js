@@ -158,11 +158,17 @@
     lastSections = result.model.sections || [];
     slot.replaceChildren(engine.renderPaper(result.model, { logo: "../images/logo2.png" }));
     var pkg = packageById(draft.packageId);
-    var rooms = pkg ? engine.stagedRooms(pkg, catalog, draft.qty) : 0;
+    var rooms = pkg ? engine.stagedRooms(pkg, catalog, draft.qty, draft.addons) : 0;
     document.querySelectorAll("[data-qty-row]").forEach(function (row) {
       var applies = row.getAttribute("data-applies") || "";
       var ok = !!pkg && (!applies || applies.split(",").indexOf(pkg.id) !== -1);
       row.hidden = !ok;
+      var linePriceInput = row.querySelector("[data-price-for]");
+      if (linePriceInput) linePriceInput.hidden = !(Number(draft.qty[row.getAttribute("data-qty-row")]) > 0);
+    });
+    document.querySelectorAll("[data-addon-row]").forEach(function (row) {
+      var priceInput = row.querySelector("[data-price-for]");
+      if (priceInput) priceInput.hidden = !(draft.addons && draft.addons[row.getAttribute("data-addon-row")]);
     });
     document.querySelectorAll("[data-hint-for]").forEach(function (node) {
       var id = node.getAttribute("data-hint-for");
@@ -177,6 +183,56 @@
     document.title = "Quote " + result.model.number + " · " + (brand.businessName || "Staged4Sale");
   }
 
+  function syncPriceFields(pkg) {
+    var wrap = document.getElementById("package-price-wrap");
+    var inputNode = document.getElementById("price-package");
+    var staging = pkg && pkg.kind !== "consult";
+    if (wrap) wrap.hidden = !staging;
+    if (inputNode && staging && document.activeElement !== inputNode) {
+      inputNode.setAttribute("data-override", "pkg:" + pkg.id);
+      inputNode.value = shownOverride("pkg:" + pkg.id, pkg.price);
+    }
+    var mediaWrap = document.getElementById("media-price-wrap");
+    var mediaInput = document.getElementById("price-media");
+    if (mediaWrap) mediaWrap.hidden = !draft.mediaOn;
+    if (mediaInput && draft.mediaOn && document.activeElement !== mediaInput) {
+      mediaInput.value = shownOverride("media", (catalog.media && catalog.media.price) || 0);
+    }
+    var creditWrap = document.getElementById("credit-price-wrap");
+    var creditInput = document.getElementById("price-credit");
+    if (creditWrap) creditWrap.hidden = draft.consultFee !== "credit" || !staging;
+    if (creditInput && draft.consultFee === "credit" && document.activeElement !== creditInput) {
+      creditInput.value = shownOverride("credit", (catalog.consultation && catalog.consultation.credit) || 0);
+    }
+    var consultWrap = document.getElementById("consult-price-wrap");
+    var consultInput = document.getElementById("price-consult");
+    var showConsultPrice = draft.consultFee === "charge" || (pkg && pkg.kind === "consult");
+    if (consultWrap) consultWrap.hidden = !showConsultPrice;
+    if (consultInput && showConsultPrice && document.activeElement !== consultInput) {
+      consultInput.value = shownOverride("consult", (catalog.consultation && catalog.consultation.price) || 0);
+    }
+    document.querySelectorAll("[data-price-for]").forEach(function (node) {
+      if (document.activeElement === node) return;
+      var id = node.getAttribute("data-price-for");
+      var amount = catalogAmount(id);
+      if (amount == null) return;
+      node.value = shownOverride(id, amount);
+    });
+  }
+
+  function shownOverride(key, fallback) {
+    var map = draft.overrides || {};
+    if (map[key] != null && String(map[key]).trim() !== "") return String(map[key]);
+    return String(fallback);
+  }
+
+  function catalogAmount(id) {
+    var found = null;
+    (catalog.quantityItems || []).forEach(function (item) { if (item.id === id) found = item.price; });
+    (catalog.addons || []).forEach(function (item) { if (item.id === id) found = item.price; });
+    return found;
+  }
+
   function syncTrip() {
     var readout = document.getElementById("miles-readout");
     if (!readout) return;
@@ -189,16 +245,16 @@
       return;
     }
     if (!String(draft.zip || "").trim()) {
-      readout.textContent = "Enter a ZIP to estimate miles. " + lead + "Leave miles blank to use the estimate.";
+      readout.textContent = "Enter a ZIP to estimate miles. " + lead;
       return;
     }
     if (!trip.destKnown && !trip.overridden) {
       readout.textContent = "That ZIP is not in the local table. Enter miles to add a distance charge. " + lead;
       return;
     }
-    var calc = trip.calculated == null ? "" : "Calculated " + trip.calculated + " miles (" +
-      (Math.round(trip.straight * 10) / 10) + " straight-line × " + settings.roadFactor + ", rounded). ";
-    var used = trip.overridden ? "Using " + trip.used + " miles entered. " : "Using " + trip.used + " miles. ";
+    var calc = trip.calculated == null ? "" : "Straight-line " + (Math.round(trip.straight * 10) / 10) +
+      " × " + settings.roadFactor + " rounds to " + trip.calculated + ". ";
+    var used = trip.overridden ? "The miles field is " + trip.used + ", edited from that estimate. " : "";
     var charge = trip.surcharge > 0
       ? trip.extra + " miles over " + settings.freeMiles + ". Surcharge " + engine.money(trip.surcharge) + "."
       : "Within the free miles. Surcharge " + engine.money(0) + ".";
@@ -225,7 +281,7 @@
         ? "Waived. The quote shows " + price + " and a matching credit. Square feet over " + (media.sqftThreshold || 2500) + " still add " + (media.perSqFt || 0.1) + " each."
         : "Basic media is " + price + " up to " + (media.sqftThreshold || 2500) + " sq ft, then " + (media.perSqFt || 0.1) + " per sq ft. It can be booked on its own. Waive shows the price and a matching credit.";
     }
-    var rooms = pkg ? engine.stagedRooms(pkg, catalog, draft.qty) : 0;
+    var rooms = pkg ? engine.stagedRooms(pkg, catalog, draft.qty, draft.addons) : 0;
     var showExt = !!pkg && (pkg.kind === "occupied" ? rooms > 0 : true);
     var addonList = document.getElementById("addon-list");
     if (addonList) addonList.hidden = !pkg;
@@ -235,9 +291,16 @@
         ? (rooms ? "Extensions apply only to rented rooms, after the included " + pkg.includedDays + " days." : "")
         : "Extensions use the rooms in the package plus added rooms. Occupied styling with no rented rooms has no extension.");
     }
+    var feeCredit = document.getElementById("consult-fee-credit");
+    var staging = pkg && pkg.kind !== "consult";
+    if (feeCredit) feeCredit.disabled = !staging;
+    var waiveWrap = document.getElementById("media-waive-wrap");
+    if (waiveWrap) waiveWrap.hidden = !draft.mediaOn;
+    syncPriceFields(pkg);
     if (consultNote) {
-      var credit = engine.money(Math.round(Number((catalog.consultation && catalog.consultation.credit) || 0) * 100));
-      consultNote.textContent = "If consultation is on this quote with staging, or it was previously paid, a " + credit + " credit is applied to staging. Waive turns that credit off. A consultation-only quote has no staging terms.";
+      consultNote.textContent = staging
+        ? "Charge adds the consultation fee. Waive leaves it off this quote. Credit toward staging adds a credit line."
+        : "Consultation only can be charged or waived. Credit toward staging is available with a staging package.";
     }
     if (sectionLine) {
       sectionLine.textContent = lastSections.map(function (part) {
@@ -270,10 +333,8 @@
     document.querySelectorAll("input[name='packageId']").forEach(function (node) {
       node.checked = (node.value === "none" && !draft.packageId) || node.value === draft.packageId;
     });
-    ["consultation-on", "previously-paid", "waive-credit"].forEach(function (id, index) {
-      var keys = ["consultationOn", "previouslyPaid", "waiveCredit"];
-      var node = document.getElementById(id);
-      if (node) node.checked = !!draft[keys[index]];
+    document.querySelectorAll("input[name='consultFee']").forEach(function (node) {
+      node.checked = node.value === (draft.consultFee || "waive");
     });
     (catalog.quantityItems || []).forEach(function (item) {
       setValue("qty-" + item.id, draft.qty[item.id] || 0);
@@ -505,6 +566,13 @@
       refresh();
       return;
     }
+    if (target.hasAttribute("data-override")) {
+      markDirty();
+      if (!draft.overrides) draft.overrides = {};
+      draft.overrides[target.getAttribute("data-override")] = target.value;
+      refresh();
+      return;
+    }
     var key = target.getAttribute("data-draft");
     if (!key) return;
     markDirty();
@@ -513,18 +581,32 @@
       draft.addons[key.slice(6)] = target.checked;
     } else if (key.indexOf("qty:") === 0) {
       draft.qty[key.slice(4)] = target.value;
-    } else if (key === "consultationOn" || key === "previouslyPaid" || key === "waiveCredit" || key === "mediaOn" || key === "mediaWaive") {
+    } else if (key === "mediaOn" || key === "mediaWaive") {
       draft[key] = !!target.checked;
       if (key === "mediaOn" && !draft.mediaOn) draft.mediaWaive = false;
+    } else if (key === "consultFee") {
+      if (target.checked) draft.consultFee = target.value;
     } else if (key === "occupancy" || key === "packageId") {
       if (target.checked) draft[key] = target.value === "none" ? "" : target.value;
       if (key === "packageId" && target.checked) {
         var next = packageById(draft.packageId);
         if (next && next.kind === "occupied") draft.occupancy = "occupied";
         if (next && next.kind === "vacant") draft.occupancy = "vacant";
+        if (!next && draft.consultFee === "credit") draft.consultFee = "waive";
+        if (next && next.kind === "consult" && (draft.consultFee === "credit" || draft.consultFee === "waive")) draft.consultFee = "charge";
         document.querySelectorAll("input[name='occupancy']").forEach(function (node) {
           node.checked = node.value === draft.occupancy;
         });
+        document.querySelectorAll("input[name='consultFee']").forEach(function (node) {
+          node.checked = node.value === draft.consultFee;
+        });
+      }
+    } else if (key === "zip") {
+      draft.zip = target.value;
+      var tripNow = engine.mileage(catalog, draft.zip, "");
+      if (tripNow.calculated != null) {
+        draft.miles = String(tripNow.calculated);
+        setValue("miles", draft.miles);
       }
     } else {
       draft[key] = target.value;
@@ -597,6 +679,15 @@
       "data-draft": "qty:" + item.id,
       "aria-label": item.name + " quantity"
     });
+    var price = input({
+      id: "price-" + item.id,
+      "data-override": item.id,
+      "data-price-for": item.id,
+      type: "number",
+      min: "0",
+      step: "0.01",
+      "aria-label": item.name + " price"
+    });
     less.addEventListener("click", function () { stepQty(item.id, -1); });
     more.addEventListener("click", function () { stepQty(item.id, 1); });
     var title = el("p", { children: [el("span", { class: "qt-choice-name", text: item.name })] });
@@ -614,7 +705,7 @@
             el("p", { class: "fine", "data-hint-for": item.id, text: "" })
           ]
         }),
-        el("div", { class: "qt-stepper", children: [less, box, more] })
+        el("div", { class: "qt-stepper", children: [less, box, more, price] })
       ]
     });
   }
@@ -625,12 +716,23 @@
       type: "checkbox",
       "data-draft": "addon:" + item.id
     });
+    var price = input({
+      "data-override": item.id,
+      "data-price-for": item.id,
+      type: "number",
+      min: "0",
+      step: "0.01",
+      "aria-label": item.name + " price"
+    });
     var text = el("span", { children: [
-      el("span", { class: "qt-choice-name", text: item.name + " · " + engine.moneyShort(Math.round(Number(item.price) * 100)) }),
+      el("span", { class: "qt-choice-name", text: item.name }),
       item.placeholder ? el("span", { class: "qt-badge", text: "Placeholder" }) : null,
       item.description ? el("span", { class: "qt-choice-desc fine", text: item.description }) : null
     ]});
-    return el("label", { class: "qt-check", children: [box, text] });
+    return el("div", { class: "qt-addon", "data-addon-row": item.id, children: [
+      el("label", { class: "qt-check", children: [box, text] }),
+      price
+    ]});
   }
 
   function datalist(id, people) {
@@ -713,14 +815,7 @@
       type: "number",
       min: "0",
       step: "1",
-      placeholder: "Blank uses calculated"
-    });
-    var useCalculated = el("button", { class: "btn btn-small btn-ghost", type: "button", text: "Use calculated" });
-    useCalculated.addEventListener("click", function () {
-      draft.miles = "";
-      setValue("miles", "");
-      markDirty();
-      refresh();
+      placeholder: "Miles"
     });
     var mediaOn = input({ id: "media-on", type: "checkbox", "data-draft": "mediaOn" });
     var mediaWaive = input({ id: "media-waive", type: "checkbox", "data-draft": "mediaWaive" });
@@ -752,8 +847,12 @@
     }));
     (catalog.packages || []).forEach(function (pkg) { packages.appendChild(choice(pkg)); });
     var quantities = el("div");
-    (catalog.quantityItems || []).forEach(function (item) { quantities.appendChild(qtyRow(item)); });
     var addons = el("div", { id: "addon-list" });
+    (catalog.quantityItems || []).forEach(function (item) {
+      var row = qtyRow(item);
+      if (item.extensionRooms) addons.appendChild(row);
+      else quantities.appendChild(row);
+    });
     (catalog.addons || []).forEach(function (item) { addons.appendChild(addonRow(item)); });
     var discount = input({ id: "discount-value", "data-draft": "discountValue", type: "number", min: "0", step: "0.01", value: "0" });
     var discountMode = el("select", { id: "discount-mode", "data-draft": "discountMode" });
@@ -807,10 +906,7 @@
           field("Square feet", sqft)
         ]}),
         el("p", { id: "miles-readout", class: "fine", text: "" }),
-        el("div", { class: "qt-inline", children: [
-          field("Miles (override)", miles),
-          el("div", { class: "field", children: [el("span", { text: "Calculated miles" }), useCalculated] })
-        ]}),
+        field("Miles", miles, true),
         el("fieldset", { class: "field", children: [
           el("legend", { text: "Occupied or vacant" }),
           el("label", { class: "qt-check", children: [occVacant, el("span", { text: "Vacant" })] }),
@@ -820,27 +916,37 @@
         datalist("agent-names", realtors)
       ]}),
       el("section", { class: "card", children: [
-        el("h2", { text: "Consultation" }),
-        el("p", { class: "fine", text: ((catalog.consultation && catalog.consultation.hours) || 1) + " hour. General written plan. Optional, and it can be the whole quote." }),
-        el("label", { class: "qt-check", children: [consultationOn, el("span", { text: "Include consultation" })] }),
-        el("label", { class: "qt-check", children: [previouslyPaid, el("span", { text: "Previously paid" })] }),
-        el("label", { class: "qt-check", children: [waiveCredit, el("span", { text: "Waive consultation credit" })] }),
-        el("p", { id: "consultation-note", class: "fine", text: "" })
-      ]}),
-      el("section", { class: "card", children: [
-        el("h2", { text: "Staging" }),
-        el("p", { class: "fine", text: "Pick one package or none. " + (catalog.roomNote || "") }),
+        el("h2", { text: "Quote type" }),
+        el("p", { class: "fine", text: "Pick one. Basic media can be added to any choice. " + (catalog.roomNote || "") }),
         packages,
+        el("div", { id: "package-price-wrap", children: [
+          field("Package price for this quote", input({
+            id: "price-package",
+            "data-override": "package",
+            type: "number",
+            min: "0",
+            step: "0.01"
+          }))
+        ]}),
+        el("fieldset", { class: "field", children: [
+          el("legend", { text: "Consultation fee" }),
+          el("label", { class: "qt-check", children: [input({ type: "radio", name: "consultFee", id: "consult-fee-charge", value: "charge", "data-draft": "consultFee" }), el("span", { text: "Charge" })] }),
+          el("label", { class: "qt-check", children: [input({ type: "radio", name: "consultFee", id: "consult-fee-waive", value: "waive", "data-draft": "consultFee", checked: "checked" }), el("span", { text: "Waive fee" })] }),
+          el("label", { class: "qt-check", children: [input({ type: "radio", name: "consultFee", id: "consult-fee-credit", value: "credit", "data-draft": "consultFee" }), el("span", { text: "Credit toward staging" })] })
+        ]}),
+        el("div", { id: "consult-price-wrap", children: [field("Consultation price for this quote", input({ id: "price-consult", "data-override": "consult", type: "number", min: "0", step: "0.01" }))] }),
+        el("div", { id: "credit-price-wrap", children: [field("Credit amount for this quote", input({ id: "price-credit", "data-override": "credit", type: "number", min: "0", step: "0.01" }))] }),
+        el("p", { id: "consultation-note", class: "fine", text: "" }),
+        el("label", { class: "qt-check", children: [mediaOn, el("span", { text: "Basic Media Package" })] }),
+        el("div", { id: "media-price-wrap", children: [field("Media price for this quote", input({ id: "price-media", "data-override": "media", type: "number", min: "0", step: "0.01" }))] }),
+        el("div", { id: "media-waive-wrap", children: [
+          el("label", { class: "qt-check", children: [mediaWaive, el("span", { text: "Waive media fee" })] })
+        ]}),
+        el("p", { id: "media-note", class: "fine", text: "" }),
         el("div", { id: "extension-wrap", children: [
           field("Extension weeks", extensionWeeks, true),
           el("p", { id: "extension-note", class: "fine", text: "" })
         ]})
-      ]}),
-      el("section", { class: "card", children: [
-        el("h2", { text: "Listing media" }),
-        el("label", { class: "qt-check", children: [mediaOn, el("span", { text: "Basic Media Package" })] }),
-        el("label", { class: "qt-check", children: [mediaWaive, el("span", { text: "Waive media fee" })] }),
-        el("p", { id: "media-note", class: "fine", text: "" })
       ]}),
       el("section", { class: "card", children: [
         el("h2", { text: "Quantities" }),
