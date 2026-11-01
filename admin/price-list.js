@@ -89,11 +89,19 @@
       return;
     }
     if (fieldName === "kind") {
-      item.kind = raw === "consult" ? "consult" : "stage";
+      item.kind = raw === "occupied" ? "occupied" : "vacant";
+      return;
+    }
+    if (fieldName === "includesConsultation") {
+      item.includesConsultation = !!raw;
+      return;
+    }
+    if (fieldName === "extensionRooms") {
+      item.extensionRooms = !!raw;
       return;
     }
     if (fieldName === "pricing") {
-      item.pricing = raw === "percent" ? "percent" : "flat";
+      item.pricing = raw === "percent" || raw === "per-room" ? raw : "flat";
       return;
     }
     if (fieldName === "price" || fieldName === "mediaIncluded" || fieldName === "percent") {
@@ -105,9 +113,9 @@
       item[fieldName] = Math.round(n * 100) / 100;
       return;
     }
-    if (fieldName === "includedRooms" || fieldName === "includedMonths" || fieldName === "piecesPerRoom") {
+    if (fieldName === "includedRooms" || fieldName === "includedMonths" || fieldName === "includedDays" || fieldName === "piecesPerRoom") {
       if (String(raw).trim() === "") return;
-      var cap = fieldName === "includedMonths" ? 36 : 99;
+      var cap = fieldName === "includedMonths" ? 36 : (fieldName === "includedDays" ? 365 : 99);
       var whole = Math.round(Number(raw));
       if (!isFinite(whole) || whole < 0) whole = 0;
       if (whole > cap) whole = cap;
@@ -156,17 +164,65 @@
       persist();
       return;
     }
+    if (target.id === "room-note") {
+      state.roomNote = String(target.value || "").slice(0, 400);
+      persist();
+      return;
+    }
     var fieldName = target.getAttribute("data-field");
     var card = target.closest("[data-kind]");
     if (!fieldName || !card) return;
-    var item = findItem(card.getAttribute("data-kind"), card.getAttribute("data-id"));
-    if (!item) return;
+    var kindName = card.getAttribute("data-kind");
     var value = target.type === "checkbox" ? target.checked : target.value;
+    if (kindName === "media" || kindName === "distance") {
+      if (target.type === "number" && String(target.value).trim() === "" && event.type === "input") return;
+      assignSettings(kindName, fieldName, value);
+      if (event.type === "change" && target.type === "number" && state[kindName][fieldName] != null) {
+        target.value = String(state[kindName][fieldName]);
+      }
+      persist();
+      return;
+    }
+    var item = findItem(kindName, card.getAttribute("data-id"));
+    if (!item) return;
+    if (fieldName === "appliesTo") {
+      var picked = [];
+      card.querySelectorAll("[data-field='appliesTo']").forEach(function (box) {
+        if (box.checked) picked.push(box.getAttribute("data-package-id"));
+      });
+      item.appliesTo = picked.length === state.packages.length ? [] : picked;
+      persist();
+      return;
+    }
     if ((target.type === "number") && String(target.value).trim() === "" && event.type === "input") return;
     assign(item, fieldName, value);
     if (event.type === "change") writeBack(target, item);
     syncCardChrome(card, item);
     persist();
+  }
+
+  function assignSettings(kindName, fieldName, raw) {
+    var item = state[kindName];
+    if (!item) return;
+    if (fieldName === "name" || fieldName === "description" || fieldName === "originLabel") {
+      item[fieldName] = raw;
+      return;
+    }
+    if (fieldName === "originZip") {
+      item.originZip = String(raw || "").replace(/\D/g, "").slice(0, 5);
+      return;
+    }
+    if (fieldName === "placeholder") {
+      item.placeholder = !!raw;
+      return;
+    }
+    if (String(raw).trim() === "") return;
+    var n = Number(raw);
+    if (!isFinite(n) || n < 0) n = 0;
+    if (fieldName === "perSqFt") item.perSqFt = Math.round(n * 10000) / 10000;
+    else if (fieldName === "roadFactor") item.roadFactor = Math.min(3, Math.max(1, Math.round(n * 100) / 100));
+    else if (fieldName === "sqftThreshold" || fieldName === "freeMiles") item[fieldName] = Math.round(n);
+    else item[fieldName] = Math.round(n * 100) / 100;
   }
 
   function badge(on) {
@@ -187,15 +243,14 @@
     var name = input({ "data-field": "name", type: "text", maxlength: "80", value: pkg.name });
     var price = input({ "data-field": "price", type: "number", min: "0", step: "0.01", value: String(pkg.price) });
     var kind = el("select", { "data-field": "kind" });
-    kind.appendChild(el("option", { value: "stage", text: "Staging" }));
-    kind.appendChild(el("option", { value: "consult", text: "Consultation" }));
-    kind.value = pkg.kind === "consult" ? "consult" : "stage";
+    kind.appendChild(el("option", { value: "vacant", text: "Vacant staging" }));
+    kind.appendChild(el("option", { value: "occupied", text: "Occupied styling" }));
+    kind.value = pkg.kind === "occupied" ? "occupied" : "vacant";
     var description = el("textarea", { "data-field": "description", maxlength: "400", rows: "3" });
     description.value = pkg.description || "";
     var rooms = input({ "data-field": "includedRooms", type: "number", min: "0", max: "99", step: "1", value: String(pkg.includedRooms) });
-    var months = input({ "data-field": "includedMonths", type: "number", min: "0", max: "36", step: "1", value: String(pkg.includedMonths) });
-    var media = input({ "data-field": "mediaIncluded", type: "number", min: "0", step: "0.01", value: String(pkg.mediaIncluded) });
-    var pieces = input({ "data-field": "piecesPerRoom", type: "number", min: "0", max: "99", step: "1", value: String(pkg.piecesPerRoom) });
+    var daysIncluded = input({ "data-field": "includedDays", type: "number", min: "0", max: "365", step: "1", value: String(pkg.includedDays || 0) });
+    var includesConsult = input({ "data-field": "includesConsultation", type: "checkbox", checked: pkg.includesConsultation ? "checked" : null });
     var placeholder = input({ "data-field": "placeholder", type: "checkbox", checked: pkg.placeholder ? "checked" : null });
     var starter = input({
       type: "radio",
@@ -214,10 +269,9 @@
           field("Price (USD)", price),
           field("Kind", kind),
           field("Description", description, true),
-          field("Included rooms", rooms),
-          field("Included months", months),
-          field("Media included (USD value, not an extra charge)", media),
-          field("Furniture pieces per room", pieces)
+          field("Included rooms (0 on occupied styling)", rooms),
+          field("Included days", daysIncluded),
+          el("label", { class: "qt-check-line qt-span", children: [includesConsult, el("span", { text: "Includes the consultation service" })] })
         ]}),
         el("label", { class: "qt-check-line", children: [placeholder, el("span", { text: "Placeholder — this number is not confirmed" })] }),
         el("label", { class: "qt-check-line", children: [starter, el("span", { text: "Starting package for a new quote" })] })
@@ -231,7 +285,8 @@
     var pricing = el("select", { "data-field": "pricing" });
     pricing.appendChild(el("option", { value: "flat", text: "Flat price each" }));
     pricing.appendChild(el("option", { value: "percent", text: "Percent of the package price" }));
-    pricing.value = item.pricing === "percent" ? "percent" : "flat";
+    pricing.appendChild(el("option", { value: "per-room", text: "Price × rooms staged" }));
+    pricing.value = item.pricing === "percent" || item.pricing === "per-room" ? item.pricing : "flat";
     var price = input({ "data-field": "price", type: "number", min: "0", step: "0.01", value: String(item.price) });
     var percent = input({ "data-field": "percent", type: "number", min: "0", max: "100", step: "0.1", value: String(item.percent) });
     var description = el("textarea", { "data-field": "description", maxlength: "400", rows: "2" });
@@ -257,9 +312,31 @@
           percentWrap,
           field("Description", description, true)
         ]}),
+        packageChecks(item),
         el("label", { class: "qt-check-line", children: [placeholder, el("span", { text: "Placeholder — this number is not confirmed" })] })
       ]
     });
+  }
+
+  function packageChecks(item) {
+    var wrap = el("div", { class: "qt-check-line" });
+    wrap.appendChild(el("span", { text: "Used on" }));
+    state.packages.forEach(function (pkg) {
+      var on = !item.appliesTo || !item.appliesTo.length || item.appliesTo.indexOf(pkg.id) !== -1;
+      wrap.appendChild(el("label", {
+        class: "qt-check",
+        children: [
+          input({
+            type: "checkbox",
+            "data-field": "appliesTo",
+            "data-package-id": pkg.id,
+            checked: on ? "checked" : null
+          }),
+          el("span", { text: pkg.name })
+        ]
+      }));
+    });
+    return wrap;
   }
 
   function addonCard(item) {
@@ -305,10 +382,10 @@
           name: "New package",
           description: "",
           price: 0,
-          kind: "stage",
+          kind: "vacant",
           includedRooms: 0,
-          includedMonths: 0,
-          mediaIncluded: 0,
+          includedDays: 0,
+          includesConsultation: false,
           piecesPerRoom: 0,
           placeholder: true
         });
@@ -321,6 +398,7 @@
           pricing: "flat",
           price: 0,
           percent: 0,
+          appliesTo: [],
           placeholder: true
         });
       } else if (kind === "addons") {
@@ -361,6 +439,100 @@
     render();
   }
 
+  function consultationCard() {
+    var item = state.consultation || {};
+    var name = input({ "data-field": "name", type: "text", maxlength: "80", value: item.name || "" });
+    var price = input({ "data-field": "price", type: "number", min: "0", step: "0.01", value: String(item.price || 0) });
+    var hours = input({ "data-field": "hours", type: "number", min: "1", max: "24", step: "1", value: String(item.hours || 1) });
+    var credit = input({ "data-field": "credit", type: "number", min: "0", step: "0.01", value: String(item.credit || 0) });
+    var description = el("textarea", { "data-field": "description", maxlength: "400", rows: "2" });
+    description.value = item.description || "";
+    return el("article", {
+      class: "card qt-edit",
+      "data-kind": "consultation",
+      children: [el("div", { class: "qt-fields", children: [
+        field("Name", name),
+        field("Price (USD)", price),
+        field("Hours", hours),
+        field("Credit against staging (USD)", credit),
+        field("Description", description, true)
+      ]})]
+    });
+  }
+
+  function extensionCard() {
+    var item = state.extension || {};
+    var monthly = input({ "data-field": "monthlyPerRoom", type: "number", min: "0", step: "0.01", value: String(item.monthlyPerRoom || 0) });
+    var weekly = input({ "data-field": "weeklyPerRoom", type: "number", min: "0", step: "0.01", value: String(item.weeklyPerRoom || 0) });
+    var placeholder = input({ "data-field": "placeholder", type: "checkbox", checked: item.placeholder ? "checked" : null });
+    return el("article", {
+      class: "card qt-edit",
+      "data-kind": "extension",
+      children: [
+        el("div", { class: "qt-fields", children: [
+          field("Per room per month (USD)", monthly),
+          field("Per room per week (USD)", weekly)
+        ]}),
+        el("label", { class: "qt-check-line", children: [placeholder, el("span", { text: "Placeholder — this number is not confirmed" })] })
+      ]
+    });
+  }
+
+  function roomNoteCard() {
+    var box = el("textarea", { id: "room-note", rows: "3", maxlength: "400" });
+    box.value = state.roomNote || "";
+    return el("article", { class: "card", children: [field("Shown on staging quotes", box, true)] });
+  }
+
+  function mediaCard() {
+    var media = state.media || {};
+    var name = input({ "data-field": "name", type: "text", maxlength: "80", value: media.name || "" });
+    var price = input({ "data-field": "price", type: "number", min: "0", step: "0.01", value: String(media.price || 0) });
+    var threshold = input({ "data-field": "sqftThreshold", type: "number", min: "0", step: "1", value: String(media.sqftThreshold || 0) });
+    var rate = input({ "data-field": "perSqFt", type: "number", min: "0", step: "0.01", value: String(media.perSqFt || 0) });
+    var description = el("textarea", { "data-field": "description", maxlength: "400", rows: "2" });
+    description.value = media.description || "";
+    var placeholder = input({ "data-field": "placeholder", type: "checkbox", checked: media.placeholder ? "checked" : null });
+    return el("article", {
+      class: "card qt-edit",
+      "data-kind": "media",
+      children: [
+        el("div", { class: "qt-fields", children: [
+          field("Name", name),
+          field("Price (USD)", price),
+          field("Square feet included before a surcharge", threshold),
+          field("Surcharge per square foot over that (USD)", rate),
+          field("Description", description, true)
+        ]}),
+        el("label", { class: "qt-check-line", children: [placeholder, el("span", { text: "Placeholder — this number is not confirmed" })] })
+      ]
+    });
+  }
+
+  function distanceCard() {
+    var dist = state.distance || {};
+    var origin = input({ "data-field": "originZip", type: "text", maxlength: "10", value: dist.originZip || "" });
+    var label = input({ "data-field": "originLabel", type: "text", maxlength: "80", value: dist.originLabel || "" });
+    var free = input({ "data-field": "freeMiles", type: "number", min: "0", step: "1", value: String(dist.freeMiles || 0) });
+    var rate = input({ "data-field": "ratePerMile", type: "number", min: "0", step: "0.01", value: String(dist.ratePerMile || 0) });
+    var factor = input({ "data-field": "roadFactor", type: "number", min: "1", max: "3", step: "0.1", value: String(dist.roadFactor || 1.2) });
+    var placeholder = input({ "data-field": "placeholder", type: "checkbox", checked: dist.placeholder ? "checked" : null });
+    return el("article", {
+      class: "card qt-edit",
+      "data-kind": "distance",
+      children: [
+        el("div", { class: "qt-fields", children: [
+          field("Origin ZIP", origin),
+          field("Origin name on the quote", label),
+          field("Free miles", free),
+          field("Price per mile after that (USD)", rate),
+          field("Road factor (straight-line × this, then rounded)", factor, true)
+        ]}),
+        el("label", { class: "qt-check-line", children: [placeholder, el("span", { text: "Placeholder — this number is not confirmed" })] })
+      ]
+    });
+  }
+
   function render() {
     if (!main) return;
     var days = input({
@@ -386,22 +558,17 @@
     state.addons.forEach(function (item) { addonHost.appendChild(addonCard(item)); });
 
     var seed = window.QuoteCatalog.defaults();
-    var seedFull = null;
-    var seedConsult = null;
-    var seedExt = null;
-    seed.packages.forEach(function (pkg) {
-      if (pkg.id === "full-service") seedFull = pkg;
-      if (pkg.id === "consultation") seedConsult = pkg;
-    });
-    seed.quantityItems.forEach(function (item) {
-      if (item.id === "extra-month") seedExt = item;
-    });
-    var seedText = "The draft fixed list is consultation " +
-      engine.moneyShort(Math.round(seedConsult.price * 100)) + " and " + seedFull.name + " at " +
-      engine.moneyShort(Math.round(seedFull.price * 100)) + ", with a " +
-      engine.moneyShort(Math.round(seedFull.mediaIncluded * 100)) + " media package and " +
-      seedFull.includedMonths + " months of rental included in that fee. Extension is " +
-      seedExt.percent + "% of the package price per extra month.";
+    function dollars(amount) {
+      return engine.moneyShort(Math.round(Number(amount) * 100));
+    }
+    var seedText = "Draft sheet: consultation " + dollars(seed.consultation.price) +
+      " for " + seed.consultation.hours + " hour. Partial Staging " + dollars(2000) +
+      " for 2 rooms and 30 days. Full-Service Staging " + dollars(3000) +
+      " for 3 rooms and 60 days. Media is separate. Occupied Styling & Accessories " +
+      dollars(1500) + ". Extra vacant rooms and occupied furniture rental are " + dollars(500) +
+      " each. Extensions are " + dollars(seed.extension.monthlyPerRoom) + " per room per month, billed at " +
+      dollars(seed.extension.weeklyPerRoom) + " per room per week. Occupied styling itself has no extension; rented rooms use that same rate after 60 days. " +
+      seed.roomNote;
     var root = el("div", { class: "qt" });
     root.append(
       el("div", { class: "page-head", children: [
@@ -420,17 +587,30 @@
         resetTop,
         el("p", { id: "save-note", class: "fine", text: "Saved in this browser only. Nothing was sent to a server." })
       ]}),
+      el("h2", { class: "qt-section-title", text: "Consultation" }),
+      consultationCard(),
       el("h2", { class: "qt-section-title", text: "Packages" }),
-      el("p", { class: "fine", text: "The package price is a flat fee. Included rooms, months, pieces, and the media value describe what that fee already covers. They are not added again." }),
+      el("p", { class: "fine", text: "The package price is a flat fee. Included rooms, months, days, pieces, and a media value already inside the price are not added again. Leave media value at 0 when media is only an add-on." }),
       packageHost,
       addButton("packages", "Add a package"),
       el("h2", { class: "qt-section-title", text: "Quantity items" }),
-      el("p", { class: "fine", text: "Use a flat price, or a percent of the selected package price. The rental extension uses that percent. It does not include extra rooms or add-ons." }),
+      el("p", { class: "fine", text: "Flat is a price each. Percent is a share of the package price only, not of extra rooms or add-ons. Price × rooms staged multiplies by the included rooms plus extra rooms. Use the checkboxes to limit an item to one package." }),
       qtyHost,
       addButton("quantityItems", "Add a quantity item"),
       el("h2", { class: "qt-section-title", text: "Add-ons" }),
       addonHost,
       addButton("addons", "Add an add-on"),
+      el("h2", { class: "qt-section-title", text: "Extension rates" }),
+      el("p", { class: "fine", text: "Vacant packages use included rooms plus added rooms. Occupied styling has no extension of its own. These rates apply only to Furniture Rental Add-on rooms, and only after the included 60 days. If there are no rental rooms, the quote does not mention an extension." }),
+      extensionCard(),
+      el("h2", { class: "qt-section-title", text: "Room sizing note" }),
+      roomNoteCard(),
+      el("h2", { class: "qt-section-title", text: "Media package" }),
+      el("p", { class: "fine", text: "This is its own line. Waive shows that price and a matching credit. On a package that already includes media, the credit is applied whenever the line is shown so the headline price does not rise. The size surcharge is added when media is on the quote and the home is over the threshold, even if the base fee is waived." }),
+      mediaCard(),
+      el("h2", { class: "qt-section-title", text: "Distance" }),
+      el("p", { class: "fine", text: "Miles are estimated in this browser from a bundled Census ZIP table for San Diego, Orange, and Riverside counties. No map service is called. Straight-line distance times the road factor, rounded to a whole mile. The origin ZIP has to be in that table." }),
+      distanceCard(),
       el("h2", { class: "qt-section-title", text: "Quote defaults" }),
       el("div", { class: "card", children: [
         field("Quote stays valid for (days)", days, true),

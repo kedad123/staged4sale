@@ -3,84 +3,126 @@
    by serving the same shape. The admin editor stores edits in
    localStorage under QuoteCatalog.KEY. Nothing is sent to a server.
 
-   mediaIncluded, includedMonths, includedRooms, and piecesPerRoom
-   describe what the package price already covers. They are not
-   added on top of the package price.
+   A quote has three optional sections: consultation, one staging
+   package, and listing media. Travel is charged once per visit.
+   extensionRooms on a quantity item means that quantity counts
+   toward extension rooms. Occupied packages do not count their
+   included rooms; only those add-on rooms do.
 
    placeholder: true means the number was not in the draft fixed
    list. The client-facing quote does not print that word. */
 (function () {
-  var KEY = "s4s-admin-quote-catalog-v1";
+  var KEY = "s4s-admin-quote-catalog-v3";
 
   var DEFAULTS = {
-    version: 1,
+    version: 3,
     currency: "USD",
     quoteValidDays: 30,
-    defaultPackageId: "full-service",
+    defaultPackageId: "",
+    roomNote: "A room includes up to 5 pieces of furniture. Great rooms and other large rooms may count as two or more rooms.",
+    consultation: {
+      name: "Consultation",
+      description: "One hour with a general written plan.",
+      price: 250,
+      hours: 1,
+      credit: 250,
+      placeholder: false
+    },
+    extension: {
+      weeklyPerRoom: 50,
+      monthlyPerRoom: 200,
+      placeholder: false
+    },
+    consultationTerms: [
+      "The consultation fee is due when the agreement is signed. This quote is not a commitment until then.",
+      "The visit is one hour and includes a general written plan.",
+      "This quote is valid through the date above."
+    ],
+    mediaTerms: [
+      "The media fee is due when the agreement is signed. This quote is not a commitment until then.",
+      "This quote is valid through the date above."
+    ],
     terms: [
       "The staging fee is due when the agreement is signed. This quote is not a commitment until then.",
-      "After the included rental period, rental continues at the extension rate shown on this quote. Rental is not prorated.",
+      "After the included period, furniture rental continues in prepaid one-week blocks at the weekly rate on this quote. It is not prorated.",
       "De-staging is included with at least 7 days' notice. Please call as soon as the property is in escrow. Shorter notice may incur a fee.",
       "The home should be professionally cleaned before installation. Please leave staged items as placed. Damage, loss, or theft is charged at replacement cost.",
       "A special style, color, or size request may cost extra. This quote is valid through the date above."
     ],
     packages: [
       {
-        id: "consultation",
-        name: "Consultation",
-        description: "Walk-through of the property with recommendations for staging.",
-        price: 250,
-        kind: "consult",
-        includedRooms: 0,
-        includedMonths: 0,
-        mediaIncluded: 0,
-        piecesPerRoom: 0,
+        id: "partial",
+        name: "Partial Staging",
+        description: "Full styling by an ASPM Master Stager, furniture plus accessories. The client picks the two rooms.",
+        price: 2000,
+        kind: "vacant",
+        includedRooms: 2,
+        includedDays: 30,
+        includesConsultation: false,
         placeholder: false
       },
       {
         id: "full-service",
         name: "Full-Service Staging",
-        description: "Furniture and accessories for the rooms in this package, chosen for the listing.",
+        description: "Three rooms plus kitchen and bath accents. Includes consultation, furniture selection, accessories, and styling. Listing media is separate.",
         price: 3000,
-        kind: "stage",
+        kind: "vacant",
         includedRooms: 3,
-        includedMonths: 2,
-        mediaIncluded: 500,
-        piecesPerRoom: 5,
+        includedDays: 60,
+        includesConsultation: true,
         placeholder: false
       },
       {
-        id: "minimal",
-        name: "Minimal (accessories only)",
-        description: "Accessories only, using the seller's own furniture.",
-        price: 1800,
-        kind: "stage",
+        id: "occupied",
+        name: "Occupied Styling & Accessories",
+        description: "Living, dining, and primary bedroom, plus kitchen and bath accents, using the owner's furniture. Accessories stay 60 days. Delivery and pickup are included. Moving furniture is not included.",
+        price: 1500,
+        kind: "occupied",
         includedRooms: 0,
-        includedMonths: 1,
-        mediaIncluded: 0,
-        piecesPerRoom: 0,
-        placeholder: true
+        includedDays: 60,
+        includesConsultation: false,
+        placeholder: false
       }
     ],
+    media: {
+      name: "Basic Media Package",
+      description: "Listing media for the home.",
+      price: 500,
+      sqftThreshold: 2500,
+      perSqFt: 0.1,
+      placeholder: false
+    },
+    distance: {
+      originZip: "92054",
+      originLabel: "Oceanside, CA",
+      freeMiles: 20,
+      ratePerMile: 5,
+      roadFactor: 1.2,
+      placeholder: false
+    },
     quantityItems: [
       {
         id: "extra-room",
         name: "Additional room",
-        description: "Another staged room beyond the package.",
+        description: "Another room on a vacant staging.",
         unit: "room",
         pricing: "flat",
-        price: 750,
+        price: 500,
         percent: 0,
-        placeholder: true
+        appliesTo: ["partial", "full-service"],
+        extensionRooms: true,
+        placeholder: false
       },
       {
-        id: "extra-month",
-        name: "Rental extension",
-        description: "Each extra month after the rental included in the package.",
-        unit: "month",
-        pricing: "percent",
-        price: 0,
-        percent: 20,
+        id: "furniture-rental",
+        name: "Furniture Rental Add-on",
+        description: "Furniture for one room when the home is occupied.",
+        unit: "room",
+        pricing: "flat",
+        price: 500,
+        percent: 0,
+        appliesTo: ["occupied"],
+        extensionRooms: true,
         placeholder: false
       },
       {
@@ -113,13 +155,6 @@
         placeholder: true
       },
       {
-        id: "occupied",
-        name: "Occupied home",
-        description: "Working around furniture the seller is keeping.",
-        price: 500,
-        placeholder: true
-      },
-      {
         id: "patio",
         name: "Patio set",
         description: "Outdoor seating set.",
@@ -149,11 +184,16 @@
   }
 
   function clampNum(value, min, max, fallback) {
+    return clampDecimal(value, min, max, fallback, 2);
+  }
+
+  function clampDecimal(value, min, max, fallback, places) {
     var n = Number(value);
     if (!isFinite(n)) return fallback;
     if (n < min) return min;
     if (n > max) return max;
-    return Math.round(n * 100) / 100;
+    var factor = Math.pow(10, places);
+    return Math.round(n * factor) / factor;
   }
 
   function cleanId(value) {
@@ -169,11 +209,10 @@
       name: String(item.name || "Package").trim().slice(0, 80) || "Package",
       description: String(item.description || "").trim().slice(0, 400),
       price: clampNum(item.price, 0, 10000000, 0),
-      kind: item.kind === "consult" ? "consult" : "stage",
+      kind: item.kind === "occupied" ? "occupied" : "vacant",
       includedRooms: clampInt(item.includedRooms, 0, 99, 0),
-      includedMonths: clampInt(item.includedMonths, 0, 36, 0),
-      mediaIncluded: clampNum(item.mediaIncluded, 0, 10000000, 0),
-      piecesPerRoom: clampInt(item.piecesPerRoom, 0, 99, 0),
+      includedDays: clampInt(item.includedDays, 0, 365, 0),
+      includesConsultation: !!item.includesConsultation,
       placeholder: !!item.placeholder
     };
   }
@@ -187,9 +226,83 @@
       name: String(item.name || "Item").trim().slice(0, 80) || "Item",
       description: String(item.description || "").trim().slice(0, 400),
       unit: String(item.unit || "item").trim().slice(0, 24) || "item",
-      pricing: item.pricing === "percent" ? "percent" : "flat",
+      pricing: item.pricing === "percent" || item.pricing === "per-room" ? item.pricing : "flat",
       price: clampNum(item.price, 0, 10000000, 0),
       percent: clampNum(item.percent, 0, 100, 0),
+      appliesTo: appliesToList(item.appliesTo),
+      extensionRooms: !!item.extensionRooms,
+      placeholder: !!item.placeholder
+    };
+  }
+
+  function appliesToList(value) {
+    var out = [];
+    if (!Array.isArray(value)) return out;
+    value.forEach(function (id) {
+      var clean = cleanId(id);
+      if (clean && out.indexOf(clean) === -1 && out.length < 20) out.push(clean);
+    });
+    return out;
+  }
+
+  function sanitizeMedia(raw) {
+    var seed = DEFAULTS.media;
+    var item = raw && typeof raw === "object" ? raw : seed;
+    return {
+      name: String(item.name || seed.name).trim().slice(0, 80) || seed.name,
+      description: String(item.description || "").trim().slice(0, 400),
+      price: clampNum(item.price, 0, 10000000, seed.price),
+      sqftThreshold: clampInt(item.sqftThreshold, 0, 1000000, seed.sqftThreshold),
+      perSqFt: clampDecimal(item.perSqFt, 0, 1000, seed.perSqFt, 4),
+      placeholder: !!item.placeholder
+    };
+  }
+
+  function sanitizeDistance(raw) {
+    var seed = DEFAULTS.distance;
+    var item = raw && typeof raw === "object" ? raw : seed;
+    var origin = String(item.originZip || seed.originZip).replace(/\D/g, "").slice(0, 5);
+    if (origin.length !== 5) origin = seed.originZip;
+    return {
+      originZip: origin,
+      originLabel: String(item.originLabel || seed.originLabel).trim().slice(0, 80) || seed.originLabel,
+      freeMiles: clampInt(item.freeMiles, 0, 5000, seed.freeMiles),
+      ratePerMile: clampNum(item.ratePerMile, 0, 100000, seed.ratePerMile),
+      roadFactor: clampDecimal(item.roadFactor, 1, 3, seed.roadFactor, 2),
+      placeholder: !!item.placeholder
+    };
+  }
+
+  function termList(value, fallback) {
+    var terms = [];
+    var source = Array.isArray(value) ? value : fallback;
+    if (!Array.isArray(source)) return [];
+    source.forEach(function (term) {
+      var text = String(term || "").trim().slice(0, 500);
+      if (text && terms.length < 12) terms.push(text);
+    });
+    return terms;
+  }
+
+  function sanitizeConsultation(raw) {
+    var seed = DEFAULTS.consultation;
+    var item = raw && typeof raw === "object" ? raw : seed;
+    return {
+      name: String(item.name || seed.name).trim().slice(0, 80) || seed.name,
+      description: String(item.description || seed.description).trim().slice(0, 400),
+      price: clampNum(item.price, 0, 10000000, seed.price),
+      hours: clampInt(item.hours, 1, 24, seed.hours),
+      credit: clampNum(item.credit, 0, 10000000, seed.credit),
+      placeholder: !!item.placeholder
+    };
+  }
+
+  function sanitizeExtension(raw) {
+    var seed = DEFAULTS.extension;
+    var item = raw && typeof raw === "object" ? raw : seed;
+    return {
+      weeklyPerRoom: clampNum(item.weeklyPerRoom, 0, 100000, seed.weeklyPerRoom),
+      monthlyPerRoom: clampNum(item.monthlyPerRoom, 0, 100000, seed.monthlyPerRoom),
       placeholder: !!item.placeholder
     };
   }
@@ -235,16 +348,23 @@
     }
     var ids = packages.map(function (pkg) { return pkg.id; });
     var defaultPackageId = cleanId(raw.defaultPackageId);
-    if (ids.indexOf(defaultPackageId) === -1) defaultPackageId = ids[0] || "";
+    if (defaultPackageId && ids.indexOf(defaultPackageId) === -1) defaultPackageId = "";
     return {
-      version: 1,
+      version: 3,
       currency: "USD",
       quoteValidDays: clampInt(raw.quoteValidDays, 1, 365, 30),
       defaultPackageId: defaultPackageId,
-      terms: terms,
+      roomNote: String(raw.roomNote || DEFAULTS.roomNote).trim().slice(0, 400),
+      consultation: sanitizeConsultation(raw.consultation),
+      extension: sanitizeExtension(raw.extension),
+      consultationTerms: termList(raw.consultationTerms, DEFAULTS.consultationTerms),
+      mediaTerms: termList(raw.mediaTerms, DEFAULTS.mediaTerms),
+      terms: terms.length ? terms : DEFAULTS.terms.slice(),
       packages: packages,
       quantityItems: quantityItems,
-      addons: addons
+      addons: addons,
+      media: sanitizeMedia(raw.media),
+      distance: sanitizeDistance(raw.distance)
     };
   }
 

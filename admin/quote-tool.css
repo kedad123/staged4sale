@@ -119,6 +119,11 @@
   .qt-layout {
     grid-template-columns: minmax(340px, 1fr) minmax(420px, 0.92fr);
   }
+
+  .qt-preview {
+    position: sticky;
+    top: calc(var(--app-top, 96px) + 12px);
+  }
 }
 
 .qt-form {

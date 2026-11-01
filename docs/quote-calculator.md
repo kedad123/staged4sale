@@ -19,13 +19,29 @@ The sidebar Office group links Quote builder and Price list under the existing Q
 
 ## Price list
 
-The seed object is `admin/quote-catalog.js`. A later backend can replace that object with the same shape. Until then, the editor writes the whole object to `localStorage` key `s4s-admin-quote-catalog-v1`.
+The seed object is `admin/quote-catalog.js`. A later backend can replace that object with the same shape. Until then, the editor writes the whole object to `localStorage` key `s4s-admin-quote-catalog-v3`.
 
 Saved quotes use `s4s-admin-saved-quotes-v1`. A saved quote stores the choices (package, quantities, names). Opening it prices those choices with the list currently in that browser. A copied link is different: it freezes the line items from the moment it was copied.
 
 Reset on the price list deletes the saved list in that browser and loads the seed again.
 
-`mediaIncluded`, included months, included rooms, and pieces per room describe what the package price already covers. They are not added on top of it. Rental extension is a percent of the package price only, not of extra rooms or add-ons. The percent is rounded to the nearest cent.
+A quote is three optional sections. Each has its own subtotal. The quote total is the sum, after any whole-quote discount.
+
+1. Consultation is $250 for one hour and a general written plan. It can be the whole quote. If it is on the same quote as staging, or Previously paid is checked, a $250 Consultation credit is applied against staging. Waive consultation credit turns that credit off. A consultation-only quote does not mention rental, extension, weeks, or months.
+2. Staging is one package, or none.
+3. Listing media is the Basic Media Package, $500 for homes up to 2,500 sq ft, plus $0.10 per sq ft above that. It can be booked alone. Waive shows the $500 line and a matching credit. The size surcharge is still charged when the home is over 2,500 sq ft.
+
+Travel is $5 per mile after 20 miles from Oceanside, once per visit, for any section that needs a visit. It is not part of an extension.
+
+Distance is estimated in the browser. `admin/zip-centroids.js` holds U.S. Census Bureau 2024 ZCTA internal points for ZIP codes that touch San Diego, Orange, or Riverside County (2020 ZCTA-to-county relationship file). Census publications are public domain. The origin is the ZIP 92054 centroid (Oceanside). Miles are straight-line haversine distance times a road factor of 1.2, rounded to a whole mile. The rate, free miles, origin ZIP, origin name, and road factor are editable. A ZIP outside the table does not guess a distance. Tawni can type miles instead. No map service and no API key are used.
+
+Vacant extension rooms are the package rooms plus additional rooms. After the included days, the rate is $200 per room per month, billed in prepaid one-week blocks at $50 per room per week. The quote shows both rates. The week count is what gets charged.
+
+Occupied Styling & Accessories has no extension of its own. Extensions apply only to Furniture Rental Add-on rooms, at that same $200 / $50 rate, after the included 60 days. If there are no rental rooms, the quote does not mention an extension.
+
+Extensions do not include media, consultation, or travel.
+
+Staging terms, including the weekly rental sentence, are printed only when a staging package is selected and an extension applies. A consultation-only or media-only quote uses a short set of terms with none of that language.
 
 A dollar discount cannot exceed a positive subtotal. A percent discount is also limited to the subtotal. A custom line may be negative; that is a credit. A zero custom amount is left off the quote.
 
@@ -35,22 +51,27 @@ Items flagged Placeholder were not in the draft fixed list. The flag shows in th
 
 From the draft fixed list, still labeled sample:
 
-- Consultation, $250
-- Full-Service Staging, $3,000 for 3 rooms, with a $500 media package and 2 months of rental included. Each room includes up to 5 pieces of furniture plus accessories.
-- Rental extension, 20% of the package price per extra month ($600 on Full-Service Staging)
+- Consultation, $250 for 1 hour, with a $250 credit against staging when it is on the same quote or previously paid
+- Partial Staging, $2,000, 2 rooms, 30 days. Full styling by an ASPM Master Stager. The client picks the rooms.
+- Full-Service Staging, $3,000, 3 rooms plus kitchen and bath accents, 60 days. Includes consultation, furniture selection, accessories, and styling. Media is not included.
+- Occupied Styling & Accessories, $1,500. Living, dining, and primary bedroom plus kitchen and bath accents, using the owner's furniture. Accessories stay 60 days. Delivery and pickup are included. Moving furniture is not included. No extension unless furniture is rented.
+- Additional room on a vacant package, $500
+- Furniture Rental Add-on, occupied only, $500 per room
+- Extension, $200 per room per month, billed at $50 per room per week. On an occupied job the rooms are rented rooms only.
+- Basic Media Package, $500 up to 2,500 sq ft, then $0.10 per sq ft
+- Travel, $5 per mile after 20 miles from Oceanside (ZIP 92054)
+
+Room note, shown on staging quotes and the price list: "A room includes up to 5 pieces of furniture. Great rooms and other large rooms may count as two or more rooms."
 
 Placeholders, marked in the editor:
 
 | Item | Seed |
 |---|---|
-| Additional room | $750 per room |
 | Extra furniture piece | $100 |
 | Extra accent piece | $25 |
 | Stairs / long carry | $350 |
-| Occupied home | $500 |
 | Patio set | $400 |
 | Rush booking | $300 |
-| Minimal (accessories only) | $1,800, with 1 month of rental included |
 
 ## Share link and PDF
 

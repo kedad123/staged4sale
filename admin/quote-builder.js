@@ -6,6 +6,7 @@
   var catalog = window.QuoteCatalog.load();
   var engine = window.QuoteEngine;
   var draft = engine.blankDraft(catalog);
+  var lastSections = [];
   var currentSaveId = "";
   var dirty = false;
   var silent = false;
@@ -73,12 +74,11 @@
 
   function packageBlurb(pkg) {
     if (!pkg) return "";
-    if (pkg.kind === "consult") return pkg.description || "";
     var bits = [];
-    if (pkg.includedRooms) bits.push(pkg.includedRooms + (pkg.includedRooms === 1 ? " room" : " rooms"));
-    if (pkg.includedMonths) bits.push(pkg.includedMonths + (pkg.includedMonths === 1 ? " month" : " months") + " of rental included");
-    if (pkg.mediaIncluded) bits.push("media package included");
-    if (pkg.piecesPerRoom) bits.push("up to " + pkg.piecesPerRoom + " pieces per room");
+    if (pkg.kind === "occupied") bits.push("Owner's furniture");
+    else if (pkg.includedRooms) bits.push(pkg.includedRooms + (pkg.includedRooms === 1 ? " room" : " rooms"));
+    if (pkg.includedDays) bits.push(pkg.includedDays + " days");
+    if (pkg.includesConsultation) bits.push("includes consultation");
     return bits.join(" · ");
   }
 
@@ -142,10 +142,12 @@
     if (cap) cap.hidden = !result.discountCapped;
     if (!slot) return;
     if (!result.model) {
+      lastSections = [];
       var message = result.error === "missing-package"
         ? "That package is no longer on the price list. Choose another to rebuild the total."
-        : "Add a package on the price list to build a quote.";
+        : "Turn on consultation, choose a staging package, or add listing media.";
       slot.replaceChildren(el("p", { class: "card", text: message }));
+      syncMediaControls(pkg);
       return;
     }
     if (!draft.quoteNumber) {
@@ -153,17 +155,95 @@
       var numberInput = document.getElementById("quote-number");
       if (numberInput && !numberInput.value.trim()) numberInput.value = result.model.number;
     }
+    lastSections = result.model.sections || [];
     slot.replaceChildren(engine.renderPaper(result.model, { logo: "../images/logo2.png" }));
     var pkg = packageById(draft.packageId);
+    var rooms = pkg ? engine.stagedRooms(pkg, catalog, draft.qty) : 0;
+    document.querySelectorAll("[data-qty-row]").forEach(function (row) {
+      var applies = row.getAttribute("data-applies") || "";
+      var ok = !!pkg && (!applies || applies.split(",").indexOf(pkg.id) !== -1);
+      row.hidden = !ok;
+    });
     document.querySelectorAll("[data-hint-for]").forEach(function (node) {
       var id = node.getAttribute("data-hint-for");
       var item = null;
       (catalog.quantityItems || []).forEach(function (entry) {
         if (entry.id === id) item = entry;
       });
-      node.textContent = engine.unitHint(item, pkg);
+      node.textContent = engine.unitHint(item, pkg, rooms);
     });
+    syncTrip();
+    syncMediaControls(pkg);
     document.title = "Quote " + result.model.number + " · " + (brand.businessName || "Staged4Sale");
+  }
+
+  function syncTrip() {
+    var readout = document.getElementById("miles-readout");
+    if (!readout) return;
+    var trip = engine.mileage(catalog, draft.zip, draft.miles);
+    var settings = trip.settings;
+    var rate = engine.money(Math.round(Number(settings.ratePerMile) * 100));
+    var lead = settings.freeMiles + " miles from " + settings.originLabel + " (" + settings.originZip + ") are included, then " + rate + " per mile. ";
+    if (!trip.originKnown) {
+      readout.textContent = "The origin ZIP is not in the local table. Pick one in San Diego, Orange, or Riverside County, or enter miles. " + lead;
+      return;
+    }
+    if (!String(draft.zip || "").trim()) {
+      readout.textContent = "Enter a ZIP to estimate miles. " + lead + "Leave miles blank to use the estimate.";
+      return;
+    }
+    if (!trip.destKnown && !trip.overridden) {
+      readout.textContent = "That ZIP is not in the local table. Enter miles to add a distance charge. " + lead;
+      return;
+    }
+    var calc = trip.calculated == null ? "" : "Calculated " + trip.calculated + " miles (" +
+      (Math.round(trip.straight * 10) / 10) + " straight-line × " + settings.roadFactor + ", rounded). ";
+    var used = trip.overridden ? "Using " + trip.used + " miles entered. " : "Using " + trip.used + " miles. ";
+    var charge = trip.surcharge > 0
+      ? trip.extra + " miles over " + settings.freeMiles + ". Surcharge " + engine.money(trip.surcharge) + "."
+      : "Within the free miles. Surcharge " + engine.money(0) + ".";
+    readout.textContent = calc + used + charge;
+  }
+
+  function syncMediaControls(pkg) {
+    var box = document.getElementById("media-on");
+    var waive = document.getElementById("media-waive");
+    var note = document.getElementById("media-note");
+    var extWrap = document.getElementById("extension-wrap");
+    var extNote = document.getElementById("extension-note");
+    var consultNote = document.getElementById("consultation-note");
+    var sectionLine = document.getElementById("section-totals");
+    if (box) box.checked = !!draft.mediaOn;
+    if (waive) {
+      waive.checked = !!draft.mediaWaive;
+      waive.disabled = !draft.mediaOn;
+    }
+    var media = catalog.media || {};
+    var price = engine.money(Math.round(Number(media.price || 0) * 100));
+    if (note) {
+      note.textContent = draft.mediaOn && draft.mediaWaive
+        ? "Waived. The quote shows " + price + " and a matching credit. Square feet over " + (media.sqftThreshold || 2500) + " still add " + (media.perSqFt || 0.1) + " each."
+        : "Basic media is " + price + " up to " + (media.sqftThreshold || 2500) + " sq ft, then " + (media.perSqFt || 0.1) + " per sq ft. It can be booked on its own. Waive shows the price and a matching credit.";
+    }
+    var rooms = pkg ? engine.stagedRooms(pkg, catalog, draft.qty) : 0;
+    var showExt = !!pkg && (pkg.kind === "occupied" ? rooms > 0 : true);
+    var addonList = document.getElementById("addon-list");
+    if (addonList) addonList.hidden = !pkg;
+    if (extWrap) extWrap.hidden = !showExt;
+    if (extNote) {
+      extNote.textContent = !pkg ? "" : (pkg.kind === "occupied"
+        ? (rooms ? "Extensions apply only to rented rooms, after the included " + pkg.includedDays + " days." : "")
+        : "Extensions use the rooms in the package plus added rooms. Occupied styling with no rented rooms has no extension.");
+    }
+    if (consultNote) {
+      var credit = engine.money(Math.round(Number((catalog.consultation && catalog.consultation.credit) || 0) * 100));
+      consultNote.textContent = "If consultation is on this quote with staging, or it was previously paid, a " + credit + " credit is applied to staging. Waive turns that credit off. A consultation-only quote has no staging terms.";
+    }
+    if (sectionLine) {
+      sectionLine.textContent = lastSections.map(function (part) {
+        return part.title + " " + engine.money(part.subtotal);
+      }).join(" · ");
+    }
   }
 
   function fillForm() {
@@ -176,6 +256,10 @@
     setValue("client-email", draft.clientEmail);
     setValue("agent-name", draft.agentName);
     setValue("address", draft.address);
+    setValue("zip", draft.zip || "");
+    setValue("sqft", draft.sqft || "");
+    setValue("miles", draft.miles || "");
+    setValue("extension-weeks", draft.extensionWeeks || 0);
     setValue("discount-value", draft.discountValue);
     setValue("notes", draft.notes);
     var mode = document.getElementById("discount-mode");
@@ -184,7 +268,12 @@
       node.checked = node.value === draft.occupancy;
     });
     document.querySelectorAll("input[name='packageId']").forEach(function (node) {
-      node.checked = node.value === draft.packageId;
+      node.checked = (node.value === "none" && !draft.packageId) || node.value === draft.packageId;
+    });
+    ["consultation-on", "previously-paid", "waive-credit"].forEach(function (id, index) {
+      var keys = ["consultationOn", "previouslyPaid", "waiveCredit"];
+      var node = document.getElementById(id);
+      if (node) node.checked = !!draft[keys[index]];
     });
     (catalog.quantityItems || []).forEach(function (item) {
       setValue("qty-" + item.id, draft.qty[item.id] || 0);
@@ -424,8 +513,19 @@
       draft.addons[key.slice(6)] = target.checked;
     } else if (key.indexOf("qty:") === 0) {
       draft.qty[key.slice(4)] = target.value;
+    } else if (key === "consultationOn" || key === "previouslyPaid" || key === "waiveCredit" || key === "mediaOn" || key === "mediaWaive") {
+      draft[key] = !!target.checked;
+      if (key === "mediaOn" && !draft.mediaOn) draft.mediaWaive = false;
     } else if (key === "occupancy" || key === "packageId") {
-      if (target.checked) draft[key] = target.value;
+      if (target.checked) draft[key] = target.value === "none" ? "" : target.value;
+      if (key === "packageId" && target.checked) {
+        var next = packageById(draft.packageId);
+        if (next && next.kind === "occupied") draft.occupancy = "occupied";
+        if (next && next.kind === "vacant") draft.occupancy = "vacant";
+        document.querySelectorAll("input[name='occupancy']").forEach(function (node) {
+          node.checked = node.value === draft.occupancy;
+        });
+      }
     } else {
       draft[key] = target.value;
     }
@@ -501,8 +601,11 @@
     more.addEventListener("click", function () { stepQty(item.id, 1); });
     var title = el("p", { children: [el("span", { class: "qt-choice-name", text: item.name })] });
     if (item.placeholder) title.appendChild(el("span", { class: "qt-badge", text: "Placeholder" }));
+    var applies = item.appliesTo && item.appliesTo.length ? item.appliesTo.join(",") : "";
     return el("div", {
       class: "qt-qty",
+      "data-qty-row": item.id,
+      "data-applies": applies,
       children: [
         el("div", {
           class: "qt-qty-copy",
@@ -558,6 +661,7 @@
       el("span", { text: "Quote total" }),
       el("strong", { id: "running-total", text: "$0.00" })
     ]});
+    var sectionTotals = el("p", { id: "section-totals", class: "fine no-print", text: "" });
     var warn = el("p", {
       id: "placeholder-warn",
       class: "qt-warn no-print",
@@ -585,13 +689,71 @@
       autocomplete: "off",
       placeholder: "123 Sample Street, Carlsbad, CA"
     });
+    var zip = input({
+      id: "zip",
+      "data-draft": "zip",
+      type: "text",
+      inputmode: "numeric",
+      maxlength: "10",
+      autocomplete: "postal-code",
+      placeholder: "92024"
+    });
+    var sqft = input({
+      id: "sqft",
+      "data-draft": "sqft",
+      type: "number",
+      min: "0",
+      step: "1",
+      inputmode: "numeric",
+      placeholder: "2500"
+    });
+    var miles = input({
+      id: "miles",
+      "data-draft": "miles",
+      type: "number",
+      min: "0",
+      step: "1",
+      placeholder: "Blank uses calculated"
+    });
+    var useCalculated = el("button", { class: "btn btn-small btn-ghost", type: "button", text: "Use calculated" });
+    useCalculated.addEventListener("click", function () {
+      draft.miles = "";
+      setValue("miles", "");
+      markDirty();
+      refresh();
+    });
+    var mediaOn = input({ id: "media-on", type: "checkbox", "data-draft": "mediaOn" });
+    var mediaWaive = input({ id: "media-waive", type: "checkbox", "data-draft": "mediaWaive" });
+    var consultationOn = input({ id: "consultation-on", type: "checkbox", "data-draft": "consultationOn" });
+    var previouslyPaid = input({ id: "previously-paid", type: "checkbox", "data-draft": "previouslyPaid" });
+    var waiveCredit = input({ id: "waive-credit", type: "checkbox", "data-draft": "waiveCredit" });
+    var extensionWeeks = input({
+      id: "extension-weeks",
+      "data-draft": "extensionWeeks",
+      type: "number",
+      min: "0",
+      max: "104",
+      step: "1",
+      value: "0"
+    });
     var occVacant = input({ type: "radio", name: "occupancy", value: "vacant", "data-draft": "occupancy", checked: "checked" });
     var occOccupied = input({ type: "radio", name: "occupancy", value: "occupied", "data-draft": "occupancy" });
     var packages = el("div");
+    packages.appendChild(el("label", {
+      class: "qt-choice",
+      children: [
+        input({ type: "radio", name: "packageId", value: "none", "data-draft": "packageId", checked: draft.packageId ? null : "checked" }),
+        el("span", { children: [
+          el("span", { class: "qt-choice-name", text: "No staging" }),
+          el("span", { class: "qt-choice-desc fine", text: "Consultation or media can be quoted on their own." })
+        ]}),
+        el("span", { class: "qt-choice-price", text: "$0" })
+      ]
+    }));
     (catalog.packages || []).forEach(function (pkg) { packages.appendChild(choice(pkg)); });
     var quantities = el("div");
     (catalog.quantityItems || []).forEach(function (item) { quantities.appendChild(qtyRow(item)); });
-    var addons = el("div");
+    var addons = el("div", { id: "addon-list" });
     (catalog.addons || []).forEach(function (item) { addons.appendChild(addonRow(item)); });
     var discount = input({ id: "discount-value", "data-draft": "discountValue", type: "number", min: "0", step: "0.01", value: "0" });
     var discountMode = el("select", { id: "discount-mode", "data-draft": "discountMode" });
@@ -640,6 +802,15 @@
         field("Client email", email, true),
         field("Agent name", agent, true),
         field("Property address", address, true),
+        el("div", { class: "qt-fields", children: [
+          field("ZIP code", zip),
+          field("Square feet", sqft)
+        ]}),
+        el("p", { id: "miles-readout", class: "fine", text: "" }),
+        el("div", { class: "qt-inline", children: [
+          field("Miles (override)", miles),
+          el("div", { class: "field", children: [el("span", { text: "Calculated miles" }), useCalculated] })
+        ]}),
         el("fieldset", { class: "field", children: [
           el("legend", { text: "Occupied or vacant" }),
           el("label", { class: "qt-check", children: [occVacant, el("span", { text: "Vacant" })] }),
@@ -649,13 +820,31 @@
         datalist("agent-names", realtors)
       ]}),
       el("section", { class: "card", children: [
-        el("h2", { text: "Package" }),
-        el("p", { class: "fine", text: "One package per quote. The price is a flat fee. Included months and the media package are already inside it." }),
-        packages
+        el("h2", { text: "Consultation" }),
+        el("p", { class: "fine", text: ((catalog.consultation && catalog.consultation.hours) || 1) + " hour. General written plan. Optional, and it can be the whole quote." }),
+        el("label", { class: "qt-check", children: [consultationOn, el("span", { text: "Include consultation" })] }),
+        el("label", { class: "qt-check", children: [previouslyPaid, el("span", { text: "Previously paid" })] }),
+        el("label", { class: "qt-check", children: [waiveCredit, el("span", { text: "Waive consultation credit" })] }),
+        el("p", { id: "consultation-note", class: "fine", text: "" })
+      ]}),
+      el("section", { class: "card", children: [
+        el("h2", { text: "Staging" }),
+        el("p", { class: "fine", text: "Pick one package or none. " + (catalog.roomNote || "") }),
+        packages,
+        el("div", { id: "extension-wrap", children: [
+          field("Extension weeks", extensionWeeks, true),
+          el("p", { id: "extension-note", class: "fine", text: "" })
+        ]})
+      ]}),
+      el("section", { class: "card", children: [
+        el("h2", { text: "Listing media" }),
+        el("label", { class: "qt-check", children: [mediaOn, el("span", { text: "Basic Media Package" })] }),
+        el("label", { class: "qt-check", children: [mediaWaive, el("span", { text: "Waive media fee" })] }),
+        el("p", { id: "media-note", class: "fine", text: "" })
       ]}),
       el("section", { class: "card", children: [
         el("h2", { text: "Quantities" }),
-        el("p", { class: "fine", text: "Rental extension is a percent of the package price only, not of extra rooms or add-ons." }),
+        el("p", { class: "fine", text: "Additional rooms are for vacant packages. Furniture rental is for occupied styling only. Extension weeks use those rooms after the included days." }),
         quantities
       ]}),
       el("section", { class: "card", children: [
@@ -693,7 +882,7 @@
     ]});
 
     var root = el("div", { class: "qt" });
-    root.append(head, notice, running, warn, cap, el("div", { class: "qt-layout", children: [form, preview] }));
+    root.append(head, notice, running, sectionTotals, warn, cap, el("div", { class: "qt-layout", children: [form, preview] }));
     main.replaceChildren(root);
     root.addEventListener("input", onField);
     root.addEventListener("change", onField);
