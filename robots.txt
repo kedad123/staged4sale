@@ -29,6 +29,9 @@ Disallow: /administrator/
 # Sample admin studio (admin/). Mock data only; pages also send noindex.
 Disallow: /admin/
 
+# Read-only quote links. The quote is in the URL fragment. The page sends noindex.
+Disallow: /quote
+
 # Sitemap location
 Sitemap: https://staged4sale.com/sitemap.xml
 
