@@ -4,6 +4,22 @@ This file manages all blog post metadata for the Staged4Sale blog. Each post ent
 
 ## Posts
 
+- title: "Staged4Sale Celebrates 20 Years of Home Staging"
+  subtitle: "How an Oceanside staging business grew through a housing crash, a pandemic, and two decades of changes in how people shop for homes."
+  slug: "staged4sale-20-years"
+  date: "2026-11-21"
+  author: "Staged4Sale"
+  category: "Behind the Scenes"
+  image: "/images/tawni.jpg"
+  alt_text: "Tawni Oppenheim, founder of Staged4Sale, smiling in sunglasses."
+  tags: ["Company Anniversary", "North County San Diego", "Home Staging", "AI in Staging"]
+  summary: "Tawni Oppenheim looks back on two decades of staging homes in North County San Diego, from printed MapQuest directions to AI."
+  meta_description: "From printed MapQuest directions to AI, see how Oceanside’s Staged4Sale has helped North County San Diego sellers prepare their homes for market since 2006."
+  read_time: 3
+  featured: true
+  published: true
+  related_posts: ["monte-fuego-ranch-transformation"]
+
 - title: "Fall Home Staging Tips & Buyer Psychology"
   subtitle: "Help buyers feel at home this fall, one thoughtful detail at a time."
   slug: "fall-home-staging-tips-buyer-psychology"
