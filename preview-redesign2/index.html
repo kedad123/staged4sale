@@ -28,62 +28,65 @@
     </div>
   </div>
 
-  <!-- Row 1: Slim Desktop Utility Bar (Scrolls Away Cleanly) -->
-  <div class="hidden sm:block bg-[#0c0b09] border-b border-[rgba(245,240,232,0.07)] text-xs text-[#bfb7aa]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-9 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-2.5">
-        <span class="text-[#d5b26d] font-semibold tracking-wide">Staging Since 2006</span>
-        <span class="text-[#5e564a]">•</span>
-        <span>Oceanside &amp; North County San Diego</span>
-      </div>
-      <div class="flex items-center gap-4 tabular-nums">
-        <a href="tel:+17605832500" class="hover:text-[#e5c687] transition-colors inline-flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-[#d5b26d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-          <span>Call or Text <strong class="text-[#f5f0e8]">(760) 583-2500</strong></span>
-        </a>
-        <span class="text-[#5e564a] hidden md:inline">•</span>
-        <a href="mailto:info@staged4sale.com" class="hidden md:inline hover:text-[#e5c687] transition-colors">info@staged4sale.com</a>
+  <!-- Sticky Header Wrapper: Row 1 (Staging Since 2006 Utility Bar) + Row 2 (Main Nav Bar) -->
+  <header class="sticky top-0 z-40">
+    <!-- Row 1: Slim Utility Bar (Sticks With Header) -->
+    <div class="bg-[#0c0b09] border-b border-[rgba(245,240,232,0.08)] text-[11px] sm:text-xs text-[#bfb7aa]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-9 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-[#d5b26d] font-semibold tracking-wide">Staging Since 2006</span>
+          <span class="text-[#5e564a]">•</span>
+          <span>Oceanside &amp; North County San Diego</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-4 tabular-nums">
+          <a href="tel:+17605832500" class="hover:text-[#e5c687] transition-colors inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-[#d5b26d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+            <span>Call or Text <strong class="text-[#f5f0e8]">(760) 583-2500</strong></span>
+          </a>
+          <span class="text-[#5e564a] hidden md:inline">•</span>
+          <a href="mailto:info@staged4sale.com" class="hidden md:inline hover:text-[#e5c687] transition-colors">info@staged4sale.com</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Row 2: Clean Sticky Main Nav Bar -->
-  <header class="sticky top-0 z-40 bg-[#12110f]/95 backdrop-blur-md border-b border-[rgba(245,240,232,0.08)]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-      <a href="#top" class="flex items-center gap-3 shrink-0">
-        <img src="../images/logo2.png" alt="Staged4Sale" class="h-10 sm:h-11 w-auto object-contain" />
-      </a>
+    <!-- Row 2: Clean Main Nav Bar -->
+    <div class="bg-[#12110f]/95 backdrop-blur-md border-b border-[rgba(245,240,232,0.08)]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        <a href="#top" class="flex items-center gap-3 shrink-0">
+          <img src="../images/logo2.png" alt="Staged4Sale" class="h-10 sm:h-11 w-auto object-contain" />
+        </a>
 
-      <nav class="hidden lg:flex items-center gap-7 text-sm text-[#d9d2c5]" aria-label="Primary">
-        <a href="#market-data" class="hover:text-[#e5c687] transition-colors">Local Data</a>
-        <a href="#pricing-quote" class="hover:text-[#e5c687] transition-colors">Pricing &amp; Quote</a>
-        <a href="#projects" class="hover:text-[#e5c687] transition-colors">Projects</a>
-        <a href="#realtors" class="hover:text-[#e5c687] transition-colors">For Realtors</a>
-        <a href="#faq" class="hover:text-[#e5c687] transition-colors">FAQ</a>
+        <nav class="hidden lg:flex items-center gap-7 text-sm text-[#d9d2c5]" aria-label="Primary">
+          <a href="#market-data" class="hover:text-[#e5c687] transition-colors">Local Data</a>
+          <a href="#pricing-quote" class="hover:text-[#e5c687] transition-colors">Pricing &amp; Quote</a>
+          <a href="#projects" class="hover:text-[#e5c687] transition-colors">Projects</a>
+          <a href="#realtors" class="hover:text-[#e5c687] transition-colors">For Realtors</a>
+          <a href="#faq" class="hover:text-[#e5c687] transition-colors">FAQ</a>
+        </nav>
+
+        <div class="flex items-center gap-2.5">
+          <button onclick="jumpToWalkthrough()" class="hidden md:inline-flex items-center gap-1.5 text-xs sm:text-sm px-3.5 py-2 rounded-md btn-outline-gold">
+            Free Walkthrough
+          </button>
+          <a href="#pricing-quote" class="inline-flex items-center gap-1.5 text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-md btn-gold">
+            Instant Quote
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
+          <button type="button" onclick="toggleMobileMenu()" aria-label="Open menu" class="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-[rgba(213,178,109,0.35)] text-[#e5c687] hover:bg-[rgba(213,178,109,0.12)]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Slide-Down Nav Drawer -->
+      <nav id="mobile-nav-drawer" class="hidden lg:hidden bg-[#181613] border-t border-[rgba(213,178,109,0.2)] px-4 py-3 space-y-1 text-sm">
+        <a href="#market-data" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Local North County Data</a>
+        <a href="#pricing-quote" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Pricing &amp; Instant Quote</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Recent Projects</a>
+        <a href="#realtors" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Realtor Partner Program</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Meet Tawni</a>
+        <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">FAQ</a>
       </nav>
-
-      <div class="flex items-center gap-2.5">
-        <button onclick="jumpToWalkthrough()" class="hidden md:inline-flex items-center gap-1.5 text-xs sm:text-sm px-3.5 py-2 rounded-md btn-outline-gold">
-          Free Walkthrough
-        </button>
-        <a href="#pricing-quote" class="inline-flex items-center gap-1.5 text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-md btn-gold">
-          Instant Quote
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </a>
-        <button type="button" onclick="toggleMobileMenu()" aria-label="Open menu" class="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-[rgba(213,178,109,0.35)] text-[#e5c687] hover:bg-[rgba(213,178,109,0.12)]">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-        </button>
-      </div>
     </div>
-    <!-- Mobile Slide-Down Nav Drawer -->
-    <nav id="mobile-nav-drawer" class="hidden lg:hidden bg-[#181613] border-t border-[rgba(213,178,109,0.2)] px-4 py-3 space-y-1 text-sm">
-      <a href="#market-data" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Local North County Data</a>
-      <a href="#pricing-quote" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Pricing &amp; Instant Quote</a>
-      <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Recent Projects</a>
-      <a href="#realtors" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Realtor Partner Program</a>
-      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Meet Tawni</a>
-      <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">FAQ</a>
-    </nav>
   </header>
 
   <main id="top">
@@ -329,14 +332,23 @@
             </div>
           </div>
           <div class="mt-3 pt-2 border-t border-[rgba(245,240,232,0.08)] flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#bfb7aa]">
-            <span>Ballpark for standard rooms—Tawni walks your home (complimentary) and sends your custom <strong class="text-[#e5c687]">Staging Success Plan</strong>.</span>
+            <span>Ballpark for standard rooms—we'll walk your home (complimentary) and send your custom <strong class="text-[#e5c687]">Staging Success Plan</strong>.</span>
             <span class="italic text-[#d5b26d]">The investment in staging is always less than a price reduction.</span>
           </div>
         </div>
 
-        <!-- Room Selection Panel: 4 Clean Counter Tiles ($750 / $750 / $500 / $250 — all start at 0) -->
+        <!-- Room Selection Panel: Included Base + 4 Counter Tiles + 2 Property Condition Checkboxes -->
         <div class="pq-panel border-t-0 rounded-b-xl p-3.5 sm:p-4 mb-3.5">
           <div id="vacant-panel">
+            <!-- Clear Base Inclusions Callout Above Optional Room Add-Ons -->
+            <div class="bg-[#f3ede2] border border-[rgba(26,24,21,0.1)] rounded-lg px-3.5 py-2.5 mb-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div>
+                <span class="font-bold text-[#8f6720] uppercase tracking-[0.12em] text-[10px]">Included in Base ($2,500):</span>
+                <span class="text-[#1a1815] font-medium ml-1">Living Room · Dining Room · Kitchen · Bathroom · Entry</span>
+              </div>
+              <span class="text-[11px] text-[#6b6357]">60-day rental &amp; de-stage included</span>
+            </div>
+
             <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
               <span class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold">Optional Room Add-Ons (From $250 – $750)</span>
               <span id="addon-count-label" class="text-xs text-[#6b6357] font-medium tabular-nums">Base rooms only</span>
@@ -390,6 +402,31 @@
                   <button type="button" id="inc-patio" onclick="stepCount('patio', 1)" aria-label="Add outdoor patio or sitting nook" class="qty-btn">+</button>
                 </div>
               </div>
+            </div>
+
+            <!-- Logistics Checkboxes: Stairs/Elevator/Long Carry & Outside North County -->
+            <div class="mt-3 pt-3 border-t border-[rgba(26,24,21,0.09)] grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button type="button" id="tile-access" onclick="toggleExtra('access')" class="room-tile rounded-lg px-3.5 py-2.5 flex items-center gap-2.5">
+                <span class="room-check" id="chk-access"></span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="rt-title text-xs font-semibold leading-tight">Stairs, Elevator, or Long Carry</span>
+                    <span class="rt-price text-[11px] font-semibold tabular-nums shrink-0">+$350</span>
+                  </div>
+                  <div class="text-[11px] text-[#6b6357] leading-snug">Multi-story walk-up, condo elevator, or tight street parking</div>
+                </div>
+              </button>
+
+              <button type="button" id="tile-travel" onclick="toggleExtra('travel')" class="room-tile rounded-lg px-3.5 py-2.5 flex items-center gap-2.5">
+                <span class="room-check" id="chk-travel"></span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="rt-title text-xs font-semibold leading-tight">Outside North County San Diego</span>
+                    <span class="rt-price text-[11px] font-semibold tabular-nums shrink-0">+$250</span>
+                  </div>
+                  <div class="text-[11px] text-[#6b6357] leading-snug">Beyond ~20 mi from Oceanside (Metro SD, South OC, Temecula)</div>
+                </div>
+              </button>
             </div>
           </div>
 
@@ -462,30 +499,23 @@
             </div>
 
             <div id="inline-walkthrough-panel" class="lg:col-span-6 bg-[#12110f] border border-[rgba(213,178,109,0.22)] rounded-lg p-3 space-y-2.5">
-              <div class="flex items-center justify-between gap-2 text-[11px]">
-                <span class="text-[#d5b26d] font-semibold uppercase tracking-[0.11em]">
-                  Book a Complimentary Quote Walkthrough <span class="text-[#8f877b] font-normal normal-case">(optional)</span>
-                </span>
-                <div class="flex items-center gap-2 shrink-0">
-                  <button type="button" onclick="scrollDates(-180)" aria-label="Earlier dates" class="text-[#bfb7aa] hover:text-[#e5c687] px-1">‹</button>
-                  <button type="button" onclick="scrollDates(180)" aria-label="Later dates" class="text-[#bfb7aa] hover:text-[#e5c687] px-1">›</button>
-                  <button type="button" id="wt-clear-btn" onclick="clearWalkthroughSlot()" class="hidden text-[#e5c687] hover:underline ml-1">Clear</button>
+              <div>
+                <div class="flex items-center justify-between gap-2 text-[11px]">
+                  <span class="text-[#d5b26d] font-semibold uppercase tracking-[0.11em]">
+                    Book a Complimentary Quote Walkthrough
+                  </span>
+                  <div class="flex items-center gap-2 shrink-0">
+                    <button type="button" onclick="scrollDates(-180)" aria-label="Earlier dates" class="text-[#bfb7aa] hover:text-[#e5c687] px-1">‹</button>
+                    <button type="button" onclick="scrollDates(180)" aria-label="Later dates" class="text-[#bfb7aa] hover:text-[#e5c687] px-1">›</button>
+                    <button type="button" id="wt-clear-btn" onclick="clearWalkthroughSlot()" class="hidden text-[#e5c687] hover:underline ml-1">Clear</button>
+                  </div>
                 </div>
+                <p class="text-[11px] text-[#9c9487] mt-1">Choose a time slot now, or we can discuss when we connect.</p>
               </div>
 
               <div id="inline-day-group" class="date-scroll flex gap-1.5 overflow-x-auto pb-1.5"></div>
 
-              <div class="grid grid-cols-3 gap-1.5 tabular-nums" id="inline-time-group">
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">8:00 AM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">9:00 AM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">10:00 AM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">11:00 AM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">12:00 PM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">1:00 PM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">2:00 PM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">3:00 PM</button>
-                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">4:00 PM</button>
-              </div>
+              <div class="grid grid-cols-3 gap-1.5 tabular-nums" id="inline-time-group"></div>
             </div>
           </div>
 
@@ -1024,6 +1054,26 @@
       bed: 6,
       patio: 4
     };
+    const EXTRA_FEES = {
+      access: 350,
+      travel: 250
+    };
+    const WALKTHROUGH_TIMES = [
+      "10:00 AM",
+      "11:00 AM",
+      "12:00 PM",
+      "1:00 PM",
+      "2:00 PM",
+      "3:00 PM"
+    ];
+    const BOOKED_PATTERNS = [
+      ["10:00 AM", "1:00 PM"],
+      ["11:00 AM", "3:00 PM"],
+      ["12:00 PM"],
+      ["10:00 AM", "2:00 PM"],
+      ["11:00 AM", "1:00 PM"],
+      ["2:00 PM"]
+    ];
 
     const SERVICE_PROCESS = {
       occupied: {
@@ -1054,6 +1104,10 @@
       living: 0,
       bed: 0,
       patio: 0,
+      access: false,
+      travel: false,
+      selectedDayIdx: null,
+      selectedTime: "",
       lastRangeText: ""
     };
 
@@ -1076,15 +1130,36 @@
         const d = new Date(start);
         d.setDate(start.getDate() + i);
         if (d.getDay() === 0) continue;
+        const idx = items.length;
         const label = `${days[d.getDay()]} ${months[d.getMonth()]} ${d.getDate()}`;
         items.push(`
-          <button type="button" data-date="${label}" onclick="selectInlineSlot(this, 'day')" class="chip-dark shrink-0 w-[66px] py-1.5 rounded text-[11px] text-center leading-tight">
+          <button type="button" data-date="${label}" data-day-idx="${idx}" onclick="selectInlineSlot(this, 'day')" class="chip-dark shrink-0 w-[66px] py-1.5 rounded text-[11px] text-center leading-tight">
             <div>${days[d.getDay()]}</div>
             <div class="text-[10px] opacity-80">${months[d.getMonth()]} ${d.getDate()}</div>
           </button>
         `);
       }
       wrap.innerHTML = items.join("");
+    }
+
+    function renderTimeSlots(dayIdx) {
+      const wrap = document.getElementById("inline-time-group");
+      const booked = BOOKED_PATTERNS[(dayIdx || 0) % BOOKED_PATTERNS.length];
+      if (estState.selectedTime && booked.includes(estState.selectedTime)) {
+        estState.selectedTime = "";
+      }
+      wrap.innerHTML = WALKTHROUGH_TIMES.map(t => {
+        if (booked.includes(t)) {
+          return `
+            <button type="button" disabled aria-disabled="true" title="Already booked" class="chip-booked py-1.5 rounded text-xs text-center leading-tight">
+              <span class="slot-time">${t}</span>
+              <span class="slot-tag">Booked</span>
+            </button>
+          `;
+        }
+        const activeClass = estState.selectedTime === t ? " active" : "";
+        return `<button type="button" data-time="${t}" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center${activeClass}">${t}</button>`;
+      }).join("");
     }
 
     function scrollDates(dx) {
@@ -1094,6 +1169,11 @@
     function stepCount(key, delta) {
       const max = ROOM_MAX[key] || 4;
       estState[key] = Math.max(0, Math.min(max, estState[key] + delta));
+      updateEstimator();
+    }
+
+    function toggleExtra(key) {
+      estState[key] = !estState[key];
       updateEstimator();
     }
 
@@ -1123,6 +1203,20 @@
         document.getElementById(`dec-${key}`).disabled = val === 0;
         document.getElementById(`inc-${key}`).disabled = val >= (ROOM_MAX[key] || 4);
       });
+      ["access", "travel"].forEach(key => {
+        const on = Boolean(estState[key]);
+        const tile = document.getElementById(`tile-${key}`);
+        const chk = document.getElementById(`chk-${key}`);
+        if (tile) {
+          tile.classList.toggle("active", on);
+          tile.setAttribute("aria-pressed", on ? "true" : "false");
+        }
+        if (chk) {
+          chk.innerHTML = on
+            ? '<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>'
+            : "";
+        }
+      });
     }
 
     function updateEstimator() {
@@ -1148,19 +1242,26 @@
       } else {
         syncVacantUI();
         const extraCount = estState.primary + estState.living + estState.bed + estState.patio;
-        const extraCost =
+        const roomCost =
           estState.primary * ROOM_RATES.primary +
           estState.living * ROOM_RATES.living +
           estState.bed * ROOM_RATES.bed +
           estState.patio * ROOM_RATES.patio;
-        const lo = VACANT_BASE + extraCost;
-        const hi = lo + Math.max(400, Math.round(lo * 0.14));
-        const weeklyLo = fmtWeekly(lo * 0.05);
+        const logisticsCost =
+          (estState.access ? EXTRA_FEES.access : 0) +
+          (estState.travel ? EXTRA_FEES.travel : 0);
+        const furnitureCost = VACANT_BASE + roomCost;
+        const lo = furnitureCost + logisticsCost;
+        const hi = lo + Math.max(400, Math.round(furnitureCost * 0.14));
+        const weeklyLo = fmtWeekly(furnitureCost * 0.05);
         rangeEl.textContent = `${fmtDollar(lo)} – ${fmtDollar(hi)}`;
 
-        document.getElementById("addon-count-label").textContent = extraCount === 0
-          ? "Base rooms only"
-          : `${extraCount} space${extraCount === 1 ? "" : "s"} added (+$${extraCost.toLocaleString()})`;
+        const labelParts = [];
+        if (extraCount > 0) labelParts.push(`${extraCount} space${extraCount === 1 ? "" : "s"} (+$${roomCost.toLocaleString()})`);
+        if (logisticsCost > 0) labelParts.push(`logistics (+$${logisticsCost.toLocaleString()})`);
+        document.getElementById("addon-count-label").textContent = labelParts.length
+          ? labelParts.join(" · ")
+          : "Base rooms only";
 
         incEl.innerHTML = `<strong class="text-[#e5c687]">Base ($2,500) includes:</strong> Living, Dining, Kitchen, Main Bath and Entry.`;
 
@@ -1169,9 +1270,11 @@
         if (estState.living > 0) parts.push(`${estState.living}× Living / Family ($750)`);
         if (estState.bed > 0) parts.push(`${estState.bed}× Bed / Office ($500)`);
         if (estState.patio > 0) parts.push(`${estState.patio}× Patio / Nook ($250)`);
+        if (estState.access) parts.push(`Stairs/Elevator/Long Carry (+$${EXTRA_FEES.access})`);
+        if (estState.travel) parts.push(`Outside North County (+$${EXTRA_FEES.travel})`);
         addEl.innerHTML = parts.length
           ? `<strong class="text-[#e5c687]">Added:</strong> ${parts.join(" · ")}`
-          : "Add optional spaces below — $750 major · $500 standard · $250 patio/nook.";
+          : "Add optional spaces or logistics below — $750 major · $500 standard · $250 patio/nook.";
         termsEl.innerHTML = `<strong class="text-[#e5c687]">Terms:</strong> 60-day rental &amp; complimentary de-stage included · Flexible weekly extensions (~${weeklyLo}/wk, 5%/wk — no forced extra month)`;
       }
 
@@ -1196,11 +1299,21 @@
       const wasActive = btn.classList.contains("active");
       document.querySelectorAll(`${parent} .chip-dark`).forEach(b => b.classList.remove("active"));
       if (!wasActive) btn.classList.add("active");
+
+      if (group === "day") {
+        estState.selectedDayIdx = !wasActive ? Number(btn.dataset.dayIdx) : null;
+        renderTimeSlots(estState.selectedDayIdx !== null ? estState.selectedDayIdx : 0);
+      } else {
+        estState.selectedTime = !wasActive ? btn.dataset.time : "";
+      }
       updateWalkthroughButtonState();
     }
 
     function clearWalkthroughSlot() {
-      document.querySelectorAll("#inline-day-group .chip-dark, #inline-time-group .chip-dark").forEach(b => b.classList.remove("active"));
+      estState.selectedDayIdx = null;
+      estState.selectedTime = "";
+      document.querySelectorAll("#inline-day-group .chip-dark").forEach(b => b.classList.remove("active"));
+      renderTimeSlots(0);
       updateWalkthroughButtonState();
     }
 
@@ -1225,12 +1338,12 @@
       let slotStr = "";
       if (dayEl || timeEl) {
         const dTxt = dayEl ? dayEl.dataset.date : "Preferred day TBD";
-        const tTxt = timeEl ? timeEl.innerText + " PT" : "flexible time";
+        const tTxt = timeEl ? timeEl.dataset.time + " PT" : "flexible time";
         slotStr = ` Complimentary walkthrough requested for <strong>${dTxt} (${tTxt})</strong>.`;
       }
 
       const svcLabel = estState.service === "occupied" ? "Occupied Staging" : "Vacant Staging";
-      box.innerHTML = `<strong>All set${name ? ", " + name : ""}!</strong> (Demo) Inquiry ready for Tawni: <strong>${svcLabel} · ${estState.lastRangeText}</strong> (${estState.role === "realtor" ? "Realtor®" : "Homeowner"}${addr ? " · " + addr : ""}${smsOk ? " · SMS OK" : ""}).${slotStr}${notes ? `<br><span class="opacity-80">Notes: "${notes}"</span>` : ""}`;
+      box.innerHTML = `<strong>All set${name ? ", " + name : ""}!</strong> (Demo) Inquiry ready for our team: <strong>${svcLabel} · ${estState.lastRangeText}</strong> (${estState.role === "realtor" ? "Realtor®" : "Homeowner"}${addr ? " · " + addr : ""}${smsOk ? " · SMS OK" : ""}).${slotStr}${notes ? `<br><span class="opacity-80">Notes: "${notes}"</span>` : ""}`;
       box.classList.remove("hidden");
     }
 
@@ -1616,6 +1729,7 @@
 
     // Init
     renderScrollDates();
+    renderTimeSlots(0);
     updateEstimator();
     renderProjectsGrid();
     renderMarketSpotlight("All North County");

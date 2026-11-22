@@ -335,6 +335,25 @@
       color: #e5c687;
       font-weight: 600;
     }
+    .chip-booked {
+      border: 1px dashed rgba(245, 240, 232, 0.1);
+      background-color: rgba(255, 255, 255, 0.02);
+      color: #6b6357;
+      cursor: not-allowed;
+      user-select: none;
+    }
+    .chip-booked .slot-time {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    .chip-booked .slot-tag {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8f877b;
+      margin-top: 1px;
+    }
 
     .date-scroll {
       scrollbar-width: thin;
