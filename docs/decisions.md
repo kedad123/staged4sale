@@ -93,3 +93,7 @@ The article distinguishes agent survey observations from experimental findings a
 ## 2026-10-28 — Monte Fuego living room after photo
 
 On Oct 28, 2026 the Monte Fuego living room after photo was replaced with Joey's color-corrected version.
+
+## 2026-10-28 — Enhanced project photos
+
+Oct 28, 2026, enhanced photos swapped in for Anchor Point Hideaway 05, Canyon View Condo 06 and Cresta View Estate 02 (also images/dining.jpg), color/exposure fixes only.
