@@ -1316,6 +1316,13 @@ body.app .header-inner {
   border-radius: 10px;
 }
 
+.pair .shot img {
+  aspect-ratio: 3 / 2;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
 .shot figcaption {
   margin-top: 6px;
   color: var(--a-muted);

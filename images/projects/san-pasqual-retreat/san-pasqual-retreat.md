@@ -10,6 +10,8 @@ tags: [retreat, serene, open-concept]
 - san-pasqual-retreat-03.jpg | Cozy Conversation Area: Intimate sofa arrangement with soft accent pillows, woven throw, and warm-toned area rug centered around curated round coffee table  
 - san-pasqual-retreat-04.jpg | Dining Room: Tailored setup with upholstered chairs and sleek black table, featuring textured vase centerpiece framed by tropical landscape artwork  
 - san-pasqual-retreat-05.jpg | Great Room: Soaring ceilings and expansive windows with neutral-toned seating, layered textures, and subtle metallic accents for sophisticated relaxed atmosphere  
+- san-pasqual-retreat-06.jpg | Kitchen: Bright white cabinetry, central island with bar stools, and a dining nook  
+- san-pasqual-retreat-07.jpg | Primary Bedroom: Neutral bedding, metallic wall accents, and matching nightstands with lamps  
 
 ## Notes  
 Tucked away along Old San Pasqual Road, this serene home blends open, airy interiors with warm, welcoming design touches — perfectly staged to highlight its inviting flow and comfort. The staging emphasizes the home's natural light through soaring ceilings and expansive windows while creating sophisticated yet relaxed atmospheres in each space. From the spa-like primary bath with hotel-inspired minimalist accessories to the great room's layered textures and metallic accents, every space invites both entertaining and everyday living. The thoughtful furniture placement and curated accessories create intimate conversation areas while maintaining the open, flowing feel that makes this retreat so special.
