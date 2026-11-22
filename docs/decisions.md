@@ -93,3 +93,5 @@ The article distinguishes agent survey observations from experimental findings a
 ## 2026-10-28 — Monte Fuego living room after photo
 
 On Oct 28, 2026 the Monte Fuego living room after photo was replaced with Joey's color-corrected version.
+
+Oct 28, 2026, Monte Fuego photos 03-07 replaced with Joey's color-corrected versions (color/exposure edits only; the kitchen stays off the site).
