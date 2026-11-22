@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <title>Staged4Sale — Private Redesign Preview v2 (Noindex)</title>
+  <link rel="stylesheet" href="preview.css" />
+</head>
+<body class="pb-20 md:pb-0">
+
+  <!-- Mockup Preview Notice Banner -->
+  <div class="bg-[#1f1c17] border-b border-[rgba(213,178,109,0.22)] text-xs text-[#cfc6b7]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-2">
+      <span>
+        <strong class="text-[#e5c687]">Private Redesign Preview v2 (/preview-redesign2/ · Noindex)</strong> — 2-Card Pricing ($2,500 + $750/$500/$250) · 5%/wk Extensions · Complimentary Quote Walkthroughs
+      </span>
+      <div class="flex items-center gap-3">
+        <button onclick="replayHeroFade()" class="text-[#e5c687] hover:underline font-medium">Replay Hero Fade</button>
+        <span class="opacity-30">|</span>
+        <button onclick="openReportModal()" class="text-[#e5c687] hover:underline font-medium">Monthly Report Card</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 1: Slim Desktop Utility Bar (Scrolls Away Cleanly) -->
+  <div class="hidden sm:block bg-[#0c0b09] border-b border-[rgba(245,240,232,0.07)] text-xs text-[#bfb7aa]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-9 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5">
+        <span class="text-[#d5b26d] font-semibold tracking-wide">Staging Since 2006</span>
+        <span class="text-[#5e564a]">•</span>
+        <span>Oceanside &amp; North County San Diego</span>
+      </div>
+      <div class="flex items-center gap-4 tabular-nums">
+        <a href="tel:+17605832500" class="hover:text-[#e5c687] transition-colors inline-flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-[#d5b26d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          <span>Call or Text <strong class="text-[#f5f0e8]">(760) 583-2500</strong></span>
+        </a>
+        <span class="text-[#5e564a] hidden md:inline">•</span>
+        <a href="mailto:info@staged4sale.com" class="hidden md:inline hover:text-[#e5c687] transition-colors">info@staged4sale.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Clean Sticky Main Nav Bar -->
+  <header class="sticky top-0 z-40 bg-[#12110f]/95 backdrop-blur-md border-b border-[rgba(245,240,232,0.08)]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <a href="#top" class="flex items-center gap-3 shrink-0">
+        <img src="../images/logo2.png" alt="Staged4Sale" class="h-10 sm:h-11 w-auto object-contain" />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-sm text-[#d9d2c5]" aria-label="Primary">
+        <a href="#market-data" class="hover:text-[#e5c687] transition-colors">Local Data</a>
+        <a href="#pricing-quote" class="hover:text-[#e5c687] transition-colors">Pricing &amp; Quote</a>
+        <a href="#projects" class="hover:text-[#e5c687] transition-colors">Projects</a>
+        <a href="#realtors" class="hover:text-[#e5c687] transition-colors">For Realtors</a>
+        <a href="#faq" class="hover:text-[#e5c687] transition-colors">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <button onclick="jumpToWalkthrough()" class="hidden md:inline-flex items-center gap-1.5 text-xs sm:text-sm px-3.5 py-2 rounded-md btn-outline-gold">
+          Free Walkthrough
+        </button>
+        <a href="#pricing-quote" class="inline-flex items-center gap-1.5 text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-md btn-gold">
+          Instant Quote
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </a>
+        <button type="button" onclick="toggleMobileMenu()" aria-label="Open menu" class="lg:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-[rgba(213,178,109,0.35)] text-[#e5c687] hover:bg-[rgba(213,178,109,0.12)]">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Slide-Down Nav Drawer -->
+    <nav id="mobile-nav-drawer" class="hidden lg:hidden bg-[#181613] border-t border-[rgba(213,178,109,0.2)] px-4 py-3 space-y-1 text-sm">
+      <a href="#market-data" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Local North County Data</a>
+      <a href="#pricing-quote" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Pricing &amp; Instant Quote</a>
+      <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Recent Projects</a>
+      <a href="#realtors" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Realtor Partner Program</a>
+      <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">Meet Tawni</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-[#e6dfd2] hover:text-[#e5c687]">FAQ</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO SECTION: Photo fills ONLY the hero banner (never hidden behind proof strip!) -->
+    <section class="border-b border-[rgba(213,178,109,0.16)]">
+      <div class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src="../images/hero-before.jpg" alt="Vacant living room before staging" class="w-full h-full object-cover object-center" />
+        <img id="hero-after-img" src="../images/hero-after.jpg" alt="Staged living room by Staged4Sale" class="hero-after-layer absolute inset-0 w-full h-full object-cover object-center" />
+        <div class="hero-scrim-main absolute inset-0"></div>
+        <div class="hidden sm:block absolute inset-0" style="background: linear-gradient(180deg, rgba(14,13,11,0.52) 0%, rgba(14,13,11,0.14) 36%, rgba(14,13,11,0.22) 72%, rgba(18,17,15,0.96) 100%);"></div>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-8 pb-7 sm:pt-24 sm:pb-20">
+        <div class="max-w-2xl" style="text-shadow: 0 2px 14px rgba(0,0,0,0.7);">
+          <p class="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#e5c687] mb-2 sm:mb-4">
+            Oceanside &amp; North County San Diego · Est. 2006
+          </p>
+          <h1 class="font-serif-editorial text-[1.75rem] sm:text-5xl lg:text-[3.5rem] leading-[1.08] tracking-[-0.025em] text-[#fbf8f2] mb-2.5 sm:mb-5">
+            Homes staged to sell faster—and for <em class="italic text-[#e5c687]">top dollar.</em>
+          </h1>
+          <p class="text-xs sm:text-lg text-[#ece5d9] leading-snug sm:leading-relaxed mb-4 sm:mb-8 max-w-xl">
+            Owned-inventory vacant &amp; occupied staging built around your listing timeline. Transparent starting rates, complimentary quote walkthroughs, and 20+ years of North County results.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 sm:mb-7" style="text-shadow: none;">
+            <a href="#pricing-quote" class="btn-gold px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-md text-xs sm:text-base inline-flex items-center gap-1.5 sm:gap-2">
+              Estimate Staging Cost
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </a>
+            <button onclick="jumpToWalkthrough()" class="btn-outline-gold px-3.5 sm:px-5 py-2.5 sm:py-3.5 rounded-md text-xs sm:text-base inline-flex items-center gap-1.5 sm:gap-2">
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#d5b26d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+              Book Free Walkthrough
+            </button>
+          </div>
+
+          <!-- Shown on desktop (mobile already has sticky Call / Text Us / Instant Quote bar) -->
+          <div class="hidden sm:flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#e6dfd2]">
+            <a href="tel:+17605832500" class="inline-flex items-center gap-1.5 hover:text-[#e5c687] transition-colors">
+              <span class="text-[#e5c687] font-semibold">Call:</span>
+              <span class="tabular-nums underline decoration-[rgba(213,178,109,0.5)] underline-offset-4">(760) 583-2500</span>
+            </a>
+            <span class="text-[#8a8071]">•</span>
+            <a href="sms:+17605832500?&body=Hi%20Tawni%2C%20I%27d%20like%20a%20staging%20quote%20for%20a%20listing%20at%20" class="inline-flex items-center gap-1.5 hover:text-[#e5c687] transition-colors">
+              <span class="text-[#e5c687] font-semibold">Text an MLS link:</span>
+              <span class="underline decoration-[rgba(213,178,109,0.5)] underline-offset-4">SMS (760) 583-2500</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <!-- 4-Fact Concrete Proof Strip (Separate from Hero Photo Container!) -->
+      <div class="bg-[#181613] border-t border-[rgba(213,178,109,0.18)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div>
+            <div class="font-serif-editorial text-[1.05rem] sm:text-2xl text-[#e5c687] tabular-nums leading-snug">20+ Years Experience</div>
+            <div class="text-[11px] sm:text-xs text-[#bfb7aa] mt-0.5">Staging North County since 2006</div>
+          </div>
+          <div>
+            <div class="font-serif-editorial text-[1.05rem] sm:text-2xl text-[#e5c687] leading-snug">ASPM™ Master</div>
+            <div class="text-[11px] sm:text-xs text-[#bfb7aa] mt-0.5">IAHSP Best of Staging Winner</div>
+          </div>
+          <button type="button" onclick="jumpToWalkthrough()" class="group block text-left rounded-lg -m-1.5 p-1.5 hover:bg-[rgba(213,178,109,0.08)] transition-colors">
+            <div class="font-serif-editorial text-[1.05rem] sm:text-2xl text-[#e5c687] leading-snug inline-flex items-center gap-1.5">
+              <span>Free Walkthroughs</span>
+              <span class="text-xs sm:text-sm transition-transform group-hover:translate-x-0.5">→</span>
+            </div>
+            <div class="text-[11px] sm:text-xs text-[#bfb7aa] mt-0.5 group-hover:text-[#f5f0e8] transition-colors">Complimentary quote (vacant or occupied)</div>
+          </button>
+          <a href="#realtors" class="group block rounded-lg -m-1.5 p-1.5 hover:bg-[rgba(213,178,109,0.08)] transition-colors">
+            <div class="font-serif-editorial text-[1.05rem] sm:text-2xl text-[#e5c687] leading-snug inline-flex items-center gap-1.5">
+              <span>Realtor Partners</span>
+              <span class="text-xs sm:text-sm transition-transform group-hover:translate-x-0.5">→</span>
+            </div>
+            <div class="text-[11px] sm:text-xs text-[#bfb7aa] mt-0.5 group-hover:text-[#f5f0e8] transition-colors">Priority scheduling &amp; agent perks</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE NORTH COUNTY STAGING DATA (Tight Band Right Below Hero) -->
+    <div class="gold-divider"></div>
+    <section id="market-data" class="py-12 sm:py-16 bg-[#0d0c0a]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-6">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#d5b26d] mb-1.5">
+              North County Market Study · Oct 15 – Nov 15, 2026
+            </p>
+            <h2 class="font-serif-editorial text-2xl sm:text-3xl text-[#fbf8f2] tracking-[-0.02em]">
+              Does staging <em class="italic text-[#e5c687]">pay off</em> in North County?
+            </h2>
+            <p class="text-xs sm:text-sm text-[#bfb7aa] mt-1.5 max-w-2xl">
+              We crunched the local numbers. Every month we analyze hundreds of recent North County closed sales—comparing professionally staged listings directly against unstaged vacant homes, city by city.
+            </p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button onclick="openReportModal()" class="btn-outline-gold px-3.5 py-2 rounded-md text-xs inline-flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-[#d5b26d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Shareable Seller Report
+            </button>
+            <a href="#pricing-quote" class="btn-gold px-3.5 py-2 rounded-md text-xs inline-flex items-center gap-1">
+              See Pricing ↓
+            </a>
+          </div>
+        </div>
+
+        <!-- Compact 4-KPI Strip -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+          <div class="bg-[#181613] border border-[rgba(213,178,109,0.28)] rounded-xl px-4 py-3.5">
+            <div class="text-[11px] uppercase tracking-[0.12em] text-[#bfb7aa]">More Per Sq Ft</div>
+            <div class="font-serif-editorial text-2xl sm:text-3xl text-[#e5c687] tabular-nums leading-tight mt-0.5">+11.6%</div>
+            <div class="text-[11px] text-[#9c9487] mt-0.5">$573 vs. $513/sf median</div>
+          </div>
+          <div class="bg-[#181613] border border-[rgba(213,178,109,0.28)] rounded-xl px-4 py-3.5">
+            <div class="text-[11px] uppercase tracking-[0.12em] text-[#bfb7aa]">Faster to Contract</div>
+            <div class="font-serif-editorial text-2xl sm:text-3xl text-[#e5c687] tabular-nums leading-tight mt-0.5">14 Days</div>
+            <div class="text-[11px] text-[#9c9487] mt-0.5">18 days vs. 31.5 vacant</div>
+          </div>
+          <div class="bg-[#181613] border border-[rgba(213,178,109,0.28)] rounded-xl px-4 py-3.5">
+            <div class="text-[11px] uppercase tracking-[0.12em] text-[#bfb7aa]">Sale-to-List Ratio</div>
+            <div class="font-serif-editorial text-2xl sm:text-3xl text-[#e5c687] tabular-nums leading-tight mt-0.5">98.0%</div>
+            <div class="text-[11px] text-[#9c9487] mt-0.5">vs. 95.2% for vacant</div>
+          </div>
+          <div class="bg-[#181613] border border-[rgba(245,240,232,0.09)] rounded-xl px-4 py-3.5">
+            <div class="text-[11px] uppercase tracking-[0.12em] text-[#bfb7aa]">Local Sales Analyzed</div>
+            <div class="font-serif-editorial text-2xl sm:text-3xl text-[#fbf8f2] tabular-nums leading-tight mt-0.5">314</div>
+            <div class="text-[11px] text-[#9c9487] mt-0.5">213 staged · 101 vacant</div>
+          </div>
+        </div>
+
+        <!-- Compact Footer Bar + Optional Expandable 10-Area Table -->
+        <div class="bg-[#181613] border border-[rgba(245,240,232,0.09)] rounded-xl px-4 sm:px-5 py-3.5">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span class="text-xs text-[#d6cec0]">
+              <strong class="text-[#e5c687]">Typical 2,000 sq ft North County home:</strong> about <strong class="text-[#fbf8f2]">$119,000 more</strong> at sale when staged vs. vacant.
+            </span>
+            <button id="toggle-full-table-btn" onclick="toggleFullTable()" class="text-xs font-semibold text-[#e5c687] hover:underline shrink-0">
+              Show 10-area city breakdown ↓
+            </button>
+          </div>
+
+          <div id="full-market-table-wrap" class="hidden mt-4 pt-4 border-t border-[rgba(245,240,232,0.08)] overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm tabular-nums">
+              <thead>
+                <tr class="border-b border-[rgba(213,178,109,0.28)] text-[#bfb7aa]">
+                  <th class="py-2 pr-4 font-semibold">Area</th>
+                  <th class="py-2 px-3 font-semibold text-[#e5c687]">Staged Sales</th>
+                  <th class="py-2 px-3 font-semibold text-[#e5c687]">Staged $/sf</th>
+                  <th class="py-2 px-3 font-semibold text-[#e5c687]">Staged Days</th>
+                  <th class="py-2 px-3 font-semibold text-[#e5c687]">Staged % List</th>
+                  <th class="py-2 px-3 font-semibold border-l border-[rgba(245,240,232,0.08)]">Vacant Sales</th>
+                  <th class="py-2 px-3 font-semibold">Vacant $/sf</th>
+                  <th class="py-2 px-3 font-semibold">Vacant Days</th>
+                  <th class="py-2 pl-3 font-semibold">Vacant % List</th>
+                </tr>
+              </thead>
+              <tbody id="full-market-tbody" class="divide-y divide-[rgba(245,240,232,0.06)]"></tbody>
+            </table>
+          </div>
+
+          <p class="mt-3.5 text-[11px] text-[#8f877b] leading-relaxed">
+            Medians across public North County closed listings (Oct 15 – Nov 15, 2026). Days = days to contract. Gold = staged outperformed vacant (min. 5 sales each). Observational market data—not a guarantee of individual sale price.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPACT PRICING & INSTANT ESTIMATE (Warm Cream Spotlight Section) -->
+    <section id="pricing-quote" class="py-10 sm:py-14">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-2 mb-5">
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#8f6720] mb-1">Transparent Pricing &amp; Instant Estimate</p>
+            <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#1a1815] tracking-[-0.02em]">
+              Instant estimate, <em class="italic text-[#8f6720]">no obligation.</em>
+            </h2>
+          </div>
+          <p class="text-xs sm:text-sm text-[#544d42] max-w-sm">
+            Pick vacant or occupied and adjust your rooms—your ballpark updates immediately.
+          </p>
+        </div>
+
+        <!-- Clean 2-Card Service Switcher: Vacant (From $2,500, active) | Occupied (From $1,000) -->
+        <div class="grid grid-cols-2 gap-2.5 sm:gap-3.5 mb-3.5" id="service-cards">
+          <button type="button" data-service="vacant" class="tier-card active rounded-xl p-3.5 sm:p-4 flex flex-col">
+            <div class="flex items-center justify-between gap-1 w-full mb-1">
+              <span class="tier-kicker text-[10px] uppercase tracking-[0.12em] font-semibold">Popular</span>
+              <span class="tier-pill hidden sm:inline text-[10px] px-1.5 py-0.5 rounded font-medium">60 Days · Destage Included</span>
+            </div>
+            <div class="tier-title font-serif-editorial text-base sm:text-xl leading-tight">Vacant Staging</div>
+            <div class="flex items-baseline gap-1 mt-1 sm:mb-1">
+              <span class="tier-muted text-[10px] sm:text-[11px]">From</span>
+              <span class="tier-price font-serif-editorial text-xl sm:text-2xl tabular-nums">$2,500</span>
+            </div>
+            <p class="tier-desc hidden sm:block text-[11px] leading-snug">Full-service vacant staging with curated owned inventory. Add rooms below (+$750 / +$500 / +$250).</p>
+          </button>
+
+          <button type="button" data-service="occupied" class="tier-card rounded-xl p-3.5 sm:p-4 flex flex-col">
+            <div class="flex items-center justify-between gap-1 w-full mb-1">
+              <span class="tier-kicker text-[10px] uppercase tracking-[0.12em] font-semibold">Lived-In Homes</span>
+              <span class="tier-pill hidden sm:inline text-[10px] px-1.5 py-0.5 rounded font-medium">Restyle + Accents</span>
+            </div>
+            <div class="tier-title font-serif-editorial text-base sm:text-xl leading-tight">Occupied Staging</div>
+            <div class="flex items-baseline gap-1 mt-1 sm:mb-1">
+              <span class="tier-muted text-[10px] sm:text-[11px]">From</span>
+              <span class="tier-price font-serif-editorial text-xl sm:text-2xl tabular-nums">$1,000</span>
+            </div>
+            <p class="tier-desc hidden sm:block text-[11px] leading-snug">Restyling with your existing furniture plus curated accent pieces—begins with a $250 consultation (credited toward staging).</p>
+          </button>
+        </div>
+
+        <!-- Compact 1-2-3 Process Bar -->
+        <div class="pq-panel rounded-xl px-3.5 py-2.5 mb-3.5">
+          <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+            <span id="proc-heading" class="text-[11px] uppercase tracking-[0.15em] text-[#8f6720] font-bold">How Vacant Staging Works</span>
+            <span id="proc-sub" class="text-[11px] text-[#6b6357]">Complimentary quote walkthrough to photo-ready install</span>
+          </div>
+          <div id="proc-steps" class="grid grid-cols-1 md:grid-cols-3 gap-2"></div>
+        </div>
+
+        <!-- Live Estimate Banner + Base Inclusions + Weekly Extension Terms -->
+        <div class="bg-[#1b1916] text-[#f5f0e8] border-2 border-[#c89f50] rounded-t-xl px-4 py-3.5 sm:px-5 sm:py-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div>
+              <span class="text-[11px] uppercase tracking-[0.16em] text-[#d5b26d] font-semibold">Ballpark Estimate</span>
+              <div id="est-range" class="font-serif-editorial text-3xl sm:text-4xl text-[#fbf8f2] tracking-[-0.02em] tabular-nums leading-tight">
+                $2,500 – $2,900
+              </div>
+            </div>
+            <div class="sm:text-right max-w-lg space-y-1">
+              <div id="est-included-line" class="text-xs text-[#efe8dc] leading-snug">
+                <strong class="text-[#e5c687]">Base ($2,500) includes:</strong> Living, Dining, Kitchen, Main Bath and Entry.
+              </div>
+              <div id="est-addons-line" class="text-[11px] text-[#cfc7b9] leading-snug"></div>
+              <div id="est-terms-line" class="text-[11px] text-[#a9a093]">
+                <strong class="text-[#e5c687]">Terms:</strong> 60-day rental &amp; complimentary de-stage included · Flexible weekly extensions (~$125/wk, 5%/wk — no forced extra month)
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-[rgba(245,240,232,0.08)] flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#bfb7aa]">
+            <span>Ballpark for standard rooms—Tawni walks your home (complimentary) and sends your custom <strong class="text-[#e5c687]">Staging Success Plan</strong>.</span>
+            <span class="italic text-[#d5b26d]">The investment in staging is always less than a price reduction.</span>
+          </div>
+        </div>
+
+        <!-- Room Selection Panel: 4 Clean Counter Tiles ($750 / $750 / $500 / $250 — all start at 0) -->
+        <div class="pq-panel border-t-0 rounded-b-xl p-3.5 sm:p-4 mb-3.5">
+          <div id="vacant-panel">
+            <div class="flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
+              <span class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold">Optional Room Add-Ons (From $250 – $750)</span>
+              <span id="addon-count-label" class="text-xs text-[#6b6357] font-medium tabular-nums">Base rooms only</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div id="tile-primary" class="room-tile rounded-lg px-3.5 py-2.5 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="rt-title text-xs font-semibold leading-tight">Primary Bedroom &amp; Bath</div>
+                  <div class="rt-price text-[11px] font-semibold tabular-nums">from +$750 each</div>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button type="button" id="dec-primary" onclick="stepCount('primary', -1)" aria-label="Remove primary bedroom and bath" class="qty-btn">−</button>
+                  <span id="cnt-primary" class="w-4 text-center text-xs font-bold text-[#1a1815] tabular-nums">0</span>
+                  <button type="button" id="inc-primary" onclick="stepCount('primary', 1)" aria-label="Add primary bedroom and bath" class="qty-btn">+</button>
+                </div>
+              </div>
+
+              <div id="tile-living" class="room-tile rounded-lg px-3.5 py-2.5 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="rt-title text-xs font-semibold leading-tight">Additional Living / Family / Bonus</div>
+                  <div class="rt-price text-[11px] font-semibold tabular-nums">from +$750 each</div>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button type="button" id="dec-living" onclick="stepCount('living', -1)" aria-label="Remove additional living or family room" class="qty-btn">−</button>
+                  <span id="cnt-living" class="w-4 text-center text-xs font-bold text-[#1a1815] tabular-nums">0</span>
+                  <button type="button" id="inc-living" onclick="stepCount('living', 1)" aria-label="Add additional living or family room" class="qty-btn">+</button>
+                </div>
+              </div>
+
+              <div id="tile-bed" class="room-tile rounded-lg px-3.5 py-2.5 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="rt-title text-xs font-semibold leading-tight">Additional Bedroom / Office / Nook</div>
+                  <div class="rt-price text-[11px] font-semibold tabular-nums">from +$500 each</div>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button type="button" id="dec-bed" onclick="stepCount('bed', -1)" aria-label="Remove additional bedroom or office" class="qty-btn">−</button>
+                  <span id="cnt-bed" class="w-4 text-center text-xs font-bold text-[#1a1815] tabular-nums">0</span>
+                  <button type="button" id="inc-bed" onclick="stepCount('bed', 1)" aria-label="Add additional bedroom or office" class="qty-btn">+</button>
+                </div>
+              </div>
+
+              <div id="tile-patio" class="room-tile rounded-lg px-3.5 py-2.5 flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="rt-title text-xs font-semibold leading-tight">Outdoor / Patio Living / Sitting Nook</div>
+                  <div class="rt-price text-[11px] font-semibold tabular-nums">from +$250 each</div>
+                </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <button type="button" id="dec-patio" onclick="stepCount('patio', -1)" aria-label="Remove outdoor patio or sitting nook" class="qty-btn">−</button>
+                  <span id="cnt-patio" class="w-4 text-center text-xs font-bold text-[#1a1815] tabular-nums">0</span>
+                  <button type="button" id="inc-patio" onclick="stepCount('patio', 1)" aria-label="Add outdoor patio or sitting nook" class="qty-btn">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="occupied-panel" class="hidden">
+            <div class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold mb-2">Select Occupied Staging Scope</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="occupied-scope-group">
+              <button type="button" data-scope="small" class="room-tile active rounded-lg p-2.5">
+                <div class="rt-title text-xs font-semibold">Key Living Areas</div>
+                <div class="rt-price text-xs font-semibold tabular-nums">From $1,000</div>
+                <div class="text-[11px] text-[#6b6357]">Living, dining &amp; entry refresh</div>
+              </button>
+              <button type="button" data-scope="medium" class="room-tile rounded-lg p-2.5">
+                <div class="rt-title text-xs font-semibold">Main Home + Accents</div>
+                <div class="rt-price text-xs font-semibold tabular-nums">From $1,750</div>
+                <div class="text-[11px] text-[#6b6357]">4–5 rooms + curated art &amp; pillows</div>
+              </button>
+              <button type="button" data-scope="large" class="room-tile rounded-lg p-2.5">
+                <div class="rt-title text-xs font-semibold">Full Home + Supplemental</div>
+                <div class="rt-price text-xs font-semibold tabular-nums">From $2,500</div>
+                <div class="text-[11px] text-[#6b6357]">Whole-home edit + key accent pieces</div>
+              </button>
+            </div>
+            <div class="mt-3 bg-[#f3ede2] border border-[rgba(26,24,21,0.1)] rounded-lg px-3 py-2 text-[11px] text-[#3c362e] leading-relaxed">
+              <strong class="text-[#1a1815]">Pre-Listing Consultation ($250):</strong> Occupied staging begins with a 90-minute on-site walkthrough &amp; room-by-room DIY action plan covering decluttering, layout, paint, lighting, and curb appeal—<strong>credited in full toward staging within 30 days</strong> (standalone consultation fee is non-refundable). Quote-only proposals are always complimentary.
+            </div>
+          </div>
+        </div>
+
+        <!-- Finalize Your Quote Form + Scrollable Walkthrough Calendar -->
+        <form id="quote-submit-card" onsubmit="handleUnifiedSubmit(event)" class="bg-[#1b1916] text-[#f5f0e8] border border-[rgba(213,178,109,0.38)] rounded-xl p-4 sm:p-5 shadow-lg space-y-3.5">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-[rgba(245,240,232,0.09)]">
+            <div>
+              <h3 class="font-serif-editorial text-lg sm:text-xl text-[#fbf8f2] leading-tight">Request your Staging Success Plan</h3>
+              <p class="text-xs text-[#bfb7aa]">24-hour reply · Complimentary quote walkthrough (vacant or occupied) with custom options.</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs tabular-nums">
+              <a href="tel:+17605832500" class="text-[#e5c687] hover:underline font-semibold inline-flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                (760) 583-2500
+              </a>
+              <span class="text-[#5e564a]">·</span>
+              <a href="sms:+17605832500" class="text-[#cfc7b9] hover:text-[#e5c687] underline underline-offset-2">Text</a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start">
+            <div class="lg:col-span-6 space-y-2">
+              <div class="flex items-center gap-2.5 pb-0.5">
+                <span class="text-[10px] uppercase tracking-[0.12em] text-[#d5b26d] font-semibold shrink-0">I am a:</span>
+                <div class="grid grid-cols-2 gap-1.5 flex-1 max-w-[240px]" id="role-group">
+                  <button type="button" data-role="realtor" class="chip-dark active py-1.5 px-2.5 rounded-md text-xs text-center">Realtor®</button>
+                  <button type="button" data-role="homeowner" class="chip-dark py-1.5 px-2.5 rounded-md text-xs text-center">Homeowner</button>
+                </div>
+              </div>
+
+              <input type="text" id="q-name" required placeholder="Your name" class="w-full bg-[#12110f] border border-[rgba(245,240,232,0.15)] rounded-md px-3 py-2 text-sm text-[#f5f0e8] placeholder-[#827a6f] focus:outline-none focus:border-[#d5b26d]" />
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input type="tel" id="q-phone" required placeholder="Phone number" class="bg-[#12110f] border border-[rgba(245,240,232,0.15)] rounded-md px-3 py-2 text-sm text-[#f5f0e8] placeholder-[#827a6f] focus:outline-none focus:border-[#d5b26d]" />
+                <input type="email" id="q-email" required placeholder="Email address" class="bg-[#12110f] border border-[rgba(245,240,232,0.15)] rounded-md px-3 py-2 text-sm text-[#f5f0e8] placeholder-[#827a6f] focus:outline-none focus:border-[#d5b26d]" />
+              </div>
+
+              <input type="text" id="q-address" placeholder="Property address or paste MLS / Zillow link (fastest)" class="w-full bg-[#12110f] border border-[rgba(245,240,232,0.15)] rounded-md px-3 py-2 text-sm text-[#f5f0e8] placeholder-[#827a6f] focus:outline-none focus:border-[#d5b26d]" />
+              <textarea id="q-notes" rows="2" placeholder="Optional notes: target photo date, stairs/elevator, HOA, special requests..." class="w-full bg-[#12110f] border border-[rgba(245,240,232,0.15)] rounded-md px-3 py-2 text-sm text-[#f5f0e8] placeholder-[#827a6f] focus:outline-none focus:border-[#d5b26d] resize-none"></textarea>
+
+              <label class="inline-flex items-center gap-2 text-xs text-[#cfc7b9]">
+                <input type="checkbox" id="q-sms-ok" class="s4s-checkbox" />
+                <span>Okay to text me about this quote &amp; walkthrough</span>
+              </label>
+            </div>
+
+            <div id="inline-walkthrough-panel" class="lg:col-span-6 bg-[#12110f] border border-[rgba(213,178,109,0.22)] rounded-lg p-3 space-y-2.5">
+              <div class="flex items-center justify-between gap-2 text-[11px]">
+                <span class="text-[#d5b26d] font-semibold uppercase tracking-[0.11em]">
+                  Book a Complimentary Quote Walkthrough <span class="text-[#8f877b] font-normal normal-case">(optional)</span>
+                </span>
+                <div class="flex items-center gap-2 shrink-0">
+                  <button type="button" onclick="scrollDates(-180)" aria-label="Earlier dates" class="text-[#bfb7aa] hover:text-[#e5c687] px-1">‹</button>
+                  <button type="button" onclick="scrollDates(180)" aria-label="Later dates" class="text-[#bfb7aa] hover:text-[#e5c687] px-1">›</button>
+                  <button type="button" id="wt-clear-btn" onclick="clearWalkthroughSlot()" class="hidden text-[#e5c687] hover:underline ml-1">Clear</button>
+                </div>
+              </div>
+
+              <div id="inline-day-group" class="date-scroll flex gap-1.5 overflow-x-auto pb-1.5"></div>
+
+              <div class="grid grid-cols-3 gap-1.5 tabular-nums" id="inline-time-group">
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">8:00 AM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">9:00 AM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">10:00 AM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">11:00 AM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">12:00 PM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">1:00 PM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">2:00 PM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">3:00 PM</button>
+                <button type="button" onclick="selectInlineSlot(this, 'time')" class="chip-dark py-1.5 rounded text-xs text-center">4:00 PM</button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="unified-submit-btn" class="w-full btn-gold py-2.5 px-5 rounded-md text-sm">
+            Send Quote Inquiry
+          </button>
+
+          <div id="quote-confirmation" class="hidden text-xs bg-[rgba(74,222,128,0.1)] border border-[rgba(74,222,128,0.3)] text-[#bbf7d0] rounded-md p-3 leading-relaxed"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- UNIFIED RECENT PROJECTS SECTION: All 6 Projects With Live Draggable Before/After Sliders + Clickable Galleries! -->
+    <section id="projects" class="py-20 sm:py-24 bg-[#0d0c0a]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#d5b26d] mb-2">Recent Projects · Before &amp; After</p>
+            <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#fbf8f2] tracking-[-0.02em]">
+              Rooms, ready for <em class="italic text-[#e5c687]">photos.</em>
+            </h2>
+          </div>
+          <p class="text-xs sm:text-sm text-[#bfb7aa]">Toggle Before &amp; After on any home—or click to open its full gallery.</p>
+        </div>
+
+        <!-- 6-Card Grid: Every Card Has an Interactive Before/After Slider + Opens Full Gallery Modal -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8" id="projects-grid"></div>
+
+        <!-- Woven Agent Quote #2 -->
+        <blockquote class="bg-[#1b1916] border border-[rgba(213,178,109,0.28)] rounded-xl p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="text-[#e5c687] text-xs tracking-widest mb-1.5">★★★★★</div>
+            <p class="font-serif-editorial text-lg sm:text-xl text-[#fbf8f2] italic leading-snug">
+              “I recently had her stage a 3-story beach condo &amp; I felt it helped tremendously with the sale &amp; to get top dollar. This condo will be the highest priced condo in the complex!”
+            </p>
+          </div>
+          <footer class="text-xs shrink-0 sm:text-right">
+            <div class="font-semibold text-[#e5c687]">Stacey Walker</div>
+            <div class="text-[#9c9487]">Realtor® · Recommended on Facebook</div>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- REALTOR PARTNER PROGRAM SPOTLIGHT -->
+    <div class="gold-divider"></div>
+    <section id="realtors" class="py-20 sm:py-24 bg-[#1e1b17]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="bg-[#1b1916] border border-[rgba(213,178,109,0.32)] rounded-2xl p-7 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#d5b26d] mb-2">Built for Listing Agents</p>
+            <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#fbf8f2] tracking-[-0.02em] mb-4">
+              The Staged4Sale <em class="italic text-[#e5c687]">Realtor Partner</em> Program
+            </h2>
+            <p class="text-sm sm:text-base text-[#cfc7b9] leading-relaxed mb-6">
+              Depend on preparation—not luck—to sell your client's listing. We work as a quiet extension of your team: showing up on time, staging from our own curated inventory, and arming you with local market data that helps sellers say yes without friction.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-[#e2dad0] mb-7">
+              <div class="flex gap-2.5"><span class="text-[#d5b26d] font-bold">01</span><span><strong class="text-[#fbf8f2]">Priority Photo-Day Scheduling</strong> — hold install windows around your shoot.</span></div>
+              <div class="flex gap-2.5"><span class="text-[#d5b26d] font-bold">02</span><span><strong class="text-[#fbf8f2]">Complimentary Quote Walkthroughs</strong> — custom Staging Success Plan in 24 hrs.</span></div>
+              <div class="flex gap-2.5"><span class="text-[#d5b26d] font-bold">03</span><span><strong class="text-[#fbf8f2]">Monthly Local Data Sheets</strong> — city-by-city seller presentation graphics.</span></div>
+              <div class="flex gap-2.5"><span class="text-[#d5b26d] font-bold">04</span><span><strong class="text-[#fbf8f2]">Agent Portal Coming Soon</strong> — track listings, invoices &amp; seller packets.</span></div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+              <button onclick="jumpToWalkthrough()" class="btn-gold px-4 py-2.5 rounded-md text-xs sm:text-sm whitespace-nowrap">Book Free Walkthrough</button>
+              <button onclick="openOnePagerModal()" class="btn-outline-gold px-4 py-2.5 rounded-md text-xs sm:text-sm inline-flex items-center gap-1.5 whitespace-nowrap">
+                <svg class="w-4 h-4 text-[#d5b26d]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                Partner One-Pager
+              </button>
+              <button onclick="openReportModal()" class="btn-outline-gold px-4 py-2.5 rounded-md text-xs sm:text-sm whitespace-nowrap">Monthly Data Sheet</button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-[#131210] border border-[rgba(245,240,232,0.08)] rounded-xl p-6">
+            <div class="text-xs uppercase tracking-[0.16em] text-[#d5b26d] font-semibold mb-4">How Fast We Move</div>
+            <ol class="space-y-4 text-sm">
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-full bg-[rgba(213,178,109,0.16)] text-[#e5c687] text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">1</span>
+                <div><div class="font-semibold text-[#fbf8f2]">Estimate or Text the Address</div><div class="text-xs text-[#a9a093] mt-0.5">Use the estimator or text an MLS link to (760) 583-2500.</div></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-full bg-[rgba(213,178,109,0.16)] text-[#e5c687] text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">2</span>
+                <div><div class="font-semibold text-[#fbf8f2]">Free Walkthrough &amp; Staging Success Plan in 24 Hrs</div><div class="text-xs text-[#a9a093] mt-0.5">Tailored room options &amp; clear pricing before anything loads onto a truck.</div></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-full bg-[rgba(213,178,109,0.16)] text-[#e5c687] text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">3</span>
+                <div><div class="font-semibold text-[#fbf8f2]">1–2 Day Install Before Photography</div><div class="text-xs text-[#a9a093] mt-0.5">Coordinated directly with your photographer &amp; listing launch.</div></div>
+              </li>
+              <li class="flex gap-3">
+                <span class="w-6 h-6 rounded-full bg-[rgba(213,178,109,0.16)] text-[#e5c687] text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">4</span>
+                <div><div class="font-semibold text-[#fbf8f2]">Complimentary De-Stage When You Close</div><div class="text-xs text-[#a9a093] mt-0.5">Give us 7 days' notice before closing—we handle removal cleanly.</div></div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEET TAWNI + CLIENT REVIEWS + TRUST CREDENTIALS + AWARDS -->
+    <div class="gold-divider"></div>
+    <section id="about" class="py-20 sm:py-24 bg-[#0d0c0a]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-4">
+            <img src="../images/tawni.jpg" alt="Tawni Oppenheim, founder of Staged4Sale" class="w-full max-w-sm mx-auto rounded-2xl border border-[rgba(213,178,109,0.28)] object-cover aspect-[4/4.2] object-top shadow-xl" />
+          </div>
+          <div class="lg:col-span-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#d5b26d] mb-2">Meet the Founder</p>
+            <h2 class="font-serif-editorial text-3xl text-[#fbf8f2] mb-4">
+              Tawni Oppenheim, ASPM™ — <em class="italic text-[#e5c687]">20 Years</em> in North County
+            </h2>
+            <p class="text-sm sm:text-base text-[#d2cabd] leading-relaxed mb-4">
+              Personally trained by home staging founder Barb Schwarz, Tawni has spent over two decades helping North County San Diego agents and sellers turn empty or lived-in houses into spaces buyers emotionally connect with. Because Staged4Sale owns and curates its own inventory, every install is tailored to the home's architecture, light, and target buyer—without third-party rental delays.
+            </p>
+
+            <!-- Verified Operational Trust Strip -->
+            <div class="flex flex-wrap gap-2 text-[11px] text-[#e6dfd2] mb-5">
+              <span class="bg-[#1b1916] border border-[rgba(213,178,109,0.28)] rounded-full px-3 py-1">✓ 100% Owned Local Inventory</span>
+              <span class="bg-[#1b1916] border border-[rgba(213,178,109,0.28)] rounded-full px-3 py-1">✓ Licensed, Insured &amp; Workers' Comp</span>
+              <span class="bg-[#1b1916] border border-[rgba(213,178,109,0.28)] rounded-full px-3 py-1">✓ Complimentary De-Stage</span>
+              <span class="bg-[#1b1916] border border-[rgba(213,178,109,0.28)] rounded-full px-3 py-1">✓ Online E-Sign Agreements</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
+              <blockquote class="bg-[#1b1916] border border-[rgba(245,240,232,0.08)] rounded-xl p-4">
+                <p class="text-xs text-[#dcd4c7] italic leading-relaxed mb-2.5">“Tawni and her team always offer good value and excellent customer service… I can always count on them to showcase a vacant or drab space. Prices are reasonable.”</p>
+                <footer class="text-[11px]"><strong class="text-[#e5c687]">Alma S.</strong> <span class="text-[#9c9487]">· Real Estate Pro · Yelp</span></footer>
+              </blockquote>
+              <blockquote class="bg-[#1b1916] border border-[rgba(245,240,232,0.08)] rounded-xl p-4">
+                <p class="text-xs text-[#dcd4c7] italic leading-relaxed mb-2.5">“Every time I send her a request for a new property to stage, she acts immediately and keeps me informed. The results speak for themselves as my recent homes have sold quickly and at top price.”</p>
+                <footer class="text-[11px]"><strong class="text-[#e5c687]">Zaid Iñiguez</strong> <span class="text-[#9c9487]">· Realtor® · Lenders Realty, Inc.</span></footer>
+              </blockquote>
+              <blockquote class="bg-[#1b1916] border border-[rgba(245,240,232,0.08)] rounded-xl p-4">
+                <p class="text-xs text-[#dcd4c7] italic leading-relaxed mb-2.5">“Staged 4 Sale is a valuable partner in staging for your listings! They are professional and deliver high quality service. Would definitely recommend!!”</p>
+                <footer class="text-[11px]"><strong class="text-[#e5c687]">Credo Bizimana</strong> <span class="text-[#9c9487]">· Real Estate Professional</span></footer>
+              </blockquote>
+              <blockquote class="bg-[#1b1916] border border-[rgba(245,240,232,0.08)] rounded-xl p-4">
+                <p class="text-xs text-[#dcd4c7] italic leading-relaxed mb-2.5">“I used Staged 4 Sale when we had our house on the market. I 100% believe that staging my home helped sell it. Staged 4 Sale did an awesome job!”</p>
+                <footer class="text-[11px]"><strong class="text-[#e5c687]">Cletta McCaughan Johnson</strong> <span class="text-[#9c9487]">· Homeowner</span></footer>
+              </blockquote>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3.5">
+              <img src="../images/awards/certified-accredited-staging-professional-master.jpg" alt="Certified ASPM" class="h-12 w-auto rounded bg-white p-1" />
+              <img src="../images/awards/iahsp-best-of-home-staging-2020-staging-excellence.jpeg" alt="IAHSP Best of Home Staging 2020" class="h-12 w-auto rounded bg-white p-1" />
+              <img src="../images/awards/iahsp-best-of-home-staging-2021-staging-excellence.jpeg" alt="IAHSP Best of Home Staging 2021 Staging Excellence" class="h-12 w-auto rounded bg-white p-1" />
+              <img src="../images/awards/iahsp-best-of-home-staging-2021-client-care-excellence.jpeg" alt="IAHSP Best of Home Staging 2021 Client Care" class="h-12 w-auto rounded bg-white p-1" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIRECT, PRACTICAL FAQ (2-Column Desktop Layout) -->
+    <div class="gold-divider"></div>
+    <section id="faq" class="py-20 sm:py-24 bg-[#1e1b17]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div class="lg:col-span-4">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#d5b26d] mb-2">Quick Answers</p>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#fbf8f2] tracking-[-0.02em] mb-3">
+            Good <em class="italic text-[#e5c687]">to know.</em>
+          </h2>
+          <p class="text-sm text-[#bfb7aa] leading-relaxed mb-5">
+            Straight answers on pricing, turnaround, and how we work with listing agents across North County.
+          </p>
+          <a href="tel:+17605832500" class="inline-flex items-center gap-2 text-xs font-semibold text-[#e5c687] border border-[rgba(213,178,109,0.35)] bg-[#141210] px-4 py-2.5 rounded-md hover:border-[#e5c687] transition-colors tabular-nums">
+            Still have a question? (760) 583-2500
+          </a>
+        </div>
+
+        <div class="lg:col-span-8 divide-y divide-[rgba(245,240,232,0.09)] border-y border-[rgba(245,240,232,0.09)]" id="faq-list">
+          <div class="py-4">
+            <button type="button" onclick="toggleFaq(this)" aria-expanded="true" class="w-full flex items-center justify-between gap-4 text-left font-medium text-[#fbf8f2] hover:text-[#e5c687] transition-colors">
+              <span>How much does home staging cost in North County San Diego?</span>
+              <span class="faq-plus text-[#d5b26d] text-xl leading-none">−</span>
+            </button>
+            <div class="faq-body open">
+              <div class="pt-3 text-sm text-[#c7bfb1] leading-relaxed">
+                Quote walkthroughs are complimentary for vacant or occupied homes. Vacant Staging starts at <strong>$2,500</strong> (Living, Dining, Kitchen, Main Bath &amp; Entry + 60-day rental &amp; complimentary de-stage), with optional room add-ons starting at <strong>$750</strong> (Primary Suite or extra Living/Family), <strong>$500</strong> (Bedroom/Office/Nook), and <strong>$250</strong> (Patio/Sitting Nook), plus flexible <strong>5%/week</strong> extensions if needed. Occupied Staging starts at <strong>$1,000</strong> and begins with a <strong>$250</strong> pre-listing consultation &amp; room-by-room plan (credited toward staging within 30 days; standalone consult fee is non-refundable).
+              </div>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <button type="button" onclick="toggleFaq(this)" aria-expanded="false" class="w-full flex items-center justify-between gap-4 text-left font-medium text-[#fbf8f2] hover:text-[#e5c687] transition-colors">
+              <span>How far in advance should we book before listing photos?</span>
+              <span class="faq-plus text-[#d5b26d] text-xl leading-none">+</span>
+            </button>
+            <div class="faq-body">
+              <div class="pt-3 text-sm text-[#c7bfb1] leading-relaxed">
+                Ideally 1–2 weeks before photo day so we can complete a complimentary walkthrough and hold your install window. Because we own our inventory, we can often accommodate tighter turnarounds—text or call us for current availability.
+              </div>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <button type="button" onclick="toggleFaq(this)" aria-expanded="false" class="w-full flex items-center justify-between gap-4 text-left font-medium text-[#fbf8f2] hover:text-[#e5c687] transition-colors">
+              <span>Do you own your furniture or rent from a third party?</span>
+              <span class="faq-plus text-[#d5b26d] text-xl leading-none">+</span>
+            </button>
+            <div class="faq-body">
+              <div class="pt-3 text-sm text-[#c7bfb1] leading-relaxed">
+                We own and curate our own inventory locally. That means faster installs, consistent design quality, and zero delays waiting on outside furniture rental companies.
+              </div>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <button type="button" onclick="toggleFaq(this)" aria-expanded="false" class="w-full flex items-center justify-between gap-4 text-left font-medium text-[#fbf8f2] hover:text-[#e5c687] transition-colors">
+              <span>What happens if the home goes under contract in the first week—or takes longer than 60 days?</span>
+              <span class="faq-plus text-[#d5b26d] text-xl leading-none">+</span>
+            </button>
+            <div class="faq-body">
+              <div class="pt-3 text-sm text-[#c7bfb1] leading-relaxed">
+                Your staging stays in place through inspections and appraisal—helping protect the deal all the way to closing, with complimentary de-stage included (just give us 7 days' notice). If you ever need extra time past 60 days, we extend cleanly week-to-week at 5% per week so you're never locked into a full extra month.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="gold-divider"></div>
+
+    <!-- CLOSING CTA (Instant Quote + Book Free Walkthrough + Call/Text) & FOOTER -->
+    <footer class="py-16 bg-[#0d0c0a]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="bg-[#1b1916] border border-[rgba(213,178,109,0.28)] rounded-2xl p-7 sm:p-10 mb-12 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div>
+            <h2 class="font-serif-editorial text-2xl sm:text-3xl text-[#fbf8f2] mb-2">Have a listing <em class="italic text-[#e5c687]">coming up?</em></h2>
+            <p class="text-sm text-[#bfb7aa]">Get an instant ballpark, book a complimentary walkthrough, or text the address to (760) 583-2500.</p>
+          </div>
+          <div class="flex flex-wrap gap-3 shrink-0">
+            <a href="#pricing-quote" class="btn-gold px-5 py-3 rounded-md text-sm">Instant Quote</a>
+            <button onclick="jumpToWalkthrough()" class="btn-outline-gold px-5 py-3 rounded-md text-sm">Book Free Walkthrough</button>
+            <a href="tel:+17605832500" class="btn-outline-gold px-5 py-3 rounded-md text-sm tabular-nums">(760) 583-2500</a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-xs text-[#a9a093] pb-8 border-b border-[rgba(245,240,232,0.08)]">
+          <div>
+            <img src="../images/logo2.png" alt="Staged4Sale" class="h-10 w-auto mb-3" />
+            <p class="leading-relaxed">Accredited, Licensed &amp; Insured · Serving North County San Diego, Temecula &amp; Southern California for over 20 years.</p>
+          </div>
+          <div>
+            <div class="text-[#e5c687] font-semibold uppercase tracking-[0.14em] mb-2.5">Services</div>
+            <ul class="space-y-1.5">
+              <li><a href="../services/vacant-staging/" class="hover:text-[#f5f0e8] transition-colors">Vacant Home Staging</a></li>
+              <li><a href="../services/occupied-staging/" class="hover:text-[#f5f0e8] transition-colors">Occupied Staging &amp; Consults</a></li>
+              <li><a href="../services/staged4home/" class="hover:text-[#f5f0e8] transition-colors">Staged4Home Interior Redesign</a></li>
+              <li><a href="#realtors" class="hover:text-[#f5f0e8] transition-colors">Realtor Partner Program</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-[#e5c687] font-semibold uppercase tracking-[0.14em] mb-2.5">Service Areas</div>
+            <p class="leading-loose">
+              <a href="../cities/oceanside/" class="hover:text-[#e5c687]">Oceanside</a> ·
+              <a href="../cities/carlsbad/" class="hover:text-[#e5c687]">Carlsbad</a> ·
+              <a href="../cities/encinitas/" class="hover:text-[#e5c687]">Encinitas</a> ·
+              <a href="../cities/del-mar/" class="hover:text-[#e5c687]">Del Mar</a> ·
+              <a href="../cities/solana-beach/" class="hover:text-[#e5c687]">Solana Beach</a> ·
+              <a href="../cities/rancho-santa-fe/" class="hover:text-[#e5c687]">Rancho Santa Fe</a> ·
+              <a href="../cities/la-jolla/" class="hover:text-[#e5c687]">La Jolla</a> ·
+              <a href="../cities/vista/" class="hover:text-[#e5c687]">Vista</a> ·
+              <a href="../cities/san-marcos/" class="hover:text-[#e5c687]">San Marcos</a> ·
+              <a href="../cities/escondido/" class="hover:text-[#e5c687]">Escondido</a> ·
+              <a href="../cities/poway/" class="hover:text-[#e5c687]">Poway</a> ·
+              <a href="../cities/bonsall/" class="hover:text-[#e5c687]">Bonsall</a> ·
+              <a href="../cities/fallbrook/" class="hover:text-[#e5c687]">Fallbrook</a> ·
+              <a href="../cities/temecula/" class="hover:text-[#e5c687]">Temecula</a> ·
+              <a href="../cities/san-clemente/" class="hover:text-[#e5c687]">San Clemente</a> ·
+              <a href="../cities/san-diego/" class="hover:text-[#e5c687]">San Diego</a>
+            </p>
+          </div>
+          <div>
+            <div class="text-[#e5c687] font-semibold uppercase tracking-[0.14em] mb-2.5">Resources &amp; Contact</div>
+            <p class="leading-loose">
+              Call or Text: <a href="tel:+17605832500" class="text-[#f5f0e8] hover:text-[#e5c687] tabular-nums">(760) 583-2500</a><br />
+              Email: <a href="mailto:info@staged4sale.com" class="text-[#f5f0e8] hover:text-[#e5c687]">info@staged4sale.com</a><br />
+              <a href="#market-data" class="hover:text-[#f5f0e8]">Monthly Market Data</a> · <a href="../projects/" class="hover:text-[#f5f0e8]">Portfolio</a> · <a href="../blog/" class="hover:text-[#f5f0e8]">Blog</a><br />
+              <a href="https://www.instagram.com/staged4sale" target="_blank" rel="noopener noreferrer" class="hover:text-[#e5c687]">Instagram</a> · <a href="https://www.facebook.com/staged4sale" target="_blank" rel="noopener noreferrer" class="hover:text-[#e5c687]">Facebook</a>
+            </p>
+          </div>
+        </div>
+        <div class="pt-6 flex flex-wrap items-center justify-between gap-2 text-xs text-[#7c756b]">
+          <span>&copy; 2026 Staged4Sale. All Rights Reserved.</span>
+          <span>Refined Dark &amp; Brushed Gold Preview v2</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- STICKY MOBILE ACTION BAR -->
+  <div class="fixed bottom-0 inset-x-0 z-40 md:hidden bg-[#161411]/95 backdrop-blur-md border-t border-[rgba(213,178,109,0.3)] px-3 py-2.5 grid grid-cols-3 gap-2">
+    <a href="tel:+17605832500" class="btn-outline-gold py-2.5 rounded-md text-xs font-semibold text-center">Call</a>
+    <a href="sms:+17605832500" class="btn-outline-gold py-2.5 rounded-md text-xs font-semibold text-center">Text Us</a>
+    <a href="#pricing-quote" class="btn-gold py-2.5 rounded-md text-xs font-semibold text-center">Instant Quote</a>
+  </div>
+
+  <!-- PROJECT GALLERY LIGHTBOX MODAL -->
+  <div id="gallery-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4">
+    <div class="bg-[#1b1916] border border-[rgba(213,178,109,0.4)] rounded-2xl max-w-4xl w-full p-5 sm:p-6 relative shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <div>
+          <div id="gal-location" class="text-[11px] uppercase tracking-[0.16em] text-[#d5b26d] font-semibold"></div>
+          <h3 id="gal-title" class="font-serif-editorial text-2xl sm:text-3xl text-[#fbf8f2]"></h3>
+          <p id="gal-desc" class="text-xs text-[#bfb7aa] mt-1"></p>
+        </div>
+        <button onclick="closeGalleryModal()" aria-label="Close" class="text-[#a9a093] hover:text-[#f5f0e8] text-2xl leading-none px-2">×</button>
+      </div>
+      <div id="gal-body" class="space-y-5"></div>
+      <div class="mt-5 pt-4 border-t border-[rgba(245,240,232,0.08)] flex flex-wrap items-center justify-between gap-3">
+        <div class="text-xs text-[#a9a093]">
+          Like this look? <a href="../services/staged4home/" class="text-[#e5c687] hover:underline">Ask about Staged4Home move-in styling →</a>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <a id="gal-page-link" href="../projects/" class="btn-outline-gold px-3.5 py-2 rounded-md text-xs">Full Project Page →</a>
+          <button onclick="closeGalleryModal(); document.getElementById('pricing-quote').scrollIntoView({behavior:'smooth'});" class="btn-gold px-4 py-2 rounded-md text-xs">Estimate Similar Listing</button>
+          <button onclick="closeGalleryModal()" class="btn-outline-gold px-4 py-2 rounded-md text-xs">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTHLY REPORT GRAPHIC PREVIEW MODAL -->
+  <div id="report-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div class="bg-[#1b1916] border border-[rgba(213,178,109,0.4)] rounded-2xl max-w-2xl w-full p-5 relative shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between gap-3 mb-3">
+        <div>
+          <div class="text-xs uppercase tracking-[0.14em] text-[#d5b26d] font-semibold">Realtor Seller Packet Insert</div>
+          <div class="text-sm text-[#f5f0e8] font-medium">North County Staging Data · Oct 15 – Nov 15, 2026</div>
+        </div>
+        <button onclick="closeReportModal()" aria-label="Close" class="text-[#a9a093] hover:text-[#f5f0e8] text-2xl leading-none px-2">×</button>
+      </div>
+      <img src="assets/north-county-stats-2026-11.jpg" alt="North County San Diego Home Staging Report Oct-Nov 2026" class="w-full h-auto rounded-lg border border-[rgba(245,240,232,0.12)]" />
+      <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-[#bfb7aa]">
+        <span>Updated monthly from public North County listing data.</span>
+        <button onclick="closeReportModal()" class="btn-gold px-4 py-2 rounded-md text-xs">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REALTOR PARTNER ONE-PAGER MODAL (Print / Save PDF Ready) -->
+  <div id="onepager-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 backdrop-blur-sm p-3 sm:p-5 overflow-y-auto">
+    <div class="max-w-3xl w-full my-auto">
+      <!-- Modal Action Bar -->
+      <div class="no-print flex flex-wrap items-center justify-between gap-2 mb-3 text-xs text-[#cfc7b9]">
+        <div>
+          <span class="uppercase tracking-[0.14em] text-[#d5b26d] font-semibold">Realtor Partner One-Pager</span>
+          <span class="hidden sm:inline text-[#8f877b] ml-2">Formatted for 8.5×11 print or Save as PDF</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="window.print()" class="btn-gold px-3.5 py-1.5 rounded-md text-xs inline-flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
+            Print / Save PDF
+          </button>
+          <button onclick="closeOnePagerModal()" class="btn-outline-gold px-3 py-1.5 rounded-md text-xs">Close</button>
+        </div>
+      </div>
+
+      <!-- The Printable 1-Page Sheet (Matches Report Graphic Palette: Charcoal Header + Gold Bar + Clean Light Body) -->
+      <div id="onepager-sheet" class="bg-[#fbf9f5] text-[#1a1815] rounded-xl overflow-hidden shadow-2xl border border-[rgba(213,178,109,0.45)]">
+        <!-- Sheet Header -->
+        <div class="bg-[#181613] text-[#f5f0e8] px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <div class="text-[10px] uppercase tracking-[0.2em] text-[#e5c687] font-semibold">Realtor Partner Program · North County San Diego · Est. 2006</div>
+            <h3 class="font-serif-editorial text-2xl sm:text-[1.7rem] text-[#fbf8f2] leading-tight mt-1">Your Quiet Staging Partner for Faster, Stronger Sales</h3>
+          </div>
+          <img id="op-logo" alt="Staged4Sale" class="h-11 w-auto object-contain" />
+        </div>
+
+        <!-- Gold Local Proof Strip -->
+        <div class="bg-[#c89f50] text-[#14120f] px-6 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold tabular-nums">
+          <span>North County Data (314 Recent Sales): +11.6% More $/Sq Ft</span>
+          <span>•</span>
+          <span>14 Days Faster to Contract</span>
+          <span>•</span>
+          <span>98.0% vs. 95.2% Sale-to-List</span>
+        </div>
+
+        <!-- Main 2-Column Body -->
+        <div class="p-6 grid grid-cols-1 md:grid-cols-12 gap-6 text-xs">
+          <!-- Left Column (7 cols) -->
+          <div class="md:col-span-7 space-y-5">
+            <div>
+              <h4 class="font-serif-editorial text-base text-[#1a1815] border-b border-[#c89f50] pb-1 mb-2.5">Why Listing Agents Partner With Staged4Sale</h4>
+              <ul class="space-y-2 text-[#3c362e]">
+                <li class="flex gap-2"><span class="text-[#9e7428] font-bold">✓</span><span><strong>Priority Photo-Day Scheduling:</strong> Reserve install windows around your photography &amp; MLS launch.</span></li>
+                <li class="flex gap-2"><span class="text-[#9e7428] font-bold">✓</span><span><strong>Complimentary Quote Walkthroughs:</strong> Free walkthrough (vacant or occupied) + custom Staging Success Plan in 24 hrs.</span></li>
+                <li class="flex gap-2"><span class="text-[#9e7428] font-bold">✓</span><span><strong>Owned, Curated Inventory:</strong> In-house furnishings mean cohesive design and 1–2 day installs—zero rental delays.</span></li>
+                <li class="flex gap-2"><span class="text-[#9e7428] font-bold">✓</span><span><strong>Seller Presentation Tools:</strong> Monthly North County staged-vs-vacant market reports + instant online quote estimator.</span></li>
+              </ul>
+            </div>
+
+            <!-- Side-by-Side Before & After Visual Proof -->
+            <div>
+              <h4 class="font-serif-editorial text-base text-[#1a1815] border-b border-[#c89f50] pb-1 mb-2.5">Real Transformation · Monte Fuego Ranch (Rancho Santa Fe)</h4>
+              <div class="grid grid-cols-2 gap-2.5">
+                <div>
+                  <div class="relative rounded overflow-hidden border border-[rgba(26,24,21,0.12)]">
+                    <img id="op-before" alt="Before staging" class="w-full aspect-[3/2] object-cover" />
+                    <span class="absolute bottom-1.5 left-1.5 bg-[#181613]/85 text-[#f5f0e8] text-[9px] uppercase tracking-wider px-2 py-0.5 rounded font-semibold">Before</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="relative rounded overflow-hidden border border-[#c89f50]">
+                    <img id="op-after" alt="After staging" class="w-full aspect-[3/2] object-cover" />
+                    <span class="absolute bottom-1.5 right-1.5 bg-[#c89f50] text-[#14120f] text-[9px] uppercase tracking-wider px-2 py-0.5 rounded font-semibold">After</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Agent Testimonial -->
+            <blockquote class="bg-[#f3ede2] border-l-3 border-[#c89f50] rounded-r-lg p-3 italic text-[#3c362e]">
+              “I recently had her stage a 3-story beach condo &amp; I felt it helped tremendously with the sale &amp; to get top dollar. This condo will be the highest priced condo in the complex!”
+              <div class="not-italic font-semibold text-[#8f6720] mt-1">— Stacey Walker, Realtor®</div>
+            </blockquote>
+          </div>
+
+          <!-- Right Column (5 cols) -->
+          <div class="md:col-span-5 space-y-5">
+            <!-- Starting Pricing Box -->
+            <div class="bg-[#f3ede2] border border-[rgba(26,24,21,0.1)] rounded-lg p-4">
+              <h4 class="font-serif-editorial text-base text-[#1a1815] border-b border-[#c89f50] pb-1 mb-3">Starting Rates</h4>
+              <div class="space-y-2.5 tabular-nums">
+                <div class="flex justify-between gap-2">
+                  <div>
+                    <div class="font-semibold text-[#1a1815]">Vacant Base Package</div>
+                    <div class="text-[11px] text-[#6b6357]">Living, Dining, Kitchen, Main Bath &amp; Entry · 60-day term + destage</div>
+                  </div>
+                  <div class="font-bold text-[#8f6720] shrink-0">From $2,500</div>
+                </div>
+                <div class="flex justify-between gap-2 pt-2 border-t border-[rgba(26,24,21,0.08)]">
+                  <div>
+                    <div class="font-semibold text-[#1a1815]">Primary Suite / Extra Living</div>
+                    <div class="text-[11px] text-[#6b6357]">Primary bedroom &amp; bath, family or bonus room</div>
+                  </div>
+                  <div class="font-bold text-[#8f6720] shrink-0">From $750</div>
+                </div>
+                <div class="flex justify-between gap-2 pt-2 border-t border-[rgba(26,24,21,0.08)]">
+                  <div>
+                    <div class="font-semibold text-[#1a1815]">Bedroom / Office · Patio</div>
+                    <div class="text-[11px] text-[#6b6357]">Extra bed/office from $500 · Patio/nook from $250</div>
+                  </div>
+                  <div class="font-bold text-[#8f6720] shrink-0">$250–$500</div>
+                </div>
+                <div class="flex justify-between gap-2 pt-2 border-t border-[rgba(26,24,21,0.08)]">
+                  <div>
+                    <div class="font-semibold text-[#1a1815]">Occupied Staging</div>
+                    <div class="text-[11px] text-[#6b6357]">Restyling + accents ($250 consult credited w/in 30d)</div>
+                  </div>
+                  <div class="font-bold text-[#8f6720] shrink-0">From $1,000</div>
+                </div>
+              </div>
+              <div class="mt-3 pt-2 border-t border-[rgba(26,24,21,0.08)] text-[10px] text-[#6b6357]">
+                Complimentary quote walkthrough · 60-day rental &amp; de-stage included · Flexible 5%/wk extensions if needed (no forced extra month).
+              </div>
+            </div>
+
+            <!-- 3-Step Fast Turnaround -->
+            <div>
+              <h4 class="font-serif-editorial text-base text-[#1a1815] border-b border-[#c89f50] pb-1 mb-2.5">Fast 3-Step Listing Process</h4>
+              <ol class="space-y-2 text-[#3c362e]">
+                <li><strong class="text-[#8f6720]">1. Instant Ballpark or Text:</strong> Run numbers at staged4sale.com or text an MLS link to (760) 583-2500.</li>
+                <li><strong class="text-[#8f6720]">2. Complimentary Walkthrough:</strong> Custom Staging Success Plan with tailored options in 24 hrs.</li>
+                <li><strong class="text-[#8f6720]">3. Photo-Ready Install:</strong> 1–2 day install; stays through inspection &amp; appraisal.</li>
+              </ol>
+            </div>
+
+            <!-- Credentials -->
+            <div class="text-[11px] text-[#524b41] bg-white border border-[rgba(26,24,21,0.1)] rounded-lg p-3">
+              <strong class="text-[#1a1815]">Tawni Oppenheim, ASPM™</strong><br />
+              Accredited Staging Professional Master · IAHSP Best of Home Staging Award Winner · Licensed, Insured &amp; Workers' Comp Covered
+            </div>
+          </div>
+        </div>
+
+        <!-- Sheet Footer -->
+        <div class="bg-[#181613] text-[#f5f0e8] px-6 py-3.5 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <span class="font-semibold text-[#e5c687]">Call or Text an MLS Link: (760) 583-2500</span>
+          <span class="text-[#bfb7aa]">info@staged4sale.com · staged4sale.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. HERO VACANT -> STAGED CROSS-FADE
+    // =========================================================================
+    let heroTimer = null;
+    function setHeroState(staged) {
+      const layer = document.getElementById("hero-after-img");
+      if (layer) layer.classList.toggle("is-staged", staged);
+    }
+    function replayHeroFade() {
+      clearTimeout(heroTimer);
+      setHeroState(false);
+      heroTimer = setTimeout(() => setHeroState(true), 1100);
+    }
+    window.addEventListener("DOMContentLoaded", () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setHeroState(true);
+      } else {
+        setHeroState(false);
+        heroTimer = setTimeout(() => setHeroState(true), 1150);
+      }
+    });
+
+    // =========================================================================
+    // 2. MARKET DATA & COMPACT ESTIMATOR
+    // =========================================================================
+    const MARKET_DATA = [
+      { area: "All North County", sub: "Every city combined", sSales: 213, sPsf: 573, sDays: 18, sStl: 98.0, vSales: 101, vPsf: 513, vDays: 31.5, vStl: 95.2 },
+      { area: "Oceanside", sub: "Coastal & inland", sSales: 31, sPsf: 536, sDays: 16, sStl: 100.0, vSales: 28, vPsf: 505, vDays: 25, vStl: 96.2 },
+      { area: "Carlsbad", sub: "All Carlsbad ZIPs", sSales: 35, sPsf: 772, sDays: 11, sStl: 99.1, vSales: 7, vPsf: 662, vDays: 39, vStl: 92.9 },
+      { area: "Escondido", sub: "All Escondido ZIPs", sSales: 22, sPsf: 456, sDays: 19, sStl: 97.3, vSales: 10, vPsf: 383, vDays: 40, vStl: 94.0 },
+      { area: "Vista", sub: "All Vista ZIPs", sSales: 25, sPsf: 473, sDays: 13, sStl: 98.7, vSales: 12, vPsf: 456, vDays: 52.5, vStl: 94.1 },
+      { area: "San Marcos", sub: "All San Marcos ZIPs", sSales: 22, sPsf: 506, sDays: 18, sStl: 96.9, vSales: 12, vPsf: 437, vDays: 12.5, vStl: 95.3 },
+      { area: "Poway", sub: "All Poway ZIPs", sSales: 13, sPsf: 715, sDays: 15.5, sStl: 98.1, vSales: 5, vPsf: 644, vDays: 9, vStl: 98.9 },
+      { area: "Rancho Bernardo Area", sub: "RB, 4S Ranch, Carmel Mtn, Sabre Springs", sSales: 32, sPsf: 629, sDays: 23, sStl: 96.2, vSales: 8, vPsf: 538, vDays: 25, vStl: 97.0 },
+      { area: "San Dieguito Area", sub: "Encinitas, Cardiff, Del Mar, Solana Beach, RSF", sSales: 22, sPsf: 970, sDays: 25.5, sStl: 96.6, vSales: 10, vPsf: 1009, vDays: 59.5, vStl: 90.8 },
+      { area: "Fallbrook Area", sub: "Fallbrook, Bonsall, Valley Center", sSales: 11, sPsf: 398, sDays: 37, sStl: 96.1, vSales: 9, vPsf: 399, vDays: 50, vStl: 97.1 }
+    ];
+
+    const VACANT_BASE = 2500;
+    const ROOM_RATES = {
+      primary: 750,
+      living: 750,
+      bed: 500,
+      patio: 250
+    };
+    const ROOM_MAX = {
+      primary: 3,
+      living: 4,
+      bed: 6,
+      patio: 4
+    };
+
+    const SERVICE_PROCESS = {
+      occupied: {
+        heading: "How Occupied Staging Works",
+        sub: "Built for lived-in homes preparing to list",
+        steps: [
+          { num: "01", title: "Pre-Listing Consult ($250)", desc: "90-min walkthrough & DIY action plan—credited toward staging within 30 days." },
+          { num: "02", title: "Restyle & Refresh", desc: "Rearrange your existing pieces for buyer appeal + layer in curated accents." },
+          { num: "03", title: "Photo & Showing Ready", desc: "Camera-ready rooms that still work for daily living." }
+        ]
+      },
+      vacant: {
+        heading: "How Vacant Staging Works",
+        sub: "Complimentary quote walkthrough to photo-ready install",
+        steps: [
+          { num: "01", title: "Free Walkthrough & 24-Hr Plan", desc: "Complimentary visit or MLS review → custom Staging Success Plan." },
+          { num: "02", title: "1–2 Day Curated Install", desc: "Owned inventory delivered & styled around your photo day." },
+          { num: "03", title: "Show, Sell & Free Destage", desc: "60-day term + flexible 5%/wk extensions; complimentary removal at close." }
+        ]
+      }
+    };
+
+    const estState = {
+      service: "vacant",
+      occupiedScope: "small",
+      role: "realtor",
+      primary: 0,
+      living: 0,
+      bed: 0,
+      patio: 0,
+      lastRangeText: ""
+    };
+
+    function fmtDollar(n) {
+      return "$" + (Math.round(n / 50) * 50).toLocaleString();
+    }
+
+    function fmtWeekly(n) {
+      return "$" + (Math.round(n / 5) * 5).toLocaleString();
+    }
+
+    function renderScrollDates() {
+      const wrap = document.getElementById("inline-day-group");
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const start = new Date();
+      start.setDate(start.getDate() + 1);
+      const items = [];
+      for (let i = 0; i < 21 && items.length < 16; i++) {
+        const d = new Date(start);
+        d.setDate(start.getDate() + i);
+        if (d.getDay() === 0) continue;
+        const label = `${days[d.getDay()]} ${months[d.getMonth()]} ${d.getDate()}`;
+        items.push(`
+          <button type="button" data-date="${label}" onclick="selectInlineSlot(this, 'day')" class="chip-dark shrink-0 w-[66px] py-1.5 rounded text-[11px] text-center leading-tight">
+            <div>${days[d.getDay()]}</div>
+            <div class="text-[10px] opacity-80">${months[d.getMonth()]} ${d.getDate()}</div>
+          </button>
+        `);
+      }
+      wrap.innerHTML = items.join("");
+    }
+
+    function scrollDates(dx) {
+      document.getElementById("inline-day-group").scrollBy({ left: dx, behavior: "smooth" });
+    }
+
+    function stepCount(key, delta) {
+      const max = ROOM_MAX[key] || 4;
+      estState[key] = Math.max(0, Math.min(max, estState[key] + delta));
+      updateEstimator();
+    }
+
+    function renderServiceProcess() {
+      const cfg = SERVICE_PROCESS[estState.service] || SERVICE_PROCESS.vacant;
+      document.getElementById("proc-heading").textContent = cfg.heading;
+      document.getElementById("proc-sub").textContent = cfg.sub;
+      document.getElementById("proc-steps").innerHTML = cfg.steps.map((s, i) => `
+        <div class="bg-[#faf7f1] border border-[rgba(26,24,21,0.09)] rounded-lg px-3 py-2 flex gap-2.5 items-start">
+          <span class="w-5 h-5 rounded-full bg-[#1b1916] text-[#e5c687] text-[10px] font-semibold flex items-center justify-center shrink-0 mt-0.5 tabular-nums">${s.num}</span>
+          <div class="min-w-0">
+            <div class="text-xs font-semibold text-[#1a1815] flex items-center gap-1">
+              <span>${s.title}</span>
+              ${i < 2 ? '<span class="hidden md:inline text-[#b58932] ml-auto">→</span>' : ""}
+            </div>
+            <p class="text-[11px] text-[#5a5247] leading-snug mt-0.5">${s.desc}</p>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function syncVacantUI() {
+      ["primary", "living", "bed", "patio"].forEach(key => {
+        const val = estState[key];
+        document.getElementById(`tile-${key}`).classList.toggle("active", val > 0);
+        document.getElementById(`cnt-${key}`).textContent = val;
+        document.getElementById(`dec-${key}`).disabled = val === 0;
+        document.getElementById(`inc-${key}`).disabled = val >= (ROOM_MAX[key] || 4);
+      });
+    }
+
+    function updateEstimator() {
+      document.getElementById("vacant-panel").classList.toggle("hidden", estState.service !== "vacant");
+      document.getElementById("occupied-panel").classList.toggle("hidden", estState.service !== "occupied");
+
+      const rangeEl = document.getElementById("est-range");
+      const incEl = document.getElementById("est-included-line");
+      const addEl = document.getElementById("est-addons-line");
+      const termsEl = document.getElementById("est-terms-line");
+
+      if (estState.service === "occupied") {
+        const map = {
+          small: [1000, 1400, "Key living areas (living, dining & entry)"],
+          medium: [1750, 2300, "Main home (4–5 rooms + curated accents)"],
+          large: [2500, 3300, "Full home edit + supplemental accent pieces"]
+        };
+        const [lo, hi, desc] = map[estState.occupiedScope];
+        rangeEl.textContent = `${fmtDollar(lo)} – ${fmtDollar(hi)}`;
+        incEl.innerHTML = `<strong class="text-[#e5c687]">Scope:</strong> ${desc}.`;
+        addEl.innerHTML = `<strong class="text-[#e5c687]">Consultation ($250):</strong> Credited toward staging within 30 days (standalone fee non-refundable).`;
+        termsEl.innerHTML = `<strong class="text-[#e5c687]">Details:</strong> Restyling with your existing furniture · Quote-only walkthroughs are complimentary.`;
+      } else {
+        syncVacantUI();
+        const extraCount = estState.primary + estState.living + estState.bed + estState.patio;
+        const extraCost =
+          estState.primary * ROOM_RATES.primary +
+          estState.living * ROOM_RATES.living +
+          estState.bed * ROOM_RATES.bed +
+          estState.patio * ROOM_RATES.patio;
+        const lo = VACANT_BASE + extraCost;
+        const hi = lo + Math.max(400, Math.round(lo * 0.14));
+        const weeklyLo = fmtWeekly(lo * 0.05);
+        rangeEl.textContent = `${fmtDollar(lo)} – ${fmtDollar(hi)}`;
+
+        document.getElementById("addon-count-label").textContent = extraCount === 0
+          ? "Base rooms only"
+          : `${extraCount} space${extraCount === 1 ? "" : "s"} added (+$${extraCost.toLocaleString()})`;
+
+        incEl.innerHTML = `<strong class="text-[#e5c687]">Base ($2,500) includes:</strong> Living, Dining, Kitchen, Main Bath and Entry.`;
+
+        const parts = [];
+        if (estState.primary > 0) parts.push(`${estState.primary}× Primary Suite ($750)`);
+        if (estState.living > 0) parts.push(`${estState.living}× Living / Family ($750)`);
+        if (estState.bed > 0) parts.push(`${estState.bed}× Bed / Office ($500)`);
+        if (estState.patio > 0) parts.push(`${estState.patio}× Patio / Nook ($250)`);
+        addEl.innerHTML = parts.length
+          ? `<strong class="text-[#e5c687]">Added:</strong> ${parts.join(" · ")}`
+          : "Add optional spaces below — $750 major · $500 standard · $250 patio/nook.";
+        termsEl.innerHTML = `<strong class="text-[#e5c687]">Terms:</strong> 60-day rental &amp; complimentary de-stage included · Flexible weekly extensions (~${weeklyLo}/wk, 5%/wk — no forced extra month)`;
+      }
+
+      estState.lastRangeText = rangeEl.textContent;
+      renderServiceProcess();
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById("mobile-nav-drawer").classList.toggle("hidden");
+    }
+
+    function updateWalkthroughButtonState() {
+      const hasSlot = Boolean(document.querySelector("#inline-day-group .chip-dark.active, #inline-time-group .chip-dark.active"));
+      document.getElementById("wt-clear-btn").classList.toggle("hidden", !hasSlot);
+      document.getElementById("unified-submit-btn").textContent = hasSlot
+        ? "Send Quote Inquiry & Request Free Walkthrough"
+        : "Send Quote Inquiry";
+    }
+
+    function selectInlineSlot(btn, group) {
+      const parent = group === "day" ? "#inline-day-group" : "#inline-time-group";
+      const wasActive = btn.classList.contains("active");
+      document.querySelectorAll(`${parent} .chip-dark`).forEach(b => b.classList.remove("active"));
+      if (!wasActive) btn.classList.add("active");
+      updateWalkthroughButtonState();
+    }
+
+    function clearWalkthroughSlot() {
+      document.querySelectorAll("#inline-day-group .chip-dark, #inline-time-group .chip-dark").forEach(b => b.classList.remove("active"));
+      updateWalkthroughButtonState();
+    }
+
+    function jumpToWalkthrough() {
+      const panel = document.getElementById("inline-walkthrough-panel");
+      panel.scrollIntoView({ behavior: "smooth", block: "center" });
+      panel.classList.remove("gold-focus-ring");
+      void panel.offsetWidth;
+      panel.classList.add("gold-focus-ring");
+    }
+
+    function handleUnifiedSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("q-name").value.trim();
+      const addr = document.getElementById("q-address").value.trim();
+      const notes = document.getElementById("q-notes").value.trim();
+      const smsOk = document.getElementById("q-sms-ok").checked;
+      const box = document.getElementById("quote-confirmation");
+
+      const dayEl = document.querySelector("#inline-day-group .chip-dark.active");
+      const timeEl = document.querySelector("#inline-time-group .chip-dark.active");
+      let slotStr = "";
+      if (dayEl || timeEl) {
+        const dTxt = dayEl ? dayEl.dataset.date : "Preferred day TBD";
+        const tTxt = timeEl ? timeEl.innerText + " PT" : "flexible time";
+        slotStr = ` Complimentary walkthrough requested for <strong>${dTxt} (${tTxt})</strong>.`;
+      }
+
+      const svcLabel = estState.service === "occupied" ? "Occupied Staging" : "Vacant Staging";
+      box.innerHTML = `<strong>All set${name ? ", " + name : ""}!</strong> (Demo) Inquiry ready for Tawni: <strong>${svcLabel} · ${estState.lastRangeText}</strong> (${estState.role === "realtor" ? "Realtor®" : "Homeowner"}${addr ? " · " + addr : ""}${smsOk ? " · SMS OK" : ""}).${slotStr}${notes ? `<br><span class="opacity-80">Notes: "${notes}"</span>` : ""}`;
+      box.classList.remove("hidden");
+    }
+
+    document.querySelectorAll("#service-cards .tier-card").forEach(card => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll("#service-cards .tier-card").forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        estState.service = card.dataset.service;
+        updateEstimator();
+      });
+    });
+    document.querySelectorAll("#role-group .chip-dark").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#role-group .chip-dark").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        estState.role = btn.dataset.role;
+        const addrInput = document.getElementById("q-address");
+        if (addrInput) {
+          addrInput.placeholder = estState.role === "realtor"
+            ? "Property address or paste MLS / Zillow link (fastest)"
+            : "Property address or city (optional)";
+        }
+      });
+    });
+    document.querySelectorAll("#occupied-scope-group .room-tile").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#occupied-scope-group .room-tile").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        estState.occupiedScope = btn.dataset.scope;
+        updateEstimator();
+      });
+    });
+
+    // =========================================================================
+    // 3. UNIFIED 6-PROJECT PORTFOLIO WITH BEFORE/AFTER SLIDERS + GALLERIES
+    // =========================================================================
+    const PROJECTS = [
+      {
+        slug: "monte-fuego-ranch",
+        title: "Monte Fuego Ranch",
+        location: "Rancho Santa Fe",
+        tagline: "Vacant staging · 4 Before/After rooms",
+        description: "Layered neutral furnishings frame the architectural arches and scenic ranch views without competing with the space.",
+        before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01-before.webp",
+        after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg",
+        extraBeforeAfters: [
+          { label: "Living Room", before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01-before.webp", after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-01.jpg" },
+          { label: "Kitchen & Island", before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-02-before.webp", after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-02.jpg" },
+          { label: "Family Room", before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-03-before.webp", after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-03.jpg" },
+          { label: "Sitting Area", before: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-04-before.webp", after: "../images/projects/monte-fuego-ranch/monte-fuego-ranch-04.jpg" }
+        ],
+        gallery: []
+      },
+      {
+        slug: "cresta-view-estate",
+        title: "Cresta View Estate",
+        location: "San Clemente",
+        tagline: "Full 5-bedroom coastal vacant estate",
+        description: "Staged throughout to highlight sunlit coastal living areas, open gourmet kitchen, and ocean-breeze luxury.",
+        before: "../images/projects/cresta-view-estate/cresta-view-estate-03-before.jpg",
+        after: "../images/projects/cresta-view-estate/cresta-view-estate-03.jpg",
+        extraBeforeAfters: [
+          { label: "Bright Family Room", before: "../images/projects/cresta-view-estate/cresta-view-estate-03-before.jpg", after: "../images/projects/cresta-view-estate/cresta-view-estate-03.jpg" }
+        ],
+        gallery: [
+          { src: "../images/projects/cresta-view-estate/cresta-view-estate-01.jpg", caption: "Gourmet Kitchen with Bar Seating" },
+          { src: "../images/projects/cresta-view-estate/cresta-view-estate-02.jpg", caption: "Living Room with Fireplace" }
+        ]
+      },
+      {
+        slug: "canyon-view-condo",
+        title: "Canyon View Condo",
+        location: "La Jolla",
+        tagline: "Remodeled coastal condo · Key rooms",
+        description: "Modern furnishings warm the stone fireplace wall and draw the eye out toward the canyon views.",
+        before: "assets/canyon-view-condo-01-before.jpg",
+        after: "../images/projects/canyon-view-condo/canyon-view-condo-01.webp",
+        extraBeforeAfters: [
+          { label: "Living Room & Kitchen", before: "assets/canyon-view-condo-01-before.jpg", after: "../images/projects/canyon-view-condo/canyon-view-condo-01.webp" }
+        ],
+        gallery: [
+          { src: "../images/projects/canyon-view-condo/canyon-view-condo-02.webp", caption: "Open Kitchen & Dining Flow" },
+          { src: "../images/projects/canyon-view-condo/canyon-view-condo-05.webp", caption: "Vaulted Primary Bedroom" }
+        ]
+      },
+      {
+        slug: "anchor-point-hideaway",
+        title: "Anchor Point Hideaway",
+        location: "Carlsbad",
+        tagline: "Coastal family home · Living & pool lounge",
+        description: "Warm textures, modern art, and cohesive flow across the main living spaces and outdoor poolside lounge.",
+        before: "assets/anchor-point-hideaway-01-before.jpg",
+        after: "../images/projects/anchor-point-hideaway/anchor-point-hideaway-01.jpg",
+        extraBeforeAfters: [
+          { label: "Main Living Room", before: "assets/anchor-point-hideaway-01-before.jpg", after: "../images/projects/anchor-point-hideaway/anchor-point-hideaway-01.jpg" }
+        ],
+        gallery: [
+          { src: "../images/projects/anchor-point-hideaway/anchor-point-hideaway-08.jpg", caption: "Poolside Outdoor Living Lounge" },
+          { src: "../images/projects/anchor-point-hideaway/anchor-point-hideaway-04.jpg", caption: "Dining Area with Patio Access" }
+        ]
+      },
+      {
+        slug: "rolando-bungalow",
+        title: "Rolando Bungalow",
+        location: "San Diego",
+        tagline: "Mid-century bungalow · Turnkey showcase",
+        description: "Soft neutral silhouettes complement refinished hardwood floors and emphasize move-in-ready warmth.",
+        before: "assets/rolando-bungalow-01-before.jpg",
+        after: "../images/projects/rolando-bungalow/rolando-bungalow-01.webp",
+        extraBeforeAfters: [
+          { label: "Sunlit Living Room", before: "assets/rolando-bungalow-01-before.jpg", after: "../images/projects/rolando-bungalow/rolando-bungalow-01.webp" }
+        ],
+        gallery: [
+          { src: "../images/projects/rolando-bungalow/rolando-bungalow-02.webp", caption: "Vintage Kitchen Styled for Contrast" },
+          { src: "../images/projects/rolando-bungalow/rolando-bungalow-05.webp", caption: "Serene Primary Bedroom" }
+        ]
+      },
+      {
+        slug: "san-pasqual-retreat",
+        title: "San Pasqual Retreat",
+        location: "San Pasqual · Escondido",
+        tagline: "Open-concept retreat · Vaulted great room",
+        description: "Tailored dining and soaring great room setups create intimate conversation zones in an expansive floor plan.",
+        before: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-04-before.jpg",
+        after: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-04.jpg",
+        extraBeforeAfters: [
+          { label: "Tailored Dining Room", before: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-04-before.jpg", after: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-04.jpg" }
+        ],
+        gallery: [
+          { src: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-05.jpg", caption: "Vaulted Great Room" },
+          { src: "../images/projects/san-pasqual-retreat/san-pasqual-retreat-02.jpg", caption: "Warm Family Retreat" }
+        ]
+      }
+    ];
+
+    function initSlider(slider) {
+      const beforeWrap = slider.querySelector(".ba-before-wrap");
+      const handle = slider.querySelector(".ba-handle");
+      let active = false;
+      function move(clientX) {
+        const rect = slider.getBoundingClientRect();
+        let pct = ((clientX - rect.left) / rect.width) * 100;
+        pct = Math.max(5, Math.min(95, pct));
+        beforeWrap.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+        handle.style.left = `${pct}%`;
+      }
+      slider.addEventListener("pointerdown", e => {
+        active = true;
+        slider.setPointerCapture(e.pointerId);
+        move(e.clientX);
+      });
+      slider.addEventListener("pointermove", e => { if (active) move(e.clientX); });
+      slider.addEventListener("pointerup", () => { active = false; });
+    }
+
+    function setCardBA(wrapId, btnBeforeId, btnAfterId, showBefore) {
+      const wrap = document.getElementById(wrapId);
+      const btnB = document.getElementById(btnBeforeId);
+      const btnA = document.getElementById(btnAfterId);
+      wrap.classList.toggle("is-before", showBefore);
+      if (showBefore) {
+        btnB.className = "px-2.5 py-1 rounded-full transition-colors bg-[#c89f50] text-[#14120f] font-semibold";
+        btnA.className = "px-2.5 py-1 rounded-full transition-colors text-[#bfb7aa] hover:text-[#f5f0e8]";
+      } else {
+        btnA.className = "px-2.5 py-1 rounded-full transition-colors bg-[#c89f50] text-[#14120f] font-semibold";
+        btnB.className = "px-2.5 py-1 rounded-full transition-colors text-[#bfb7aa] hover:text-[#f5f0e8]";
+      }
+    }
+
+    function renderProjectsGrid() {
+      const grid = document.getElementById("projects-grid");
+      grid.innerHTML = PROJECTS.map((p, idx) => `
+        <article class="bg-[#1b1916] border border-[rgba(245,240,232,0.09)] rounded-xl overflow-hidden hover:border-[rgba(213,178,109,0.45)] transition-colors flex flex-col">
+          <div class="ba-toggle-wrap aspect-[3/2]" id="card-ba-${idx}" onclick="openGalleryModal(${idx})">
+            <img src="${p.before}" alt="Before staging: ${p.title}" class="w-full h-full object-cover" />
+            <img src="${p.after}" alt="After staging: ${p.title}" class="ba-toggle-after" />
+            <div onclick="event.stopPropagation()" class="absolute bottom-2.5 right-2.5 inline-flex items-center bg-[#12110f]/85 backdrop-blur-md border border-[rgba(213,178,109,0.4)] rounded-full p-0.5 text-[11px] shadow-lg">
+              <button type="button" id="card-btn-before-${idx}" onclick="setCardBA('card-ba-${idx}', 'card-btn-before-${idx}', 'card-btn-after-${idx}', true)" class="px-2.5 py-1 rounded-full transition-colors text-[#bfb7aa] hover:text-[#f5f0e8]">Before</button>
+              <button type="button" id="card-btn-after-${idx}" onclick="setCardBA('card-ba-${idx}', 'card-btn-before-${idx}', 'card-btn-after-${idx}', false)" class="px-2.5 py-1 rounded-full transition-colors bg-[#c89f50] text-[#14120f] font-semibold">After</button>
+            </div>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between gap-3">
+            <div>
+              <div class="text-[11px] uppercase tracking-[0.14em] text-[#d5b26d]">${p.location}</div>
+              <h3 class="font-serif-editorial text-lg text-[#fbf8f2] mt-0.5">${p.title}</h3>
+              <p class="text-xs text-[#a9a093] mt-1">${p.tagline}</p>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <button type="button" onclick="openGalleryModal(${idx})" class="text-xs font-semibold text-[#e5c687] hover:underline inline-flex items-center gap-1">
+                Open Gallery <span>→</span>
+              </button>
+              <a href="../projects/${p.slug}/" class="text-[11px] text-[#a9a093] hover:text-[#e5c687] transition-colors">Full Page ↗</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function openGalleryModal(idx) {
+      const p = PROJECTS[idx];
+      document.getElementById("gal-location").textContent = p.location;
+      document.getElementById("gal-title").textContent = p.title;
+      document.getElementById("gal-desc").textContent = p.description;
+      const pageLink = document.getElementById("gal-page-link");
+      if (pageLink) pageLink.href = `../projects/${p.slug}/`;
+
+      const body = document.getElementById("gal-body");
+      let html = `<div class="grid grid-cols-1 ${p.extraBeforeAfters.length > 1 ? "md:grid-cols-2" : ""} gap-4">`;
+      p.extraBeforeAfters.forEach((item, rIdx) => {
+        html += `
+          <div class="bg-[#141210] border border-[rgba(245,240,232,0.08)] rounded-xl p-2.5">
+            <div class="ba-toggle-wrap aspect-[3/2] rounded-lg" id="gal-ba-${rIdx}">
+              <img src="${item.before}" alt="Before: ${item.label}" class="w-full h-full object-cover" />
+              <img src="${item.after}" alt="After: ${item.label}" class="ba-toggle-after" />
+              <div class="absolute bottom-2.5 right-2.5 inline-flex items-center bg-[#12110f]/85 backdrop-blur-md border border-[rgba(213,178,109,0.4)] rounded-full p-0.5 text-[11px] shadow-lg">
+                <button type="button" id="gal-btn-before-${rIdx}" onclick="setCardBA('gal-ba-${rIdx}', 'gal-btn-before-${rIdx}', 'gal-btn-after-${rIdx}', true)" class="px-2.5 py-1 rounded-full transition-colors text-[#bfb7aa] hover:text-[#f5f0e8]">Before</button>
+                <button type="button" id="gal-btn-after-${rIdx}" onclick="setCardBA('gal-ba-${rIdx}', 'gal-btn-before-${rIdx}', 'gal-btn-after-${rIdx}', false)" class="px-2.5 py-1 rounded-full transition-colors bg-[#c89f50] text-[#14120f] font-semibold">After</button>
+              </div>
+            </div>
+            <div class="text-xs font-medium text-[#e5c687] mt-2 px-1">${item.label}</div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+
+      if (p.gallery.length) {
+        html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">`;
+        p.gallery.forEach(g => {
+          html += `
+            <figure class="bg-[#141210] border border-[rgba(245,240,232,0.08)] rounded-xl overflow-hidden">
+              <img src="${g.src}" alt="${g.caption}" class="w-full aspect-[3/2] object-cover" />
+              <figcaption class="px-3 py-2 text-xs text-[#cfc7b9]">${g.caption}</figcaption>
+            </figure>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      body.innerHTML = html;
+      body.querySelectorAll("[data-gal-slider]").forEach(initSlider);
+
+      const m = document.getElementById("gallery-modal");
+      m.classList.remove("hidden");
+      m.classList.add("flex");
+    }
+
+    function closeGalleryModal() {
+      const m = document.getElementById("gallery-modal");
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+
+    // =========================================================================
+    // 4. MARKET DATA PILLS & TABLE (Refined Dark & Gold)
+    // =========================================================================
+    function renderMarketPills(activeArea) {
+      const pillsEl = document.getElementById("market-city-pills");
+      if (!pillsEl) return;
+      document.getElementById("market-city-pills").innerHTML = MARKET_DATA.map(row => `
+        <button type="button" onclick="renderMarketSpotlight('${row.area.replace(/'/g, "\'")}')"
+          class="chip px-3 py-1.5 rounded-md text-xs ${row.area === activeArea ? "active" : ""}">
+          ${row.area.replace(" Area", "")}
+        </button>
+      `).join("");
+    }
+
+    function renderMarketSpotlight(areaName) {
+      const spotEl = document.getElementById("market-city-spotlight");
+      if (!spotEl) return;
+      renderMarketPills(areaName);
+      const r = MARKET_DATA.find(d => d.area === areaName) || MARKET_DATA[0];
+      const psfWin = r.sPsf >= r.vPsf;
+      const daysWin = r.sDays <= r.vDays;
+      const stlWin = r.sStl >= r.vStl;
+
+      document.getElementById("market-city-spotlight").innerHTML = `
+        <div class="bg-[#211e19] border border-[rgba(213,178,109,0.45)] rounded-lg p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <span class="text-xs uppercase tracking-[0.14em] text-[#e5c687] font-semibold">Professionally Staged</span>
+              <div class="text-xs text-[#a9a093]">${r.area} · ${r.sSales} closed sales</div>
+            </div>
+            <span class="text-[11px] px-2.5 py-0.5 rounded bg-[rgba(213,178,109,0.16)] text-[#e5c687]">Staged</span>
+          </div>
+          <div class="grid grid-cols-3 gap-3 pt-2 border-t border-[rgba(245,240,232,0.08)] tabular-nums">
+            <div><div class="text-[11px] text-[#a9a093]">Median $/Sq Ft</div><div class="font-serif-editorial text-2xl ${psfWin ? "text-[#e5c687]" : "text-[#fbf8f2]"}">$${r.sPsf}</div></div>
+            <div><div class="text-[11px] text-[#a9a093]">Days to Contract</div><div class="font-serif-editorial text-2xl ${daysWin ? "text-[#e5c687]" : "text-[#fbf8f2]"}">${r.sDays}</div></div>
+            <div><div class="text-[11px] text-[#a9a093]">Sale-to-List</div><div class="font-serif-editorial text-2xl ${stlWin ? "text-[#e5c687]" : "text-[#fbf8f2]"}">${r.sStl.toFixed(1)}%</div></div>
+          </div>
+        </div>
+        <div class="bg-[#141210] border border-[rgba(245,240,232,0.08)] rounded-lg p-4">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <span class="text-xs uppercase tracking-[0.14em] text-[#bfb7aa] font-semibold">Unstaged Vacant</span>
+              <div class="text-xs text-[#8f877b]">${r.area} · ${r.vSales} closed sales</div>
+            </div>
+            <span class="text-[11px] px-2.5 py-0.5 rounded bg-[rgba(245,240,232,0.06)] text-[#bfb7aa]">Vacant</span>
+          </div>
+          <div class="grid grid-cols-3 gap-3 pt-2 border-t border-[rgba(245,240,232,0.08)] tabular-nums">
+            <div><div class="text-[11px] text-[#8f877b]">Median $/Sq Ft</div><div class="font-serif-editorial text-2xl text-[#cfc7b9]">$${r.vPsf}</div></div>
+            <div><div class="text-[11px] text-[#8f877b]">Days to Contract</div><div class="font-serif-editorial text-2xl text-[#cfc7b9]">${r.vDays}</div></div>
+            <div><div class="text-[11px] text-[#8f877b]">Sale-to-List</div><div class="font-serif-editorial text-2xl text-[#cfc7b9]">${r.vStl.toFixed(1)}%</div></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderFullTable() {
+      document.getElementById("full-market-tbody").innerHTML = MARKET_DATA.map(r => {
+        const isTotal = r.area === "All North County";
+        return `
+          <tr class="${isTotal ? "bg-[rgba(213,178,109,0.1)] font-semibold" : "hover:bg-[rgba(245,240,232,0.03)]"}">
+            <td class="py-2.5 pr-4 text-[#f5f0e8]"><div>${r.area}</div><div class="text-[11px] font-normal text-[#8f877b]">${r.sub}</div></td>
+            <td class="py-2.5 px-3 text-[#bfb7aa]">${r.sSales}</td>
+            <td class="py-2.5 px-3 ${r.sPsf >= r.vPsf ? "text-[#e5c687] font-semibold" : "text-[#d5cec2]"}">$${r.sPsf}</td>
+            <td class="py-2.5 px-3 ${r.sDays <= r.vDays ? "text-[#e5c687] font-semibold" : "text-[#d5cec2]"}">${r.sDays}</td>
+            <td class="py-2.5 px-3 ${r.sStl >= r.vStl ? "text-[#e5c687] font-semibold" : "text-[#d5cec2]"}">${r.sStl.toFixed(1)}%</td>
+            <td class="py-2.5 px-3 text-[#9c9487] border-l border-[rgba(245,240,232,0.08)]">${r.vSales}</td>
+            <td class="py-2.5 px-3 text-[#bfb7aa]">$${r.vPsf}</td>
+            <td class="py-2.5 px-3 text-[#bfb7aa]">${r.vDays}</td>
+            <td class="py-2.5 pl-3 text-[#bfb7aa]">${r.vStl.toFixed(1)}%</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function toggleFullTable() {
+      const wrap = document.getElementById("full-market-table-wrap");
+      const btn = document.getElementById("toggle-full-table-btn");
+      const hidden = wrap.classList.toggle("hidden");
+      btn.textContent = hidden ? "Show 10-area city breakdown ↓" : "Hide city breakdown ↑";
+    }
+
+    // FAQ & Report Modal
+    function toggleFaq(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains("open");
+      document.querySelectorAll("#faq-list .faq-body").forEach(b => b.classList.remove("open"));
+      document.querySelectorAll("#faq-list .faq-plus").forEach(p => p.textContent = "+");
+      document.querySelectorAll("#faq-list button").forEach(b => b.setAttribute("aria-expanded", "false"));
+      if (!isOpen) {
+        body.classList.add("open");
+        btn.querySelector(".faq-plus").textContent = "−";
+        btn.setAttribute("aria-expanded", "true");
+      }
+    }
+
+    function openReportModal() {
+      const m = document.getElementById("report-modal");
+      m.classList.remove("hidden");
+      m.classList.add("flex");
+    }
+    function closeReportModal() {
+      const m = document.getElementById("report-modal");
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+
+    function openOnePagerModal() {
+      // Reuse already-embedded logo & Monte Fuego before/after so zero extra file weight!
+      const headerLogo = document.querySelector("header img");
+      if (headerLogo) document.getElementById("op-logo").src = headerLogo.src;
+      document.getElementById("op-before").src = PROJECTS[0].before;
+      document.getElementById("op-after").src = PROJECTS[0].after;
+      const m = document.getElementById("onepager-modal");
+      m.classList.remove("hidden");
+      m.classList.add("flex");
+    }
+    function closeOnePagerModal() {
+      const m = document.getElementById("onepager-modal");
+      m.classList.add("hidden");
+      m.classList.remove("flex");
+    }
+
+    ["gallery-modal", "report-modal", "onepager-modal"].forEach(id => {
+      document.getElementById(id).addEventListener("click", e => {
+        if (e.target.id === id) {
+          e.target.classList.add("hidden");
+          e.target.classList.remove("flex");
+        }
+      });
+    });
+
+    // Init
+    renderScrollDates();
+    updateEstimator();
+    renderProjectsGrid();
+    renderMarketSpotlight("All North County");
+    renderFullTable();
+  </script>
+</body>
+</html>
