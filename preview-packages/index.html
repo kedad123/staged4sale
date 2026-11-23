@@ -324,28 +324,110 @@
             </div>
           </div>
 
-          <!-- Occupied Panel -->
+          <!-- Occupied / Lived-In Panel: 3 Stepped Luxury Packages -->
           <div id="occupied-panel" class="hidden">
-            <div class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold mb-2">Select Occupied Staging Scope</div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="occupied-scope-group">
-              <button type="button" data-scope="small" class="room-tile active rounded-lg p-2.5">
-                <div class="rt-title text-xs font-semibold">Key Living Areas</div>
-                <div class="rt-price text-xs font-semibold tabular-nums">From $1,000</div>
-                <div class="text-[11px] text-[#6b6357]">Living, dining &amp; entry refresh</div>
+            <div class="flex flex-wrap items-center justify-between gap-1.5 mb-3">
+              <span class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold">Choose Your Lived-In Staging Package ($250 Consult Credited)</span>
+              <span id="occ-scope-label" class="text-xs text-[#6b6357] font-medium tabular-nums">Restyle Plus</span>
+            </div>
+
+            <!-- 3 Stepped Occupied Packages: Lowest -> Highest -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="occupied-scope-group">
+              <!-- Tier 1: Occupied Refresh (Left — Clean Entry · Using Your Furnishings) -->
+              <button type="button" data-scope="small" onclick="selectOccupiedScope('small')" class="pkg-card pkg-essential flex flex-col justify-between">
+                <div>
+                  <div class="pkg-ribbon-essential px-3.5 py-1.5 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em]">
+                    <span>Budget-Conscious · Redesign</span>
+                    <span>Your Pieces</span>
+                  </div>
+                  <div class="p-3.5 space-y-2.5">
+                    <div>
+                      <div class="font-serif-editorial text-lg text-[#1a1815] leading-tight">Occupied Refresh</div>
+                      <div class="flex items-baseline gap-1 mt-1">
+                        <span class="text-[11px] text-[#6b6357]">From</span>
+                        <span class="font-serif-editorial text-2xl text-[#1a1815] tabular-nums">$1,000</span>
+                      </div>
+                      <div class="text-[11px] text-[#6b6357]">No rental fees · 1-day restyle</div>
+                    </div>
+                    <ul class="space-y-1.5 pt-2 border-t border-[rgba(26,24,21,0.1)] text-xs text-[#3c362e] leading-snug">
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">3 Key Showing Areas:</strong> Living Room, Dining Room &amp; Entry</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span>Room editing, clutter reduction &amp; photo-ready layout</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span>Artful arrangement of your existing furniture &amp; décor</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="px-3.5 py-2 border-t border-[rgba(26,24,21,0.09)] text-[11px] text-[#6b6357] font-medium">
+                  Ideal when your existing furniture just needs a designer's eye
+                </div>
               </button>
-              <button type="button" data-scope="medium" class="room-tile rounded-lg p-2.5">
-                <div class="rt-title text-xs font-semibold">Main Home + Accents</div>
-                <div class="rt-price text-xs font-semibold tabular-nums">From $1,750</div>
-                <div class="text-[11px] text-[#6b6357]">4–5 rooms + curated art &amp; pillows</div>
+
+              <!-- Tier 2: Restyle Plus (Center — Visually Elevated BEST VALUE) -->
+              <button type="button" data-scope="medium" onclick="selectOccupiedScope('medium')" class="pkg-card pkg-featured active flex flex-col justify-between">
+                <div>
+                  <div class="pkg-ribbon-featured px-3.5 py-2 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em]">
+                    <span>★ Best Value · Most Popular</span>
+                    <span>60 Days</span>
+                  </div>
+                  <div class="p-3.5 space-y-2.5">
+                    <div class="flex items-start justify-between gap-2">
+                      <div>
+                        <div class="font-serif-editorial text-lg text-[#1a1815] leading-tight">Restyle Plus</div>
+                        <div class="flex items-baseline gap-1 mt-1">
+                          <span class="text-[11px] text-[#6b6357]">From</span>
+                          <span class="font-serif-editorial text-2xl text-[#8f6720] tabular-nums">$1,750</span>
+                        </div>
+                        <div class="text-[11px] text-[#6b6357] tabular-nums">60-day accent rental · free pickup</div>
+                      </div>
+                      <span class="pkg-save-pill text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">$250 Credit</span>
+                    </div>
+                    <ul class="space-y-1.5 pt-2 border-t border-[rgba(26,24,21,0.1)] text-xs text-[#3c362e] leading-snug">
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">4–5 Main Rooms:</strong> Living, Dining, Kitchen, Primary &amp; Entry</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span>Full room editing &amp; layout using your core furniture</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Curated Accent Rental:</strong> Art, pillows, throws, lamps, greenery &amp; bath styling</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-green">★</span><span><strong class="text-[#1a1815]">$250 Consult credited</strong> + complimentary accent pickup</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="px-3.5 py-2 border-t border-[rgba(26,24,21,0.09)] text-[11px] text-[#8f6720] font-semibold">
+                  Most popular for lived-in homes needing that online "WOW" pop
+                </div>
               </button>
-              <button type="button" data-scope="large" class="room-tile rounded-lg p-2.5">
-                <div class="rt-title text-xs font-semibold">Full Home + Supplemental</div>
-                <div class="rt-price text-xs font-semibold tabular-nums">From $2,500</div>
-                <div class="text-[11px] text-[#6b6357]">Whole-home edit + key accent pieces</div>
+
+              <!-- Tier 3: Full Home Transformation (Right — Flagship Whole-Home + Supplemental) -->
+              <button type="button" data-scope="large" onclick="selectOccupiedScope('large')" class="pkg-card pkg-flagship flex flex-col justify-between">
+                <div>
+                  <div class="pkg-ribbon-flagship px-3.5 py-1.5 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em]">
+                    <span>◆ Whole-Home + Furniture</span>
+                    <span>60 Days</span>
+                  </div>
+                  <div class="p-3.5 space-y-2.5">
+                    <div class="flex items-start justify-between gap-2">
+                      <div>
+                        <div class="font-serif-editorial text-lg text-[#1a1815] leading-tight">Full Home Transformation</div>
+                        <div class="flex items-baseline gap-1 mt-1">
+                          <span class="text-[11px] text-[#6b6357]">From</span>
+                          <span class="font-serif-editorial text-2xl text-[#8f6720] tabular-nums">$2,500</span>
+                        </div>
+                        <div class="text-[11px] text-[#6b6357] tabular-nums">60-day rental · free pickup</div>
+                      </div>
+                      <span class="pkg-save-pill text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">$250 Credit</span>
+                    </div>
+                    <ul class="space-y-1.5 pt-2 border-t border-[rgba(26,24,21,0.1)] text-xs text-[#3c362e] leading-snug">
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Everything in Restyle Plus</strong> across the entire home</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Supplemental Rental Furniture:</strong> Accent chairs, tables, rugs, barstools &amp; patio bistro</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span>Secondary bedrooms, home office &amp; outdoor living cues</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-green">★</span><span><strong class="text-[#1a1815]">60-day rental included</strong> + photo-day finishing polish</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="px-3.5 py-2 border-t border-[rgba(26,24,21,0.09)] text-[11px] text-[#1a1815] font-semibold">
+                  Best when key rooms are half-empty or need elevated anchor pieces
+                </div>
               </button>
             </div>
-            <div class="mt-3 bg-[#f3ede2] border border-[rgba(26,24,21,0.1)] rounded-lg px-3 py-2 text-[11px] text-[#3c362e] leading-relaxed">
-              <strong class="text-[#1a1815]">Pre-Listing Consultation ($250):</strong> Occupied staging begins with a 90-minute on-site walkthrough &amp; room-by-room DIY action plan covering decluttering, layout, paint, lighting, and curb appeal—<strong>credited in full toward staging within 30 days</strong> (standalone consultation fee is non-refundable). Quote-only proposals are always complimentary.
+
+            <div class="mt-3 bg-[#f3ede2] border border-[rgba(26,24,21,0.1)] rounded-lg px-3.5 py-2.5 text-xs text-[#3c362e] leading-relaxed">
+              <strong class="text-[#1a1815]">Pre-Listing Consultation ($250):</strong> Lived-in staging begins with a 90-minute on-site walkthrough &amp; room-by-room DIY action plan covering decluttering, layout, paint, lighting, and curb appeal—<strong>credited in full toward any Occupied package within 30 days</strong> (standalone consultation fee is non-refundable). Quote-only proposals are always complimentary.
             </div>
           </div>
         </div>
@@ -492,10 +574,37 @@
       }
     };
 
+    const OCC_PKGS = {
+      small: {
+        name: "Occupied Refresh",
+        pill: "Occupied Refresh · Your Pieces",
+        lo: 1000,
+        hi: 1400,
+        summary: "Living, Dining & Entry restyled using your existing furnishings (no rental fees)",
+        terms: "1-day photo-ready restyle · Quote-only walkthroughs are complimentary"
+      },
+      medium: {
+        name: "Restyle Plus",
+        pill: "Restyle Plus · Best Value · 60 Days",
+        lo: 1750,
+        hi: 2300,
+        summary: "4–5 main rooms restyled + curated art, pillows, lamps, greenery & bath styling",
+        terms: "60-day accent rental & complimentary pickup included · Flexible 5%/wk extensions"
+      },
+      large: {
+        name: "Full Home Transformation",
+        pill: "Full Home Transformation · 60 Days",
+        lo: 2500,
+        hi: 3300,
+        summary: "Whole-home edit + supplemental rental furniture (chairs, tables, rugs, barstools, patio) & accents",
+        terms: "60-day rental & complimentary pickup included · Flexible 5%/wk extensions"
+      }
+    };
+
     const estState = {
       service: "vacant",
       vacantPkg: "curated",
-      occupiedScope: "small",
+      occupiedScope: "medium",
       role: "realtor",
       major: 0,
       bed: 0,
@@ -568,6 +677,12 @@
       updateEstimator();
     }
 
+    function selectOccupiedScope(scope) {
+      if (!OCC_PKGS[scope]) return;
+      estState.occupiedScope = scope;
+      updateEstimator();
+    }
+
     function stepCustom(key, delta) {
       const max = CUSTOM_MAX[key] || 4;
       estState[key] = Math.max(0, Math.min(max, estState[key] + delta));
@@ -633,6 +748,14 @@
       });
     }
 
+    function syncOccupiedUI() {
+      document.querySelectorAll("#occupied-scope-group .pkg-card").forEach(card => {
+        const isActive = card.dataset.scope === estState.occupiedScope;
+        card.classList.toggle("active", isActive);
+        card.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+    }
+
     function updateEstimator() {
       document.getElementById("vacant-panel").classList.toggle("hidden", estState.service !== "vacant");
       document.getElementById("occupied-panel").classList.toggle("hidden", estState.service !== "occupied");
@@ -644,17 +767,15 @@
       const termsEl = document.getElementById("est-terms-line");
 
       if (estState.service === "occupied") {
-        const map = {
-          small: [1000, 1400, "Key living areas (living, dining & entry)", "Occupied · Key Living"],
-          medium: [1750, 2300, "Main home (4–5 rooms + curated accents)", "Occupied · Main Home"],
-          large: [2500, 3300, "Full home edit + supplemental accent pieces", "Occupied · Full Home"]
-        };
-        const [lo, hi, desc, occPill] = map[estState.occupiedScope];
-        rangeEl.textContent = `${fmtDollar(lo)} – ${fmtDollar(hi)}`;
-        if (pillEl) pillEl.textContent = occPill;
-        incEl.innerHTML = `<strong class="text-[#e5c687]">Scope:</strong> ${desc}.`;
+        syncOccupiedUI();
+        const occ = OCC_PKGS[estState.occupiedScope] || OCC_PKGS.medium;
+        rangeEl.textContent = `${fmtDollar(occ.lo)} – ${fmtDollar(occ.hi)}`;
+        if (pillEl) pillEl.textContent = occ.pill;
+        const occLabel = document.getElementById("occ-scope-label");
+        if (occLabel) occLabel.textContent = occ.name;
+        incEl.innerHTML = `<strong class="text-[#e5c687]">${occ.name} (From $${occ.lo.toLocaleString()}):</strong> ${occ.summary}.`;
         addEl.innerHTML = `<strong class="text-[#e5c687]">Consultation ($250):</strong> Credited toward staging within 30 days (standalone fee non-refundable).`;
-        termsEl.innerHTML = `<strong class="text-[#e5c687]">Details:</strong> Restyling with your existing furniture · Quote-only walkthroughs are complimentary.`;
+        termsEl.innerHTML = `<strong class="text-[#e5c687]">Terms:</strong> ${occ.terms}.`;
       } else {
         syncVacantUI();
         const pkg = VACANT_PKGS[estState.vacantPkg] || VACANT_PKGS.curated;
@@ -759,8 +880,9 @@
         slotStr = ` Complimentary walkthrough requested for <strong>${dTxt} (${tTxt})</strong>.`;
       }
 
-      const pkgName = (VACANT_PKGS[estState.vacantPkg] || VACANT_PKGS.curated).name;
-      const svcLabel = estState.service === "occupied" ? "Occupied Staging" : `Vacant Staging (${pkgName})`;
+      const vacName = (VACANT_PKGS[estState.vacantPkg] || VACANT_PKGS.curated).name;
+      const occName = (OCC_PKGS[estState.occupiedScope] || OCC_PKGS.medium).name;
+      const svcLabel = estState.service === "occupied" ? `Occupied Staging (${occName})` : `Vacant Staging (${vacName})`;
       box.innerHTML = `<strong>All set${name ? ", " + name : ""}!</strong> (Demo) Inquiry ready for our team: <strong>${svcLabel} · ${estState.lastRangeText}</strong> (${estState.role === "realtor" ? "Realtor®" : "Homeowner"}${addr ? " · " + addr : ""}${smsOk ? " · SMS OK" : ""}).${slotStr}${notes ? `<br><span class="opacity-80">Notes: "${notes}"</span>` : ""}`;
       box.classList.remove("hidden");
     }
@@ -785,15 +907,6 @@
             ? "Property address or paste MLS / Zillow link (fastest)"
             : "Property address or city (optional)";
         }
-      });
-    });
-
-    document.querySelectorAll("#occupied-scope-group .room-tile").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#occupied-scope-group .room-tile").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        estState.occupiedScope = btn.dataset.scope;
-        updateEstimator();
       });
     });
 
