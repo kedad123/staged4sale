@@ -31,6 +31,7 @@ Disallow: /admin/
 # Private homepage redesign preview (noindex, not linked from public site)
 Disallow: /preview-redesign/
 Disallow: /preview-redesign2/
+Disallow: /preview-packages/
 
 # Sitemap location
 Sitemap: https://staged4sale.com/sitemap.xml
