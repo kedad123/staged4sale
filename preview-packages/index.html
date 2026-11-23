@@ -87,14 +87,14 @@
           <button type="button" data-service="vacant" class="tier-card active rounded-xl p-3.5 sm:p-4 flex flex-col">
             <div class="flex items-center justify-between gap-1 w-full mb-1">
               <span class="tier-kicker text-[10px] uppercase tracking-[0.12em] font-semibold">Popular</span>
-              <span class="tier-pill hidden sm:inline text-[10px] px-1.5 py-0.5 rounded font-medium">60 Days · Destage Included</span>
+              <span class="tier-pill hidden sm:inline text-[10px] px-1.5 py-0.5 rounded font-medium">30–90 Days · Destage Included</span>
             </div>
             <div class="tier-title font-serif-editorial text-base sm:text-xl leading-tight">Vacant Staging</div>
             <div class="flex items-baseline gap-1 mt-1 sm:mb-1">
               <span class="tier-muted text-[10px] sm:text-[11px]">From</span>
               <span class="tier-price font-serif-editorial text-xl sm:text-2xl tabular-nums">$2,500</span>
             </div>
-            <p class="tier-desc hidden sm:block text-[11px] leading-snug">3 clear vacant staging packages ($2,500 · $3,750 · $4,950) with curated owned inventory &amp; optional add-ons.</p>
+            <p class="tier-desc hidden sm:block text-[11px] leading-snug">3 clear vacant staging packages ($2,500 · $3,750 · $4,950) with 30, 60, or 90 days included.</p>
           </button>
 
           <button type="button" data-service="occupied" class="tier-card rounded-xl p-3.5 sm:p-4 flex flex-col">
@@ -152,18 +152,18 @@
         <div class="pq-panel border-t-0 rounded-b-xl p-3.5 sm:p-4 mb-3.5">
           <div id="vacant-panel">
             <div class="flex flex-wrap items-center justify-between gap-1.5 mb-3">
-              <span class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold">Choose Your Vacant Staging Package (All Include 60 Days &amp; De-Stage)</span>
+              <span class="text-[11px] uppercase tracking-[0.14em] text-[#8f6720] font-bold">Choose Your Vacant Staging Package (30 · 60 · 90 Days Included)</span>
               <span id="addon-count-label" class="text-xs text-[#6b6357] font-medium tabular-nums">Curated Home</span>
             </div>
 
             <!-- 3 Stepped Vacant Packages: Lowest -> Highest -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="vacant-pkg-group">
-              <!-- Tier 1: Essential Core (Left — Clean Entry) -->
+              <!-- Tier 1: Essential Core (Left — Clean Entry · 30 Days) -->
               <button type="button" data-pkg="essential" onclick="selectVacantPkg('essential')" class="pkg-card pkg-essential flex flex-col justify-between">
                 <div>
                   <div class="pkg-ribbon-essential px-3.5 py-1.5 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em]">
                     <span>Budget-Conscious &amp; Condos</span>
-                    <span>60 Days</span>
+                    <span>30 Days</span>
                   </div>
                   <div class="p-3.5 space-y-2.5">
                     <div>
@@ -172,12 +172,12 @@
                         <span class="text-[11px] text-[#6b6357]">From</span>
                         <span class="font-serif-editorial text-2xl text-[#1a1815] tabular-nums">$2,500</span>
                       </div>
-                      <div class="text-[11px] text-[#6b6357] tabular-nums">~$125/wk extension after 60 days</div>
+                      <div class="text-[11px] text-[#6b6357] tabular-nums">30 days included · ~$125/wk after</div>
                     </div>
                     <ul class="space-y-1.5 pt-2 border-t border-[rgba(26,24,21,0.1)] text-xs text-[#3c362e] leading-snug">
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">5 Core Spaces:</strong> Living, Dining, Kitchen, Main Bath &amp; Entry</span></li>
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span>Curated art, lighting, rugs &amp; greenery</span></li>
-                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span>60-day rental &amp; complimentary de-stage</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">30-day rental</strong> &amp; complimentary de-stage</span></li>
                     </ul>
                   </div>
                 </div>
@@ -186,7 +186,7 @@
                 </div>
               </button>
 
-              <!-- Tier 2: Curated Home (Center — Visually Elevated BEST VALUE) -->
+              <!-- Tier 2: Curated Home (Center — Visually Elevated BEST VALUE · 60 Days) -->
               <button type="button" data-pkg="curated" onclick="selectVacantPkg('curated')" class="pkg-card pkg-featured active flex flex-col justify-between">
                 <div>
                   <div class="pkg-ribbon-featured px-3.5 py-2 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em]">
@@ -201,7 +201,7 @@
                           <span class="text-[11px] text-[#6b6357]">From</span>
                           <span class="font-serif-editorial text-2xl text-[#8f6720] tabular-nums">$3,750</span>
                         </div>
-                        <div class="text-[11px] text-[#6b6357] tabular-nums">~$190/wk extension after 60 days</div>
+                        <div class="text-[11px] text-[#6b6357] tabular-nums">60 days included · ~$190/wk after</div>
                       </div>
                       <span class="pkg-save-pill text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">Save $250</span>
                     </div>
@@ -209,7 +209,7 @@
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Everything in Essential Core</strong> (5 core spaces)</span></li>
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Primary Bedroom &amp; En-Suite Bath</strong></span></li>
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">1 Secondary Bedroom or Office</strong></span></li>
-                      <li class="flex items-start gap-1.5"><span class="pkg-check-green">★</span><span><strong class="text-[#1a1815]">Bonus Patio Bistro or Sitting Nook</strong> included</span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-green">★</span><span><strong class="text-[#1a1815]">60-day rental</strong> (2× Essential) + <strong class="text-[#1a1815]">Patio Bistro / Nook</strong></span></li>
                     </ul>
                   </div>
                 </div>
@@ -218,12 +218,12 @@
                 </div>
               </button>
 
-              <!-- Tier 3: Signature Showcase (Right — Flagship Luxury Treatment) -->
+              <!-- Tier 3: Signature Showcase (Right — Flagship Luxury Treatment · 90 Days) -->
               <button type="button" data-pkg="signature" onclick="selectVacantPkg('signature')" class="pkg-card pkg-flagship flex flex-col justify-between">
                 <div>
                   <div class="pkg-ribbon-flagship px-3.5 py-1.5 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em]">
                     <span>◆ Full Home &amp; Estates</span>
-                    <span>60 Days</span>
+                    <span>90 Days</span>
                   </div>
                   <div class="p-3.5 space-y-2.5">
                     <div class="flex items-start justify-between gap-2">
@@ -233,7 +233,7 @@
                           <span class="text-[11px] text-[#6b6357]">From</span>
                           <span class="font-serif-editorial text-2xl text-[#8f6720] tabular-nums">$4,950</span>
                         </div>
-                        <div class="text-[11px] text-[#6b6357] tabular-nums">~$250/wk extension after 60 days</div>
+                        <div class="text-[11px] text-[#6b6357] tabular-nums">90 days included · ~$250/wk after</div>
                       </div>
                       <span class="pkg-save-pill text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">Save $550</span>
                     </div>
@@ -241,7 +241,7 @@
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Everything in Curated Home</strong></span></li>
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Family / Bonus / 2nd Living Room</strong></span></li>
                       <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">2nd Secondary Bedroom or Office</strong></span></li>
-                      <li class="flex items-start gap-1.5"><span class="pkg-check-gold">✓</span><span><strong class="text-[#1a1815]">Elevated Outdoor Living / Sitting Area</strong></span></li>
+                      <li class="flex items-start gap-1.5"><span class="pkg-check-green">★</span><span><strong class="text-[#1a1815]">90-day rental included</strong> + Elevated Outdoor Living</span></li>
                     </ul>
                   </div>
                 </div>
@@ -435,20 +435,23 @@
     const VACANT_PKGS = {
       essential: {
         name: "Essential Core",
-        pill: "Essential Core · Budget-Conscious",
+        pill: "Essential Core · 30 Days",
         base: 2500,
+        days: 30,
         summary: "Living, Dining, Kitchen, Main Bath & Entry"
       },
       curated: {
         name: "Curated Home",
-        pill: "Curated Home · Best Value",
+        pill: "Curated Home · Best Value · 60 Days",
         base: 3750,
+        days: 60,
         summary: "5 Core Spaces + Primary Suite + 1 Bed/Office + Bonus Patio Bistro"
       },
       signature: {
         name: "Signature Showcase",
-        pill: "Signature Showcase · Full Home",
+        pill: "Signature Showcase · 90 Days",
         base: 4950,
+        days: 90,
         summary: "5 Core Spaces + Primary + Family/Bonus + 2 Beds/Office + Outdoor Living"
       }
     };
@@ -484,7 +487,7 @@
         steps: [
           { num: "01", title: "Free Walkthrough & 24-Hr Plan", desc: "Complimentary visit or MLS review → custom Staging Success Plan." },
           { num: "02", title: "1–2 Day Curated Install", desc: "Owned inventory delivered & styled around your photo day." },
-          { num: "03", title: "Show, Sell & Free Destage", desc: "60-day term + flexible 5%/wk extensions; complimentary removal at close." }
+          { num: "03", title: "Show, Sell & Free Destage", desc: "30, 60, or 90-day term by tier + flexible 5%/wk extensions; free removal at close." }
         ]
       }
     };
@@ -677,7 +680,7 @@
           if (customCount > 0) customBadge.textContent = `+${customCount} space${customCount === 1 ? "" : "s"} (+$${customCost.toLocaleString()})`;
         }
 
-        const labelParts = [`${pkg.name}`];
+        const labelParts = [`${pkg.name} (${pkg.days} days)`];
         if (customCount > 0) labelParts.push(`+${customCount} extra space${customCount === 1 ? "" : "s"}`);
         if (logisticsCost > 0) labelParts.push(`+$${logisticsCost.toLocaleString()} logistics`);
         document.getElementById("addon-count-label").textContent = labelParts.join(" · ");
@@ -693,7 +696,7 @@
         addEl.innerHTML = parts.length
           ? `<strong class="text-[#e5c687]">Added:</strong> ${parts.join(" · ")}`
           : "All 3 packages include curated furniture, art, greenery, delivery &amp; de-stage.";
-        termsEl.innerHTML = `<strong class="text-[#e5c687]">Terms:</strong> 60-day rental &amp; complimentary de-stage included · Flexible weekly extensions (~${weeklyLo}/wk, 5%/wk — no forced extra month)`;
+        termsEl.innerHTML = `<strong class="text-[#e5c687]">Terms:</strong> ${pkg.days}-day rental &amp; complimentary de-stage included · Flexible weekly extensions (~${weeklyLo}/wk, 5%/wk — no forced extra month)`;
       }
 
       estState.lastRangeText = rangeEl.textContent;
