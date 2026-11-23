@@ -543,6 +543,13 @@
 </head>
 <body>
 
+    <div class="bf-topbar" data-bf-promo role="region" aria-label="Black Friday Staging Special">
+        <div class="bf-topbar-inner">
+            <span class="bf-topbar-badge">Black Friday Special</span>
+            <span class="bf-topbar-text"><strong>$250 Staging Credit</strong> on packages of $2,500+ &middot; Book by Nov 30</span>
+            <a href="#black-friday" class="bf-topbar-link" id="bf-topbar-link">Claim Offer &rarr;</a>
+        </div>
+    </div>
 
     <header>
         <div class="container">
@@ -613,6 +620,34 @@
                         <i class="fas fa-trophy" aria-hidden="true"></i>
                         <span>Award-Winning Stager</span>
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="black-friday" class="bf-promo-section" data-bf-promo aria-labelledby="bf-heading">
+            <div class="container">
+                <div class="bf-card">
+                    <div class="bf-media">
+                        <img src="images/black-friday-2026.jpg" alt="Staged coastal living room in North County San Diego by Staged4Sale" loading="lazy">
+                    </div>
+                    <div class="bf-content">
+                        <p class="bf-eyebrow">Black Friday Staging Special</p>
+                        <h2 id="bf-heading" class="bf-title"><span class="bf-title-amount">$250</span> Staging Credit</h2>
+                        <p class="bf-qualify">On staging packages of $2,500 or more</p>
+                        <p class="bf-plan">Start with a complimentary Staging Success Plan&trade;</p>
+                        <p class="bf-area">North County San Diego</p>
+                        <div class="bf-actions">
+                            <a href="#contact" class="bf-btn-primary" id="bf-claim-btn">
+                                <i class="fas fa-tag" aria-hidden="true"></i>
+                                <span>Claim $250 Credit</span>
+                            </a>
+                            <a href="tel:+17605832500" class="bf-btn-secondary">
+                                <i class="fas fa-phone-alt" aria-hidden="true"></i>
+                                <span>Call / Text (760) 583-2500</span>
+                            </a>
+                        </div>
+                        <p class="bf-terms">Book by Monday, November 30, 2026 with a signed agreement and deposit. Valid for December 2026 and January 2027 staging dates, subject to availability.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1042,8 +1077,8 @@
 <script>
 // --- Fade-in on scroll for sections ---
 window.addEventListener('DOMContentLoaded', function() {
-  // Add fade-section class to all main > section except hero
-  document.querySelectorAll('main > section:not(#hero)').forEach(el => {
+  // Add fade-section class to all main > section except hero and Black Friday promo
+  document.querySelectorAll('main > section:not(#hero):not(#black-friday)').forEach(el => {
     el.classList.add('fade-section');
   });
   // Intersection Observer for fade-in and fade-out
@@ -1059,6 +1094,52 @@ window.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.fade-section').forEach(el => {
     observer.observe(el);
   });
+
+  // --- Black Friday 2026 promo: auto-hide after Nov 30, 2026 11:59:59 PM PT ---
+  const bfExpiresAt = Date.parse('2026-12-01T08:00:00Z');
+  if (Date.now() >= bfExpiresAt) {
+    document.querySelectorAll('[data-bf-promo]').forEach(el => {
+      el.classList.add('bf-promo-hidden');
+    });
+  } else {
+    function scrollWithHeader(selector) {
+      const target = document.querySelector(selector);
+      if (!target) return;
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.offsetHeight : 0;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 8;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+
+    const bfTopLink = document.getElementById('bf-topbar-link');
+    if (bfTopLink) {
+      bfTopLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        scrollWithHeader('#black-friday');
+      });
+    }
+
+    const bfClaimBtn = document.getElementById('bf-claim-btn');
+    if (bfClaimBtn) {
+      bfClaimBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const form = document.getElementById('contact-form');
+        const subject = form ? form.querySelector('input[name="_subject"]') : null;
+        const message = document.getElementById('message');
+        const nameInput = document.getElementById('name');
+        if (subject) {
+          subject.value = 'Black Friday $250 Staging Credit Inquiry';
+        }
+        if (message && !message.value.trim()) {
+          message.value = "Hi Tawni, I'd like to claim the Black Friday $250 Staging Credit.\nProperty address: \nTarget list date: ";
+        }
+        scrollWithHeader('#contact');
+        if (nameInput) {
+          setTimeout(() => nameInput.focus({ preventScroll: true }), 450);
+        }
+      });
+    }
+  }
 });
 
 // Text Reveal Hero Animation
